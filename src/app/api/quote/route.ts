@@ -26,8 +26,8 @@ const TO   = process.env.EMAIL_TO || process.env.EMAIL_USER!;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, phone, email, service, message, websiteUrl } = body as {
-      name: string; phone: string; email?: string; service: string; message?: string; websiteUrl?: string;
+    const { name, phone, email, service, message, address, websiteUrl } = body as {
+      name: string; phone: string; email?: string; service: string; message?: string; address?: string; websiteUrl?: string;
     };
 
     // Honeypot check: If the hidden field is filled, it's a bot
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     }
 
     /* ── Validation ─────────────────────────────────────────── */
-    if (!name?.trim() || !phone?.trim() || !email?.trim() || !service?.trim()) {
+    if (!name?.trim() || !phone?.trim() || !email?.trim() || !service?.trim() || !address?.trim()) {
       return NextResponse.json(
         { success: false, error: 'Missing required fields.' },
         { status: 400 },
@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
       phone:     phone.trim(),
       email:     email?.trim() || null,
       service:   service.trim(),
+      address:   address?.trim() || null,
       message:   message?.trim() || '',
       status:    'new',
       source:    'quote-popup',
@@ -82,6 +83,7 @@ export async function POST(request: NextRequest) {
       phone:   phone.trim(),
       email:   email?.trim() || null,
       service: service.trim(),
+      address: address?.trim() || null,
       message: message?.trim() || null,
       source:  'quote-popup',
     };

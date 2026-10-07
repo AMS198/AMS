@@ -33,7 +33,7 @@
 
 /* ── Base ────────────────────────────────────────────────────── */
 @layer base {
-  html { @apply scroll-smooth antialiased; font-family: var(--font-body), sans-serif; }
+  html { @apply scroll-smooth antialiased; font-family: var(--font-body), sans-serif; scroll-padding-top: 120px; }
   body { background: var(--navy); color: var(--slate-light); overflow-x: hidden; }
   h1,h2,h3 { font-family: var(--font-display), serif; }
 

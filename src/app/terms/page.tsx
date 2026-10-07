@@ -25,7 +25,7 @@ const terms = [
   {
     icon: Construction,
     title: '4. Scope of Work & Variations',
-    content: 'Any changes or additions to the original agreed scope of work will be treated as a "Variation" and will incur additional costs. Verbal instructions for changes will not be accepted; all variations must be confirmed via WhatsApp or Email.',
+    content: 'Final pricing and scope of work may vary (increase or decrease) depending on the actual site conditions and our final discussion before execution. Any changes or additions to the original agreed scope of work will be treated as a "Variation" and will incur additional costs. Verbal instructions for changes will not be accepted; all variations must be confirmed via WhatsApp or Email.',
   },
   {
     icon: HardHat,

@@ -7,10 +7,10 @@ import Link from 'next/link';
 import {
   ArrowRight, CheckCircle, XCircle, Sparkles, Home, Star,
   Clock, Ruler, IndianRupee, Calculator, Phone, ChevronDown, ChevronUp,
-  Shield, Award, Users, Zap, Building2, Sun,
+  Shield, Award, Users, Zap, Building2, Sun, AlertCircle,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { packages, calculateEMI, formatINR } from '@/data/packagesData';
+import { packages, formatINR } from '@/data/packagesData';
 import type { PackageData } from '@/data/packagesData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
@@ -39,121 +39,8 @@ function useScrollReveal() {
   }, []);
 }
 
-/* ── EMI Calculator Modal ──────────────────────────────────────── */
-function EMICalculator({ pkg, onClose }: { pkg: PackageData; onClose: () => void }) {
-  const [amount, setAmount] = useState(pkg.priceStarting);
-  const [rate, setRate] = useState(10.5);
-  const [tenure, setTenure] = useState(24);
-  const emi = calculateEMI(amount, rate, tenure);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-[#101827] border border-[#1E2D45] rounded-3xl p-8 max-w-md w-full shadow-2xl"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="text-xl font-bold text-white">EMI Calculator</h3>
-            <p className="text-sm text-slate-400">{pkg.title} Package</p>
-          </div>
-          <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
-            <XCircle size={24} />
-          </button>
-        </div>
-
-        <div className="space-y-6">
-          {/* Amount */}
-          <div>
-            <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-              Renovation Amount: {formatINR(amount)}
-            </label>
-            <input
-              type="range"
-              min={pkg.priceStarting}
-              max={pkg.priceStarting * 3}
-              step={10000}
-              value={amount}
-              onChange={e => setAmount(Number(e.target.value))}
-              className="w-full accent-orange-500 h-2 rounded-full cursor-pointer"
-            />
-            <div className="flex justify-between text-xs text-slate-500 mt-1">
-              <span>{formatINR(pkg.priceStarting)}</span>
-              <span>{formatINR(pkg.priceStarting * 3)}</span>
-            </div>
-          </div>
-
-          {/* Interest Rate */}
-          <div>
-            <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-              Interest Rate: {rate}% per annum
-            </label>
-            <input
-              type="range"
-              min={7}
-              max={18}
-              step={0.5}
-              value={rate}
-              onChange={e => setRate(Number(e.target.value))}
-              className="w-full accent-orange-500 h-2 rounded-full cursor-pointer"
-            />
-            <div className="flex justify-between text-xs text-slate-500 mt-1">
-              <span>7%</span>
-              <span>18%</span>
-            </div>
-          </div>
-
-          {/* Tenure */}
-          <div>
-            <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-              Tenure: {tenure} months ({(tenure / 12).toFixed(1)} years)
-            </label>
-            <input
-              type="range"
-              min={6}
-              max={60}
-              step={6}
-              value={tenure}
-              onChange={e => setTenure(Number(e.target.value))}
-              className="w-full accent-orange-500 h-2 rounded-full cursor-pointer"
-            />
-            <div className="flex justify-between text-xs text-slate-500 mt-1">
-              <span>6 months</span>
-              <span>5 years</span>
-            </div>
-          </div>
-
-          {/* Result */}
-          <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-6 text-center">
-            <p className="text-xs text-orange-400 uppercase tracking-wider font-bold mb-2">Your Monthly EMI</p>
-            <p className="text-4xl font-black text-white font-display">
-              {formatINR(emi)}<span className="text-lg text-slate-400 font-normal">/mo</span>
-            </p>
-            <p className="text-xs text-slate-500 mt-2">
-              Total: {formatINR(emi * tenure)} | Interest: {formatINR(emi * tenure - amount)}
-            </p>
-          </div>
-
-          <p className="text-[10px] text-slate-600 text-center">
-            * EMI calculation is indicative. Actual rates depend on your bank/NBFC. We can connect you with partner banks for home improvement loans.
-          </p>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
 /* ── Package Card ───────────────────────────────────────────────── */
-function PackageCard({ pkg, index, onEMI }: { pkg: PackageData; index: number; onEMI: (pkg: PackageData) => void }) {
+function PackageCard({ pkg, index }: { pkg: PackageData; index: number }) {
   const [expanded, setExpanded] = useState(false);
   const Icon = iconMap[pkg.icon] || Home;
 
@@ -201,6 +88,9 @@ function PackageCard({ pkg, index, onEMI }: { pkg: PackageData; index: number; o
             <span className="flex items-center gap-1"><Ruler size={12} /> {pkg.sqftRange}</span>
             <span className="flex items-center gap-1"><Clock size={12} /> {pkg.duration}</span>
           </div>
+          <p className="text-[10px] text-white font-bold mt-3 leading-relaxed border-t border-[#1E2D45] pt-2">
+            *Final quotation will be decided after meeting or completely analyzing the structure and requirement.
+          </p>
         </div>
 
         {/* Highlights */}
@@ -266,17 +156,11 @@ function PackageCard({ pkg, index, onEMI }: { pkg: PackageData; index: number; o
           </button>
 
           <div className="flex gap-3">
-            <button
-              onClick={() => onEMI(pkg)}
-              className="flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-[#1E2D45] text-slate-400 hover:border-orange-500/30 hover:text-orange-400 transition-all flex items-center justify-center gap-2"
-            >
-              <Calculator size={14} /> EMI Calculator
-            </button>
             <a
               href={`https://wa.me/918779391690?text=${encodeURIComponent(`Hi! I'm interested in the ${pkg.title} package (${pkg.priceRange}). Please share more details.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-green-500/20 text-green-400 hover:bg-green-500 hover:text-white transition-all flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-green-500/20 text-green-400 hover:bg-green-500 hover:text-white transition-all flex items-center justify-center gap-2"
             >
               <WhatsAppLogo className="w-4 h-4 fill-current" /> WhatsApp
             </a>
@@ -290,7 +174,6 @@ function PackageCard({ pkg, index, onEMI }: { pkg: PackageData; index: number; o
 /* ── Main Page ──────────────────────────────────────────────────── */
 export default function PackagesPage() {
   useScrollReveal();
-  const [emiPkg, setEmiPkg] = useState<PackageData | null>(null);
 
   return (
     <main className="min-h-screen bg-[#080D1A]">
@@ -319,9 +202,16 @@ export default function PackagesPage() {
               Complete Home <span className="text-gradient">Packages</span>
             </h1>
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl animate-fadeUp" style={{ animationDelay: '100ms' }}>
-              From 1BHK flats to luxury bungalows — choose a transparent, all-inclusive renovation package. 
-              No hidden costs. EMI options available. <strong className="text-white">Free site visit & consultation.</strong>
+              From 1BHK flats to luxury bungalows — choose a transparent renovation package. 
+              No hidden costs. <strong className="text-white">Site visit fee (₹500-₹1000) may be applicable.</strong>
             </p>
+            
+            <div className="mt-6 inline-flex items-start sm:items-center gap-3 p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20 max-w-2xl animate-fadeUp" style={{ animationDelay: '150ms' }}>
+              <AlertCircle size={20} className="text-orange-500 shrink-0 mt-0.5 sm:mt-0" />
+              <p className="text-sm text-orange-400 font-medium">
+                * Note: The rates shown below are for <strong className="text-orange-300">civil work and labor only</strong>. They do NOT include the cost of materials.
+              </p>
+            </div>
           </div>
 
           {/* Quick Stats */}
@@ -329,7 +219,6 @@ export default function PackagesPage() {
             {[
               { icon: Shield, label: 'Zero Hidden Costs' },
               { icon: Award, label: '25+ Years Trust' },
-              { icon: Calculator, label: 'EMI Available' },
               { icon: Users, label: '500+ Happy Families' },
             ].map((s, i) => (
               <div key={i} className="flex items-center gap-2 text-sm text-slate-300">
@@ -351,24 +240,24 @@ export default function PackagesPage() {
               Renovation & Construction <span className="text-gradient">Packages</span>
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Every package includes free site visit, detailed quotation, project manager, and quality materials. 
-              Prices are starting estimates — exact cost depends on your specific requirements.
+              Every package includes a detailed quotation and a dedicated project manager. 
+              Prices shown are starting estimates for <strong className="text-white">labor and civil work only</strong> (materials are extra) and depend on your specific requirements. (Site visit fee may apply).
             </p>
           </div>
 
           {/* Packages Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {packages.map((pkg, i) => (
-              <PackageCard key={pkg.id} pkg={pkg} index={i} onEMI={setEmiPkg} />
+              <PackageCard key={pkg.id} pkg={pkg} index={i} />
             ))}
           </div>
 
           {/* Disclaimer */}
           <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
             <p className="text-xs text-slate-500 leading-relaxed max-w-3xl mx-auto">
-              <strong className="text-slate-400">Note:</strong> Prices shown are starting estimates and may vary based on 
-              material selection, site condition, location, and specific requirements. Final pricing is provided after a 
-              free site inspection. All packages include our standard 1-year workmanship warranty. GST extra as applicable.
+              <strong className="text-slate-400">Note:</strong> Prices shown are starting estimates for labor and civil execution ONLY and do NOT include the cost of materials (tiles, cement, paint, etc.). Rates may vary based on 
+              site condition, location, and specific requirements. Final pricing is provided after a 
+              site inspection. All packages include our standard 1-year workmanship warranty. GST extra as applicable.
               For customized packages, please{' '}
               <button onClick={openQuotePopup} className="text-orange-400 hover:underline font-semibold">
                 request a free quote
@@ -399,8 +288,8 @@ export default function PackagesPage() {
               {
                 step: '02',
                 icon: Home,
-                title: 'Free Site Visit',
-                desc: 'Our senior engineer visits your property, takes measurements, and understands your vision.',
+                title: 'Site Visit',
+                desc: 'Our senior engineer visits your property, takes measurements, and understands your vision. (Fee of ₹500-₹1000 may be applicable, adjustable in final bill).',
               },
               {
                 step: '03',
@@ -464,7 +353,6 @@ export default function PackagesPage() {
                   ['Supervision', 'Senior civil engineer', 'Unsupervised labor'],
                   ['Timeline', 'Milestone tracking, on-time', 'Frequent delays'],
                   ['Hidden Costs', 'Zero hidden charges', 'Common cost overruns'],
-                  ['EMI Option', 'Available via partner banks', 'Not available'],
                   ['After-Sales', '6-month free support', 'No support after work'],
                 ].map(([feature, ams, local], i) => (
                   <tr key={i} className="border-b border-[#1E2D45]/50 hover:bg-white/5 transition-colors">
@@ -497,15 +385,11 @@ export default function PackagesPage() {
             {[
               {
                 q: 'Are these exact prices or estimates?',
-                a: 'These are starting estimates. Exact pricing depends on your flat size, material choices, site condition, and specific requirements. We provide a detailed, itemized quote after a free site visit — no hidden costs.',
+                a: 'These are starting estimates. Exact pricing depends on your flat size, material choices, site condition, and specific requirements. We provide a detailed, itemized quote after a site visit (fee ₹500-₹1000 may apply, adjustable in final bill) — no hidden costs.',
               },
               {
                 q: 'Can I customize a package?',
                 a: 'Absolutely! Every package can be customized. Want to upgrade the kitchen but keep basic flooring? No problem. We create a tailored quote based on your exact needs and budget.',
-              },
-              {
-                q: 'Do you offer EMI or financing options?',
-                a: 'Yes! We can connect you with our partner banks for home improvement loans. EMI options are available from 6 months to 5 years. Use our built-in EMI calculator for indicative amounts.',
               },
               {
                 q: 'What warranty do you provide?',
@@ -513,7 +397,7 @@ export default function PackagesPage() {
               },
               {
                 q: 'How do I get started?',
-                a: 'Simply click "Get Free Quote" on any package, or call us at +91 87793 91690. Our engineer will visit your property for free, discuss your requirements, and provide a detailed quotation within 24 hours.',
+                a: 'Simply click "Get Free Quote" on any package, or call us at +91 87793 91690. Our engineer will visit your property, discuss your requirements, and provide a detailed quotation within 24 hours. (A site visit fee of ₹500-₹1000 may apply, adjustable against the final bill).',
               },
               {
                 q: 'Kya renovation ke liye ghar khali karna padta hai?',
@@ -529,14 +413,9 @@ export default function PackagesPage() {
       {/* ── CTA ──────────────────────────────────────────── */}
       <ModernCTA
         title="Ready to Pick Your Package?"
-        subtitle="Get a free site visit and detailed quotation within 24 hours."
+        subtitle="Get a site visit and detailed quotation within 24 hours (Site visit fee may apply)."
         description="AMS Civil Construction offers transparent, package-based pricing for all home renovation and construction needs in Mumbai. From 1BHK smart renovations to luxury bungalow construction, we deliver premium results at honest prices. No middlemen, no hidden costs — just quality work by experienced professionals."
       />
-
-      {/* EMI Modal */}
-      <AnimatePresence>
-        {emiPkg && <EMICalculator pkg={emiPkg} onClose={() => setEmiPkg(null)} />}
-      </AnimatePresence>
     </main>
   );
 }

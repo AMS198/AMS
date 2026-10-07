@@ -320,6 +320,19 @@ export default function CalculatorPage() {
                     />
                   </div>
 
+                  {/* DPDP Consent */}
+                  <div className="flex items-start gap-3 mt-2">
+                    <input 
+                      type="checkbox" 
+                      required
+                      id="dpdpConsentCalc"
+                      className="mt-1 accent-orange-500 w-4 h-4 cursor-pointer shrink-0"
+                    />
+                    <label htmlFor="dpdpConsentCalc" className="text-[10px] sm:text-xs text-slate-400 leading-relaxed cursor-pointer">
+                      I agree to the <a href="/privacy" target="_blank" className="text-orange-400 hover:underline">Privacy Policy</a> and consent to receive construction estimates and updates.
+                    </label>
+                  </div>
+
                   {error && <p className="text-red-400 text-sm text-center font-medium bg-red-400/10 py-2 rounded-lg">{error}</p>}
 
                   <button 

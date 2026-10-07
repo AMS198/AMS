@@ -97,7 +97,7 @@ export default function ServicesPageContent() {
       </section>
 
       {/* ── QUICK NAV ───────────────────────────────────────────── */}
-      <div className="bg-brand-steel border-b border-brand-iron sticky top-[64px] z-30 overflow-x-auto">
+      <div className="bg-brand-steel border-b border-brand-iron overflow-x-auto">
         <div className="container-custom flex gap-1 py-3 min-w-max sm:min-w-0 flex-wrap">
           {services.map((svc) => {
             const Icon = iconMap[svc.icon] ?? Wrench;

@@ -12,8 +12,10 @@ interface QuoteFormData {
   phone: string;
   email: string;
   service: string;
+  address: string;
   message: string;
   websiteUrl?: string;
+  dpdpConsent: boolean;
 }
 
 export default function QuotePopup() {
@@ -87,15 +89,15 @@ export default function QuotePopup() {
         <div className="px-6 py-5 flex items-center justify-between shrink-0"
           style={{ background: 'linear-gradient(135deg, #F97316, #EA580C)' }}>
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-display font-bold text-white text-xl">Get a Free Quote</h2>
-              <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                ⚡ 3 Slots Left Today
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <h2 className="font-display font-bold text-white text-lg sm:text-xl">Book a Site Visit & Quote</h2>
+              <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
+                ⚡ Slots Filling Fast
               </span>
             </div>
-            <p className="text-white/80 text-xs flex items-center gap-1.5">
+            <p className="text-white/90 text-xs font-medium flex items-center gap-1.5 mt-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-              12 people requested quotes today
+              Note: Site visit fee (₹500-₹1000) may apply, adjustable in final bill.
             </p>
           </div>
           <button onClick={() => setOpen(false)}
@@ -192,6 +194,15 @@ export default function QuotePopup() {
                 {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service.message}</p>}
               </div>
 
+              {/* Address */}
+              <div>
+                <label className="block text-slate-300 text-xs font-medium mb-1.5">Site Address (Full) *</label>
+                <textarea {...register('address', { required: 'Address is required for site visit' })} rows={2}
+                  placeholder="Complete address with Room No, Floor, Building, Area..."
+                  className="form-input resize-none" />
+                {errors.address && <p className="text-red-400 text-xs mt-1">{errors.address.message as string}</p>}
+              </div>
+
               {/* Message */}
               <div>
                 <label className="block text-slate-300 text-xs font-medium mb-1.5">Project Details</label>
@@ -206,13 +217,27 @@ export default function QuotePopup() {
                 <input {...register('websiteUrl')} type="text" id="websiteUrlQuote" tabIndex={-1} autoComplete="off" />
               </div>
 
+              {/* DPDP Consent */}
+              <div className="flex items-start gap-2 mt-2">
+                <input 
+                  type="checkbox" 
+                  id="dpdpConsentQuote"
+                  {...register('dpdpConsent', { required: 'You must consent to data processing' })}
+                  className="mt-0.5 accent-orange-500"
+                />
+                <label htmlFor="dpdpConsentQuote" className="text-[10px] text-slate-400 leading-tight cursor-pointer">
+                  I agree to the <a href="/privacy" target="_blank" className="text-orange-400 hover:underline">Privacy Policy</a> and consent to receive estimates.
+                </label>
+              </div>
+              {errors.dpdpConsent && <p className="text-red-400 text-xs mt-0">{errors.dpdpConsent.message as string}</p>}
+
               {/* Submit */}
               <button type="submit" disabled={isSubmitting}
                 className="btn-primary justify-center mt-1 disabled:opacity-60 disabled:cursor-not-allowed">
                 {isSubmitting ? (
                   <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin1" />Saving…</>
                 ) : (
-                  <><Send size={16} />SEND QUOTE REQUEST</>
+                  <><Send size={16} />BOOK SITE VISIT</>
                 )}
               </button>
               
@@ -220,7 +245,7 @@ export default function QuotePopup() {
               <div className="flex items-center justify-center gap-4 mt-3 pt-3 border-t border-[#1E2D45]">
                 <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-mono uppercase tracking-wider">
                   <CheckCircle size={12} className="text-orange-500" />
-                  100% Free Estimate
+                  Expert Consultation
                 </div>
                 <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-mono uppercase tracking-wider">
                   <CheckCircle size={12} className="text-orange-500" />

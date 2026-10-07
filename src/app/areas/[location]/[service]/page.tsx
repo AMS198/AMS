@@ -405,7 +405,7 @@ export default async function AreaServicePage({ params }: { params: { location: 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(extraJsonLd) }} />
 
       {/* ── Hero Section ─────────────────────────────────── */}
-      <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
+      <section className="relative pt-40 pb-24 overflow-x-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0">
           <Image src={svc.image} alt={exactMatchKeyword} fill className="object-cover opacity-20" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A] via-[#080D1A]/90 to-[#080D1A]/60" />
@@ -456,7 +456,7 @@ export default async function AreaServicePage({ params }: { params: { location: 
       {/* ── Detailed Service Description ── */}
       <section className="section-y bg-[#0B1120]">
         <div className="container-custom grid lg:grid-cols-2 gap-16 items-center">
-          <div className={layoutSeed > 0.5 ? "order-2" : "order-1"}>
+          <div className={`relative ${layoutSeed > 0.5 ? "order-2" : "order-1"}`}>
             <div className="aspect-square relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl watermark-container">
               <Image src={svc.image} alt={exactMatchKeyword} fill className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#0B1120] via-transparent to-transparent" />

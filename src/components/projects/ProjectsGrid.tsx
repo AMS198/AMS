@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 // src/components/projects/ProjectsGrid.tsx
 // Client component: handles filter tabs, animations.
 // Data is passed in from the SSG server component — no client-side fetch.
@@ -63,7 +63,7 @@ export default function ProjectsGrid({ projects }: Props) {
       </section>
 
       {/* Filter bar */}
-      <div className="sticky top-[64px] z-30 py-4 border-b" style={{ background: '#101827', borderColor: '#1E2D45' }}>
+      <div className="py-4 border-b" style={{ background: '#101827', borderColor: '#1E2D45' }}>
         <div className="container-custom flex items-center justify-between flex-wrap gap-3">
           <div className="flex gap-2">
             {(['all', 'ongoing', 'completed'] as const).map(tab => (

@@ -2,7 +2,7 @@
 // Dedicated SEO page per service e.g. /services/bathroom-renovation
 // Ranks independently for high-intent service keywords
 
-export const revalidate = 31536000; // 24 hours ISR cache to save CPU
+export const revalidate = false; // Fully static — no ISR reads, rebuild only on redeploy
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -16,10 +16,10 @@ import { serviceDetailsData } from '@/data/serviceDetails';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
 
-export const dynamicParams = true;
+export const dynamicParams = false; // No on-demand generation — saves ISR reads
 
 export async function generateStaticParams() {
-  return [];
+  return services.map((s) => ({ slug: s.slug }));
 }
 
 /* ── Service Emojis for Metadata ── */

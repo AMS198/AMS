@@ -16,6 +16,7 @@ interface ContactFormData {
   service: string;
   message: string;
   websiteUrl?: string;
+  dpdpConsent: boolean;
 }
 
 function useScrollReveal() {
@@ -101,7 +102,7 @@ export default function ContactPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ── Page Header ──────────────────────────────────────── */}
-      <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: '#0B1120' }}>
+      <section className="relative pt-32 pb-8 overflow-hidden" style={{ background: '#0B1120' }}>
         <div className="glow-orb w-[500px] h-[500px] opacity-15"
           style={{ background: 'radial-gradient(circle, #F97316, transparent 70%)', top: '-20%', right: '-10%' }} />
         <div className="relative container-custom">
@@ -117,7 +118,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── Contact Content ──────────────────────────────────── */}
-      <section className="section-y" style={{ background: '#0B1120' }}>
+      <section className="pb-20" style={{ background: '#0B1120' }}>
         <div className="container-custom grid grid-cols-1 lg:grid-cols-5 gap-12">
 
           {/* Left — Info cards */}
@@ -296,6 +297,22 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {/* DPDP Consent */}
+                <div className="flex items-start gap-3 mt-2">
+                  <input 
+                    type="checkbox" 
+                    id="dpdpConsentContact"
+                    {...register('dpdpConsent', { required: 'You must consent to data processing' })}
+                    className="mt-1 accent-orange-500 w-4 h-4 cursor-pointer"
+                  />
+                  <label htmlFor="dpdpConsentContact" className="text-xs text-slate-400 leading-relaxed cursor-pointer">
+                    I agree to the <a href="/privacy" target="_blank" className="text-orange-400 hover:underline">Privacy Policy</a> and consent to receive construction estimates and project updates.
+                  </label>
+                </div>
+                {errors.dpdpConsent && (
+                  <p className="text-red-400 text-xs mt-0">{errors.dpdpConsent.message as string}</p>
+                )}
+
                 {/* Submit */}
                 <button
                   type="submit"
@@ -318,7 +335,7 @@ export default function ContactPage() {
                 {/* Reassurance note */}
                 <p className="flex items-center gap-2 text-slate-500 text-xs">
                   <CheckCircle size={13} style={{ color: '#10B981' }} />
-                  Your message is saved securely and only visible to our admin panel.
+                  Your message is saved securely and only visible to authorized personnel.
                 </p>
               </form>
             </div>

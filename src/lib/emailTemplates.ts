@@ -6,6 +6,7 @@ export interface EnquiryData {
   phone:   string;
   email?:  string | null;
   service: string;
+  address?: string | null;
   location?: string | null;
   message?: string | null;
   source:  string; // 'contact-form' | 'quote-popup' | 'scroll-lead'
@@ -63,7 +64,7 @@ const now = () => {
    Sent to: ams.constructionwork@gmail.com
 ───────────────────────────────────────────────────────────────── */
 export function adminAlertHtml(data: EnquiryData): string {
-  const { name, phone, email, service, location, message, source } = data;
+  const { name, phone, email, service, address, location, message, source } = data;
   
   let tag = '📩 Contact Form Enquiry';
   if (source === 'quote-popup') tag = '🏗️ Free Quote Request';
@@ -129,6 +130,11 @@ export function adminAlertHtml(data: EnquiryData): string {
         <tr>
           <td class="label">Location</td>
           <td class="value">${location}</td>
+        </tr>` : ''}
+        ${address ? `
+        <tr>
+          <td class="label" style="vertical-align:top;">Address</td>
+          <td class="value">${address}</td>
         </tr>` : ''}
         ${message ? `
         <tr>

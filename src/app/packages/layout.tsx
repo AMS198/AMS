@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Home Renovation Packages Mumbai | 1BHK 2BHK 3BHK 4BHK | AMS Civil',
   description:
-    '⭐ [2026] Complete home renovation packages in Mumbai. 1BHK ₹2.5L, 2BHK ₹4.5L, 3BHK ₹8L, 4BHK ₹12L. Bungalow & terrace home construction. Transparent pricing. EMI available. Free site visit!',
+    '⭐ [2026] Complete home renovation packages in Mumbai. 1BHK ₹2.5L, 2BHK ₹4.5L, 3BHK ₹8L, 4BHK ₹12L. Bungalow & terrace home construction. Transparent pricing. Free site visit!',
   keywords: [
     '1bhk renovation cost Mumbai',
     '2bhk renovation cost Mumbai',
@@ -60,7 +60,7 @@ export default function PackagesLayout({ children }: { children: React.ReactNode
     '@type': 'OfferCatalog',
     name: 'Home Renovation & Construction Packages — AMS Civil Construction',
     description:
-      'Complete home renovation packages in Mumbai from 1BHK to Bungalows with transparent pricing and EMI options.',
+      'Complete home renovation packages in Mumbai from 1BHK to Bungalows with transparent pricing.',
     provider: {
       '@type': 'LocalBusiness',
       name: 'AMS Civil Construction',

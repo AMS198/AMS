@@ -48,7 +48,7 @@ const getCachedLocalData = unstable_cache(
     }
   },
   ['location-page-db-cache'],
-  { revalidate: 604800 } // 1 week cache
+  { revalidate: false } // Cache forever until redeploy — saves ISR reads
 );
 
 /* ── Generate all paths at build time ──────────────── */

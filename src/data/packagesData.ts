@@ -50,7 +50,7 @@ export const packages: PackageData[] = [
     ],
     highlights: [
       'Perfect for newly purchased flats',
-      'Budget-friendly with premium materials',
+      'Budget-friendly civil execution',
       'Zero hidden costs — 100% transparent',
       'Ideal for rental property upgrade',
     ],
@@ -120,13 +120,13 @@ export const packages: PackageData[] = [
       { text: 'Texture/Wallpaper Feature Walls', included: true },
     ],
     highlights: [
-      'Luxury-grade materials throughout',
+      'Luxury-grade civil finishing',
       'Designer POP with ambient lighting',
       'Premium branded hardware (Hettich/Hafele)',
       'Dedicated senior project manager',
     ],
     description:
-      'Elevate your 3BHK to luxury standards with our premium interior package. We use top-tier materials — Italian marble, Asian Paints Royale, Hettich hardware — combined with designer POP ceilings and smart-home wiring for a truly upscale living experience.',
+      'Elevate your 3BHK to luxury standards with our premium interior package. We provide top-tier civil execution for Italian marble, Asian Paints Royale, and Hettich hardware — combined with designer POP ceilings and smart-home wiring for a truly upscale living experience.',
     seoTitle: '3BHK Luxury Interior Package Mumbai | ₹8L Starting | AMS Civil',
     seoDescription:
       '3BHK luxury interior renovation in Mumbai from ₹8 Lakh. Italian marble, modular kitchen, designer POP, 3 bathrooms. Premium materials. Free estimate!',
@@ -156,7 +156,7 @@ export const packages: PackageData[] = [
       { text: 'Servant Room / Utility Renovation', included: true },
     ],
     highlights: [
-      'Ultra-premium imported materials',
+      'Ultra-premium civil execution',
       'Smart home ready wiring',
       'Jaquar/Grohe bathroom fittings',
       'Home theatre & bar counter civil work',

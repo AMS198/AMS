@@ -13,6 +13,7 @@ interface LeadFormData {
   service: string;
   location: string;
   websiteUrl?: string;
+  dpdpConsent: boolean;
 }
 
 export default function LeadGenPopup() {
@@ -219,6 +220,20 @@ export default function LeadGenPopup() {
                   <label htmlFor="websiteUrlLead">Website URL</label>
                   <input {...register('websiteUrl')} type="text" id="websiteUrlLead" tabIndex={-1} autoComplete="off" />
                 </div>
+
+                {/* DPDP Consent */}
+                <div className="flex items-start gap-2 mt-2">
+                  <input 
+                    type="checkbox" 
+                    id="dpdpConsentLead"
+                    {...register('dpdpConsent', { required: 'You must consent to data processing' })}
+                    className="mt-1 accent-orange-500 w-4 h-4 cursor-pointer shrink-0"
+                  />
+                  <label htmlFor="dpdpConsentLead" className="text-[10px] sm:text-xs text-slate-400 leading-tight cursor-pointer">
+                    I agree to the <a href="/privacy" target="_blank" className="text-orange-400 hover:underline">Privacy Policy</a> and consent to receive estimates and updates.
+                  </label>
+                </div>
+                {errors.dpdpConsent && <p className="text-red-500 text-[10px] font-bold uppercase mt-0">{errors.dpdpConsent.message as string}</p>}
 
                 <button
                   type="submit"

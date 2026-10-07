@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 // src/components/gallery/GalleryGrid.tsx
 // Client component: handles category filter, lightbox, keyboard nav.
 // Data is passed in from the SSG server component — no client-side fetch needed.
@@ -47,7 +47,7 @@ export default function GalleryGrid({ images }: Props) {
   return (
     <>
       {/* PAGE HEADER */}
-      <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: '#0B1120' }}>
+      <section className="relative pt-52 pb-20 overflow-hidden" style={{ background: '#0B1120' }}>
         <div className="glow-orb w-[500px] h-[400px] opacity-15"
           style={{ background: 'radial-gradient(circle, #F97316, transparent 70%)', top: '-15%', right: '-8%' }} />
         <div className="relative container-custom">
@@ -67,7 +67,7 @@ export default function GalleryGrid({ images }: Props) {
       </section>
 
       {/* CATEGORY FILTER BAR */}
-      <div className="sticky top-[64px] z-30 py-4 border-b overflow-x-auto"
+      <div className="py-4 border-b overflow-x-auto"
         style={{ background: '#101827', borderColor: '#1E2D45' }}>
         <div className="container-custom flex gap-2 flex-wrap min-w-max sm:min-w-0">
           {categories.map(cat => (

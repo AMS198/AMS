@@ -82,9 +82,50 @@ export default function PrivacyPolicyPage() {
             We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.
           </p>
 
-          <h2>7. Contact Us</h2>
+          <h2 id="dpdp">7. Digital Personal Data Protection (DPDP) Act, 2023 Compliance</h2>
           <p>
-            If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.
+            AMS Civil Construction is fully committed to complying with the <strong>Digital Personal Data Protection (DPDP) Act, 2023</strong> of India. We respect your digital privacy and ensure that any personal data you share with us is handled with the utmost security, transparency, and strictly for the purpose it was collected.
+          </p>
+          
+          <h3>7.1 Consent & Purpose of Data Collection</h3>
+          <p>
+            By checking the consent box on our forms (Contact Us, Get Quote, Cost Calculator, Lead Generation), you provide us with explicit, verifiable consent to collect and process your personal data (such as Name, Phone Number, Email, and Location). 
+            This data is used <strong>exclusively</strong> for:
+          </p>
+          <ul>
+            <li>Providing accurate civil construction and renovation estimates.</li>
+            <li>Contacting you to schedule site visits.</li>
+            <li>Sharing project updates, invoices, and architectural drawings.</li>
+            <li>Sending critical communications related to your inquiry.</li>
+          </ul>
+          <p>We do <strong>not</strong> sell, rent, or illegally share your personal data with third-party marketing agencies.</p>
+
+          <h3>7.2 Your Rights Under the DPDP Act</h3>
+          <p>As a Data Principal (the user), the DPDP Act grants you specific rights over your personal data. You have the right to:</p>
+          <ul>
+            <li><strong>Right to Access:</strong> You can request a summary of the personal data we hold about you and the processing activities undertaken by us.</li>
+            <li><strong>Right to Correction:</strong> You can request us to correct any inaccurate or misleading personal data we have on file.</li>
+            <li><strong>Right to Erasure (Right to be Forgotten):</strong> You can request the complete deletion of your personal data when it is no longer required for the purpose it was collected, or if you withdraw your consent.</li>
+            <li><strong>Right to Withdraw Consent:</strong> You have the right to withdraw your previously given consent at any time. Upon withdrawal, we will cease processing your data within a reasonable timeframe.</li>
+            <li><strong>Right to Grievance Redressal:</strong> You have the right to raise any privacy concerns or complaints regarding your data.</li>
+          </ul>
+
+          <h3>7.3 How to Exercise Your Rights (Data Protection Officer)</h3>
+          <p>
+            To exercise any of your rights under the DPDP Act (such as withdrawing consent or requesting data deletion), please contact our designated <strong>Data Protection / Grievance Officer</strong>:
+          </p>
+          <div className="bg-orange-500/10 border border-orange-500/20 p-4 rounded-xl my-4">
+            <p className="mb-1 font-bold text-white">Grievance Officer: Nitesh Mandal</p>
+            <p className="mb-1">Email: <a href="mailto:ams.constructionwork@gmail.com" className="text-orange-400 hover:underline">ams.constructionwork@gmail.com</a></p>
+            <p className="mb-0">Phone: <a href="tel:+918779391690" className="text-orange-400 hover:underline">+91 87793 91690</a></p>
+          </div>
+          <p>
+            We are committed to resolving any data-related grievances promptly and within the timeframe stipulated by Indian law.
+          </p>
+
+          <h2>8. Contact Us</h2>
+          <p>
+            If you have any questions or suggestions about our Privacy Policy or your data rights, do not hesitate to contact us.
           </p>
           <ul>
             <li><strong>Email:</strong> <a href="mailto:ams.constructionwork@gmail.com" className="text-orange-400 hover:underline">ams.constructionwork@gmail.com</a></li>
