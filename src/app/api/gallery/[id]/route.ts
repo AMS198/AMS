@@ -29,8 +29,8 @@ export async function DELETE(
       return NextResponse.json({ success: false, error: 'Item not found.' }, { status: 404 });
     }
 
-    revalidatePath('/gallery'); revalidatePath('/');
-    revalidatePath('/gallery'); revalidatePath('/');
+    revalidatePath('/gallery');
+    revalidatePath('/');
     return NextResponse.json({ success: true, message: 'Item deleted successfully.' });
   } catch (error) {
     console.error('DELETE /api/gallery error:', error);

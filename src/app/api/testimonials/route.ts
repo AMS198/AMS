@@ -1,4 +1,4 @@
-export const revalidate = 31536000; // 1 year cache
+export const dynamic = 'force-dynamic';
 // src/app/api/testimonials/route.ts
 // GET  /api/testimonials  — fetch all testimonials (public)
 // POST /api/testimonials  — save a new testimonial (admin only)
@@ -17,7 +17,6 @@ export async function GET() {
 
     const testimonials = docs.map(({ _id, ...rest }) => ({ id: _id.toString(), ...rest }));
 
-    revalidatePath('/testimonials'); revalidatePath('/');
     return NextResponse.json({ success: true, data: testimonials });
   } catch (error) {
     console.error('GET /api/testimonials error:', error);
@@ -64,8 +63,8 @@ export async function POST(request: NextRequest) {
 
     const result = await db.collection(COLLECTION).insertOne(newItem);
 
-    revalidatePath('/testimonials'); revalidatePath('/'); revalidatePath('/api/testimonials');
-    revalidatePath('/testimonials'); revalidatePath('/');
+    revalidatePath('/testimonials');
+    revalidatePath('/');
     return NextResponse.json({ success: true, 
       data: { id: result.insertedId.toString(), ...newItem } 
     }, { status: 201 });
