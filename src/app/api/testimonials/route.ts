@@ -4,7 +4,6 @@ export const dynamic = 'force-dynamic';
 // POST /api/testimonials  — save a new testimonial (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
 
@@ -63,8 +62,6 @@ export async function POST(request: NextRequest) {
 
     const result = await db.collection(COLLECTION).insertOne(newItem);
 
-    revalidatePath('/testimonials');
-    revalidatePath('/');
     return NextResponse.json({ success: true, 
       data: { id: result.insertedId.toString(), ...newItem } 
     }, { status: 201 });

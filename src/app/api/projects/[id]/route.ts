@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
+import { revalidateProjects } from '@/lib/revalidate';
 
 const COLLECTION = 'projects';
 
@@ -51,6 +52,7 @@ export async function PUT(
 
     const { _id: oid, ...rest } = result;
     console.log('✏️  Project updated:', params.id);
+    revalidateProjects();
     return NextResponse.json({ success: true, data: { id: oid.toString(), ...rest } });
   } catch (error) {
     console.error('PUT /api/projects/[id] error:', error);
@@ -79,6 +81,7 @@ export async function DELETE(
     }
 
     console.log('🗑️  Project deleted:', params.id);
+    revalidateProjects();
     return NextResponse.json({ success: true, message: 'Project deleted successfully.' });
   } catch (error) {
     console.error('DELETE /api/projects/[id] error:', error);

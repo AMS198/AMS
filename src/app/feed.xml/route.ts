@@ -112,7 +112,7 @@ export async function GET(req: NextRequest) {
       headers: {
         'Content-Type': 'application/xml; charset=utf-8',
         // Long CDN cache — edge serves stale until on-demand revalidation fires
-        'Cache-Control': 's-maxage=31536000, stale-while-revalidate=86400',
+        'Cache-Control': 'public, max-age=31536000, immutable',
       },
     });
   } catch (error) {

@@ -18,38 +18,33 @@ import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 
 import { getDb } from '@/lib/mongodb';
-import { unstable_cache } from 'next/cache';
 
-const getCachedLocalData = unstable_cache(
-  async (locName: string, locZone: string, locNearby: string[]) => {
-    try {
-      const db = await getDb();
-      const localProjects = await db.collection('projects').find({ 
-        location: { $regex: new RegExp(locName, 'i') },
-        status: 'completed'
-      }).limit(3).toArray();
+async function getLocalData(locName: string, locZone: string, locNearby: string[]) {
+  try {
+    const db = await getDb();
+    const localProjects = await db.collection('projects').find({ 
+      location: { $regex: new RegExp(locName, 'i') },
+      status: 'completed'
+    }).limit(3).toArray();
 
-      const localBlogs = await db.collection('blogs').find({
-        published: true,
-        $or: [
-          { locationTags: { $in: [locName, locZone, ...locNearby] } },
-          { title: { $regex: new RegExp(locName, 'i') } },
-          { seoKeywords: { $regex: new RegExp(locName, 'i') } }
-        ]
-      }).sort({ createdAt: -1 }).limit(3).toArray();
+    const localBlogs = await db.collection('blogs').find({
+      published: true,
+      $or: [
+        { locationTags: { $in: [locName, locZone, ...locNearby] } },
+        { title: { $regex: new RegExp(locName, 'i') } },
+        { seoKeywords: { $regex: new RegExp(locName, 'i') } }
+      ]
+    }).sort({ createdAt: -1 }).limit(3).toArray();
 
-      return {
-        localProjects: JSON.parse(JSON.stringify(localProjects)),
-        localBlogs: JSON.parse(JSON.stringify(localBlogs))
-      };
-    } catch (e) {
-      console.error('Failed to fetch local projects or blogs', e);
-      return { localProjects: [], localBlogs: [] };
-    }
-  },
-  ['location-page-db-cache'],
-  { revalidate: false } // Cache forever until redeploy — saves ISR reads
-);
+    return {
+      localProjects: JSON.parse(JSON.stringify(localProjects)),
+      localBlogs: JSON.parse(JSON.stringify(localBlogs))
+    };
+  } catch (e) {
+    console.error('Failed to fetch local projects or blogs', e);
+    return { localProjects: [], localBlogs: [] };
+  }
+}
 
 /* ── Generate all paths at build time ──────────────── */
 export async function generateStaticParams() {
@@ -154,8 +149,8 @@ export default async function LocationPage({ params }: { params: { location: str
   const loc = getLocation(params.location);
   if (!loc) notFound();
 
-  /* ── Dynamic Content Injection (Heavily Cached to save CPU) ── */
-  const { localProjects, localBlogs } = await getCachedLocalData(loc.name, loc.zone, loc.nearby);
+  /* ── Dynamic Content Injection (Static SSG at build time) ── */
+  const { localProjects, localBlogs } = await getLocalData(loc.name, loc.zone, loc.nearby);
 
   /* JSON-LD for this specific location — optimized for Google Rich Results */
   const jsonLd = {

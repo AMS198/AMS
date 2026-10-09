@@ -1,40 +1,45 @@
 // src/lib/revalidate.ts
-// Central on-demand ISR revalidation helper.
-// Call from admin API routes AFTER a successful DB write.
-// Pages use export const revalidate = false (never time-based).
+// Targeted On-Demand ISR Revalidation:
+// Only called when backend/admin modifies data.
+// Revalidates ONLY the specific page changed, avoiding wide purges of '/' or all pages.
 
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
-/** Purge a specific blog post + all aggregator pages */
+/** Purge ONLY the specific blog post + blog index page */
 export function revalidateBlog(slug: string) {
-  revalidatePath(`/blog/${slug}`, 'page');
-  revalidatePath('/blog', 'page');
-  revalidatePath('/', 'page');
-  revalidatePath('/sitemap.xml');
-  revalidatePath('/feed.xml');
-  revalidateTag('blogs');
-  revalidateTag(`blog-${slug}`);
+  try {
+    if (slug) {
+      revalidatePath(`/blog/${slug}`, 'page');
+    }
+    revalidatePath('/blog', 'page');
+  } catch (error) {
+    console.error(`[Revalidate] Error revalidating blog ${slug}:`, error);
+  }
 }
 
-/** Purge all blog-related pages (after new blog created) */
+/** Purge ONLY the blog listing page when a new post is added or removed */
 export function revalidateAllBlogs() {
-  revalidatePath('/blog', 'page');
-  revalidatePath('/', 'page');
-  revalidatePath('/sitemap.xml');
-  revalidatePath('/feed.xml');
-  revalidateTag('blogs');
+  try {
+    revalidatePath('/blog', 'page');
+  } catch (error) {
+    console.error('[Revalidate] Error revalidating /blog:', error);
+  }
 }
 
-/** Purge projects page + home carousel */
+/** Purge ONLY the projects page when a project is added, updated or deleted */
 export function revalidateProjects() {
-  revalidatePath('/projects', 'page');
-  revalidatePath('/', 'page');
-  revalidateTag('projects');
+  try {
+    revalidatePath('/projects', 'page');
+  } catch (error) {
+    console.error('[Revalidate] Error revalidating /projects:', error);
+  }
 }
 
-/** Purge gallery page + home gallery carousel */
+/** Purge ONLY the gallery page when an image is added or deleted */
 export function revalidateGallery() {
-  revalidatePath('/gallery', 'page');
-  revalidatePath('/', 'page');
-  revalidateTag('gallery');
+  try {
+    revalidatePath('/gallery', 'page');
+  } catch (error) {
+    console.error('[Revalidate] Error revalidating /gallery:', error);
+  }
 }

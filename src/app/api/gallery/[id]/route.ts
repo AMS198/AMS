@@ -2,10 +2,10 @@
 // DELETE /api/gallery/[id] — remove a gallery item (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { requireAuth } from '@/lib/auth';
+import { revalidateGallery } from '@/lib/revalidate';
 
 const COLLECTION = 'gallery';
 
@@ -29,8 +29,7 @@ export async function DELETE(
       return NextResponse.json({ success: false, error: 'Item not found.' }, { status: 404 });
     }
 
-    revalidatePath('/gallery');
-    revalidatePath('/');
+    revalidateGallery();
     return NextResponse.json({ success: true, message: 'Item deleted successfully.' });
   } catch (error) {
     console.error('DELETE /api/gallery error:', error);

@@ -3,7 +3,6 @@
 // PUT    /api/testimonials/[id]  — update a testimonial (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
@@ -30,8 +29,6 @@ export async function DELETE(
       return NextResponse.json({ success: false, error: 'Testimonial not found.' }, { status: 404 });
     }
 
-    revalidatePath('/testimonials');
-    revalidatePath('/');
     return NextResponse.json({ success: true, message: 'Testimonial deleted successfully.' });
   } catch (error) {
     console.error(`DELETE /api/testimonials/${params.id} error:`, error);
@@ -87,8 +84,6 @@ export async function PUT(
       return NextResponse.json({ success: false, error: 'Testimonial not found.' }, { status: 404 });
     }
 
-    revalidatePath('/testimonials');
-    revalidatePath('/');
     return NextResponse.json({ success: true, message: 'Testimonial updated successfully.' });
   } catch (error) {
     console.error(`PUT /api/testimonials/${params.id} error:`, error);
