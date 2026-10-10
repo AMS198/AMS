@@ -142,7 +142,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {quickLinks.map(link => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2 group">
+                  <Link href={link.href} prefetch={false} className="text-sm text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-orange-400 transition-colors" />
                     {link.label}
                   </Link>
@@ -158,7 +158,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {serviceLinks.slice(0, 8).map(link => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2 group">
+                  <Link href={link.href} prefetch={false} className="text-sm text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-orange-400 transition-colors" />
                     {link.label}
                   </Link>

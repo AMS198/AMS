@@ -158,7 +158,7 @@ export default async function LocationPageHindi({ params }: { params: { location
                 const nearLoc = getLocation(near);
                 if (!nearLoc) return null;
                 return (
-                  <Link key={near} href={`/hi/areas/${nearLoc.slug}`} 
+                  <Link key={near} href={`/hi/areas/${nearLoc.slug}`} prefetch={false}
                     className="px-5 py-3 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-xl transition-all bg-white/5">
                     {nearLoc.name} में सिविल वर्क
                   </Link>

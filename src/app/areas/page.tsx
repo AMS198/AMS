@@ -72,7 +72,7 @@ export default function AreasPage() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {zoneLocations.map(loc => (
-                    <Link key={loc.slug} href={`/areas/${loc.slug}`}
+                    <Link key={loc.slug} href={`/areas/${loc.slug}`} prefetch={false}
                       className="group p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-orange-500/30 transition-all duration-300">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors">

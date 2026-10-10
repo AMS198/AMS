@@ -186,6 +186,7 @@ function NetworkSection() {
                 {featuredLinks.map(link => (
                   <Link key={`${city.slug}-${link.slug}`} 
                         href={`/areas/${city.slug}/${link.slug}`}
+                        prefetch={false}
                         className="flex items-center justify-between text-[13px] text-slate-400 hover:text-orange-400 transition-colors group/link">
                     {link.label} 
                     <ArrowRight size={14} className="opacity-0 group-hover/card:opacity-100 -translate-x-2 group-hover/card:translate-x-0 transition-all duration-300" />
@@ -193,7 +194,7 @@ function NetworkSection() {
                 ))}
                 
                 <div className="pt-4 border-t border-white/5 mt-2">
-                  <Link href={`/areas/${city.slug}`} className="inline-flex items-center gap-2 text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors">
+                  <Link href={`/areas/${city.slug}`} prefetch={false} className="inline-flex items-center gap-2 text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors">
                     Explore All Work in {city.name} <ArrowRight size={14} />
                   </Link>
                 </div>
@@ -203,6 +204,7 @@ function NetworkSection() {
           
           {/* See More Card at the end */}
           <Link href="/areas" 
+                prefetch={false}
                 className="flex-shrink-0 w-[200px] snap-start rounded-2xl bg-orange-500/5 border border-orange-500/10 hover:bg-orange-500/10 flex flex-col items-center justify-center text-center p-6 transition-all group/more">
             <div className="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center mb-4 group-hover/more:scale-110 transition-transform">
               <MapPin size={24} />

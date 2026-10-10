@@ -126,6 +126,7 @@ export default function SEOCrossLinks({
             <Link 
               key={i} 
               href={link.url}
+              prefetch={false}
               className="text-slate-400 hover:text-orange-400 text-xs py-1.5 transition-colors flex items-center gap-2 group"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-orange-500 transition-colors shrink-0" />

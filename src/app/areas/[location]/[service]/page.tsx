@@ -377,7 +377,7 @@ export default async function AreaServicePage({ params }: { params: { location: 
                 const nearLoc = getLocation(near);
                 if (!nearLoc) return null;
                 return (
-                  <Link key={near} href={`/areas/${nearLoc.slug}/${svc.slug}`} 
+                  <Link key={near} href={`/areas/${nearLoc.slug}/${svc.slug}`} prefetch={false}
                     className="px-4 py-2 text-[11px] uppercase font-bold tracking-widest text-slate-400 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-lg transition-all bg-black/20">
                     {nearLoc.name}
                   </Link>
@@ -531,7 +531,7 @@ export default async function AreaServicePage({ params }: { params: { location: 
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {meshServices.map(otherSvc => (
-              <Link key={otherSvc.slug} href={`/areas/${loc.slug}/${otherSvc.slug}`}
+              <Link key={otherSvc.slug} href={`/areas/${loc.slug}/${otherSvc.slug}`} prefetch={false}
                 className="group p-4 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500/40 transition-all">
                 <CheckCircle size={16} className="text-orange-400 mb-2" />
                 <h4 className="text-white text-sm font-bold group-hover:text-orange-400 transition-colors mb-1">{otherSvc.title}</h4>

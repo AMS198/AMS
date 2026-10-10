@@ -2,6 +2,7 @@
 // Cache is NEVER time-based — purged only when admin saves/updates a blog.
 export const revalidate = false;
 export const dynamic = 'force-static';
+export const dynamicParams = false; // Strictly prevent on-demand ISR reads for missing slugs
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -328,7 +329,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {related.map(r => (
-                  <Link key={r.slug} href={`/blog/${r.slug}`} className="group h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all">
+                  <Link key={r.slug} href={`/blog/${r.slug}`} prefetch={false} className="group h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all">
                     <div className="p-6">
                       <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 mb-4 uppercase tracking-wider">
                         <span className="flex items-center gap-1"><Clock size={12} className="text-orange-400" /> {calculateReadingTime(r.content || '')} min</span>

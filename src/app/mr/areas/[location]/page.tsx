@@ -143,7 +143,7 @@ export default async function LocationPageMarathi({ params }: { params: { locati
                 const nearLoc = getLocation(near);
                 if (!nearLoc) return null;
                 return (
-                  <Link key={near} href={`/mr/areas/${nearLoc.slug}`} 
+                  <Link key={near} href={`/mr/areas/${nearLoc.slug}`} prefetch={false}
                     className="px-5 py-3 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-xl transition-all bg-white/5">
                     {nearLoc.name} मध्ये सिव्हिल काम
                   </Link>

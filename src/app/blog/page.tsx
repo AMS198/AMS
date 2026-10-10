@@ -85,7 +85,7 @@ export default async function BlogIndexPage() {
 
               return (
                 <React.Fragment key={blog._id.toString()}>
-                  <Link href={`/blog/${blog.slug}`} className="group flex flex-col h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-1">
+                  <Link href={`/blog/${blog.slug}`} prefetch={false} className="group flex flex-col h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:-translate-y-1">
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-4">
                         <span className="flex items-center gap-1">

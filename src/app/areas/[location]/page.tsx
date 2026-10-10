@@ -406,7 +406,7 @@ export default async function LocationPage({ params }: { params: { location: str
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc, i) => (
-              <Link key={svc.slug} href={`/areas/${loc.slug}/${svc.slug}`} 
+              <Link key={svc.slug} href={`/areas/${loc.slug}/${svc.slug}`} prefetch={false}
                     className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#111827] transition-all hover:border-orange-500/50">
                 <div className="aspect-[16/10] relative overflow-hidden watermark-container">
                   <Image src={svc.image} alt={svc.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -600,6 +600,7 @@ export default async function LocationPage({ params }: { params: { location: str
                   return (
                   <Link key={area}
                       href={`/areas/${nearLoc.slug}`}
+                      prefetch={false}
                     className="px-4 py-2 text-xs text-slate-400 hover:text-orange-400 border border-white/10 hover:border-orange-500/40 rounded-full transition-all bg-white/5">
                       {nearLoc.name}
                   </Link>
@@ -614,7 +615,7 @@ export default async function LocationPage({ params }: { params: { location: str
       <section className="py-12 bg-[#080D1A] border-t border-white/5">
         <div className="container-custom text-center">
           <p className="text-slate-500 text-xs uppercase tracking-widest mb-6">Explore more service centers</p>
-          <Link href="/areas" className="btn-outline px-10 py-4 text-sm group">
+          <Link href="/areas" prefetch={false} className="btn-outline px-10 py-4 text-sm group">
             View All 40+ Mumbai Service Areas <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

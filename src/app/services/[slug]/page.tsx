@@ -338,7 +338,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {locations.map(loc => (
-              <Link key={loc.slug} href={`/areas/${loc.slug}/${svc.slug}`}
+              <Link key={loc.slug} href={`/areas/${loc.slug}/${svc.slug}`} prefetch={false}
                 className="card p-3 group hover:border-orange-500/40 transition-all duration-200 flex items-center gap-2 bg-[#0B1120]">
                 <MapPin size={12} className="flex-shrink-0" style={{ color: '#F97316' }} />
                 <span className="text-slate-400 text-xs group-hover:text-orange-400 transition-colors leading-tight">
@@ -358,7 +358,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {services.filter(s => s.slug !== svc.slug).map(s => (
-              <Link key={s.slug} href={`/services/${s.slug}`}
+              <Link key={s.slug} href={`/services/${s.slug}`} prefetch={false}
                 className="card p-4 hover:border-orange-500/40 transition-colors group bg-[#101827] border border-[#1E2D45]">
                 <CheckCircle size={14} className="mb-2" style={{ color: '#F97316' }} />
                 <p className="text-white text-xs font-semibold group-hover:text-orange-400 transition-colors">{s.title}</p>
