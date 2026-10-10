@@ -55,7 +55,7 @@ export default function ProjectsGrid({ projects }: Props) {
             Real projects, real results. Every project handled with <strong className="text-white">Professional Integrity</strong> — full transparency from start to handover.
           </p>
           <nav className="flex items-center gap-2 mt-4 text-slate-500 text-sm">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
             <span>/</span>
             <span style={{ color: '#F97316' }}>Projects</span>
           </nav>

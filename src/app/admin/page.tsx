@@ -215,7 +215,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         </div>
 
         <p className="text-center mt-5">
-          <Link href="/" className="text-xs text-slate-500 hover:text-orange-400 transition-colors">
+          <Link prefetch={false} href="/" className="text-xs text-slate-500 hover:text-orange-400 transition-colors">
             ← Back to website
           </Link>
         </p>
@@ -412,7 +412,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               {autoRefresh ? <Bell size={13} /> : <BellOff size={13} />}
               {autoRefresh ? 'Live' : 'Paused'}
             </button>
-            <Link href="/" className="flex items-center gap-1.5 text-slate-500 hover:text-orange-400 text-xs transition-colors">
+            <Link prefetch={false} href="/" className="flex items-center gap-1.5 text-slate-500 hover:text-orange-400 text-xs transition-colors">
               <Eye size={13} /> View Site
             </Link>
             <button onClick={onLogout}

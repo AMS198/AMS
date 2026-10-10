@@ -189,7 +189,7 @@ export default function PackagesPage() {
 
         <div className="relative z-10 container-custom">
           <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs text-slate-400 mb-8 animate-fadeIn">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
             <ArrowRight size={10} className="opacity-50" />
             <span className="text-orange-400 font-medium">Packages</span>
           </nav>

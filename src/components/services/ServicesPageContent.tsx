@@ -89,7 +89,7 @@ export default function ServicesPageContent() {
             Every service is backed by our quality guarantee.
           </p>
           <nav className="flex items-center gap-2 mt-4 text-brand-smoke text-sm animate-fadeIn">
-            <Link href="/" className="hover:text-brand-amber transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-brand-amber transition-colors">Home</Link>
             <span>/</span>
             <span className="text-brand-amber">Services</span>
           </nav>
@@ -147,7 +147,7 @@ export default function ServicesPageContent() {
                     </div>
 
                     <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-4 animate-on-scroll hover:text-brand-amber transition-colors">
-                      <Link href={`/services/${svc.slug}`}>{svc.title}</Link>
+                      <Link prefetch={false} href={`/services/${svc.slug}`}>{svc.title}</Link>
                     </h2>
                     <p className="text-brand-smoke leading-relaxed mb-8 animate-on-scroll">
                       {svc.description}
@@ -170,7 +170,7 @@ export default function ServicesPageContent() {
  
                     {/* CTAs */}
                     <div className="flex flex-wrap gap-3 animate-on-scroll">
-                      <Link href={`/services/${svc.slug}`} className="btn-primary text-xs px-5 py-2.5 flex items-center gap-1.5">
+                      <Link prefetch={false} href={`/services/${svc.slug}`} className="btn-primary text-xs px-5 py-2.5 flex items-center gap-1.5">
                         Detailed Service Page <ArrowRight size={14} />
                       </Link>
                       <button onClick={() => openQuotePopup(svc.title)} className="btn-outline text-xs px-4 py-2.5">
@@ -188,7 +188,7 @@ export default function ServicesPageContent() {
  
                   {/* Image block */}
                   <div className="relative animate-on-scroll">
-                    <Link href={`/services/${svc.slug}`} className="block relative h-[400px] lg:h-[500px] overflow-hidden group">
+                    <Link prefetch={false} href={`/services/${svc.slug}`} className="block relative h-[400px] lg:h-[500px] overflow-hidden group">
                       <Image
                         src={svc.image}
                         alt={svc.title}
@@ -232,7 +232,7 @@ export default function ServicesPageContent() {
               'Mulund', 'Ghatkopar', 'Chembur', 'Kurla', 'Sion', 'Parel',
               'Colaba', 'Churchgate', 'Tardeo', 'Mahim', 'Matunga', 'Byculla'
             ].map((loc) => (
-              <Link 
+              <Link prefetch={false} 
                 key={loc} 
                 href={`/areas/${loc.toLowerCase().replace(' ', '-')}`}
                 className="px-4 py-2 text-[10px] sm:text-xs font-semibold text-brand-smoke border border-brand-iron hover:border-brand-amber hover:text-brand-amber transition-all text-center uppercase tracking-widest bg-brand-iron/10"
@@ -243,7 +243,7 @@ export default function ServicesPageContent() {
           </div>
 
           <div className="text-center mt-10">
-            <Link href="/areas" className="text-brand-amber text-sm font-bold flex items-center justify-center gap-2 hover:gap-3 transition-all">
+            <Link prefetch={false} href="/areas" className="text-brand-amber text-sm font-bold flex items-center justify-center gap-2 hover:gap-3 transition-all">
               VIEW ALL SERVICE AREAS <ArrowRight size={16} />
             </Link>
           </div>

@@ -406,13 +406,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Adsterra ads are loaded per-component, no global head script needed */}
 
         {/* Preconnect for Cloudinary images */}
-        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <Link prefetch={false} rel="preconnect" href="https://res.cloudinary.com" />
         {/* PWA Manifest */}
-        <link rel="manifest" href="/manifest.json" />
+        <Link prefetch={false} rel="manifest" href="/manifest.json" />
 
         {/* AI Discoverability — llms.txt standard */}
-        <link rel="help" href="/llms.txt" type="text/plain" title="LLM Information" />
-        <link rel="alternate" href="/llms-full.txt" type="text/plain" title="LLM Full Information" />
+        <Link prefetch={false} rel="help" href="/llms.txt" type="text/plain" title="LLM Information" />
+        <Link prefetch={false} rel="alternate" href="/llms-full.txt" type="text/plain" title="LLM Full Information" />
 
         {/* Geo tags for local SEO */}
         <meta name="geo.region"      content="IN-MH" />

@@ -106,7 +106,7 @@ export default function Footer() {
 
           {/* Brand Col */}
           <div className="lg:col-span-4 flex flex-col items-start pr-4">
-            <Link href="/" className="flex items-center gap-3 mb-6 group">
+            <Link prefetch={false} href="/" className="flex items-center gap-3 mb-6 group">
               <div className="relative w-12 h-12 overflow-hidden rounded-lg bg-white/5 p-1.5 border border-white/10 group-hover:border-orange-500/50 transition-colors">
                 <Image 
                   src="/logo.png" 
@@ -221,7 +221,7 @@ export default function Footer() {
             <p className="text-slate-500 text-xs font-medium">
               © {new Date().getFullYear()} AMS Civil Construction. All rights reserved. 
               <span className="hidden sm:inline"> A Mandal Group Venture</span>
-              <Link href="/admin" className="ml-1 text-slate-800 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
+              <Link prefetch={false} href="/admin" className="ml-1 text-slate-800 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
             </p>
             <p className="text-slate-500 text-xs font-medium">
               Developed by <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors font-semibold">WebX Crafting</a>
@@ -229,9 +229,9 @@ export default function Footer() {
           </div>
           
           <div className="flex items-center flex-wrap justify-center gap-6 text-xs font-medium text-slate-500 pr-12 md:pr-0">
-            <Link href="/privacy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-orange-400 transition-colors">Terms & Conditions</Link>
-            <Link href="/sitemap.xml" className="hover:text-orange-400 transition-colors">Sitemap</Link>
+            <Link prefetch={false} href="/privacy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link>
+            <Link prefetch={false} href="/terms" className="hover:text-orange-400 transition-colors">Terms & Conditions</Link>
+            <Link prefetch={false} href="/sitemap.xml" className="hover:text-orange-400 transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>

@@ -55,7 +55,7 @@ export default function LandingPage() {
       {/* ── Header ────────────────────────────────────────── */}
       <header className="bg-[#0B1120] border-b border-[#1E2D45] sticky top-0 z-50">
         <div className="container-custom py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+          <Link prefetch={false} href="/" className="flex items-center gap-2">
             <span className="text-2xl font-black font-display tracking-tight text-white">
               AMS <span className="text-orange-500">Civil.</span>
             </span>

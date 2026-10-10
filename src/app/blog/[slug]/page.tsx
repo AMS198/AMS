@@ -182,13 +182,13 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
           {/* Breadcrumbs & Back */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <nav className="flex items-center gap-2 text-xs font-medium">
-              <Link href="/" className="text-slate-500 hover:text-orange-400 transition-colors">Home</Link>
+              <Link prefetch={false} href="/" className="text-slate-500 hover:text-orange-400 transition-colors">Home</Link>
               <span className="text-slate-700">/</span>
-              <Link href="/blog" className="text-slate-500 hover:text-orange-400 transition-colors">Blog</Link>
+              <Link prefetch={false} href="/blog" className="text-slate-500 hover:text-orange-400 transition-colors">Blog</Link>
               <span className="text-slate-700">/</span>
               <span className="text-orange-400 truncate max-w-[150px] sm:max-w-xs">{blog.title}</span>
             </nav>
-            <Link href="/blog" className="hidden sm:inline-flex items-center gap-2 text-sm text-slate-400 hover:text-orange-400 transition-colors">
+            <Link prefetch={false} href="/blog" className="hidden sm:inline-flex items-center gap-2 text-sm text-slate-400 hover:text-orange-400 transition-colors">
               <ArrowLeft size={16} /> All articles
             </Link>
           </div>
@@ -315,7 +315,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                 <h3 className="text-white font-display text-3xl font-black mb-3">Planning your next project?</h3>
                 <p className="text-white/90 text-lg">Detailed construction estimates and site visits available today.</p>
               </div>
-              <Link href="/contact" className="px-10 py-5 bg-[#0B1120] text-white font-black text-lg rounded-xl hover:bg-black transition-all hover:scale-105 shadow-xl whitespace-nowrap">
+              <Link prefetch={false} href="/contact" className="px-10 py-5 bg-[#0B1120] text-white font-black text-lg rounded-xl hover:bg-black transition-all hover:scale-105 shadow-xl whitespace-nowrap">
                 Talk to Expert
               </Link>
             </div>

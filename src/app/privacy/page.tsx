@@ -29,7 +29,7 @@ export default function PrivacyPolicyPage() {
           
           <p>
             At <strong>AMS Civil Construction</strong> (referred to as "we", "us", or "our"), accessible from 
-            <Link href="/" className="text-orange-400 hover:underline mx-1">amscivilwork.in</Link>, 
+            <Link prefetch={false} href="/" className="text-orange-400 hover:underline mx-1">amscivilwork.in</Link>, 
             one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of 
             information that is collected and recorded by us and how we use it.
           </p>

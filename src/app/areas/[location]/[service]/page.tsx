@@ -415,11 +415,11 @@ export default async function AreaServicePage({ params }: { params: { location: 
         <div className="relative z-10 container-custom">
           {/* Breadcrumbs */}
           <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs text-slate-400 mb-8 animate-fadeIn">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
             <ArrowRight size={10} className="opacity-50" />
-            <Link href="/areas" className="hover:text-orange-400 transition-colors">Areas</Link>
+            <Link prefetch={false} href="/areas" className="hover:text-orange-400 transition-colors">Areas</Link>
             <ArrowRight size={10} className="opacity-50" />
-            <Link href={`/areas/${loc.slug}`} className="hover:text-orange-400 transition-colors">{loc.name}</Link>
+            <Link prefetch={false} href={`/areas/${loc.slug}`} className="hover:text-orange-400 transition-colors">{loc.name}</Link>
             <ArrowRight size={10} className="opacity-50" />
             <span className="text-orange-400 font-medium">{svc.title}</span>
           </nav>

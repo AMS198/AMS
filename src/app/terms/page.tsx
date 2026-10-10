@@ -61,7 +61,7 @@ export default function TermsPage() {
       <div className="relative z-10 container-custom">
         {/* Header Section */}
         <div className="max-w-4xl mb-16">
-          <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-orange-400 transition-all text-xs mb-8">
+          <Link prefetch={false} href="/" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-orange-400 transition-all text-xs mb-8">
             <ArrowLeft size={14} /> Back to Home
           </Link>
           
@@ -142,7 +142,7 @@ export default function TermsPage() {
                 <a href="tel:+918779391690" className="btn-primary px-8 py-4 gap-3">
                   Call for Clarification <ArrowLeft className="rotate-180" size={18} />
                 </a>
-                <Link href="/contact" className="btn-outline px-8 py-4 bg-white/5">
+                <Link prefetch={false} href="/contact" className="btn-outline px-8 py-4 bg-white/5">
                   Send Inquiry
                 </Link>
               </div>

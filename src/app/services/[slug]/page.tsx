@@ -174,9 +174,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </div>
         <div className="relative container-custom z-10">
           <nav className="flex items-center gap-2 text-slate-500 text-xs mb-6">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/services" className="hover:text-orange-400 transition-colors">Services</Link>
+            <Link prefetch={false} href="/services" className="hover:text-orange-400 transition-colors">Services</Link>
             <span>/</span>
             <span style={{ color: '#F97316' }}>{svc.title}</span>
           </nav>
@@ -228,8 +228,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </div>
             )}
             <div className="flex gap-3">
-              <Link href="/contact" className="btn-primary text-sm">Get Free Quote <ArrowRight size={15} /></Link>
-              <Link href="/areas" className="btn-outline text-sm">Find Your Area</Link>
+              <Link prefetch={false} href="/contact" className="btn-primary text-sm">Get Free Quote <ArrowRight size={15} /></Link>
+              <Link prefetch={false} href="/areas" className="btn-outline text-sm">Find Your Area</Link>
             </div>
           </div>
         </div>

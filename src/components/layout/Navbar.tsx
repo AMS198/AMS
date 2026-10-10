@@ -71,7 +71,7 @@ export default function Navbar() {
 
         <nav className="container-custom flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link prefetch={false} href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-10 h-10 overflow-hidden rounded-sm transition-transform duration-300 group-hover:scale-105">
               <Image 
                 src="/logo.png" 
@@ -94,7 +94,7 @@ export default function Navbar() {
           <ul className="hidden lg:flex items-center gap-5">
             {navLinks.map(link => (
               <li key={link.href}>
-                <Link href={link.href} className="nav-link pb-0.5 text-sm"
+                <Link prefetch={false} href={link.href} className="nav-link pb-0.5 text-sm"
                   style={pathname === link.href
                     ? { color: '#F97316', borderBottom: '1px solid #F97316' } : {}}>
                   {link.label}
@@ -105,7 +105,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/contact" className="btn-outline text-xs px-5 py-2.5">Get Quote</Link>
+            <Link prefetch={false} href="/contact" className="btn-outline text-xs px-5 py-2.5">Get Quote</Link>
           </div>
 
           {/* Hamburger */}
@@ -130,7 +130,7 @@ export default function Navbar() {
           <ul className="flex flex-col gap-1">
             {navLinks.map(link => (
               <li key={link.href}>
-                <Link href={link.href}
+                <Link prefetch={false} href={link.href}
                   className="block py-3 px-3 text-base font-medium transition-colors duration-150"
                   style={{
                     borderBottom: '1px solid #1E2D45',
@@ -143,7 +143,7 @@ export default function Navbar() {
           </ul>
 
           <div className="mt-8 flex flex-col gap-3">
-            <Link href="/contact" className="btn-primary justify-center">Get Free Quote</Link>
+            <Link prefetch={false} href="/contact" className="btn-primary justify-center">Get Free Quote</Link>
             <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
               className="btn-outline justify-center gap-2">
               <WhatsAppLogo className="w-4 h-4 fill-[#F97316]" />

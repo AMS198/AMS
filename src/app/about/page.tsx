@@ -101,7 +101,7 @@ export default function AboutPage() {
             delivering premium bungalow construction and high-end renovations.
           </p>
           <nav className="flex items-center gap-2 mt-8 text-brand-smoke text-sm animate-fadeIn">
-            <Link href="/" className="hover:text-brand-amber transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-brand-amber transition-colors">Home</Link>
             <span>/</span>
             <span className="text-brand-amber">About Us</span>
           </nav>
@@ -137,7 +137,7 @@ export default function AboutPage() {
               <button onClick={openQuotePopup} className="btn-primary">
                 Get Free Quote <ArrowRight size={16} />
               </button>
-              <Link href="/projects" className="btn-outline">
+              <Link prefetch={false} href="/projects" className="btn-outline">
                 View Projects
               </Link>
             </div>

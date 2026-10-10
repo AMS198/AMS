@@ -104,9 +104,9 @@ export default async function LocationPageHindi({ params }: { params: { location
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 blur-[120px]" />
         <div className="relative z-10 container-custom">
           <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400 mb-8">
-            <Link href="/" className="hover:text-orange-400">मुख्य पृष्ठ (Home)</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400">मुख्य पृष्ठ (Home)</Link>
             <ArrowRight size={10} className="opacity-50" />
-            <Link href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
+            <Link prefetch={false} href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
             <ArrowRight size={10} className="opacity-50" />
             <span className="text-orange-400 font-medium">{loc.name}</span>
           </nav>

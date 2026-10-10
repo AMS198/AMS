@@ -50,7 +50,7 @@ export default function DPDPConsentBanner() {
                 <h3 className="text-white font-bold text-sm">Data Privacy (DPDP Act)</h3>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                We use cookies and collect information to provide you with personalized construction estimates and better services. By continuing to use our website or submitting forms, you agree to our <Link href="/privacy" className="text-orange-400 hover:underline">Privacy Policy</Link>.
+                We use cookies and collect information to provide you with personalized construction estimates and better services. By continuing to use our website or submitting forms, you agree to our <Link prefetch={false} href="/privacy" className="text-orange-400 hover:underline">Privacy Policy</Link>.
               </p>
             </div>
             <div className="flex-shrink-0 w-full md:w-auto">

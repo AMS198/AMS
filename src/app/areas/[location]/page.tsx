@@ -287,9 +287,9 @@ export default async function LocationPage({ params }: { params: { location: str
         <div className="relative z-10 container-custom">
           {/* Breadcrumbs with glassmorphism */}
           <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] sm:text-xs text-slate-400 mb-8 animate-fadeIn">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
             <ArrowRight size={10} className="opacity-50" />
-            <Link href="/areas" className="hover:text-orange-400 transition-colors">Service Areas</Link>
+            <Link prefetch={false} href="/areas" className="hover:text-orange-400 transition-colors">Service Areas</Link>
             <ArrowRight size={10} className="opacity-50" />
             <span className="text-orange-400 font-medium">{loc.name}</span>
           </nav>
@@ -399,7 +399,7 @@ export default async function LocationPage({ params }: { params: { location: str
                 We use premium materials and skilled artisans for every project.
               </p>
             </div>
-            <Link href="/services" className="text-orange-400 font-medium flex items-center gap-2 hover:gap-3 transition-all">
+            <Link prefetch={false} href="/services" className="text-orange-400 font-medium flex items-center gap-2 hover:gap-3 transition-all">
               View All Services <ArrowRight size={18} />
             </Link>
           </div>
@@ -571,7 +571,7 @@ export default async function LocationPage({ params }: { params: { location: str
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {localBlogs.map((blog: any) => (
-                <Link key={blog._id.toString()} href={`/blog/${blog.slug}`} className="card p-5 group hover:border-orange-500/40 transition-colors">
+                <Link prefetch={false} key={blog._id.toString()} href={`/blog/${blog.slug}`} className="card p-5 group hover:border-orange-500/40 transition-colors">
                   <h3 className="text-white font-bold mb-2 group-hover:text-orange-400 transition-colors line-clamp-2">{blog.title}</h3>
                   <p className="text-slate-400 text-sm line-clamp-3 mb-4">{blog.excerpt}</p>
                   <span className="text-orange-400 text-xs font-bold flex items-center gap-1">Read Guide <ArrowRight size={14}/></span>

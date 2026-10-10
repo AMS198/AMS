@@ -47,7 +47,7 @@ export default function NotFound() {
         {/* Action Grid (Interactive & Premium Hover States) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
           
-          <Link 
+          <Link prefetch={false} 
             id="btn-404-home"
             href="/" 
             className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/40 text-left transition-all duration-300 group hover:-translate-y-0.5 hover:bg-white/10"
@@ -62,7 +62,7 @@ export default function NotFound() {
             <ArrowRight size={16} className="text-slate-500 group-hover:text-orange-400 ml-auto transition-colors group-hover:translate-x-0.5" />
           </Link>
 
-          <Link 
+          <Link prefetch={false} 
             id="btn-404-services"
             href="/services" 
             className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/40 text-left transition-all duration-300 group hover:-translate-y-0.5 hover:bg-white/10"
@@ -77,7 +77,7 @@ export default function NotFound() {
             <ArrowRight size={16} className="text-slate-500 group-hover:text-orange-400 ml-auto transition-colors group-hover:translate-x-0.5" />
           </Link>
 
-          <Link 
+          <Link prefetch={false} 
             id="btn-404-blog"
             href="/blog" 
             className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/40 text-left transition-all duration-300 group hover:-translate-y-0.5 hover:bg-white/10"
@@ -92,7 +92,7 @@ export default function NotFound() {
             <ArrowRight size={16} className="text-slate-500 group-hover:text-orange-400 ml-auto transition-colors group-hover:translate-x-0.5" />
           </Link>
 
-          <Link 
+          <Link prefetch={false} 
             id="btn-404-contact"
             href="/contact" 
             className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/40 text-left transition-all duration-300 group hover:-translate-y-0.5 hover:bg-white/10"

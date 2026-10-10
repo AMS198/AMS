@@ -276,7 +276,7 @@ function HeroSection() {
                 Get Free Quote <ArrowRight size={18} />
               </motion.button>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/projects" className="btn-ghost text-base px-8 py-4 h-full flex items-center">
+                <Link prefetch={false} href="/projects" className="btn-ghost text-base px-8 py-4 h-full flex items-center">
                   View Projects
                 </Link>
               </motion.div>
@@ -351,8 +351,8 @@ function IntroSection() {
               POP false ceilings, and all interior structural work Ã¢â‚¬â€ delivered with personal attention, expert engineers, and backed by a comprehensive quality guarantee.
             </p>
             <div className="flex gap-4 animate-on-scroll">
-              <Link href="/about" className="btn-primary">Our Story <ArrowRight size={16} /></Link>
-              <Link href="/services" className="btn-outline">All Services</Link>
+              <Link prefetch={false} href="/about" className="btn-primary">Our Story <ArrowRight size={16} /></Link>
+              <Link prefetch={false} href="/services" className="btn-outline">All Services</Link>
             </div>
           </div>
 
@@ -392,7 +392,7 @@ function ServicesSection() {
           {services.map((svc, i) => {
             const Icon = iconMap[svc.icon] ?? Wrench;
             return (
-              <Link key={svc.id} href={`/services#${svc.slug}`}
+              <Link prefetch={false} key={svc.id} href={`/services#${svc.slug}`}
                 className="group relative h-64 overflow-hidden rounded-xl border border-slate-800/50 flex flex-col justify-end p-5 animate-on-scroll"
                 style={{ transitionDelay: `${i * 45}ms` }}>
                 
@@ -431,7 +431,7 @@ function ServicesSection() {
         </div>
 
         <div className="text-center mt-10 animate-on-scroll">
-          <Link href="/services" className="btn-primary">
+          <Link prefetch={false} href="/services" className="btn-primary">
             All Services <ArrowRight size={16} />
           </Link>
         </div>
@@ -559,7 +559,7 @@ function ProjectsCarousel({ projects }: { projects: ProjectType[] }) {
         {filtered.length === 0 && (
           <div className="card p-12 text-center text-slate-400">
             No projects yet. Add your first project from the{' '}
-            <Link href="/admin" className="underline" style={{ color: '#F97316' }}>Admin Dashboard</Link>.
+            <Link prefetch={false} href="/admin" className="underline" style={{ color: '#F97316' }}>Admin Dashboard</Link>.
           </div>
         )}
 
@@ -658,7 +658,7 @@ function ProjectsCarousel({ projects }: { projects: ProjectType[] }) {
         )}
 
         <div className="text-center mt-8 animate-on-scroll">
-          <Link href="/projects" className="btn-outline">
+          <Link prefetch={false} href="/projects" className="btn-outline">
             View All Projects <ArrowRight size={16} />
           </Link>
         </div>
@@ -926,7 +926,7 @@ function PackagesPromoSection() {
         </div>
 
         <div className="text-center">
-          <Link
+          <Link prefetch={false}
             href="/packages"
             className="btn-primary text-base px-8 py-4 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_50px_rgba(249,115,22,0.5)]"
           >

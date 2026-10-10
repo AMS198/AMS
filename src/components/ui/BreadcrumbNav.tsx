@@ -16,7 +16,7 @@ export default function BreadcrumbNav() {
     <nav aria-label="Breadcrumb" className="absolute top-[112px] md:top-[120px] w-full z-30 py-3 px-4 bg-white/5 border-y border-white/10 overflow-x-auto whitespace-nowrap">
       <ol className="flex items-center space-x-2 text-sm text-slate-400 container-custom">
         <li>
-          <Link href="/" className="hover:text-orange-400 transition-colors flex items-center gap-1">
+          <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors flex items-center gap-1">
             <Home size={14} />
             <span>Home</span>
           </Link>
@@ -34,7 +34,7 @@ export default function BreadcrumbNav() {
                   {label}
                 </span>
               ) : (
-                <Link href={href} className="hover:text-orange-400 transition-colors">
+                <Link prefetch={false} href={href} className="hover:text-orange-400 transition-colors">
                   {label}
                 </Link>
               )}

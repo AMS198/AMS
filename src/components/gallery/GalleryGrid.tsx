@@ -59,7 +59,7 @@ export default function GalleryGrid({ images }: Props) {
             Browse our completed work — bungalows, kitchens, bathrooms, tiles, flooring &amp; interiors across Mumbai.
           </p>
           <nav className="flex items-center gap-2 mt-4 text-slate-500 text-sm animate-fadeIn">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
             <span>/</span>
             <span style={{ color: '#F97316' }}>Gallery</span>
           </nav>
