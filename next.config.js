@@ -84,6 +84,26 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
+      {
+        // Edge Cache for public HTML pages: Keeps pre-rendered HTML in Vercel Edge memory
+        // Prevents repeat Durable ISR Data Cache reads when Googlebot or visitors crawl pages
+        source: '/:path(areas|services|hi|mr|about|contact|projects|gallery|blog|calculator|packages|free-consultation|terms|privacy)/:subpath*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=2592000, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        source: '/:path(areas|services|hi|mr|about|contact|projects|gallery|blog|calculator|packages|free-consultation|terms|privacy)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=2592000, stale-while-revalidate=86400' },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=2592000, stale-while-revalidate=86400' },
+        ],
+      },
     ];
   },
 };

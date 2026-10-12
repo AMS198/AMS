@@ -86,15 +86,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority:        getLocationPriority(loc.zone) * 0.9,
     });
     
-    // SEO SCALING: Generate granular Location × Service pages for ALL zones to maximize impressions.
-    services.forEach(svc => {
-      locationPages.push({
-        url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-        lastModified:    SITE_UPDATED,
-        changeFrequency: 'weekly' as const,
-        priority:        getLocationServicePriority(loc.zone),
+    // SEO: Generate granular Location × Service pages for CORE_ZONES (Mumbai / MMR) to maximize high-intent leads and prevent bot crawl overload
+    if (CORE_ZONES.includes(loc.zone)) {
+      services.forEach(svc => {
+        locationPages.push({
+          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+          lastModified:    SITE_UPDATED,
+          changeFrequency: 'weekly' as const,
+          priority:        getLocationServicePriority(loc.zone),
+        });
       });
-    });
+    }
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
