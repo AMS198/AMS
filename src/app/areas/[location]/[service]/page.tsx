@@ -3,8 +3,8 @@
 // Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
 
-// SSG: Fully static \u2014 content only changes on redeploy. No time-based expiry.
-export const revalidate = false;
+// Dynamic SSR: Renders on demand in milliseconds to completely bypass Vercel Data Cache (0 ISR Reads)
+export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -16,26 +16,6 @@ import { generateLocalParagraph, generateWhyChooseUs, generateFAQs, zoneContext,
 import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles, HelpCircle, Navigation } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
-
-// DB imports removed to save CPU on Serverless cold starts
-
-// Removed unused getCachedRelatedBlogs to save MongoDB connection overhead
-
-/* ── Fully static \u2014 no on-demand generation to save Vercel Origin Transfer ── */
-export const dynamicParams = false;
-
-/* ── ISR: Cache generated pages for 1 week at Edge ── */
-
-/* ── Pre-render all paths at build time ───── */
-export async function generateStaticParams() {
-  const params = [];
-  for (const loc of locations) {
-    for (const s of services) {
-      params.push({ location: loc.slug, service: s.slug });
-    }
-  }
-  return params;
-}
 
 /* ── Realistic Service-Specific Emojis for Google CTR ── */
 const serviceEmojiMap: Record<string, string> = {

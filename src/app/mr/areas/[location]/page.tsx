@@ -1,6 +1,6 @@
 // src/app/mr/areas/[location]/page.tsx
-export const revalidate = false;
-export const dynamicParams = false;
+// Dynamic SSR: Renders on demand to completely bypass Vercel Data Cache (0 ISR Reads)
+export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -14,12 +14,7 @@ import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
 import { getSeededRandom, zoneContext } from '@/data/localContent';
 
-/* ── Generate all paths at build time ──────────────── */
-export async function generateStaticParams() {
-  return locations.map((loc) => ({
-    location: loc.slug,
-  }));
-}
+
 
 export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {
   const loc = getLocation(params.location);

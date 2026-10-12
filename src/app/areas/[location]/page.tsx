@@ -3,9 +3,8 @@
 // Redesigned: Premium SEO page for each Mumbai area
 // Each page is highly optimized for local ranking with a high-end UI
 
-// SSG: Fully static \u2014 content only changes on redeploy. No time-based expiry.
-export const revalidate = false;
-export const dynamicParams = false;
+// Dynamic SSR: Renders on demand to completely bypass Vercel Data Cache (0 ISR Reads)
+export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -46,12 +45,7 @@ async function getLocalData(locName: string, locZone: string, locNearby: string[
   }
 }
 
-/* ── Generate all paths at build time ──────────────── */
-export async function generateStaticParams() {
-  return locations.map((loc) => ({
-    location: loc.slug,
-  }));
-}
+
 
 /* ── Generate unique metadata per location ────────────────── */
 export async function generateMetadata(
