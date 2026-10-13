@@ -1,4 +1,4 @@
-﻿// src/app/page.tsx  -  Home Page (SSG Server Component)
+// src/app/page.tsx  -  Home Page (SSG Server Component)
 // Data is fetched at BUILD TIME via direct DB calls.
 // Cache is purged on-demand: revalidateGallery() / revalidateProjects() called by admin APIs.
 // All client-side interactivity lives in HomePageSections (a 'use client' component).
@@ -14,7 +14,7 @@ import { faqs } from '@/data/siteData';
 
 export const metadata: Metadata = {
   title: 'Best Civil Contractor in Mumbai | Bungalow Construction & Renovation | AMS Civil',
-  description: 'AMS Civil Construction — Mumbai\'s #1 civil contractor for bungalow construction, bathroom renovation, kitchen work, tiles, flooring & interior civil work. 25+ years, 500+ projects. Call for a FREE site visit!',
+  description: 'AMS Civil Construction — Mumbai\'s #1 civil contractor for bungalow construction, bathroom renovation, kitchen work, tiles, flooring & interior civil work. 25+ years, 500+ projects. Call to book your site visit!',
   alternates: { canonical: 'https://www.amscivilwork.in' },
   openGraph: {
     title: 'Best Civil Contractor in Mumbai | AMS Civil Construction',
@@ -71,7 +71,7 @@ export default async function HomePage() {
     name: 'How to Hire the Best Civil Contractor in Mumbai',
     description: 'A simple 3-step process to get your home built or renovated stress-free.',
     step: [
-      { '@type': 'HowToStep', name: 'Free Site Visit & Consultation', text: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas.' },
+      { '@type': 'HowToStep', name: 'Site Visit & Consultation', text: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas (Fee: ₹2,000–₹3,000, adjustable in final bill).' },
       { '@type': 'HowToStep', name: 'Transparent Quote', text: 'You receive a detailed, itemized quotation with zero hidden costs and exact timelines.' },
       { '@type': 'HowToStep', name: 'Flawless Execution', text: 'Our skilled team starts the work under senior supervision, keeping you updated at every milestone.' },
     ],

@@ -203,7 +203,7 @@ export default function PackagesPage() {
             </h1>
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl animate-fadeUp" style={{ animationDelay: '100ms' }}>
               From 1BHK flats to luxury bungalows — choose a transparent renovation package. 
-              No hidden costs. <strong className="text-white">Site visit fee (₹500-₹1000) may be applicable.</strong>
+              No hidden costs. <strong className="text-white">Site visit fee (₹2,000–₹3,000) applies, fully adjustable in final bill.</strong>
             </p>
             
             <div className="mt-6 inline-flex items-start sm:items-center gap-3 p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20 max-w-2xl animate-fadeUp" style={{ animationDelay: '150ms' }}>
@@ -241,7 +241,7 @@ export default function PackagesPage() {
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
               Every package includes a detailed quotation and a dedicated project manager. 
-              Prices shown are starting estimates for <strong className="text-white">labor and civil work only</strong> (materials are extra) and depend on your specific requirements. (Site visit fee may apply).
+              Prices shown are starting estimates for <strong className="text-white">labor and civil work only</strong> (materials are extra) and depend on your specific requirements. (Site visit fee: ₹2,000–₹3,000, adjustable in bill).
             </p>
           </div>
 
@@ -289,7 +289,7 @@ export default function PackagesPage() {
                 step: '02',
                 icon: Home,
                 title: 'Site Visit',
-                desc: 'Our senior engineer visits your property, takes measurements, and understands your vision. (Fee of ₹500-₹1000 may be applicable, adjustable in final bill).',
+                desc: 'Our senior engineer visits your property, takes measurements, and understands your vision. (Site visit fee: ₹2,000–₹3,000, fully adjustable in final bill).',
               },
               {
                 step: '03',
@@ -385,7 +385,7 @@ export default function PackagesPage() {
             {[
               {
                 q: 'Are these exact prices or estimates?',
-                a: 'These are starting estimates. Exact pricing depends on your flat size, material choices, site condition, and specific requirements. We provide a detailed, itemized quote after a site visit (fee ₹500-₹1000 may apply, adjustable in final bill) — no hidden costs.',
+                a: 'These are starting estimates. Exact pricing depends on your flat size, material choices, site condition, and specific requirements. We provide a detailed, itemized quote after a site visit (fee ₹2,000–₹3,000, fully adjustable in final bill) — no hidden costs.',
               },
               {
                 q: 'Can I customize a package?',
@@ -397,7 +397,7 @@ export default function PackagesPage() {
               },
               {
                 q: 'How do I get started?',
-                a: 'Simply click "Get Free Quote" on any package, or call us at +91 87793 91690. Our engineer will visit your property, discuss your requirements, and provide a detailed quotation within 24 hours. (A site visit fee of ₹500-₹1000 may apply, adjustable against the final bill).',
+                a: 'Simply click "Get Free Quote" on any package, or call us at +91 87793 91690. Our engineer will visit your property, discuss your requirements, and provide a detailed quotation within 24 hours. (A site visit fee of ₹2,000–₹3,000 applies, fully adjustable against the final bill).',
               },
               {
                 q: 'Kya renovation ke liye ghar khali karna padta hai?',
@@ -413,7 +413,7 @@ export default function PackagesPage() {
       {/* ── CTA ──────────────────────────────────────────── */}
       <ModernCTA
         title="Ready to Pick Your Package?"
-        subtitle="Get a site visit and detailed quotation within 24 hours (Site visit fee may apply)."
+        subtitle="Get a site visit and detailed quotation within 24 hours (Site visit fee: ₹2,000–₹3,000, adjustable in final bill)."
         description="AMS Civil Construction offers transparent, package-based pricing for all home renovation and construction needs in Mumbai. From 1BHK smart renovations to luxury bungalow construction, we deliver premium results at honest prices. No middlemen, no hidden costs — just quality work by experienced professionals."
       />
     </main>

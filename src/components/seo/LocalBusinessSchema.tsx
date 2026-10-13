@@ -93,7 +93,7 @@ export default function LocalBusinessSchema() {
         },
         'result': {
           '@type': 'Reservation',
-          'name': 'Book a Free Site Visit'
+          'name': 'Book a Site Visit'
         }
       }
     };

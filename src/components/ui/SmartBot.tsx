@@ -34,7 +34,7 @@ function ChatWindow({ onClose }: { onClose: () => void }) {
   }, []);
 
   const handleWA = () => {
-    window.open('https://wa.me/918779391690?text=Hi,%20I%20would%20like%20to%20book%20a%20free%20site%20visit.', '_blank');
+    window.open('https://wa.me/918779391690?text=Hi,%20I%20would%20like%20to%20book%20a%20site%20visit.', '_blank');
   };
 
   return (

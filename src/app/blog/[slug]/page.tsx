@@ -142,7 +142,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
       {
         '@type': 'Question',
         name: `What is the average cost of civil work in Mumbai?`,
-        acceptedAnswer: { '@type': 'Answer', text: `The cost varies based on the scope of work and materials used. Contact AMS Civil Construction for a free site visit and exact quote.` }
+        acceptedAnswer: { '@type': 'Answer', text: `The cost varies based on the scope of work and materials used. Contact AMS Civil Construction for a site visit (fee ₹2,000–₹3,000, adjustable in bill) and exact quote.` }
       },
       {
         '@type': 'Question',
@@ -283,7 +283,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                 <h3 className="text-white font-display text-2xl sm:text-3xl font-black mb-2">
                   Looking for the Best Civil Contractor in <span className="text-orange-400">{blog.locationTags && blog.locationTags.length > 0 ? blog.locationTags[0] : 'Mumbai'}</span>?
                 </h3>
-                <p className="text-slate-300 text-md">Get a free site visit and estimate today. No hidden charges.</p>
+                <p className="text-slate-300 text-md">Book a site visit (fee ₹2,000–₹3,000, adjustable in bill) and estimate today. No hidden charges.</p>
               </div>
               <a href="tel:+918779391690" className="px-8 py-4 bg-orange-500 text-white font-black text-lg rounded-xl hover:bg-orange-600 transition-all hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.4)] whitespace-nowrap flex items-center gap-2">
                 <PhoneLogo className="w-5 h-5 fill-white" /> Call Now

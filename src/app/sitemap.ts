@@ -23,12 +23,6 @@ function getLocationPriority(zone: string): number {
   return 0.6; // Jharkhand, West Bengal, Karnataka
 }
 
-function getLocationServicePriority(zone: string): number {
-  if (CORE_ZONES.includes(zone)) return 0.8;
-  if (zone === 'Maharashtra') return 0.65;
-  return 0.55;
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /* ── Static pages ──────────────────────────────────────── */
@@ -44,8 +38,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/calculator`, lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${BASE}/packages`,   lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 0.95 },
     { url: `${BASE}/free-consultation`, lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.95 },
-    { url: `${BASE}/hi`,         lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/mr`,         lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 1.0 },
     { url: `${BASE}/feed.xml`,   lastModified: SITE_UPDATED, changeFrequency: 'daily',   priority: 0.8 },
     { url: `${BASE}/terms`,      lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/privacy`,    lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.5 },
@@ -85,18 +77,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone) * 0.9,
     });
-    
-    // SEO: Generate granular Location × Service pages for CORE_ZONES (Mumbai / MMR) to maximize high-intent leads and prevent bot crawl overload
-    if (CORE_ZONES.includes(loc.zone)) {
-      services.forEach(svc => {
-        locationPages.push({
-          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-          lastModified:    SITE_UPDATED,
-          changeFrequency: 'weekly' as const,
-          priority:        getLocationServicePriority(loc.zone),
-        });
-      });
-    }
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */

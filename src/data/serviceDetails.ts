@@ -36,7 +36,7 @@ export const serviceDetailsData: Record<string, ServiceDetail> = {
       { title: 'Step 4: High-End Finishes', desc: 'Premium tiling/granite layouts, POP molding, wall putty application, and luxury paint coats.' }
     ],
     materials: ['Saint-Gobain Gyproc Gypsum', 'Greenply / CenturyPly Marine Plywood', 'Polycab / Havells FRLS Wires', 'Kajaria Vitrified Tiles'],
-    pricingGuide: 'Interior civil work pricing varies based on flat BHK size, materials selected, and customized design specifications. Contact us for a free site measure and detailed blueprint.'
+    pricingGuide: 'Interior civil work pricing varies based on flat BHK size, materials selected, and customized design specifications. Contact us to schedule a site visit and get a detailed quotation.'
   },
   'swimming-pool-work': {
     slug: 'swimming-pool-work',
@@ -49,7 +49,7 @@ export const serviceDetailsData: Record<string, ServiceDetail> = {
       { title: 'Step 4: Mosaics & Filtration', desc: 'Premium glass mosaic tiles laying, filtration plant setup, underwater LED lights wiring, and final testing.' }
     ],
     materials: ['Dr. Fixit / Sika Waterproofing System', 'Glass Mosaic Tiles', 'Astral / Finolex Heavy Duty Pipes', 'Premium Filtration Pumps'],
-    pricingGuide: 'Swimming pool construction costs depend on dimensions, shape complexity, soil composition, and selected automation (heaters, salt-chlorinators). Request a free site inspection.'
+    pricingGuide: 'Swimming pool construction costs depend on dimensions, shape complexity, soil composition, and selected automation (heaters, salt-chlorinators). Request a site visit for detailed planning.'
   },
   'compound-wall-work': {
     slug: 'compound-wall-work',

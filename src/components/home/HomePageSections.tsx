@@ -672,7 +672,7 @@ function ProjectsCarousel({ projects }: { projects: ProjectType[] }) {
 Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 function ProcessSection() {
   const steps = [
-    { num: '01', title: 'Free Site Visit & Consultation', desc: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas.' },
+    { num: '01', title: 'Site Visit & Consultation', desc: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas. (Fee: ₹2,000–₹3,000, adjustable in bill).' },
     { num: '02', title: 'Transparent Quote', desc: 'You receive a detailed, itemized quotation with zero hidden costs and exact timelines.' },
     { num: '03', title: 'Flawless Execution', desc: 'Our skilled team starts the work under senior supervision, keeping you updated at every milestone.' }
   ];
@@ -933,7 +933,7 @@ function PackagesPromoSection() {
             View All Packages & EMI Options <ArrowRight size={18} />
           </Link>
           <p className="text-xs text-slate-600 mt-4">
-            * Starting prices. Exact cost depends on material selection & site condition. Free site visit included.
+            * Starting prices. Exact cost depends on material selection & site condition. Site visit fee (₹2,000–₹3,000) adjustable in final bill.
           </p>
         </div>
       </div>

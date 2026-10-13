@@ -36,7 +36,7 @@ export default function TopBanner() {
       <div className="hidden sm:flex items-center justify-center gap-4 flex-wrap w-full">
         <div className="flex items-center gap-2">
           <span>🔥</span>
-          <span className="font-semibold text-xs md:text-sm">Special Offer: Book a Site Visit & Consultation (Fee Applicable)</span>
+          <span className="font-semibold text-xs md:text-sm">Special Offer: Book a Site Visit & Consultation (Fee: ₹2,000–₹3,000, Adjustable in Bill)</span>
         </div>
         <div className="flex items-center gap-3">
           <a href="tel:+918779391690" className="flex items-center gap-1.5 hover:bg-white/30 transition-all bg-white/20 px-3 py-0.5 rounded-full font-bold font-mono text-xs">
@@ -77,7 +77,7 @@ export default function TopBanner() {
           {/* First loop of content */}
           <div className="flex items-center gap-6 pr-6">
             <span className="flex items-center gap-1.5 font-semibold text-xs tracking-wide">
-              <span>🔥</span> Special Offer: Site Visit & Consultation (Fee Applicable)
+              <span>🔥</span> Special Offer: Site Visit (Fee: ₹2,000–₹3,000, Adjustable in Bill)
             </span>
             <span className="text-white/40">|</span>
             <a href="tel:+918779391690" className="flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full font-bold font-mono text-xs shadow-sm whitespace-nowrap">
@@ -98,7 +98,7 @@ export default function TopBanner() {
           {/* Second identical loop of content to create a seamless infinite scroll */}
           <div className="flex items-center gap-6 pr-6" aria-hidden="true">
             <span className="flex items-center gap-1.5 font-semibold text-xs tracking-wide">
-              <span>🔥</span> Special Offer: Site Visit & Consultation (Fee Applicable)
+              <span>🔥</span> Special Offer: Site Visit (Fee: ₹2,000–₹3,000, Adjustable in Bill)
             </span>
             <span className="text-white/40">|</span>
             <a href="tel:+918779391690" className="flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full font-bold font-mono text-xs shadow-sm whitespace-nowrap">

@@ -48,11 +48,11 @@ export async function generateMetadata(
   if (!svc) return { title: 'Not Found' };
 
   const emoji = serviceEmojiMap[svc.slug] || '👷';
-  const title = `Best ${svc.title} in Mumbai (2026) | Free Quote & Visit`;
+  const title = `Best ${svc.title} in Mumbai [2026] | Top Rated | AMS Civil`;
   
   // Use rich intro if available
   const richDesc = detail ? detail.intro : svc.shortDesc;
-  const description = `${emoji} ${richDesc} 25+ Yrs Exp. 100% Quality Guaranteed, 5-Yr Warranty. Call +91 87793 91690 for Free Site Visit!`;
+  const description = `${emoji} ${richDesc} 25+ Yrs Exp. 100% Quality Guaranteed, 5-Yr Warranty. Call +91 87793 91690 to book your site visit!`;
 
   return {
     title,
@@ -136,7 +136,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             name: `How much does ${svc.title.toLowerCase()} cost in Mumbai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `The cost of ${svc.title.toLowerCase()} in Mumbai varies by area size and materials. We offer competitive pricing with free site visits. Call +91 87793 91690 for a custom quote.`,
+              text: `The cost of ${svc.title.toLowerCase()} in Mumbai varies by area size and materials. We offer competitive pricing with site visits (fee ₹2,000–₹3,000, adjustable in final bill). Call +91 87793 91690 for a custom quote.`,
             },
           },
           {
@@ -371,7 +371,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       <ModernCTA
         title={`Start Your ${svc.title} Project Today`}
-        subtitle={`AMS Civil Construction delivers expert ${svc.title.toLowerCase()} across all Mumbai areas. Call +91 87793 91690 for a free site visit and no-obligation quote.`}
+        subtitle={`AMS Civil Construction delivers expert ${svc.title.toLowerCase()} across all Mumbai areas. Call +91 87793 91690 to schedule a site visit (fee ₹2,000–₹3,000, adjustable in bill).`}
         image={svc.image}
       />
     </>

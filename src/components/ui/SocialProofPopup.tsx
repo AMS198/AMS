@@ -7,7 +7,7 @@ import { MapPin, CheckCircle, X } from 'lucide-react';
 const names = ['Rahul', 'Priya', 'Amit', 'Neha', 'Sanjay', 'Pooja', 'Vikram', 'Anjali', 'Rakesh', 'Sneha'];
 const locations = ['Bandra', 'Andheri', 'Thane', 'Navi Mumbai', 'Worli', 'Goregaon', 'Dadar', 'Borivali'];
 const services = [
-  'booked a Free Site Visit',
+  'booked a Site Visit',
   'inquired about Bungalow Construction',
   'requested a Bathroom Renovation quote',
   'started a Modular Kitchen project',

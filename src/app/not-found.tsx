@@ -116,7 +116,7 @@ export default function NotFound() {
             <div>
               <h3 className="text-white font-bold text-lg mb-1">Need a fast construction estimate?</h3>
               <p className="text-slate-400 text-xs leading-relaxed max-w-md">
-                Get high-quality bungalow construction, full-flat renovations, and tiling solutions. Free site measurement in Mumbai.
+                Get high-quality bungalow construction, full-flat renovations, and tiling solutions. Professional site visits across Mumbai.
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-3 flex-shrink-0">

@@ -54,7 +54,7 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `✓ Best Civil Contractor in ${loc.name} [2026] | 100% Free Visit`;
+  const title       = `✓ Best Civil Contractor in ${loc.name} [2026] | Top Rated | AMS Civil`;
   const description = `⭐ 4.9/5 Rated. Award-Winning Civil Contractor in ${loc.name}, ${loc.district}. Premium bungalow construction, renovations & interior work. 100% Guaranteed Quality. Call now!`;
 
   return {
@@ -241,7 +241,7 @@ export default async function LocationPage({ params }: { params: { location: str
             name: `${loc.name} mein construction ka rate kya hai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. AMS Civil Construction se free site visit aur accurate estimate ke liye call karein: +91 87793 91690.`,
+              text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. Site visit (fee ₹2,000–₹3,000, adjustable in bill) aur accurate estimate ke liye call karein: +91 87793 91690.`,
             },
           },
         ],

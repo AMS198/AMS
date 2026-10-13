@@ -46,8 +46,8 @@ export async function generateMetadata(
   const exactMatchKeyword = `Top ${svc.title} Contractor in ${loc.name}`;
   
   // High-CTR Optimized Title & Description
-  const title = `✓ Best ${svc.title} in ${loc.name} [2026] | 100% Free Quote`;
-  const description = `⭐ 4.9/5 Rated. Looking for expert ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? Get premium quality, 25+ yrs exp & 100% Guaranteed Work. Call for a FREE Site Visit!`;
+  const title = `✓ Best ${svc.title} in ${loc.name} [2026] | Top Rated | AMS Civil`;
+  const description = `⭐ 4.9/5 Rated. Looking for expert ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? Get premium quality, 25+ yrs exp & 100% Guaranteed Work. Book your Site Visit today!`;
 
   return {
     title,
@@ -184,13 +184,13 @@ export default async function AreaServicePage({ params }: { params: { location: 
         estimatedCost: {
           '@type': 'MonetaryAmount',
           currency: 'INR',
-          value: 'Contact for free estimate',
+          value: 'Detailed quotation after site visit',
         },
         step: [
           {
             '@type': 'HowToStep',
-            name: 'Free Site Visit & Consultation',
-            text: `Our engineer visits your property in ${loc.name} to understand your ${svc.title.toLowerCase()} requirements, take measurements, and discuss ideas.`,
+            name: 'Site Visit & Consultation',
+            text: `Our engineer visits your property in ${loc.name} to understand your ${svc.title.toLowerCase()} requirements, take measurements, and plan. (Site visit fee: ₹2,000–₹3,000, adjustable in bill).`,
             position: 1,
           },
           {

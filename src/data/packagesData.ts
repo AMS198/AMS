@@ -58,7 +58,7 @@ export const packages: PackageData[] = [
       'Our 1BHK Complete Renovation Package is designed for homeowners and investors looking to transform a compact flat into a modern, comfortable living space. We handle flooring, kitchen platform, bathroom renovation, painting, and basic POP ceiling work — everything you need for a move-in-ready home.',
     seoTitle: '1BHK Renovation Package Mumbai | ₹2.5L Starting | AMS Civil',
     seoDescription:
-      'Complete 1BHK renovation in Mumbai starting ₹2.5 Lakh. Includes flooring, bathroom, kitchen platform, painting & POP work. 25-35 days delivery. Free site visit!',
+      'Complete 1BHK renovation in Mumbai starting ₹2.5 Lakh. Includes flooring, bathroom, kitchen platform, painting & POP work. 25-35 days delivery. Book a site visit!',
   },
   {
     id: 'pkg-2bhk',
@@ -239,7 +239,7 @@ export const packages: PackageData[] = [
       'Your dream bungalow, built from the ground up. Our turnkey bungalow construction covers everything — architectural planning, municipal approvals, foundation, structure, interiors, exteriors, compound wall, parking, and landscaping. We deliver your dream home stress-free.',
     seoTitle: 'Bungalow Construction Mumbai | Turnkey Builder | AMS Civil',
     seoDescription:
-      'Build your dream bungalow in Mumbai with AMS Civil. Turnkey construction from ₹25L — architecture, structure, interiors, compound wall. 25+ years expertise. Free site visit!',
+      'Build your dream bungalow in Mumbai with AMS Civil. Turnkey construction from ₹25L — architecture, structure, interiors, compound wall. 25+ years expertise. Book your site visit!',
   },
 ];
 

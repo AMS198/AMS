@@ -210,7 +210,7 @@ export function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; 
   const pool = [
     {
       q: `What is the cost of ${svc.title.toLowerCase()} in ${loc.name}?`,
-      a: `The cost of ${svc.title.toLowerCase()} in ${loc.name} (${loc.district}) varies based on area size, material grade, and design complexity. Standard projects start at ₹150/sq.ft. and premium work goes up to ₹450+/sq.ft. We provide free site visits near ${loc.landmarks[0] || loc.name} for accurate estimates. Call +91 87793 91690 for a no-obligation quote.`,
+      a: `The cost of ${svc.title.toLowerCase()} in ${loc.name} (${loc.district}) varies based on area size, material grade, and design complexity. Standard projects start at ₹150/sq.ft. and premium work goes up to ₹450+/sq.ft. We provide site visits near ${loc.landmarks[0] || loc.name} (fee ₹2,000–₹3,000, fully adjustable in your final bill). Call +91 87793 91690 to book.`,
     },
     {
       q: `How long does ${svc.title.toLowerCase()} take in ${loc.name}?`,
@@ -226,7 +226,7 @@ export function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; 
     },
     {
       q: `${loc.name} mein ${svc.title.toLowerCase()} ka rate kya hai?`,
-      a: `${loc.name} mein ${svc.title.toLowerCase()} ka rate project ke size aur material pe depend karta hai. Standard kaam ₹150/sq.ft. se shuru hota hai aur premium quality ka ₹450+/sq.ft. tak jata hai. Exact rate ke liye AMS Civil Construction ko call karein: +91 87793 91690. Hum ${loc.name} mein free site visit provide karte hain.`,
+      a: `${loc.name} mein ${svc.title.toLowerCase()} ka rate project ke size aur material pe depend karta hai. Standard kaam ₹150/sq.ft. se shuru hota hai aur premium quality ka ₹450+/sq.ft. tak jata hai. Exact rate ke liye AMS Civil Construction ko call karein: +91 87793 91690. Hum ${loc.name} mein site visit provide karte hain (fee ₹2,000–₹3,000, final bill mein adjustable).`,
     },
     {
       q: `${loc.name} mein best ${svc.title.toLowerCase()} contractor kaun hai?`,
@@ -238,7 +238,7 @@ export function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; 
     },
     {
       q: `Can I get an estimate for ${svc.title.toLowerCase()} near ${loc.landmarks[0] || loc.name}?`,
-      a: `Absolutely. We offer zero-cost site visits and detailed estimations for properties near ${loc.landmarks[0] || loc.name} and across ${loc.district}. Our supervisor will measure the area and discuss material choices with you directly on-site.`,
+      a: `Absolutely. We offer site visits and detailed estimations for properties near ${loc.landmarks[0] || loc.name} and across ${loc.district} (fee ₹2,000–₹3,000, adjustable in final bill). Our supervisor will measure the area and discuss material choices with you directly on-site.`,
     }
   ];
 

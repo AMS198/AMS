@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { PhoneLogo } from '@/components/ui/BrandIcons';
 import { Home, PaintRoller, Droplet, Hammer, ArrowRight, ShieldCheck, CheckCircle2, Lock, Loader2, Star } from 'lucide-react';
-import Navbar from '@/components/layout/Navbar';
 
 export default function CalculatorPage() {
   const [step, setStep] = useState(1);
@@ -123,14 +122,12 @@ export default function CalculatorPage() {
   };
 
   const handleWhatsApp = () => {
-    const text = `Hi AMS Civil! I just checked the calculator on your website.\n\n*Property:* ${propertyType}\n*Quality:* ${condition}\n*Estimated Range:* ${estimate.min} - ${estimate.max}\n\nI need an exact quote and free site visit.`;
+    const text = `Hi AMS Civil! I just checked the calculator on your website.\n\n*Property:* ${propertyType}\n*Quality:* ${condition}\n*Estimated Range:* ${estimate.min} - ${estimate.max}\n\nI need an exact quote and want to book a site visit (fee ₹2,000–₹3,000, adjustable in bill).`;
     window.open(`https://wa.me/918779391690?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-[#080D1A] pt-32 pb-24 selection-orange relative">
+    <main className="min-h-screen bg-[#080D1A] pt-32 pb-24 selection-orange relative">
         <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-orange-500/10 to-transparent pointer-events-none" />
         
         <div className="container-custom max-w-4xl relative z-10">
@@ -375,13 +372,13 @@ export default function CalculatorPage() {
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <button onClick={handleWhatsApp} className="w-full sm:w-auto px-8 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
-                      <PhoneLogo className="w-6 h-6 fill-white" /> Request Free Site Visit
+                      <PhoneLogo className="w-6 h-6 fill-white" /> Request Site Visit (Adjustable in Bill)
                     </button>
                     <button onClick={() => setStep(1)} className="text-slate-400 hover:text-white font-medium px-6 py-4 transition-colors">
                       Start Over
                     </button>
                   </div>
-                  <p className="text-slate-500 text-xs mt-6">*This is a rough estimate. Final quotation will be provided after physical site inspection by our engineers.</p>
+                  <p className="text-slate-500 text-xs mt-6">*This is an estimate. Final quotation is provided after site inspection. (Site visit fee ₹2,000–₹3,000 applies, fully adjustable against final bill).</p>
                 </div>
               </div>
             )}
@@ -389,6 +386,5 @@ export default function CalculatorPage() {
           </div>
         </div>
       </main>
-    </>
   );
 }

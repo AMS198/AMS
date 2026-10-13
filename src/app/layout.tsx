@@ -17,7 +17,6 @@ import DPDPConsentBanner from '@/components/ui/DPDPConsentBanner';
 
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
-import BreadcrumbNav from '@/components/ui/BreadcrumbNav';
 import SeoHead from '@/components/seo/SeoHead';
 
 const playfair = Playfair_Display({
@@ -55,7 +54,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    '⭐ 4.9/5 Rated. Looking for AMS Civil Work in Mumbai? We are the best civil contractor offering premium bungalow construction & renovations. 100% Free Estimate!',
+    '⭐ 4.9/5 Rated. Looking for the best civil contractor in Mumbai? AMS Civil Construction offers premium bungalow construction, home renovation & interior civil work. 25+ years experience. Call +91 87793 91690!',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */
@@ -201,7 +200,7 @@ export const metadata: Metadata = {
     url: 'https://www.amscivilwork.in',
     siteName: 'AMS Civil Construction',
     title: 'AMS Civil Construction | Best Construction Company in Mumbai',
-    description: '20+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Free quote: +91 87793 91690 / +91 90042 98911',
+    description: '25+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Call: +91 87793 91690 / +91 90042 98911',
     images: [
       {
         url: '/og-image.jpg',
@@ -216,7 +215,7 @@ export const metadata: Metadata = {
   twitter: {
     card:        'summary_large_image',
     title:       'AMS Civil Construction Mumbai',
-    description: 'Expert construction services across all Mumbai areas. 20+ years experience. Call +91 87793 91690 or +91 90042 98911',
+    description: 'Expert construction services across all Mumbai areas. 25+ years experience. Call +91 87793 91690 or +91 90042 98911',
     images:      ['/og-image.jpg'],
   },
 
@@ -481,7 +480,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </>
           }
         >
-          <BreadcrumbNav />
           <main id="main-content">
             {children}
           </main>

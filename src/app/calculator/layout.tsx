@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Home Renovation & Construction Cost Calculator | AMS Civil',
-  description: '⭐ [2026] Calculate your exact home renovation and bungalow construction cost in Mumbai. Get instant estimates for 1BHK, 2BHK, 3BHK and Villas. Free site visit!',
+  description: '⭐ [2026] Calculate your exact home renovation and bungalow construction cost in Mumbai. Get instant estimates for 1BHK, 2BHK, 3BHK and Villas. Book your site visit!',
   alternates: {
     canonical: 'https://www.amscivilwork.in/calculator',
   },
