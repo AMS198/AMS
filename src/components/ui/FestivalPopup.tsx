@@ -422,21 +422,11 @@ export default function FestivalPopup() {
     if (matched) {
       setActiveFestival(matched);
 
-      // Smart Frequency Control: Auto-open once per day
-      const storageKey = `ams_fest_${matched.id}_${todayStr}`;
-      const alreadySeen = typeof window !== 'undefined' ? localStorage.getItem(storageKey) : null;
-
-      if (!alreadySeen) {
-        const timer = setTimeout(() => {
-          setIsVisible(true);
-          try {
-            localStorage.setItem(storageKey, 'true');
-          } catch {
-            // ignore
-          }
-        }, 1600);
-        return () => clearTimeout(timer);
-      }
+      // Auto-open every time the website is opened or refreshed
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 1500);
+      return () => clearTimeout(timer);
     }
   }, []);
 
