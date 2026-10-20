@@ -348,15 +348,25 @@ const fixedDateFestivals: Array<{ date: string; id: string; title: string; sansk
 function FestivalArtwork({ type }: { type: FestivalItem['artType'] }) {
   if (type === 'bow') {
     return (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
-        <path d="M 28 80 Q 20 50 28 20 Q 32 35 34 50 Q 32 65 28 80 Z" fill="#F59E0B" />
-        <line x1="28" y1="20" x2="28" y2="80" stroke="#FDE68A" strokeWidth="1.5" />
-        <line x1="22" y1="50" x2="78" y2="50" stroke="#FDE68A" strokeWidth="2.5" strokeLinecap="round" />
-        <polygon points="78,44 88,50 78,56 81,50" fill="#FBBF24" />
-        <polygon points="24,46 16,43 18,50 16,57 24,54" fill="#D97706" />
-        <circle cx="88" cy="50" r="2.5" fill="#FFFBEB" />
-        <path d="M 88 42 L 88 46 M 88 54 L 88 58 M 80 50 L 84 50 M 92 50 L 96 50" stroke="#FEF08A" strokeWidth="1.2" strokeLinecap="round" />
+      <svg viewBox="0 0 120 120" className="w-20 h-20 sm:w-22 sm:h-22 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="54" stroke="#F59E0B" strokeWidth="1" strokeDasharray="4 3" opacity="0.35" />
+        <circle cx="60" cy="60" r="47" stroke="#FBBF24" strokeWidth="0.8" opacity="0.2" />
+
+        <path d="M 32 96 C 20 60 20 60 32 24 C 38 42 40 52 40 60 C 40 68 38 78 32 96 Z" fill="#D97706" stroke="#FBBF24" strokeWidth="1.2" />
+        <rect x="37" y="55" width="6" height="10" rx="2" fill="#FEF08A" stroke="#B45309" strokeWidth="1" />
+
+        <line x1="32" y1="24" x2="40" y2="60" stroke="#FEF08A" strokeWidth="1.5" />
+        <line x1="40" y1="60" x2="32" y2="96" stroke="#FEF08A" strokeWidth="1.5" />
+
+        <line x1="24" y1="60" x2="96" y2="60" stroke="#FEF08A" strokeWidth="2.5" strokeLinecap="round" />
+        <polygon points="96,52 108,60 96,68 99,60" fill="#FBBF24" stroke="#D97706" strokeWidth="1" />
+        <path d="M 28 53 C 18 49 14 53 16 60 C 14 67 18 71 28 67 Z" fill="#F59E0B" stroke="#D97706" strokeWidth="1" />
+
+        <circle cx="108" cy="60" r="3" fill="#FFFBEB" />
+        <line x1="108" y1="50" x2="108" y2="54" stroke="#FEF08A" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="108" y1="66" x2="108" y2="70" stroke="#FEF08A" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="98" y1="60" x2="102" y2="60" stroke="#FEF08A" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="114" y1="60" x2="118" y2="60" stroke="#FEF08A" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     );
   }
@@ -655,14 +665,12 @@ export default function FestivalPopup() {
                 ref={cardRef}
                 className="relative w-full overflow-hidden flex flex-col justify-between text-center px-5 pt-6 pb-5 sm:px-6 sm:pt-7 sm:pb-6 select-none"
                 style={{
-                  background: `radial-gradient(ellipse at 50% 20%, ${activeFestival.themeGradient.split(' ')[0].replace('from-', '')} 0%, #0a0d18 55%, #05070c 100%)`,
+                  background: 'radial-gradient(circle at 50% 22%, #261c10 0%, #140e08 50%, #080604 100%)',
                 }}
               >
-                {/* Royal Corner Accents */}
-                <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-amber-400/50 rounded-tl-sm pointer-events-none" />
-                <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-amber-400/50 rounded-tr-sm pointer-events-none" />
-                <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-amber-400/50 rounded-bl-sm pointer-events-none" />
-                <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-amber-400/50 rounded-br-sm pointer-events-none" />
+                {/* Subtle Inner Filigree Border */}
+                <div className="absolute inset-2 border border-amber-500/25 rounded-2xl pointer-events-none" />
+                <div className="absolute inset-3 border border-dashed border-amber-400/15 rounded-xl pointer-events-none" />
 
                 {/* Header: Sacred Tag & Corporate Badge */}
                 <div className="relative z-10 flex flex-col items-center">
@@ -674,33 +682,30 @@ export default function FestivalPopup() {
                   </div>
 
                   {/* Clean Corporate Logo Badge */}
-                  <div className="inline-flex items-center gap-2 bg-white/95 px-3 py-1 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.5)] border border-amber-400/40">
+                  <div className="bg-white/95 px-4 py-1.5 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.4)] border border-amber-400/40 inline-flex items-center justify-center">
                     <img
                       src="/logo.png"
                       alt="AMS Civil Construction"
-                      className="h-5 sm:h-6 w-auto object-contain"
+                      className="h-6 sm:h-7 w-auto object-contain"
                     />
-                    <span className="text-[10px] font-bold text-slate-800 tracking-wide font-sans border-l border-slate-300 pl-2">
-                      AMS Construction
-                    </span>
                   </div>
                 </div>
 
                 {/* Center: Handcrafted Solid Vector Art & Typography */}
-                <div className="relative z-10 flex flex-col items-center my-3">
+                <div className="relative z-10 flex flex-col items-center my-2.5">
                   {/* Glowing Medallion with Vector Artwork */}
                   <div className="relative my-1">
                     <div
-                      className="absolute -inset-3 rounded-full blur-xl animate-pulse pointer-events-none"
+                      className="absolute -inset-3 rounded-full blur-xl opacity-50 pointer-events-none"
                       style={{ backgroundColor: activeFestival.ringGlow }}
                     />
-                    <div className="relative flex items-center justify-center">
+                    <div className="relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-gradient-to-b from-amber-500/10 to-amber-950/25 border border-amber-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)]">
                       <FestivalArtwork type={activeFestival.artType} />
                     </div>
                   </div>
 
-                  {/* Festival Main Heading */}
-                  <h2 className="font-display font-bold text-xl sm:text-2xl tracking-wide bg-gradient-to-r from-amber-100 via-yellow-200 to-amber-200 bg-clip-text text-transparent drop-shadow mt-2 mb-1.5">
+                  {/* Festival Main Heading - Solid gold text (NO bg-clip-text so html2canvas renders perfectly!) */}
+                  <h2 className="font-display font-bold text-2xl sm:text-3xl tracking-wide text-[#FDE68A] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] mt-2 mb-1.5">
                     {activeFestival.title}
                   </h2>
 
