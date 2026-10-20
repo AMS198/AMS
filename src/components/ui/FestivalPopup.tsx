@@ -528,47 +528,46 @@ export default function FestivalPopup() {
 
   // Primary Action: Share PHOTO + CAPTION directly to WhatsApp
   const handleShareToWhatsApp = async () => {
-    if (!activeFestival) return;
+    if (!cardRef.current || !activeFestival) return;
     setIsSharing(true);
     try {
-      const blob = await generatePosterBlob();
-      if (!blob) throw new Error('Could not create poster image');
+      const canvas = await html2canvas(cardRef.current, {
+        scale: 2,
+        backgroundColor: '#070A12',
+        useCORS: true,
+        logging: false,
+      });
 
-      const fileName = `${activeFestival.title.replace(/\s+/g, '-').toLowerCase()}-ams-civil.png`;
-      const file = new File([blob], fileName, { type: 'image/png' });
-
-      // On Mobile: Web Share API passes the PHOTO + CAPTION directly into WhatsApp!
-      if (typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: activeFestival.title,
-            text: `${activeFestival.title} - AMS Civil Construction.\nhttps://www.amscivilwork.in`,
-          });
-          return;
-        } catch (shareErr: any) {
-          if (shareErr.name === 'AbortError') {
-            // User backed out or finished share dialog
-            return;
-          }
-          throw shareErr;
-        }
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (!blob) {
+        setIsSharing(false);
+        return;
       }
 
-      // Desktop fallback:
+      const fileName = `${activeFestival.title.replace(/\s+/g, '-').toLowerCase()}.png`;
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      // Native Share: Mobile devices pass the REAL IMAGE FILE directly into WhatsApp!
+      if (typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: activeFestival.title,
+          text: `${activeFestival.title} - AMS Civil Construction.\nhttps://www.amscivilwork.in`,
+        });
+        return;
+      }
+
+      // Desktop fallback: Download image directly
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = fileName;
       a.click();
       URL.revokeObjectURL(url);
-
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(captionText)}`;
-      window.open(whatsappUrl, '_blank');
     } catch (err: any) {
-      console.error('WhatsApp share error:', err);
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(captionText)}`;
-      window.open(whatsappUrl, '_blank');
+      if (err?.name !== 'AbortError') {
+        console.error('Share error:', err);
+      }
     } finally {
       setIsSharing(false);
     }
