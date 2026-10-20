@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, Copy, Check, Sparkles, PhoneCall, Award } from 'lucide-react';
-import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 import html2canvas from 'html2canvas';
 import Link from 'next/link';
 
@@ -345,154 +344,82 @@ const fixedDateFestivals: Array<{ date: string; id: string; title: string; sansk
   },
 ];
 
-// Handcrafted Royal Vector Illustrations (No cheap AI cartoon emojis!)
+// Handcrafted Solid-Color Vector Art (100% html2canvas compatible, no defs or url gradients)
 function FestivalArtwork({ type }: { type: FestivalItem['artType'] }) {
   if (type === 'bow') {
-    // Elegant Dussehra Golden Bow & Arrow
     return (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20 filter drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]">
-        {/* Glow halo */}
-        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(251,191,36,0.2)" strokeWidth="1" strokeDasharray="3 3" />
-        {/* Curved Golden Bow */}
-        <path d="M 28 80 Q 20 50 28 20 Q 32 35 34 50 Q 32 65 28 80 Z" fill="url(#goldGrad)" />
-        {/* Bowstring */}
-        <line x1="28" y1="20" x2="28" y2="80" stroke="#FDE68A" strokeWidth="1.2" strokeOpacity="0.8" />
-        {/* Divine Arrow Shaft */}
-        <line x1="22" y1="50" x2="78" y2="50" stroke="#FDE68A" strokeWidth="2" strokeLinecap="round" />
-        {/* Arrowhead */}
-        <polygon points="78,44 88,50 78,56 81,50" fill="url(#goldGrad)" />
-        {/* Arrow fletching */}
-        <polygon points="24,46 16,43 18,50 16,57 24,54" fill="url(#goldGrad)" />
-        {/* Sunburst Sparks */}
-        <circle cx="88" cy="50" r="2" fill="#FFFBEB" />
-        <path d="M 88 43 L 88 47 M 88 53 L 88 57 M 82 50 L 85 50 M 91 50 L 94 50" stroke="#FDE68A" strokeWidth="1" strokeLinecap="round" />
-        <defs>
-          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FEF08A" />
-            <stop offset="50%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#D97706" />
-          </linearGradient>
-        </defs>
+      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
+        <path d="M 28 80 Q 20 50 28 20 Q 32 35 34 50 Q 32 65 28 80 Z" fill="#F59E0B" />
+        <line x1="28" y1="20" x2="28" y2="80" stroke="#FDE68A" strokeWidth="1.5" />
+        <line x1="22" y1="50" x2="78" y2="50" stroke="#FDE68A" strokeWidth="2.5" strokeLinecap="round" />
+        <polygon points="78,44 88,50 78,56 81,50" fill="#FBBF24" />
+        <polygon points="24,46 16,43 18,50 16,57 24,54" fill="#D97706" />
+        <circle cx="88" cy="50" r="2.5" fill="#FFFBEB" />
+        <path d="M 88 42 L 88 46 M 88 54 L 88 58 M 80 50 L 84 50 M 92 50 L 96 50" stroke="#FEF08A" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     );
   }
 
   if (type === 'diya') {
-    // Royal Diwali Golden Diya with Glowing Flame
     return (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20 filter drop-shadow-[0_0_18px_rgba(245,158,11,0.6)]">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(251,191,36,0.2)" strokeWidth="1" strokeDasharray="3 3" />
-        {/* Diya Base */}
-        <path d="M 22 58 C 24 74 76 74 78 58 C 70 65 30 65 22 58 Z" fill="url(#diyaGold)" />
+      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
+        <path d="M 22 58 C 24 74 76 74 78 58 C 70 65 30 65 22 58 Z" fill="#D97706" />
         <ellipse cx="50" cy="58" rx="28" ry="6" fill="#B45309" />
         <ellipse cx="50" cy="57" rx="25" ry="4" fill="#78350F" />
-        {/* Flame */}
-        <path d="M 50 20 C 44 34 40 44 50 56 C 60 44 56 34 50 20 Z" fill="url(#flameGrad)" />
-        {/* Inner Flame core */}
+        <path d="M 50 20 C 44 34 40 44 50 56 C 60 44 56 34 50 20 Z" fill="#F59E0B" />
         <path d="M 50 32 C 47 40 45 46 50 53 C 55 46 53 40 50 32 Z" fill="#FEF08A" />
-        {/* Sparks */}
-        <circle cx="50" cy="16" r="1.5" fill="#FFFBEB" />
-        <circle cx="43" cy="24" r="1" fill="#FDE68A" />
-        <circle cx="57" cy="24" r="1" fill="#FDE68A" />
-        <defs>
-          <linearGradient id="diyaGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FDE68A" />
-            <stop offset="60%" stopColor="#D97706" />
-            <stop offset="100%" stopColor="#92400E" />
-          </linearGradient>
-          <linearGradient id="flameGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FFFBEB" />
-            <stop offset="40%" stopColor="#FBBF24" />
-            <stop offset="100%" stopColor="#DC2626" />
-          </linearGradient>
-        </defs>
+        <circle cx="50" cy="16" r="2" fill="#FFFBEB" />
       </svg>
     );
   }
 
   if (type === 'trishul') {
-    // Sacred Golden Trishul & Lotus (Navratri / Shivaratri)
     return (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20 filter drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(251,191,36,0.2)" strokeWidth="1" strokeDasharray="3 3" />
-        {/* Central Prong */}
-        <path d="M 48 82 L 48 24 L 50 16 L 52 24 L 52 82 Z" fill="url(#goldGrad2)" />
-        {/* Left Prong */}
-        <path d="M 48 48 C 30 46 30 26 30 26 C 36 34 44 38 48 42 Z" fill="url(#goldGrad2)" />
-        {/* Right Prong */}
-        <path d="M 52 48 C 70 46 70 26 70 26 C 64 34 56 38 52 42 Z" fill="url(#goldGrad2)" />
-        {/* Damru / Center Band */}
+      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
+        <path d="M 48 82 L 48 24 L 50 16 L 52 24 L 52 82 Z" fill="#F59E0B" />
+        <path d="M 48 48 C 30 46 30 26 30 26 C 36 34 44 38 48 42 Z" fill="#FBBF24" />
+        <path d="M 52 48 C 70 46 70 26 70 26 C 64 34 56 38 52 42 Z" fill="#FBBF24" />
         <ellipse cx="50" cy="54" rx="8" ry="3" fill="#FDE68A" />
-        {/* Lotus Petal Base */}
         <path d="M 38 78 C 44 72 56 72 62 78 C 56 82 44 82 38 78 Z" fill="#D97706" />
-        <defs>
-          <linearGradient id="goldGrad2" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FEF08A" />
-            <stop offset="50%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#B45309" />
-          </linearGradient>
-        </defs>
       </svg>
     );
   }
 
   if (type === 'ganesha') {
-    // Royal Golden Lord Ganesha Minimal Line Art
     return (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20 filter drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(251,191,36,0.2)" strokeWidth="1" strokeDasharray="3 3" />
-        {/* Trunk & Ear Line Art */}
+      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
         <path d="M 38 32 C 34 42 34 52 42 56 C 48 58 52 64 50 72 C 48 78 42 78 40 74" fill="none" stroke="#FDE68A" strokeWidth="2.5" strokeLinecap="round" />
-        {/* Crown / Pagdi */}
         <path d="M 44 22 L 56 22 L 58 30 L 42 30 Z" fill="#F59E0B" />
         <polygon points="50,14 55,22 45,22" fill="#FEF08A" />
-        {/* Big Ear */}
         <path d="M 54 30 C 66 32 72 44 64 54 C 58 58 54 54 54 50" fill="none" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" />
-        {/* Tilak / Tika */}
         <ellipse cx="46" cy="38" rx="2" ry="4" fill="#DC2626" />
-        {/* Modak */}
         <circle cx="62" cy="68" r="4" fill="#F59E0B" />
       </svg>
     );
   }
 
   if (type === 'crescent') {
-    // Celestial Crescent Moon & Lantern (Eid)
     return (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]">
-        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(52,211,153,0.2)" strokeWidth="1" strokeDasharray="3 3" />
-        {/* Crescent */}
-        <path d="M 52 20 C 35 24 25 40 28 58 C 31 74 48 84 64 78 C 50 78 38 66 38 50 C 38 36 44 26 52 20 Z" fill="url(#crescentGold)" />
-        {/* Hanging Lantern */}
-        <line x1="68" y1="20" x2="68" y2="40" stroke="#FDE68A" strokeWidth="1" />
+      <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#10B981" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
+        <path d="M 52 20 C 35 24 25 40 28 58 C 31 74 48 84 64 78 C 50 78 38 66 38 50 C 38 36 44 26 52 20 Z" fill="#34D399" />
+        <line x1="68" y1="20" x2="68" y2="40" stroke="#FDE68A" strokeWidth="1.2" />
         <polygon points="68,40 64,44 72,44" fill="#F59E0B" />
         <rect x="64" y="44" width="8" height="12" rx="1" fill="#FEF08A" />
         <polygon points="64,56 72,56 68,60" fill="#F59E0B" />
-        <defs>
-          <linearGradient id="crescentGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FEF08A" />
-            <stop offset="50%" stopColor="#34D399" />
-            <stop offset="100%" stopColor="#059669" />
-          </linearGradient>
-        </defs>
       </svg>
     );
   }
 
-  // Default / Star / Flag / National
   return (
-    <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20 filter drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-      <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(251,191,36,0.2)" strokeWidth="1" strokeDasharray="3 3" />
-      {/* 8-pointed royal star */}
-      <polygon points="50,18 56,36 74,36 60,48 66,66 50,54 34,66 40,48 26,36 44,36" fill="url(#goldGradStar)" />
+    <svg viewBox="0 0 100 100" className="w-16 h-16 sm:w-20 sm:h-20">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 3" opacity="0.35" />
+      <polygon points="50,18 56,36 74,36 60,48 66,66 50,54 34,66 40,48 26,36 44,36" fill="#F59E0B" />
       <circle cx="50" cy="46" r="6" fill="#FFFBEB" />
-      <defs>
-        <linearGradient id="goldGradStar" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FEF08A" />
-          <stop offset="50%" stopColor="#F59E0B" />
-          <stop offset="100%" stopColor="#D97706" />
-        </linearGradient>
-      </defs>
     </svg>
   );
 }
@@ -576,19 +503,20 @@ export default function FestivalPopup() {
 
   const captionText = `${activeFestival.title} - AMS Civil Construction.\n${activeFestival.message}\n\n🌐 https://www.amscivilwork.in`;
 
-  // Helper to generate HD Blob of card
+  // Robust HTML2Canvas Poster Blob generator
   const generatePosterBlob = async (): Promise<Blob | null> => {
     if (!cardRef.current) return null;
     const canvas = await html2canvas(cardRef.current, {
-      scale: 2.5,
+      scale: 2,
       backgroundColor: '#070A12',
       useCORS: true,
+      allowTaint: true,
       logging: false,
     });
     return new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
   };
 
-  // Primary Action: Share PHOTO + CAPTION directly to WhatsApp (Mobile) or download + open (Desktop)
+  // Primary Action: Share PHOTO + CAPTION directly to WhatsApp
   const handleShareToWhatsApp = async () => {
     if (!activeFestival) return;
     setIsSharing(true);
@@ -599,18 +527,25 @@ export default function FestivalPopup() {
       const fileName = `${activeFestival.title.replace(/\s+/g, '-').toLowerCase()}-ams-civil.png`;
       const file = new File([blob], fileName, { type: 'image/png' });
 
-      // On Mobile / Web Share API: passes the real IMAGE FILE directly into WhatsApp!
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: activeFestival.title,
-          text: `${activeFestival.title} - AMS Civil Construction.\nhttps://www.amscivilwork.in`,
-        });
-        return;
+      // On Mobile: Web Share API passes the PHOTO + CAPTION directly into WhatsApp!
+      if (typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: activeFestival.title,
+            text: `${activeFestival.title} - AMS Civil Construction.\nhttps://www.amscivilwork.in`,
+          });
+          return;
+        } catch (shareErr: any) {
+          if (shareErr.name === 'AbortError') {
+            // User backed out or finished share dialog
+            return;
+          }
+          throw shareErr;
+        }
       }
 
-      // Desktop Fallback:
-      // Download the photo automatically so user has the file, and open WhatsApp Web with text
+      // Desktop fallback:
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -620,9 +555,8 @@ export default function FestivalPopup() {
 
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(captionText)}`;
       window.open(whatsappUrl, '_blank');
-    } catch (err) {
+    } catch (err: any) {
       console.error('WhatsApp share error:', err);
-      // Fallback text if canvas blocked
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(captionText)}`;
       window.open(whatsappUrl, '_blank');
     } finally {
@@ -665,7 +599,7 @@ export default function FestivalPopup() {
 
   return (
     <>
-      {/* Floating Re-Open Badge (Bottom-Left, safe from right-side WhatsApp widget) */}
+      {/* Floating Re-Open Badge (Bottom-Left) */}
       {!isVisible && (
         <motion.button
           initial={{ opacity: 0, scale: 0.85, y: 15 }}
@@ -739,7 +673,7 @@ export default function FestivalPopup() {
                     <Sparkles size={10} className="text-amber-400" />
                   </div>
 
-                  {/* Clean Logo Badge - Seamless and elegant */}
+                  {/* Clean Corporate Logo Badge */}
                   <div className="inline-flex items-center gap-2 bg-white/95 px-3 py-1 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.5)] border border-amber-400/40">
                     <img
                       src="/logo.png"
@@ -752,7 +686,7 @@ export default function FestivalPopup() {
                   </div>
                 </div>
 
-                {/* Center: Handcrafted Royal Vector Art & Typography */}
+                {/* Center: Handcrafted Solid Vector Art & Typography */}
                 <div className="relative z-10 flex flex-col items-center my-3">
                   {/* Glowing Medallion with Vector Artwork */}
                   <div className="relative my-1">
@@ -802,12 +736,15 @@ export default function FestivalPopup() {
                 <button
                   onClick={handleShareToWhatsApp}
                   disabled={isSharing}
-                  className="w-full bg-gradient-to-r from-[#1eb854] to-[#25D366] hover:from-[#1ca34a] hover:to-[#22c35e] text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow-[0_4px_16px_rgba(37,211,102,0.3)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.4)] transition-all cursor-pointer active:scale-[0.98] disabled:opacity-60"
+                  className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.5)] transition-all cursor-pointer active:scale-[0.98] disabled:opacity-60"
                 >
                   {isSharing ? (
                     <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                   ) : (
-                    <WhatsAppLogo className="w-5 h-5 flex-shrink-0" fill="#FFFFFF" />
+                    /* Crisp 100% Guaranteed WhatsApp Icon */
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0 fill-white" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.414z"/>
+                    </svg>
                   )}
                   <span>{isSharing ? 'Preparing Photo...' : 'Share Photo on WhatsApp'}</span>
                 </button>
