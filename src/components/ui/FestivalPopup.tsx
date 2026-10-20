@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download, MessageCircle, Copy, Check, Sparkles, PhoneCall, Award } from 'lucide-react';
+import { X, Download, Copy, Check, Sparkles, PhoneCall, Award } from 'lucide-react';
+import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 import html2canvas from 'html2canvas';
 import Link from 'next/link';
 
@@ -806,7 +807,7 @@ export default function FestivalPopup() {
                   {isSharing ? (
                     <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                   ) : (
-                    <MessageCircle size={17} className="fill-white text-[#25D366]" />
+                    <WhatsAppLogo className="w-5 h-5 flex-shrink-0" fill="#FFFFFF" />
                   )}
                   <span>{isSharing ? 'Preparing Photo...' : 'Share Photo on WhatsApp'}</span>
                 </button>
