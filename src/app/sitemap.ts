@@ -16,11 +16,16 @@ const SITE_UPDATED = new Date('2026-05-25');
 
 /* ── Zone-based priority tiers for crawl budget optimization ── */
 const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
+const TOP_SLUGS = new Set([
+  'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
+  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex'
+]);
 
-function getLocationPriority(zone: string): number {
+function getLocationPriority(zone: string, slug: string): number {
+  if (TOP_SLUGS.has(slug)) return 0.92;
   if (CORE_ZONES.includes(zone)) return 0.85;
-  if (zone === 'Maharashtra') return 0.7;
-  return 0.6; // Jharkhand, West Bengal, Karnataka
+  if (zone === 'Maharashtra') return 0.75;
+  return 0.65; // Jharkhand, West Bengal, far suburbs
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -59,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url:             `${BASE}/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
-      priority:        getLocationPriority(loc.zone),
+      priority:        getLocationPriority(loc.zone, loc.slug),
     });
     
     // Hindi Main Location
@@ -67,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url:             `${BASE}/hi/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
-      priority:        getLocationPriority(loc.zone) * 0.9,
+      priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
 
     // Marathi Main Location
@@ -75,7 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url:             `${BASE}/mr/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
-      priority:        getLocationPriority(loc.zone) * 0.9,
+      priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
   });
 

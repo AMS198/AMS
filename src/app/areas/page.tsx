@@ -11,7 +11,7 @@ import ModernCTA from '@/components/ui/ModernCTA';
 export const metadata: Metadata = {
   title: 'Service Areas in Mumbai & Across India | Best Construction Network',
   description:
-    'AMS Civil Construction provides premium civil work in 80+ locations across Mumbai, Maharashtra, Karnataka, Jharkhand, and West Bengal. Search for the best civil contractor near you.',
+    `AMS Civil Construction provides premium civil work in ${locations.length}+ locations across Mumbai, Maharashtra, Jharkhand, and West Bengal. Search for the best civil contractor near you.`,
   keywords: [
     'construction service areas', 'civil contractor near me', 'best builder in Mumbai', 
     'construction company Pune', 'civil work Bangalore', 'bungalow construction Ranchi',
@@ -52,7 +52,7 @@ export default function AreasPage() {
             </h1>
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl animate-fadeUp" style={{ animationDelay: '100ms' }}>
               From South Mumbai to North Mumbai and major cities across India — we provide premium civil construction 
-              services in 50+ locations. Select your city to see our specialized local services.
+              services in <strong className="text-white">{locations.length}+ locations</strong>. Select your city to see our specialized local services.
             </p>
           </div>
         </div>

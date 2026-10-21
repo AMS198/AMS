@@ -42,6 +42,12 @@ export async function generateMetadata({ params }: { params: { location: string 
     },
     alternates: {
       canonical: `https://www.amscivilwork.in/mr/areas/${loc.slug}`,
+      languages: {
+        'en-IN': `https://www.amscivilwork.in/areas/${loc.slug}`,
+        'hi-IN': `https://www.amscivilwork.in/hi/areas/${loc.slug}`,
+        'mr-IN': `https://www.amscivilwork.in/mr/areas/${loc.slug}`,
+        'x-default': `https://www.amscivilwork.in/areas/${loc.slug}`,
+      },
     },
   };
 }
@@ -109,7 +115,7 @@ export default async function LocationPageMarathi({ params }: { params: { locati
               <a href="tel:+918779391690" className="btn-primary px-8 py-4 gap-3">
                 <PhoneLogo className="w-5 h-5 fill-white" /> कॉल करा
               </a>
-              <a href={`https://wa.me/918779391690?text=Hi! I need construction work in ${loc.name}.`} target="_blank" rel="noopener noreferrer" className="btn-outline px-8 py-4 gap-3 bg-white/5 group">
+              <a href={`https://wa.me/918779391690?text=Namaskar!%20Mala%20${encodeURIComponent(loc.name)}%20madhe%20civil%20kaam%20havey.%20Please%20quote%20pathva.`} target="_blank" rel="noopener noreferrer" className="btn-outline px-8 py-4 gap-3 bg-white/5 group">
                 <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-white transition-colors" /> व्हॉट्सॲप (WhatsApp)
               </a>
             </div>

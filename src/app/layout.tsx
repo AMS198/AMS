@@ -221,8 +221,13 @@ export const metadata: Metadata = {
 
   /* ── Alternates / Canonical ──────────────────────────────── */
   alternates: {
-    canonical: '/',
-    languages: { 'en-IN': '/' },
+    canonical: 'https://www.amscivilwork.in',
+    languages: {
+      'en-IN': 'https://www.amscivilwork.in',
+      'hi-IN': 'https://www.amscivilwork.in/hi',
+      'mr-IN': 'https://www.amscivilwork.in/mr',
+      'x-default': 'https://www.amscivilwork.in',
+    },
   },
 
   /* ── Verification (add your codes from Google/Bing Search Console) */
