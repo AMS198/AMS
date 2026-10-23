@@ -36,8 +36,13 @@ export function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.next();
-  // Ensure browsers always revalidate HTML pages so updates are seen instantly
-  response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+  // Edge caches public pages for 24 hours to prevent Fast Origin Transfer & CPU spikes on Vercel
+  // Browser checks edge (max-age=0) so new deployments/updates are visible promptly
+  if (url.pathname.startsWith('/admin')) {
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  } else {
+    response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800');
+  }
   return response;
 }
 

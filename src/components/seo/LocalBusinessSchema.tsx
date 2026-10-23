@@ -18,8 +18,12 @@ export default function LocalBusinessSchema() {
       'email': 'ams.constructionwork@gmail.com',
       'priceRange': '₹₹',
       'description': 'India\'s trusted civil contractor with 25+ years experience. Premium bungalow construction, bathroom & kitchen renovation, tiles, flooring, POP, plaster, waterproofing, and compound wall work.',
-      // Replace with actual Google Maps link when verified
-      'hasMap': 'https://www.google.com/maps/search/AMS+Civil+Construction/',
+      'hasMap': 'https://share.google/2FZZD5O5FcpaLjExA',
+      'sameAs': [
+        'https://share.google/2FZZD5O5FcpaLjExA',
+        'https://www.facebook.com/profile.php?id=61570712849063',
+        'https://www.instagram.com/amscivilwork/'
+      ],
       'address': [
         {
           '@type': 'PostalAddress',

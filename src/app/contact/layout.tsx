@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Contact AMS Civil Construction | Book a Site Visit in Mumbai',
   description:
-    'Contact AMS Civil Construction for all your construction and renovation needs in Mumbai. Call +91 87793 91690 or +91 90042 98911 to schedule a site visit (fee ₹2,000–₹3,000, adjustable in bill). Response within 24 hours guaranteed.',
+    'Contact AMS Civil Construction for all your construction and renovation needs in Mumbai. Call +91 87793 91690 or +91 90042 98911 to schedule a Free Site Visit (Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill). Response within 24 hours guaranteed.',
   keywords: [
     'contact civil contractor Mumbai',
     'construction company phone number Mumbai',

@@ -11,13 +11,13 @@ const COLLECTION = 'testimonials';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const authError = await requireAuth(request);
   if (authError) return authError;
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!id || !ObjectId.isValid(id)) {
       return NextResponse.json({ success: false, error: 'Valid testimonial ID is required.' }, { status: 400 });
     }
@@ -31,20 +31,20 @@ export async function DELETE(
 
     return NextResponse.json({ success: true, message: 'Testimonial deleted successfully.' });
   } catch (error) {
-    console.error(`DELETE /api/testimonials/${params.id} error:`, error);
+    console.error(`DELETE /api/testimonials error:`, error);
     return NextResponse.json({ success: false, error: 'Failed to delete testimonial.' }, { status: 500 });
   }
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const authError = await requireAuth(request);
   if (authError) return authError;
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!ObjectId.isValid(id)) {
       return NextResponse.json({ success: false, error: 'Invalid ID.' }, { status: 400 });
     }
@@ -86,7 +86,7 @@ export async function PUT(
 
     return NextResponse.json({ success: true, message: 'Testimonial updated successfully.' });
   } catch (error) {
-    console.error(`PUT /api/testimonials/${params.id} error:`, error);
+    console.error(`PUT /api/testimonials error:`, error);
     return NextResponse.json({ success: false, error: 'Failed to update testimonial.' }, { status: 500 });
   }
 }

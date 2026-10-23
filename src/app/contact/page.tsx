@@ -86,9 +86,9 @@ export default function ContactPage() {
     },
     {
       icon: MapPin,
-      label: 'Location',
-      values: ['Mumbai, Maharashtra, India'],
-      href: null,
+      label: 'Location / Google Business',
+      values: ['Mumbai, Maharashtra, India (📍 View on Google Maps)'],
+      href: 'https://share.google/2FZZD5O5FcpaLjExA',
     },
     {
       icon: Clock,
@@ -143,16 +143,29 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-slate-500 text-xs uppercase tracking-widest mb-1">{label}</p>
-                  {values.map(v => (
-                    href ? (
-                      <a key={v} href={`tel:+91${v.replace(/\D/g, '').slice(-10)}`}
-                        className="block text-slate-300 text-sm font-medium hover:text-orange-400 transition-colors">
+                  {values.map(v => {
+                    if (!href) {
+                      return <p key={v} className="text-slate-300 text-sm">{v}</p>;
+                    }
+                    const isExternal = href.startsWith('http');
+                    const linkTarget = isExternal 
+                      ? href 
+                      : href.startsWith('mailto:') 
+                      ? href 
+                      : `tel:+91${v.replace(/\D/g, '').slice(-10)}`;
+                    
+                    return (
+                      <a 
+                        key={v} 
+                        href={linkTarget}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        className="block text-slate-300 text-sm font-medium hover:text-orange-400 transition-colors"
+                      >
                         {v}
                       </a>
-                    ) : (
-                      <p key={v} className="text-slate-300 text-sm">{v}</p>
-                    )
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}

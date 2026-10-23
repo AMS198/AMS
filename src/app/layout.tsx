@@ -235,6 +235,7 @@ export const metadata: Metadata = {
     google: 'a-NPUUlhFt4ndck1sIedFhwSQG-oqFwumbqeujTHc-g',
     other: {
       'msvalidate.01': 'ADD_YOUR_BING_CODE_HERE', // Get from bing.com/webmasters
+      'p:domain_verify': '24ef3d99f9f608ed1abdd2f62a065345',
     },
   },
 
@@ -431,8 +432,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-        {/* Language */}
+        {/* Language & Verification */}
         <meta httpEquiv="content-language" content="en-IN" />
+        <meta name="p:domain_verify" content="24ef3d99f9f608ed1abdd2f62a065345" />
 
         {/* Google Analytics */}
         <Script

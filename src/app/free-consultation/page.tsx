@@ -90,7 +90,7 @@ export default function LandingPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-xl mx-auto lg:mx-0 mb-8">
                 {[
-                  'Site Visit & Inspection (Adjustable)',
+                  '100% Free Site Inspection (Diwali Special)',
                   'Exact Estimate in 24 Hours',
                   '25+ Years of Expertise',
                   'No Hidden Charges',
@@ -122,7 +122,7 @@ export default function LandingPage() {
               <div className="bg-[#101827] border border-[#1E2D45] rounded-3xl p-8 shadow-2xl relative">
                 {/* Ribbon */}
                 <div className="absolute -top-4 -right-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold px-4 py-2 rounded-xl shadow-lg transform rotate-3">
-                  Free Consultation!
+                  Diwali Special!
                 </div>
 
                 {success ? (
@@ -132,7 +132,7 @@ export default function LandingPage() {
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">Request Received!</h3>
                     <p className="text-slate-400 mb-6">
-                      Thank you! Our senior engineer will call you shortly to schedule your site visit (fee ₹2,000–₹3,000, adjustable in bill).
+                      Thank you! Our senior engineer will call you shortly to schedule your Free Site Visit & Consultation.
                     </p>
                     <button onClick={() => setSuccess(false)} className="text-orange-500 font-medium hover:underline">
                       Submit another request

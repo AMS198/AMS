@@ -71,7 +71,7 @@ export default async function HomePage() {
     name: 'How to Hire the Best Civil Contractor in Mumbai',
     description: 'A simple 3-step process to get your home built or renovated stress-free.',
     step: [
-      { '@type': 'HowToStep', name: 'Site Visit & Consultation', text: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas (Fee: ₹2,000–₹3,000, adjustable in final bill).' },
+      { '@type': 'HowToStep', name: 'Free Site Visit & Consultation', text: 'Our engineer visits your property to understand your requirements, take measurements, and discuss ideas (100% Free under Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill).' },
       { '@type': 'HowToStep', name: 'Transparent Quote', text: 'You receive a detailed, itemized quotation with zero hidden costs and exact timelines.' },
       { '@type': 'HowToStep', name: 'Flawless Execution', text: 'Our skilled team starts the work under senior supervision, keeping you updated at every milestone.' },
     ],

@@ -95,9 +95,9 @@ export default function QuotePopup() {
                 ⚡ Slots Filling Fast
               </span>
             </div>
-            <p className="text-white/90 text-xs font-medium flex items-center gap-1.5 mt-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-              Note: Site visit fee (₹2,000–₹3,000) applies, fully adjustable in final bill.
+            <p className="text-white/95 text-xs font-semibold flex items-center gap-1.5 mt-1.5">
+              <span>🪔</span>
+              Diwali Special: 100% Free Site Visit & Fast 24-Hr Estimate (Valid till 15 Nov)
             </p>
           </div>
           <button onClick={() => setOpen(false)}

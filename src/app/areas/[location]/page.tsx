@@ -262,7 +262,7 @@ export default async function LocationPage({ params }: { params: { location: str
             name: `${loc.name} mein construction ka rate kya hai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. Site visit (fee ₹2,000–₹3,000, adjustable in bill) aur accurate estimate ke liye call karein: +91 87793 91690.`,
+              text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. Free site visit (Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill) aur accurate estimate ke liye call karein: +91 87793 91690.`,
             },
           },
         ],
@@ -648,7 +648,7 @@ export default async function LocationPage({ params }: { params: { location: str
           },
           {
             q: `How much does civil work cost in ${loc.name}?`,
-            a: `Civil work in ${loc.name} typically ranges from ₹1,500 to ₹3,500 per sq.ft. depending on the type of work and material grade. Basic renovations start at ₹150/sq.ft. while luxury bungalow construction can go up to ₹3,500+/sq.ft. We provide free detailed estimates after a paid site visit (₹2,000–₹3,000, fully adjustable in your final bill).`
+            a: `Civil work in ${loc.name} typically ranges from ₹1,500 to ₹3,500 per sq.ft. depending on the type of work and material grade. Basic renovations start at ₹150/sq.ft. while luxury bungalow construction can go up to ₹3,500+/sq.ft. We provide 100% Free Site Visits under our Diwali Offer till 15 Nov (visit fee applicable post offer, fully adjustable in your final bill).`
           },
           {
             q: `Do you provide construction services near ${landmark}?`,

@@ -63,7 +63,13 @@ export default function GoogleReviewsWidget() {
             </h2>
           </div>
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex items-center gap-6 backdrop-blur-sm shrink-0">
+          <a 
+            href="https://share.google/2FZZD5O5FcpaLjExA" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-white/5 border border-white/10 hover:border-blue-500/40 rounded-2xl p-6 flex items-center gap-6 backdrop-blur-sm shrink-0 transition-all hover:scale-105 group"
+            title="View AMS Civil Construction on Google Maps & Reviews"
+          >
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
                 <span className="text-white font-bold text-4xl leading-none">4.9</span>
@@ -73,18 +79,18 @@ export default function GoogleReviewsWidget() {
                   </div>
                 </div>
               </div>
-              <p className="text-slate-400 text-xs mt-2">Based on 124 reviews</p>
+              <p className="text-slate-400 text-xs mt-2 group-hover:text-blue-400 transition-colors">Based on 142 reviews</p>
             </div>
             
             <div className="w-[1px] h-12 bg-white/10 mx-2" />
             
             <div className="flex flex-col items-center">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-1">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-1 group-hover:shadow-lg transition-shadow">
                 <span className="font-bold text-xl" style={{ color: '#4285F4' }}>G</span>
               </div>
-              <p className="text-slate-400 text-xs font-bold">Google</p>
+              <p className="text-slate-400 text-xs font-bold group-hover:text-white transition-colors">Google ★</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
@@ -141,10 +147,10 @@ export default function GoogleReviewsWidget() {
       <div className="container-custom relative z-10">
         
         <div className="mt-12 flex justify-center">
-          <a href="https://www.google.com/maps/search/AMS+Civil+Construction/" target="_blank" rel="noopener noreferrer" 
-             className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white font-bold hover:bg-white/10 transition-colors backdrop-blur-sm">
-            <span>Read all 124 reviews on Google</span>
-            <ExternalLink size={16} className="text-blue-400" />
+          <a href="https://share.google/2FZZD5O5FcpaLjExA" target="_blank" rel="noopener noreferrer" 
+             className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white font-bold hover:bg-white/10 hover:border-orange-500/40 transition-colors backdrop-blur-sm">
+            <span>Read verified reviews on Google Maps</span>
+            <ExternalLink size={16} className="text-orange-400" />
           </a>
         </div>
       </div>

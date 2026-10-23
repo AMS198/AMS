@@ -13,11 +13,12 @@ const COLLECTION = 'blogs';
 /* ── GET Single Blog by Slug (Public) ───────────────────────── */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
+  const { slug } = await params;
   try {
     const db = await getDb();
-    const blog = await db.collection(COLLECTION).findOne({ slug: params.slug });
+    const blog = await db.collection(COLLECTION).findOne({ slug });
 
     if (!blog) {
       return NextResponse.json({ success: false, error: 'Blog post not found.' }, { status: 404 });
@@ -34,14 +35,14 @@ export async function GET(
 /* ── PUT Update Blog by ID (Admin Only) ────────────────────── */
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   // ── Auth check ──────────────────────────────────────────
   const authError = await requireAuth(request);
   if (authError) return authError;
 
   try {
-    const id = params.slug; 
+    const { slug: id } = await params;
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json({ success: false, error: 'Invalid blog ID.' }, { status: 400 });
@@ -95,14 +96,14 @@ export async function PUT(
 /* ── DELETE Blog by ID (Admin Only) ────────────────────────── */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   // ── Auth check ──────────────────────────────────────────
   const authError = await requireAuth(request);
   if (authError) return authError;
 
   try {
-    const id = params.slug;
+    const { slug: id } = await params;
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json({ success: false, error: 'Invalid blog ID.' }, { status: 400 });

@@ -11,7 +11,7 @@
   "dependencies": {
     "@ai-sdk/google": "^4.0.24",
     "@ai-sdk/react": "^4.0.40",
-    "@vercel/og": "^0.11.1",
+    "@vercel/og": "^1.0.1",
     "ai": "^7.0.37",
     "cloudinary": "^2.2.0",
     "clsx": "^2.1.0",
@@ -23,8 +23,8 @@
     "lucide-react": "^0.363.0",
     "marked": "^18.0.7",
     "mongodb": "^6.3.0",
-    "next": "14.2.29",
-    "nodemailer": "^6.9.0",
+    "next": "^16.4.2",
+    "nodemailer": "^10.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
@@ -34,19 +34,24 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.4",
     "@types/marked": "^5.0.2",
-    "@types/node": "^20",
+    "@types/node": "^24.19.2",
     "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.0",
+    "eslint-config-next": "^14.2.3",
     "png-to-ico": "^3.0.1",
-    "postcss": "^8",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^3.4.0",
+    "postcss": "^8.5.31",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5"
+  },
+  "overrides": {
+    "braces": "3.0.3",
+    "glob": "^10.5.0"
   }
 }

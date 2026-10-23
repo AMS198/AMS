@@ -136,7 +136,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             name: `How much does ${svc.title.toLowerCase()} cost in Mumbai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `The cost of ${svc.title.toLowerCase()} in Mumbai varies by area size and materials. We offer competitive pricing with site visits (fee ₹2,000–₹3,000, adjustable in final bill). Call +91 87793 91690 for a custom quote.`,
+              text: `The cost of ${svc.title.toLowerCase()} in Mumbai varies by area size and materials. We offer competitive pricing with site visits (100% Free Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill). Call +91 87793 91690 for a custom quote.`,
             },
           },
           {
@@ -371,7 +371,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       <ModernCTA
         title={`Start Your ${svc.title} Project Today`}
-        subtitle={`AMS Civil Construction delivers expert ${svc.title.toLowerCase()} across all Mumbai areas. Call +91 87793 91690 to schedule a site visit (fee ₹2,000–₹3,000, adjustable in bill).`}
+        subtitle={`AMS Civil Construction delivers expert ${svc.title.toLowerCase()} across all Mumbai areas. Call +91 87793 91690 to schedule a free site visit & fast 24-hr quotation (Diwali Special Offer).`}
         image={svc.image}
       />
     </>

@@ -28,6 +28,13 @@ function getLocationPriority(zone: string, slug: string): number {
   return 0.65; // Jharkhand, West Bengal, far suburbs
 }
 
+function getLocationServicePriority(zone: string, slug: string): number {
+  if (TOP_SLUGS.has(slug)) return 0.88;
+  if (CORE_ZONES.includes(zone)) return 0.80;
+  if (zone === 'Maharashtra') return 0.65;
+  return 0.55;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /* ── Static pages ──────────────────────────────────────── */
@@ -82,6 +89,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
+
+    // SEO: Generate granular Location × Service pages for CORE_ZONES (Mumbai / MMR) to maximize high-intent leads
+    if (CORE_ZONES.includes(loc.zone)) {
+      services.forEach(svc => {
+        locationPages.push({
+          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+          lastModified:    SITE_UPDATED,
+          changeFrequency: 'weekly' as const,
+          priority:        getLocationServicePriority(loc.zone, loc.slug),
+        });
+      });
+    }
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */

@@ -35,8 +35,8 @@ export default function TopBanner() {
       {/* Desktop Layout (sm and above) */}
       <div className="hidden sm:flex items-center justify-center gap-4 flex-wrap w-full">
         <div className="flex items-center gap-2">
-          <span>🔥</span>
-          <span className="font-semibold text-xs md:text-sm">Special Offer: Book a Site Visit & Consultation (Fee: ₹2,000–₹3,000, Adjustable in Bill)</span>
+          <span>🪔</span>
+          <span className="font-semibold text-xs md:text-sm">Shubh Diwali Offer: 100% Free Site Visit & Fast 24-Hr Quotation (Valid till 15 Nov)</span>
         </div>
         <div className="flex items-center gap-3">
           <a href="tel:+918779391690" className="flex items-center gap-1.5 hover:bg-white/30 transition-all bg-white/20 px-3 py-0.5 rounded-full font-bold font-mono text-xs">
@@ -52,7 +52,7 @@ export default function TopBanner() {
             onClick={openQuotePopup} 
             className="flex items-center gap-1 text-orange-950 font-bold hover:text-white transition-colors bg-white hover:bg-orange-500 hover:border-white border border-transparent px-3 py-0.5 rounded-full text-xs"
           >
-            Book Now <ArrowRight size={12} />
+            Claim Offer <ArrowRight size={12} />
           </button>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function TopBanner() {
           {/* First loop of content */}
           <div className="flex items-center gap-6 pr-6">
             <span className="flex items-center gap-1.5 font-semibold text-xs tracking-wide">
-              <span>🔥</span> Special Offer: Site Visit (Fee: ₹2,000–₹3,000, Adjustable in Bill)
+              <span>🪔</span> Diwali Special: Free Site Visit & Fast 24-Hr Quote (Valid till 15 Nov)
             </span>
             <span className="text-white/40">|</span>
             <a href="tel:+918779391690" className="flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full font-bold font-mono text-xs shadow-sm whitespace-nowrap">
@@ -92,13 +92,13 @@ export default function TopBanner() {
               onClick={openQuotePopup} 
               className="flex items-center gap-1 text-orange-950 bg-white hover:bg-gray-100 px-3 py-1 rounded-full font-bold text-xs shadow-sm whitespace-nowrap"
             >
-              Book Now <ArrowRight size={12} />
+              Claim Offer <ArrowRight size={12} />
             </button>
           </div>
           {/* Second identical loop of content to create a seamless infinite scroll */}
           <div className="flex items-center gap-6 pr-6" aria-hidden="true">
             <span className="flex items-center gap-1.5 font-semibold text-xs tracking-wide">
-              <span>🔥</span> Special Offer: Site Visit (Fee: ₹2,000–₹3,000, Adjustable in Bill)
+              <span>🪔</span> Diwali Special: Free Site Visit & Fast 24-Hr Quote (Valid till 15 Nov)
             </span>
             <span className="text-white/40">|</span>
             <a href="tel:+918779391690" className="flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full font-bold font-mono text-xs shadow-sm whitespace-nowrap">

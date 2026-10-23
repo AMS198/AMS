@@ -120,9 +120,19 @@ export default function Footer() {
                 <span className="block text-[10px] font-mono tracking-[0.2em] text-orange-500 uppercase mt-0.5">Construction</span>
               </div>
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-8">
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
               India&apos;s trusted construction partner for 20+ years. We strictly follow all government rules and regulations to deliver excellence in every project.
             </p>
+            <a 
+              href="https://share.google/2FZZD5O5FcpaLjExA" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/50 text-xs text-slate-300 hover:text-white transition-all mb-6 group"
+            >
+              <span className="text-yellow-400 font-bold">★ 4.9</span>
+              <span className="text-slate-400 group-hover:text-slate-200">Google Verified Business</span>
+              <span className="text-[10px] bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded font-mono">Reviews</span>
+            </a>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer"
@@ -176,7 +186,15 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0 group-hover:bg-orange-500/20 transition-colors">
                   <MapPin size={14} className="text-orange-500" />
                 </div>
-                <span className="text-slate-400 text-sm leading-relaxed pt-1">Mumbai, Maharashtra, India</span>
+                <a 
+                  href="https://share.google/2FZZD5O5FcpaLjExA" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-slate-400 hover:text-orange-400 text-sm leading-relaxed pt-1 transition-colors"
+                >
+                  Mumbai, Maharashtra, India
+                  <span className="block text-xs text-orange-400/90 font-medium mt-0.5">📍 View on Google Maps</span>
+                </a>
               </li>
               <li className="flex items-start gap-3 group">
                 <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0 group-hover:bg-orange-500/20 transition-colors">

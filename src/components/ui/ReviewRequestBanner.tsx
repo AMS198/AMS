@@ -24,7 +24,7 @@ export default function ReviewRequestBanner() {
       
       <div className="relative z-10 flex flex-col gap-3 w-full md:w-auto shrink-0">
         <a 
-          href="https://www.google.com/maps/search/AMS+Civil+Construction/" 
+          href="https://share.google/2FZZD5O5FcpaLjExA" 
           target="_blank" 
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-3 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-slate-100 transition-colors shadow-lg"

@@ -189,8 +189,8 @@ export default async function AreaServicePage({ params }: { params: { location: 
         step: [
           {
             '@type': 'HowToStep',
-            name: 'Site Visit & Consultation',
-            text: `Our engineer visits your property in ${loc.name} to understand your ${svc.title.toLowerCase()} requirements, take measurements, and plan. (Site visit fee: ₹2,000–₹3,000, adjustable in bill).`,
+            name: 'Free Site Visit & Consultation',
+            text: `Our engineer visits your property in ${loc.name} to understand your ${svc.title.toLowerCase()} requirements, take measurements, and plan. (100% Free Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill).`,
             position: 1,
           },
           {

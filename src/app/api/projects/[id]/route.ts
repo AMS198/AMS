@@ -13,7 +13,7 @@ const COLLECTION = 'projects';
 /* ── PUT (Admin Only) ──────────────────────────────────────── */
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const authError = await requireAuth(request);
   if (authError) return authError;
@@ -21,8 +21,9 @@ export async function PUT(
   try {
     const body = await request.json();
     const { id, _id, createdAt, ...updates } = body; // strip immutable fields
+    const { id: projectId } = await params;
 
-    if (!ObjectId.isValid(params.id)) {
+    if (!ObjectId.isValid(projectId)) {
       return NextResponse.json({ success: false, error: 'Invalid project ID.' }, { status: 400 });
     }
 
@@ -35,7 +36,7 @@ export async function PUT(
     const db = await getDb();
 
     const result = await db.collection(COLLECTION).findOneAndUpdate(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(projectId) },
       {
         $set: {
           ...updates,
@@ -51,7 +52,7 @@ export async function PUT(
     }
 
     const { _id: oid, ...rest } = result;
-    console.log('✏️  Project updated:', params.id);
+    console.log('✏️  Project updated:', projectId);
     revalidateProjects();
     return NextResponse.json({ success: true, data: { id: oid.toString(), ...rest } });
   } catch (error) {
@@ -63,24 +64,25 @@ export async function PUT(
 /* ── DELETE (Admin Only) ───────────────────────────────────── */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const authError = await requireAuth(request);
   if (authError) return authError;
 
   try {
-    if (!ObjectId.isValid(params.id)) {
+    const { id: projectId } = await params;
+    if (!ObjectId.isValid(projectId)) {
       return NextResponse.json({ success: false, error: 'Invalid project ID.' }, { status: 400 });
     }
 
     const db = await getDb();
-    const result = await db.collection(COLLECTION).deleteOne({ _id: new ObjectId(params.id) });
+    const result = await db.collection(COLLECTION).deleteOne({ _id: new ObjectId(projectId) });
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ success: false, error: 'Project not found.' }, { status: 404 });
     }
 
-    console.log('🗑️  Project deleted:', params.id);
+    console.log('🗑️  Project deleted:', projectId);
     revalidateProjects();
     return NextResponse.json({ success: true, message: 'Project deleted successfully.' });
   } catch (error) {

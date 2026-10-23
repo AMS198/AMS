@@ -11,13 +11,13 @@ const COLLECTION = 'gallery';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const authError = await requireAuth(request);
   if (authError) return authError;
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!id || !ObjectId.isValid(id)) {
       return NextResponse.json({ success: false, error: 'Valid ID is required.' }, { status: 400 });
     }
