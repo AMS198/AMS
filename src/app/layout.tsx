@@ -3,7 +3,6 @@
 
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import TopBanner from '@/components/layout/TopBanner';
@@ -18,27 +17,6 @@ import DPDPConsentBanner from '@/components/ui/DPDPConsentBanner';
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 import SeoHead from '@/components/seo/SeoHead';
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 /* ─────────────────────────────────────────────────────────────
    SEO METADATA
@@ -400,8 +378,16 @@ const jsonLd = {
 ═══════════════════════════════════════════════════════════════ */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en-IN">
       <head>
+        {/* Google Fonts (High performance CDN - bypasses Turbopack font resolver bug) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+          rel="stylesheet"
+        />
+
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"

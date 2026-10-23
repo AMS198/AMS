@@ -18,6 +18,11 @@
 }
 
 :root {
+  /* Font families */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
   /* Brand tokens */
   --orange:      #F97316;
   --orange-dark: #EA580C;
