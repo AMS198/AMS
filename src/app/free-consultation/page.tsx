@@ -104,8 +104,15 @@ export default function LandingPage() {
 
               <div className="flex items-center justify-center lg:justify-start gap-4">
                 <div className="flex -space-x-4">
-                  {[1, 2, 3, 4].map(i => (
-                    <Image key={i} src={`/images/user${i}.jpg`} alt="Client" width={48} height={48} className="w-12 h-12 rounded-full border-2 border-[#0B1120] bg-slate-800 object-cover" />
+                  {[
+                    { initial: 'VM', bg: 'bg-orange-600' },
+                    { initial: 'AD', bg: 'bg-blue-600' },
+                    { initial: 'RK', bg: 'bg-emerald-600' },
+                    { initial: 'SP', bg: 'bg-purple-600' },
+                  ].map((user, i) => (
+                    <div key={i} className={`w-12 h-12 rounded-full border-2 border-[#0B1120] ${user.bg} text-white font-bold text-xs flex items-center justify-center shadow-md`}>
+                      {user.initial}
+                    </div>
                   ))}
                 </div>
                 <div className="text-left">

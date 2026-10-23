@@ -52,22 +52,7 @@ export default function Navbar() {
           padding: scrolled ? '12px 0' : '20px 0',
         }}>
 
-        {scrolled && (
-          <div className="hidden lg:flex justify-end container-custom pb-2 mb-1 gap-4"
-            style={{ borderBottom: '1px solid rgba(30,45,69,0.5)' }}>
-            <a href="tel:+918779391690"
-              className="flex items-center gap-1.5 text-xs font-mono"
-              style={{ color: '#F97316' }}>
-              <PhoneLogo className="w-3 h-3 fill-[#F97316]" /> +91 87793 91690
-            </a>
-            <span className="text-slate-800">|</span>
-            <a href="tel:+919004298911"
-              className="flex items-center gap-1.5 text-xs font-mono"
-              style={{ color: '#F97316' }}>
-              <PhoneLogo className="w-3 h-3 fill-[#F97316]" /> +91 90042 98911
-            </a>
-          </div>
-        )}
+
 
         <nav className="container-custom flex items-center justify-between">
           {/* Logo */}

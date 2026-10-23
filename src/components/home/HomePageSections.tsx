@@ -245,7 +245,7 @@ function HeroSection() {
         }} />
 
       {/* Hero content */}
-      <div className="relative container-custom pt-36 pb-20">
+      <div className="relative container-custom pt-44 md:pt-48 pb-20">
         <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 items-center">
           <div className="max-w-3xl">
             {/* Label */}
@@ -397,7 +397,7 @@ function ServicesSection() {
                 style={{ transitionDelay: `${i * 45}ms` }}>
                 
                 {/* Background Image */}
-                <div className="absolute inset-0 z-0 watermark-container">
+                <div className="absolute inset-0 z-0 overflow-hidden">
                   <Image 
                     src={svc.image} 
                     alt={`${svc.title} Contractor in Mumbai Ã¢â‚¬â€ AMS Civil Construction`} 

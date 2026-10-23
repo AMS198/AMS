@@ -258,6 +258,9 @@ h1, h2, h3 {
   position: relative;
   overflow: hidden;
 }
+.watermark-container.absolute {
+  position: absolute !important;
+}
 .watermark-container::after {
   content: 'AMS Civil Work';
   position: absolute;
