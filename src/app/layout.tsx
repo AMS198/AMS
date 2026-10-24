@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    '⭐ 4.9/5 Rated. Looking for the best civil contractor in Mumbai? AMS Civil Construction offers premium bungalow construction, home renovation & interior civil work. 25+ years experience. Call +91 87793 91690!',
+    '⭐ 4.9/5 Rated. Looking for the best civil contractor in Mumbai? AMS Civil Construction offers premium bungalow construction, home renovation & interior civil work. 10+ years experience. Call +91 87793 91690!',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */
@@ -178,7 +178,7 @@ export const metadata: Metadata = {
     url: 'https://www.amscivilwork.in',
     siteName: 'AMS Civil Construction',
     title: 'AMS Civil Construction | Best Construction Company in Mumbai',
-    description: '25+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Call: +91 87793 91690 / +91 90042 98911',
+    description: '10+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Call: +91 87793 91690 / +91 90042 98911',
     images: [
       {
         url: '/og-image.jpg',
@@ -193,7 +193,7 @@ export const metadata: Metadata = {
   twitter: {
     card:        'summary_large_image',
     title:       'AMS Civil Construction Mumbai',
-    description: 'Expert construction services across all Mumbai areas. 25+ years experience. Call +91 87793 91690 or +91 90042 98911',
+    description: 'Expert construction services across all Mumbai areas. 10+ years experience. Call +91 87793 91690 or +91 90042 98911',
     images:      ['/og-image.jpg'],
   },
 
@@ -246,7 +246,7 @@ const jsonLd = {
       '@id':         'https://www.amscivilwork.in/#business',
       name:          'AMS Civil Construction',
       alternateName: ['AMS Construction', 'AMS Civil', 'AMS Civil Work', 'Mandal Civil Construction'],
-      description:   'India\'s trusted civil contractor with 25+ years experience. Premium bungalow construction, bathroom & kitchen renovation, tiles, flooring, POP, plaster, waterproofing, swimming pool, and compound wall work across 90+ cities in Maharashtra, Jharkhand, West Bengal, Karnataka & Goa.',
+      description:   'India\'s trusted civil contractor with 10+ years experience. Premium bungalow construction, bathroom & kitchen renovation, tiles, flooring, POP, plaster, waterproofing, swimming pool, and compound wall work across 90+ cities in Maharashtra, Jharkhand, West Bengal, Karnataka & Goa.',
       url:           'https://www.amscivilwork.in',
       telephone:     ['+918779391690', '+919004298911'],
       email:         'ams.constructionwork@gmail.com',

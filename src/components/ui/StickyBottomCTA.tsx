@@ -98,9 +98,9 @@ export default function StickyBottomCTA() {
         <div className="flex items-center justify-center gap-4 py-1.5 bg-[#050914] text-[9px] text-slate-500 font-mono uppercase tracking-widest">
           <span>⭐ 4.9 Rating</span>
           <span className="w-0.5 h-2.5 bg-slate-700" />
-          <span>✓ 25+ Years</span>
+          <span>✓ 10+ Years</span>
           <span className="w-0.5 h-2.5 bg-slate-700" />
-          <span>🏗️ 500+ Projects</span>
+          <span>🏗️ 200+ Projects</span>
         </div>
       </div>
     </div>

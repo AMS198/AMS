@@ -151,7 +151,7 @@ export function adminAlertHtml(data: EnquiryData): string {
 
     <div class="footer">
       <p style="margin:0; font-size:13px; color:#ffffff; font-weight:600;">AMS Civil Construction Mumbai</p>
-      <p style="margin:8px 0 24px; font-size:12px;">Expert Civil & Interior Solutions for 20+ Years</p>
+      <p style="margin:8px 0 24px; font-size:12px;">Expert Civil & Interior Solutions for 10+ Years</p>
       
       <div style="margin-bottom:24px;">
         <a href="${SOCIAL.fb}" style="display:inline-block; margin:0 10px;"><img src="${ICON.fb}" width="24" height="24" alt="Facebook"></a>

@@ -16,7 +16,8 @@ import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 
 
-export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ location: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
@@ -52,7 +53,8 @@ export async function generateMetadata({ params }: { params: { location: string 
   };
 }
 
-export default async function LocationPageMarathi({ params }: { params: { location: string } }) {
+export default async function LocationPageMarathi(props: { params: Promise<{ location: string }> }) {
+  const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) notFound();
 
@@ -67,16 +69,16 @@ export default async function LocationPageMarathi({ params }: { params: { locati
   };
 
   const trustStats = [
-    { icon: Clock, label: '25+ वर्षे', desc: 'अनुभव' },
-    { icon: CheckCircle, label: '350+', desc: 'प्रोजेक्ट्स' },
-    { icon: Users, label: '500+', desc: 'आनंदी ग्राहक' },
+    { icon: Clock, label: '10+ वर्षे', desc: 'अनुभव' },
+    { icon: CheckCircle, label: '200+', desc: 'प्रोजेक्ट्स' },
+    { icon: Users, label: '200+', desc: 'आनंदी ग्राहक' },
     { icon: Star, label: '4.9/5', desc: 'रेटिंग' },
   ];
 
   // Dynamic Content for Entropy
   const layoutSeed = getSeededRandom(loc.slug + 'mr');
   const paras = [
-    `AMS Civil Construction ${loc.name} मध्ये उत्कृष्ट बांधकाम आणि नूतनीकरण (renovation) सेवा प्रदान करते. बंगला बांधणीपासून ते किचन पर्यंत, आम्ही 25+ वर्षांच्या अनुभवासह काम करतो.`,
+    `AMS Civil Construction ${loc.name} मध्ये उत्कृष्ट बांधकाम आणि नूतनीकरण (renovation) सेवा प्रदान करते. बंगला बांधणीपासून ते किचन पर्यंत, आम्ही 10+ वर्षांच्या अनुभवासह काम करतो.`,
     `जर आपण ${loc.name} (${loc.district}) मध्ये विश्वासार्ह सिव्हिल कंत्राटदार शोधत असाल, तर AMS Civil Construction हा सर्वोत्तम पर्याय आहे. आम्ही विशेषतः ${loc.landmarks[0] || loc.name} जवळ काम करतो.`,
     `${loc.name} मध्ये प्रीमियम सिव्हिल कामासाठी आम्ही ओळखले जातो. घर बांधणी असो वा नूतनीकरण, आमची टीम ${loc.zone} भागात सर्वोत्तम गुणवत्ता देते.`
   ];
@@ -178,7 +180,7 @@ export default async function LocationPageMarathi({ params }: { params: { locati
             <div className={`bg-white/5 rounded-3xl p-8 border border-white/10 ${layoutSeed > 0.5 ? 'order-1' : 'order-2'}`}>
                 <h3 className="text-white font-bold text-xl mb-4">आमची वैशिष्ट्ये</h3>
                 <ul className="space-y-4 text-slate-400">
-                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} मध्ये 350+ पेक्षा जास्त प्रकल्पांचे यशस्वी काम.</li>
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} मध्ये 200+ पेक्षा जास्त प्रकल्पांचे यशस्वी काम.</li>
                     <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> कोणत्याही छुप्या शुल्काशिवाय (Hidden Costs) स्पष्ट कोटेशन.</li>
                     <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> प्रत्यक्ष कामावर सुपरवायझरची 100% देखरेख.</li>
                 </ul>

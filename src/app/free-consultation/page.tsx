@@ -92,7 +92,7 @@ export default function LandingPage() {
                 {[
                   '100% Free Site Inspection (Diwali Special)',
                   'Exact Estimate in 24 Hours',
-                  '25+ Years of Expertise',
+                  '10+ Years of Expertise',
                   'No Hidden Charges',
                 ].map((feature, i) => (
                   <div key={i} className="flex items-center gap-3">
@@ -119,7 +119,7 @@ export default function LandingPage() {
                   <div className="flex text-orange-500 text-sm">
                     {Array(5).fill('★').join('')}
                   </div>
-                  <p className="text-xs text-slate-400 font-bold mt-1">Trusted by 500+ Families</p>
+                  <p className="text-xs text-slate-400 font-bold mt-1">Trusted by 200+ Families</p>
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@ export default function LandingPage() {
             </div>
             <div className="flex items-center gap-3">
               <Award className="w-8 h-8 text-slate-300" />
-              <div className="text-sm font-bold text-slate-300 uppercase tracking-widest">25+ Years Experience</div>
+              <div className="text-sm font-bold text-slate-300 uppercase tracking-widest">10+ Years Experience</div>
             </div>
             <div className="flex items-center gap-3">
               <CheckCircle className="w-8 h-8 text-slate-300" />

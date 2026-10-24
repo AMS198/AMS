@@ -14,7 +14,7 @@ export interface ServiceDetail {
 export const serviceDetailsData: Record<string, ServiceDetail> = {
   'bungalow-construction': {
     slug: 'bungalow-construction',
-    intro: 'Building your dream bungalow is a once-in-a-lifetime journey. AMS Civil Construction brings over 25 years of luxury residential building experience in Mumbai, turning architectural blueprints into strong, magnificent, and beautifully finished realities.',
+    intro: 'Building your dream bungalow is a once-in-a-lifetime journey. AMS Civil Construction brings over 10+ years of luxury residential building experience in Mumbai, turning architectural blueprints into strong, magnificent, and beautifully finished realities.',
     detailedProcess: 'Our bungalow construction process is comprehensive, starting from soil testing and heavy-duty structural engineering to architectural mapping and premium interior finishing. We manage all municipal approvals, RCC structure layouts, brick masonry, concealed high-grade wiring, plumbing routing, and premium external plastering. Every bungalow we build is custom-designed to withstand Mumbai\'s heavy monsoon, using corrosion-resistant steel and advanced concrete mixes.',
     steps: [
       { title: 'Step 1: Planning & Approvals', desc: 'Soil testing, structural calculations, detailed 3D design mapping, and municipal licensing coordination.' },

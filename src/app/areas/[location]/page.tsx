@@ -50,8 +50,9 @@ async function getLocalData(locName: string, locZone: string, locNearby: string[
 
 /* ── Generate unique metadata per location ────────────────── */
 export async function generateMetadata(
-  { params }: { params: { location: string } }
+  props: { params: Promise<{ location: string }> }
 ): Promise<Metadata> {
+  const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
@@ -160,7 +161,8 @@ function getGeoCoordinates(loc: { district: string; slug: string; pincode?: stri
   };
 }
 
-export default async function LocationPage({ params }: { params: { location: string } }) {
+export default async function LocationPage(props: { params: Promise<{ location: string }> }) {
+  const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) notFound();
 
@@ -174,7 +176,7 @@ export default async function LocationPage({ params }: { params: { location: str
       {
         '@type':    'LocalBusiness',
         name:       `AMS Civil Construction — ${loc.name}`,
-        description:`#1 rated construction company in ${loc.name}, ${loc.district}. Specialising in bungalows, renovations, and civil work. Trusted by 500+ families.`,
+        description:`#1 rated construction company in ${loc.name}, ${loc.district}. Specialising in bungalows, renovations, and civil work. Trusted by 200+ families.`,
         telephone:  ['+918779391690', '+919004298911'],
         url:        `https://www.amscivilwork.in/areas/${loc.slug}`,
         areaServed: [loc.name, ...loc.nearby],
@@ -246,7 +248,7 @@ export default async function LocationPage({ params }: { params: { location: str
             name: `Who is the most trusted construction company in ${loc.name}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 25+ years of experience and a track record of 350+ completed projects, we provide high-quality bungalow construction and renovation services with full transparency in ${loc.district}.`,
+              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 10+ years of experience and a track record of 200+ completed projects, we provide high-quality bungalow construction and renovation services with full transparency in ${loc.district}.`,
             },
           },
           {
@@ -302,9 +304,9 @@ export default async function LocationPage({ params }: { params: { location: str
   };
 
   const trustStats = [
-    { icon: Clock, label: '25+ Years', desc: 'Experience' },
-    { icon: CheckCircle, label: '350+', desc: 'Projects' },
-    { icon: Users, label: '500+', desc: 'Happy Clients' },
+    { icon: Clock, label: '10+ Years', desc: 'Experience' },
+    { icon: CheckCircle, label: '200+', desc: 'Projects' },
+    { icon: Users, label: '200+', desc: 'Happy Clients' },
     { icon: Star, label: '4.9/5', desc: 'Rating' },
   ];
 
@@ -344,8 +346,8 @@ export default async function LocationPage({ params }: { params: { location: str
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
               AMS Civil Construction delivers premium building solutions in {loc.name}. 
-              From luxury bungalows to modern renovations, we bring 25+ years of expertise 
-              to every project in {loc.district}. Trusted by 500+ families across {loc.zone}.
+              From luxury bungalows to modern renovations, we bring 10+ years of expertise 
+              to every project in {loc.district}. Trusted by 200+ families across {loc.zone}.
             </p>
 
             {/* Actions */}
@@ -565,7 +567,7 @@ export default async function LocationPage({ params }: { params: { location: str
             const landmark2 = loc.landmarks[1] || loc.nearby[0] || loc.name;
             const nearbyStr = loc.nearby.slice(0, 3).join(', ');
             const uniqueParas = [
-              `${loc.name} is ${ctx}. Property owners near ${landmark} and ${landmark2} consistently choose AMS Civil Construction because we combine 25+ years of hands-on experience with a deep understanding of ${loc.district} building codes. Whether you live close to ${landmark} or anywhere across the ${loc.zone} belt, our dedicated site crews deliver projects on time and within the agreed budget.`,
+              `${loc.name} is ${ctx}. Property owners near ${landmark} and ${landmark2} consistently choose AMS Civil Construction because we combine 10+ years of hands-on experience with a deep understanding of ${loc.district} building codes. Whether you live close to ${landmark} or anywhere across the ${loc.zone} belt, our dedicated site crews deliver projects on time and within the agreed budget.`,
               `As ${ctx}, ${loc.name} demands construction partners who understand its unique structural and aesthetic requirements. Our teams, operating across ${loc.district}, bring that exact expertise. From luxury renovations near ${landmark} to new bungalow construction throughout ${loc.name}, every AMS project is backed by a 1-year workmanship guarantee and full post-project support.`,
               `The ${loc.zone} region — and ${loc.name} in particular — is ${ctx}. This means property owners require contractors who combine speed, precision, and local knowledge. AMS Civil Construction has active crews near ${landmark}, ${landmark2}, and across the wider ${nearbyStr} corridor, ensuring you always have a trusted expert nearby.`
             ];
@@ -644,7 +646,7 @@ export default async function LocationPage({ params }: { params: { location: str
         const faqs = [
           {
             q: `Which is the best civil contractor in ${loc.name}?`,
-            a: `AMS Civil Construction is widely rated as the best civil contractor in ${loc.name}, ${loc.district}. With 25+ years of experience, 350+ completed projects, and a 4.9/5 rating, we offer end-to-end services from bungalow construction to interior renovations. Our team near ${landmark} is available for site visits within 24 hours.`
+            a: `AMS Civil Construction is widely rated as the best civil contractor in ${loc.name}, ${loc.district}. With 10+ years of experience, 200+ completed projects, and a 4.9/5 rating, we offer end-to-end services from bungalow construction to interior renovations. Our team near ${landmark} is available for site visits within 24 hours.`
           },
           {
             q: `How much does civil work cost in ${loc.name}?`,

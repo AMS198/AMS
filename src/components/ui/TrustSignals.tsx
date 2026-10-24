@@ -33,7 +33,7 @@ export default function TrustSignals() {
       
       <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 backdrop-blur-sm">
         <Award className="text-orange-400" size={16} />
-        <span className="text-xs font-semibold text-white">25+ Years Legacy</span>
+        <span className="text-xs font-semibold text-white">10+ Years Legacy</span>
       </div>
 
       <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 backdrop-blur-sm hidden md:flex">

@@ -45,6 +45,10 @@ const nextConfig = {
       { source: '/areas/lower parel/:path*', destination: '/areas/lower-parel/:path*', permanent: true },
       { source: '/areas/navi mumbai', destination: '/areas/navi-mumbai', permanent: true },
       { source: '/areas/navi mumbai/:path*', destination: '/areas/navi-mumbai/:path*', permanent: true },
+      { source: '/areas/khar-road', destination: '/areas/khar', permanent: true },
+      { source: '/areas/khar-road/:path*', destination: '/areas/khar/:path*', permanent: true },
+      { source: '/areas/juhu-scheme', destination: '/areas/juhu', permanent: true },
+      { source: '/areas/juhu-scheme/:path*', destination: '/areas/juhu/:path*', permanent: true },
       
       // Catch garbage URLs generated from old broken link tags
       { source: '/areas/:location/<a%20href=', destination: '/areas/:location', permanent: true },
@@ -83,13 +87,13 @@ const nextConfig = {
       {
         // Edge Cache for public HTML pages: Keeps pre-rendered HTML in Vercel Edge memory
         // Prevents repeat Durable ISR Data Cache reads when Googlebot or visitors crawl pages
-        source: '/:path(areas|services|hi|mr|about|contact|projects|gallery|blog|calculator|packages|free-consultation|terms|privacy)/:subpath*',
+        source: '/:path(areas|services|hi|mr|about|contact|projects|gallery|blog|calculator|packages|partner|free-consultation|terms|privacy)/:subpath*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=2592000, stale-while-revalidate=86400' },
         ],
       },
       {
-        source: '/:path(areas|services|hi|mr|about|contact|projects|gallery|blog|calculator|packages|free-consultation|terms|privacy)',
+        source: '/:path(areas|services|hi|mr|about|contact|projects|gallery|blog|calculator|packages|partner|free-consultation|terms|privacy)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=2592000, stale-while-revalidate=86400' },
         ],

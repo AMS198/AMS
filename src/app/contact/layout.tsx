@@ -34,5 +34,66 @@ export const metadata: Metadata = {
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ContactPage',
+        '@id': 'https://www.amscivilwork.in/contact#webpage',
+        url: 'https://www.amscivilwork.in/contact',
+        name: 'Contact AMS Civil Construction — Book a Site Visit in Mumbai',
+        description:
+          'Contact AMS Civil Construction for construction, renovation, and interior civil work in Mumbai. Call +91 87793 91690 to schedule a site visit.',
+        mainEntity: {
+          '@type': 'LocalBusiness',
+          name: 'AMS Civil Construction',
+          '@id': 'https://www.amscivilwork.in/#localbusiness',
+          telephone: ['+918779391690', '+919004298911'],
+          email: 'ams.constructionwork@gmail.com',
+          url: 'https://www.amscivilwork.in',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Andheri West',
+            addressLocality: 'Mumbai',
+            addressRegion: 'Maharashtra',
+            postalCode: '400053',
+            addressCountry: 'IN',
+          },
+          contactPoint: [
+            {
+              '@type': 'ContactPoint',
+              telephone: '+918779391690',
+              contactType: 'customer service',
+              areaServed: 'IN',
+              availableLanguage: ['English', 'Hindi', 'Marathi'],
+            },
+            {
+              '@type': 'ContactPoint',
+              telephone: '+919004298911',
+              contactType: 'technical support',
+              areaServed: 'IN',
+              availableLanguage: ['English', 'Hindi', 'Marathi'],
+            },
+          ],
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Contact Us', item: 'https://www.amscivilwork.in/contact' },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

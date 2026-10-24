@@ -14,13 +14,30 @@ import { faqs } from '@/data/siteData';
 
 export const metadata: Metadata = {
   title: 'Best Civil Contractor in Mumbai | Bungalow Construction & Renovation | AMS Civil',
-  description: 'AMS Civil Construction — Mumbai\'s #1 civil contractor for bungalow construction, bathroom renovation, kitchen work, tiles, flooring & interior civil work. 25+ years, 500+ projects. Call to book your site visit!',
+  description:
+    "AMS Civil Construction — Mumbai's #1 civil contractor for bungalow construction, bathroom renovation, kitchen work, tiles, flooring & interior civil work. 10+ years, 200+ projects. Call to book your site visit!",
   alternates: { canonical: 'https://www.amscivilwork.in' },
   openGraph: {
     title: 'Best Civil Contractor in Mumbai | AMS Civil Construction',
-    description: 'Premium bungalow construction, renovation & interior civil work across Mumbai, Navi Mumbai & Thane.',
+    description:
+      'Premium bungalow construction, renovation & interior civil work across Mumbai, Navi Mumbai & Thane.',
     url: 'https://www.amscivilwork.in',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AMS Civil Construction - Best Civil Contractor in Mumbai',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Best Civil Contractor in Mumbai | AMS Civil Construction',
+    description:
+      'Premium bungalow construction, renovation & interior civil work across Mumbai, Navi Mumbai & Thane. 10+ years experience.',
+    images: ['/og-image.jpg'],
   },
 };
 
@@ -28,13 +45,16 @@ export default async function HomePage() {
   // Fetch gallery and projects at BUILD TIME — embedded in static HTML
   let galleryItems: GalleryItem[] = [];
   let projects: ProjectType[] = [];
+  let totalProjectsCount = 0;
 
   try {
     const db = await getDb();
-    const [galleryDocs, projectDocs] = await Promise.all([
+    const [galleryDocs, projectDocs, count] = await Promise.all([
       db.collection('gallery').find({}).sort({ createdAt: -1 }).limit(20).toArray(),
-      db.collection('projects').find({}).sort({ createdAt: -1 }).limit(12).toArray(),
+      db.collection('projects').find({}).sort({ createdAt: -1 }).toArray(),
+      db.collection('projects').countDocuments().catch(() => 0),
     ]);
+    totalProjectsCount = count || projectDocs.length || 0;
     galleryItems = galleryDocs.map(({ _id, ...rest }) => ({
       id:       _id.toString(),
       src:      String(rest.src      ?? ''),
@@ -77,16 +97,29 @@ export default async function HomePage() {
     ],
   };
 
+  const webSiteLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://www.amscivilwork.in/#website',
+    name: 'AMS Civil Construction',
+    alternateName: ['AMS Civil Work Mumbai', 'AMS Construction'],
+    url: 'https://www.amscivilwork.in',
+    inLanguage: 'en-IN',
+    publisher: {
+      '@type': 'LocalBusiness',
+      name: 'AMS Civil Construction',
+      '@id': 'https://www.amscivilwork.in/#localbusiness',
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
       <LocalBusinessSchema />
       {/* Client component — all interactive sections receive pre-fetched data as props */}
-      <HomePageSections galleryItems={galleryItems} projects={projects} />
-      <section className="bg-[#0B1120] py-10 border-t border-white/5">
-        <div className="container-custom"></div>
-      </section>
+      <HomePageSections galleryItems={galleryItems} projects={projects} totalProjectsCount={totalProjectsCount} />
     </>
   );
 }

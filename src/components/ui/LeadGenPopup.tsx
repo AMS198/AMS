@@ -117,7 +117,7 @@ export default function LeadGenPopup() {
                 </div>
                 <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/10">
                   <p className="text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1">Trusted By</p>
-                  <p className="text-xs text-white font-medium">500+ Clients Across Mumbai</p>
+                  <p className="text-xs text-white font-medium">200+ Clients Across Mumbai</p>
                 </div>
               </div>
             </div>

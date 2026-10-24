@@ -5,57 +5,20 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Standard search engine crawlers
+      // Standard search engine & AI search crawlers (Google, Bing, ChatGPT Search, Perplexity)
       {
         userAgent: '*',
-        allow:     '/',
-        disallow:  ['/admin', '/api/'],
+        allow: '/',
+        disallow: ['/admin', '/api/', '/*?*'],
+        crawlDelay: 2,
       },
-      // ── AI Crawlers — Explicitly DISALLOW ──────────────────
-      // GPTBot (OpenAI/ChatGPT)
       {
-        userAgent: 'GPTBot',
-        disallow: '/',
+        userAgent: ['GPTBot', 'OAI-SearchBot', 'PerplexityBot', 'Google-Extended', 'anthropic-ai', 'Applebot-Extended'],
+        allow: '/',
+        disallow: ['/admin', '/api/', '/*?*'],
+        crawlDelay: 2,
       },
-      // ChatGPT-User (ChatGPT browsing)
-      {
-        userAgent: 'ChatGPT-User',
-        disallow: '/',
-      },
-      // Google-Extended (Gemini AI)
-      {
-        userAgent: 'Google-Extended',
-        disallow: '/',
-      },
-      // PerplexityBot
-      {
-        userAgent: 'PerplexityBot',
-        disallow: '/',
-      },
-      // ClaudeBot (Anthropic)
-      {
-        userAgent: 'anthropic-ai',
-        disallow: '/',
-      },
-      // Bytespider (TikTok AI)
-      {
-        userAgent: 'Bytespider',
-        disallow: '/',
-      },
-      { userAgent: 'OAI-SearchBot', disallow: '/' },
-      { userAgent: 'Meta-ExternalAgent', disallow: '/' },
-      { userAgent: 'Meta-ExternalFetcher', disallow: '/' },
-      { userAgent: 'Meta-Llama', disallow: '/' },
-      { userAgent: 'YouBot', disallow: '/' },
-      { userAgent: 'Applebot-Extended', disallow: '/' },
-      { userAgent: 'cohere-ai', disallow: '/' },
-      { userAgent: 'Amazonbot', disallow: '/' },
-      // CCBot (Common Crawl — feeds many AI models)
-      {
-        userAgent: 'CCBot',
-        disallow: '/',
-      },
-      // ── Aggressive Commercial Scrapers & SEO Crawlers — Block to save Vercel Quota ──
+      // ── Aggressive Commercial Scrapers & Unauthorized SEO Harvesters — Block to save bandwidth ──
       { userAgent: 'AhrefsBot', disallow: '/' },
       { userAgent: 'SemrushBot', disallow: '/' },
       { userAgent: 'SemrushBot-SI', disallow: '/' },
@@ -71,6 +34,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'DataForSeoBot', disallow: '/' },
       { userAgent: 'ZoominfoBot', disallow: '/' },
       { userAgent: 'Screaming Frog SEO Spider', disallow: '/' },
+      { userAgent: 'CCBot', disallow: '/' },
     ],
     sitemap: 'https://www.amscivilwork.in/sitemap.xml',
     host: 'https://www.amscivilwork.in',

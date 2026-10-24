@@ -8,18 +8,18 @@ import { WhatsAppLogo, PhoneLogo } from '../ui/BrandIcons';
 import SEOCrossLinks from '../ui/SEOCrossLinks';
 
 const serviceLinks = [
-  { label: 'Bungalow Construction',   href: '/services#bungalow-construction' },
-  { label: 'Full Interior Civil Work',href: '/services#interior-civil-work'   },
-  { label: 'Swimming Pool Work',      href: '/services#swimming-pool-work'    },
-  { label: 'Compound Wall & Gates',   href: '/services#compound-wall-work'    },
-  { label: 'Building Repair',         href: '/services#building-repair-work'  },
-  { label: 'Bathroom Renovation',     href: '/services#bathroom-renovation'   },
-  { label: 'Kitchen Work',            href: '/services#kitchen-work'          },
-  { label: 'Tiles Work',              href: '/services#tiles-work'            },
-  { label: 'Flooring Work',           href: '/services#flooring-work'         },
-  { label: 'POP Work',                href: '/services#pop-work'              },
-  { label: 'Plaster Work',            href: '/services#plaster-work'          },
-  { label: 'Wall Work',               href: '/services#wall-work'             },
+  { label: 'Bungalow Construction',   href: '/services/bungalow-construction' },
+  { label: 'Full Interior Civil Work',href: '/services/interior-civil-work'   },
+  { label: 'Swimming Pool Work',      href: '/services/swimming-pool-work'    },
+  { label: 'Compound Wall & Gates',   href: '/services/compound-wall-work'    },
+  { label: 'Building Repair',         href: '/services/building-repair-work'  },
+  { label: 'Bathroom Renovation',     href: '/services/bathroom-renovation'   },
+  { label: 'Kitchen Work',            href: '/services/kitchen-work'          },
+  { label: 'Tiles Work',              href: '/services/tiles-work'            },
+  { label: 'Flooring Work',           href: '/services/flooring-work'         },
+  { label: 'POP Work',                href: '/services/pop-work'              },
+  { label: 'Plaster Work',            href: '/services/plaster-work'          },
+  { label: 'Wall Work',               href: '/services/wall-work'             },
 ];
 
 const quickLinks = [
@@ -36,22 +36,21 @@ const quickLinks = [
 ];
 
 const areaLinks = [
-  { label: 'Borivali',    href: '/areas/borivali'    },
-  { label: 'Andheri',     href: '/areas/andheri'     },
-  { label: 'Bandra',      href: '/areas/bandra'      },
-  { label: 'Kandivali',   href: '/areas/kandivali'   },
-  { label: 'Malad',       href: '/areas/malad'       },
-  { label: 'Thane',       href: '/areas/thane'       },
-  { label: 'Dadar',       href: '/areas/dadar'       },
-  { label: 'Worli',       href: '/areas/worli'       },
-  { label: 'Mira Road',   href: '/areas/mira-road'   },
-  { label: 'Vashi',       href: '/areas/vashi'       },
-  { label: 'Nerul',       href: '/areas/nerul'       },
-  { label: 'Kalyan',      href: '/areas/kalyan'      },
-  { label: 'Ranchi',      href: '/areas/ranchi'      },
-  { label: 'Bangalore',   href: '/areas/bangalore'   },
-  { label: 'Pune',        href: '/areas/pune'        },
-  { label: 'Nagpur',      href: '/areas/nagpur'      },
+  { label: 'Bandra West & BKC',    href: '/areas/bandra'      },
+  { label: 'Juhu & JVPD Scheme',   href: '/areas/juhu'        },
+  { label: 'Khar & Khar Road',     href: '/areas/khar'        },
+  { label: 'Andheri & Lokhandwala',href: '/areas/andheri'     },
+  { label: 'Worli & Lower Parel',  href: '/areas/worli'       },
+  { label: 'Prabhadevi & Dadar',   href: '/areas/prabhadevi'  },
+  { label: 'Powai (Hiranandani)',  href: '/areas/powai'       },
+  { label: 'Santacruz & Vile Parle',href:'/areas/santacruz'   },
+  { label: 'Goregaon & Malad',     href: '/areas/goregaon'    },
+  { label: 'Borivali & Kandivali', href: '/areas/borivali'    },
+  { label: 'Malabar Hill & Colaba',href: '/areas/colaba'      },
+  { label: 'Thane West',           href: '/areas/thane'       },
+  { label: 'Vashi (Navi Mumbai)',  href: '/areas/vashi'       },
+  { label: 'Mira Road & Bhayandar',href: '/areas/mira-road'   },
+  { label: 'View All 384+ Areas →',href: '/areas'             },
 ];
 
 const socialLinks = [
@@ -71,30 +70,41 @@ export default function Footer() {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* ── CTA Banner ── */}
-      <div className="relative mx-4 sm:mx-8 lg:mx-auto max-w-7xl mt-12 mb-16 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-orange-900 opacity-90" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+      <div className="relative mx-4 sm:mx-6 lg:mx-auto max-w-5xl mt-6 mb-10 rounded-2xl overflow-hidden border border-orange-500/25 shadow-xl bg-gradient-to-r from-[#10192A] via-[#142036] to-[#090F1C]">
+        {/* Ambient Glows */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[90px] pointer-events-none" />
         
-        <div className="relative z-10 p-10 lg:p-14 flex flex-col lg:flex-row items-center justify-between gap-10 text-center lg:text-left">
-          <div className="max-w-2xl">
-            <h3 className="font-display text-white text-3xl sm:text-5xl font-black leading-tight tracking-tight">
-              Ready to Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-white">Project?</span>
+        <div className="relative z-10 p-5 sm:p-6 lg:p-7 flex flex-col lg:flex-row items-center justify-between gap-5 sm:gap-6 text-center lg:text-left">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-mono font-semibold uppercase tracking-wider mb-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+              <span>Diwali Festive Offer • 100% Free Site Visit &amp; 24-Hr Quotation</span>
+            </div>
+            <h3 className="font-display text-white text-xl sm:text-2xl lg:text-3xl font-black leading-tight tracking-tight">
+              Ready to Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-200">Dream Project?</span>
             </h3>
-            <p className="text-orange-100 text-base sm:text-lg mt-4 font-medium max-w-xl">
-              Get a free consultation from our expert team within 24 hours. We bring your vision to life with precision and quality.
+            <p className="text-slate-300 text-xs sm:text-[13px] mt-1.5 leading-relaxed font-normal max-w-lg">
+              Get an accurate, itemised estimate backed by 10+ years of civil engineering expertise. Zero hidden escalations, guaranteed handover dates.
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto shrink-0">
-            <a href="tel:+918779391690"
-              className="group flex items-center justify-center gap-3 px-8 py-4 font-bold text-sm tracking-widest uppercase bg-white text-orange-900 rounded-xl shadow-xl hover:bg-orange-50 hover:scale-105 transition-all duration-300">
-              <PhoneLogo className="w-5 h-5 fill-orange-600 group-hover:scale-110 transition-transform" /> 
-              Call Now
+          <div className="flex flex-wrap sm:flex-nowrap gap-2.5 w-full lg:w-auto shrink-0 justify-center">
+            <a 
+              href="tel:+918779391690"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all shadow-sm"
+            >
+              <PhoneLogo className="w-3.5 h-3.5 fill-orange-400" /> 
+              <span>Call Us Now</span>
             </a>
-            <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
-              className="group flex items-center justify-center gap-3 px-8 py-4 font-bold text-sm tracking-widest uppercase bg-orange-950/40 border border-orange-400/30 text-white rounded-xl backdrop-blur-sm hover:bg-orange-900/60 hover:scale-105 transition-all duration-300">
-              <WhatsAppLogo className="w-5 h-5 fill-[#25D366] group-hover:scale-110 transition-transform" /> 
-              WhatsApp
+            <a 
+              href="https://wa.me/918779391690?text=Hi%20AMS%20Civil,%20I%20would%20like%20a%20detailed%20quotation%20for%20my%20construction%20project." 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider bg-[#25D366] hover:bg-[#1EBE5D] text-white shadow-md shadow-green-500/20 transition-all hover:scale-[1.02]"
+            >
+              <WhatsAppLogo className="w-3.5 h-3.5 fill-white" /> 
+              <span>WhatsApp Estimate</span>
             </a>
           </div>
         </div>
@@ -121,7 +131,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
-              India&apos;s trusted construction partner for 20+ years. We strictly follow all government rules and regulations to deliver excellence in every project.
+              Mumbai&apos;s trusted construction partner for 10+ years and 200+ completed projects. We strictly follow all government rules and regulations to deliver excellence in every project.
             </p>
             <a 
               href="https://share.google/2FZZD5O5FcpaLjExA" 

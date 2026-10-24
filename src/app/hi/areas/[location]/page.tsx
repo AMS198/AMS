@@ -16,7 +16,8 @@ import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 
 
-export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ location: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
@@ -56,7 +57,8 @@ export async function generateMetadata({ params }: { params: { location: string 
   };
 }
 
-export default async function LocationPageHindi({ params }: { params: { location: string } }) {
+export default async function LocationPageHindi(props: { params: Promise<{ location: string }> }) {
+  const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) notFound();
 
@@ -82,16 +84,16 @@ export default async function LocationPageHindi({ params }: { params: { location
   };
 
   const trustStats = [
-    { icon: Clock, label: '25+ वर्ष', desc: 'अनुभव' },
-    { icon: CheckCircle, label: '350+', desc: 'प्रोजेक्ट्स' },
-    { icon: Users, label: '500+', desc: 'खुश ग्राहक' },
+    { icon: Clock, label: '10+ वर्ष', desc: 'अनुभव' },
+    { icon: CheckCircle, label: '200+', desc: 'प्रोजेक्ट्स' },
+    { icon: Users, label: '200+', desc: 'खुश ग्राहक' },
     { icon: Star, label: '4.9/5', desc: 'रेटिंग' },
   ];
 
   // Dynamic Content for Entropy
   const layoutSeed = getSeededRandom(loc.slug + 'hi');
   const paras = [
-    `AMS Civil Construction ${loc.name} में बेहतरीन निर्माण और रिनोवेशन सेवाएँ प्रदान करता है। बंगला बनाने से लेकर मॉड्यूलर किचन तक, हम 25+ सालों के अनुभव के साथ काम करते हैं।`,
+    `AMS Civil Construction ${loc.name} में बेहतरीन निर्माण और रिनोवेशन सेवाएँ प्रदान करता है। बंगला बनाने से लेकर मॉड्यूलर किचन तक, हम 10+ सालों के अनुभव के साथ काम करते हैं।`,
     `अगर आप ${loc.name} (${loc.district}) में एक भरोसेमंद ठेकेदार की तलाश में हैं, तो AMS Civil Construction सबसे सही विकल्प है। हम ${loc.landmarks[0] || loc.name} के आस-पास विशेष तौर पर काम करते हैं।`,
     `${loc.name} में प्रीमियम सिविल वर्क के लिए हम जाने जाते हैं। चाहे घर का रिनोवेशन हो या नया कंस्ट्रक्शन, हमारी टीम ${loc.zone} इलाके में सबसे उम्दा क्वालिटी देती है।`
   ];
@@ -193,7 +195,7 @@ export default async function LocationPageHindi({ params }: { params: { location
             <div className={`bg-white/5 rounded-3xl p-8 border border-white/10 ${layoutSeed > 0.5 ? 'order-1' : 'order-2'}`}>
                 <h3 className="text-white font-bold text-xl mb-4">हमारी विशेषताएँ</h3>
                 <ul className="space-y-4 text-slate-400">
-                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} में 350+ से ज्यादा घरों का निर्माण और रिनोवेशन।</li>
+                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} में 200+ से ज्यादा घरों का निर्माण और रिनोवेशन।</li>
                     <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> बिना किसी छुपे हुए खर्च के स्पष्ट कोटेशन।</li>
                     <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> काम के दौरान सुपरवाइजर की 100% निगरानी।</li>
                 </ul>

@@ -1,6 +1,7 @@
 'use client';
 
-import { Star, ExternalLink } from 'lucide-react';
+import { useRef } from 'react';
+import { Star, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import StructuredDataManager from '../seo/StructuredDataManager';
 
@@ -48,6 +49,19 @@ const reviews = [
 ];
 
 export default function GoogleReviewsWidget() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const cardWidth = scrollRef.current.clientWidth;
+      const scrollAmount = cardWidth > 768 ? cardWidth * 0.75 : cardWidth * 0.85;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section className="section-y bg-[#050914] border-t border-white/5 relative overflow-hidden">
       {/* Decorative glow */}
@@ -94,42 +108,61 @@ export default function GoogleReviewsWidget() {
         </div>
       </div>
 
-      {/* Scrolling Carousel Container - Outside to bleed to edges */}
-      <div className="relative z-10 w-full max-w-[100vw]">
-        <div className="flex gap-6 overflow-x-auto pb-6 px-4 sm:px-6 lg:px-8 xl:px-[calc((100vw-1280px)/2+2rem)] snap-x snap-mandatory scroll-smooth custom-scrollbar" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-          {/* Hide scrollbar for webkit in a style block just to be safe, but scrollbarWidth handles Firefox */}
-          <style dangerouslySetInnerHTML={{__html: `
-            .overflow-x-auto::-webkit-scrollbar {
-              display: none;
-            }
-          `}} />
+      {/* Reviews Carousel inside container with navigation */}
+      <div className="container-custom relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-slate-400 text-xs font-mono uppercase tracking-widest flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Verified Google Reviews
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scroll('left')}
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-orange-500 text-slate-300 hover:text-white flex items-center justify-center transition-all hover:bg-orange-500/80 active:scale-95 shadow-md"
+              aria-label="Previous Reviews"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-orange-500 text-slate-300 hover:text-white flex items-center justify-center transition-all hover:bg-orange-500/80 active:scale-95 shadow-md"
+              aria-label="Next Reviews"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div 
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth no-scrollbar"
+        >
           {reviews.map((review, i) => (
             <div 
               key={i} 
-              className="w-[85vw] sm:w-[400px] shrink-0 snap-start bg-[#0B1120] border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-colors animate-fadeUp"
-              style={{ animationDelay: `${i * 150}ms` }}
+              className="w-[85vw] sm:w-[360px] lg:w-[calc((100%-48px)/3)] shrink-0 snap-start bg-[#0B1120] border border-white/10 rounded-2xl p-6 hover:border-orange-500/40 transition-all flex flex-col justify-between"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-lg">
-                  {review.initials}
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-lg">
+                    {review.initials}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-sm">{review.name}</h4>
+                    <p className="text-slate-500 text-xs">{review.date}</p>
+                  </div>
+                  <div className="ml-auto w-6 h-6 rounded-full bg-white flex items-center justify-center">
+                    <span className="font-bold text-sm" style={{ color: '#4285F4' }}>G</span>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold text-sm">{review.name}</h4>
-                  <p className="text-slate-500 text-xs">{review.date}</p>
+                
+                <div className="flex text-yellow-400 mb-3 gap-0.5">
+                  {[1,2,3,4,5].map(star => <Star key={star} size={14} fill="currentColor" />)}
                 </div>
-                <div className="ml-auto w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                  <span className="font-bold text-sm" style={{ color: '#4285F4' }}>G</span>
-                </div>
+                
+                <p className="text-slate-300 text-sm leading-relaxed italic">
+                  "{review.content}"
+                </p>
               </div>
-              
-              <div className="flex text-yellow-400 mb-3 gap-0.5">
-                {[1,2,3,4,5].map(star => <Star key={star} size={14} fill="currentColor" />)}
-              </div>
-              
-              
-              <p className="text-slate-300 text-sm leading-relaxed italic">
-                "{review.content}"
-              </p>
               
               <StructuredDataManager 
                 type="Review" 

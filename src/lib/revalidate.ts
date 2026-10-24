@@ -30,6 +30,7 @@ export function revalidateAllBlogs() {
 export function revalidateProjects() {
   try {
     revalidatePath('/projects', 'page');
+    revalidatePath('/', 'page');
   } catch (error) {
     console.error('[Revalidate] Error revalidating /projects:', error);
   }

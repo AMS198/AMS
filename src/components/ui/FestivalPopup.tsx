@@ -726,7 +726,7 @@ export default function FestivalPopup() {
                     AMS CIVIL CONSTRUCTION
                   </p>
                   <p className="text-[8px] font-medium tracking-widest text-amber-400/70 uppercase">
-                    25+ Years of Architectural & Civil Excellence
+                    10+ Years of Architectural & Civil Excellence
                   </p>
                   <p className="text-[8px] text-stone-400 font-mono tracking-widest mt-0.5">
                     WWW.AMSCIVILWORK.IN

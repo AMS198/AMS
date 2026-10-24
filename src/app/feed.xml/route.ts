@@ -88,7 +88,7 @@ export async function GET(req: NextRequest) {
         <channel>
           <title>AMS Civil Construction Blog — Expert Construction Guides</title>
           <link>${SITE_URL}</link>
-          <description>Expert construction tips, cost guides, renovation ideas, and interior design inspiration across Mumbai, Ranchi, Bangalore, Kolkata, and 90+ cities. By AMS Civil Construction — India's trusted civil contractor with 25+ years experience.</description>
+          <description>Expert construction tips, cost guides, renovation ideas, and interior design inspiration across Mumbai, Ranchi, Bangalore, Kolkata, and 90+ cities. By AMS Civil Construction — India's trusted civil contractor with 10+ years experience.</description>
           <language>en-in</language>
           <managingEditor>ams.constructionwork@gmail.com (AMS Civil Team)</managingEditor>
           <webMaster>ams.constructionwork@gmail.com (AMS Civil Team)</webMaster>

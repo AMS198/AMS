@@ -1,4 +1,4 @@
-﻿// src/app/projects/page.tsx
+// src/app/projects/page.tsx
 // SSG Server Component — data fetched at build time, client component handles interactivity.
 // Cache purged on-demand via revalidateProjects() when admin adds/updates/deletes a project.
 import type { Metadata } from 'next';
@@ -8,9 +8,32 @@ import ProjectsGrid from '@/components/projects/ProjectsGrid';
 export const revalidate = false;
 
 export const metadata: Metadata = {
-  title: 'Our Construction Projects | AMS Civil Construction Mumbai',
-  description: 'Real construction projects by AMS Civil — bungalows, renovations, interiors across Mumbai, Navi Mumbai, and Thane.',
+  title: 'Our Construction Portfolio | Bungalows & Renovation Projects Mumbai',
+  description:
+    'Explore 250+ completed projects by AMS Civil Construction — luxury bungalows, flat renovations, bathrooms, modular kitchens & civil works across Mumbai, Navi Mumbai & Thane.',
+  keywords: [
+    'construction projects Mumbai',
+    'bungalow construction portfolio',
+    'renovation project examples Mumbai',
+    'civil work gallery Mumbai',
+    'AMS civil construction portfolio',
+    'completed residential projects Mumbai',
+  ],
   alternates: { canonical: 'https://www.amscivilwork.in/projects' },
+  openGraph: {
+    title: 'Our Construction Portfolio | AMS Civil Construction Mumbai',
+    description:
+      'Explore 250+ completed projects by AMS Civil Construction — luxury bungalows, flat renovations, bathrooms, modular kitchens & civil works.',
+    url: 'https://www.amscivilwork.in/projects',
+    type: 'website',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'AMS Civil Construction Projects' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Construction Projects | AMS Civil Mumbai',
+    description: '250+ completed bungalow construction & home renovation projects across Mumbai.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export interface Project {
@@ -45,5 +68,46 @@ export default async function ProjectsPage() {
     console.error('[Projects SSG] Failed to fetch projects:', err);
   }
 
-  return <ProjectsGrid projects={projects} />;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': 'https://www.amscivilwork.in/projects#collection',
+        url: 'https://www.amscivilwork.in/projects',
+        name: 'Our Construction & Renovation Projects | AMS Civil Construction',
+        description: 'Explore 250+ completed projects by AMS Civil Construction across Mumbai, Navi Mumbai, and Thane.',
+        isPartOf: {
+          '@type': 'WebSite',
+          '@id': 'https://www.amscivilwork.in/#website',
+          name: 'AMS Civil Construction',
+          url: 'https://www.amscivilwork.in',
+        },
+        hasPart: projects.slice(0, 15).map((p, idx) => ({
+          '@type': 'CreativeWork',
+          position: idx + 1,
+          name: p.title,
+          description: p.description || `${p.category} project in ${p.location}`,
+          image: p.images?.[0] || 'https://www.amscivilwork.in/og-image.jpg',
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://www.amscivilwork.in/projects' },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ProjectsGrid projects={projects} />
+    </>
+  );
 }

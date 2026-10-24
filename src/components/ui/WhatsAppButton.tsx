@@ -47,7 +47,7 @@ export default function WhatsAppButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end pointer-events-none" ref={chatRef}>
+    <div className="fixed bottom-6 right-6 z-[80] flex flex-col items-end pointer-events-none" ref={chatRef}>
       
       {/* ── The Chat Window (Lead Magnet) ── */}
       <div 
@@ -69,12 +69,23 @@ export default function WhatsAppButton() {
               <p className="text-white/80 text-xs">Typically replies instantly</p>
             </div>
           </div>
-          <button 
-            onClick={() => setIsOpen(false)}
-            className="text-white/80 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-colors"
-          >
-            <X size={18} />
-          </button>
+          <div className="flex items-center gap-2">
+            <a
+              href={`https://wa.me/${adminPhone}?text=Hi%20AMS%20Civil!%20I%20am%20looking%20for%20a%20construction%20estimate.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] font-bold bg-white/20 hover:bg-white/30 text-white px-2 py-1 rounded transition-colors"
+              title="Open WhatsApp directly"
+            >
+              Open App ↗
+            </a>
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="text-white/80 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-colors"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
         {/* Chat Body */}

@@ -37,8 +37,9 @@ const serviceEmojiMap: Record<string, string> = {
 
 /* ── SEO Metadata Generation ────────────────────────── */
 export async function generateMetadata(
-  { params }: { params: { location: string; service: string } }
+  props: { params: Promise<{ location: string; service: string }> }
 ): Promise<Metadata> {
+  const params = await props.params;
   const loc = getLocation(params.location);
   const svc = services.find(s => s.slug === params.service);
   if (!loc || !svc) return { title: 'Not Found' };
@@ -47,7 +48,7 @@ export async function generateMetadata(
   
   // High-CTR Optimized Title & Description
   const title = `✓ Best ${svc.title} in ${loc.name} [2026] | Top Rated | AMS Civil`;
-  const description = `⭐ 4.9/5 Rated. Looking for expert ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? Get premium quality, 25+ yrs exp & 100% Guaranteed Work. Book your Site Visit today!`;
+  const description = `⭐ 4.9/5 Rated. Looking for expert ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}? Get premium quality, 10+ yrs exp & 100% Guaranteed Work. Book your Site Visit today!`;
 
   return {
     title,
@@ -103,7 +104,8 @@ function getGeoCoordinates(district: string) {
   return coords[district] || { lat: '19.0760', lon: '72.8777' }; // Fallback to Mumbai
 }
 
-export default async function AreaServicePage({ params }: { params: { location: string; service: string } }) {
+export default async function AreaServicePage(props: { params: Promise<{ location: string; service: string }> }) {
+  const params = await props.params;
   const loc = getLocation(params.location);
   const svc = services.find(s => s.slug === params.service);
   
@@ -525,7 +527,7 @@ export default async function AreaServicePage({ params }: { params: { location: 
       {/* ── CTA ─────────────────────────────────────────── */}
       <ModernCTA 
         title={`Ready for high-end ${svc.title.toLowerCase()} in ${loc.name}?`}
-        subtitle={`Join 500+ happy families across India. Get your dream space delivered on time.`}
+        subtitle={`Join 200+ happy families across India. Get your dream space delivered on time.`}
         description={`Our expert teams specialize in ${svc.title.toLowerCase()} specifically in the ${loc.name} area. We understand the unique architectural requirements of ${loc.district} homes and use only ISI-marked materials. Call +91 87793 91690 for a fixed-price quote.`}
         image={svc.image}
       />

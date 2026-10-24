@@ -17,14 +17,27 @@ export interface GalleryItem {
   category: string;
 }
 
+const fallbackGalleryItems: GalleryItem[] = [
+  { id: 'fb-1', src: '/images/bungalow-construction.png', title: 'Luxury 3-Storey Bungalow Structure', category: 'Bungalow' },
+  { id: 'fb-2', src: '/images/bathroom-renovation.png', title: 'Italian Marble Designer Bathroom', category: 'Bathroom' },
+  { id: 'fb-3', src: '/images/kitchen-work.png', title: 'Modular Kitchen Civil Foundation', category: 'Kitchen' },
+  { id: 'fb-4', src: '/images/interior-work.png', title: 'Turnkey Architectural Interior', category: 'Interior' },
+  { id: 'fb-5', src: '/images/flooring-work.png', title: 'Precision Vitrified & Marble Flooring', category: 'Flooring' },
+  { id: 'fb-6', src: '/images/pop-work.png', title: 'Modern False Ceiling & Cove Lighting', category: 'False Ceiling' },
+  { id: 'fb-7', src: '/images/swimming-pool.png', title: 'Waterproof RCC Swimming Pool', category: 'Swimming Pool' },
+  { id: 'fb-8', src: '/images/compound-wall-real.png', title: 'Heavy-Duty Boundary Wall & Gate', category: 'Structural' },
+];
+
 interface Props {
   items: GalleryItem[];
 }
 
 export default function GalleryCarouselSection({ items }: Props) {
+  const displayItems = items && items.length >= 3 ? items : fallbackGalleryItems;
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { align: 'start', loop: true, skipSnaps: false, dragFree: false },
-    [Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })]
+    [Autoplay({ delay: 4500, stopOnInteraction: true, stopOnMouseEnter: true })]
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -40,10 +53,8 @@ export default function GalleryCarouselSection({ items }: Props) {
     emblaApi.on('reInit', onSelect);
   }, [emblaApi, onSelect]);
 
-  if (items.length < 3) return null;
-
   return (
-    <section className="section-y" style={{ background: '#0B1120' }}>
+    <section className="py-10 sm:py-14 border-t border-white/5" style={{ background: '#0B1120' }}>
       <div className="container-custom">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
@@ -59,7 +70,7 @@ export default function GalleryCarouselSection({ items }: Props) {
 
         <div className="embla overflow-hidden" ref={emblaRef}>
           <div className="embla__container flex">
-            {items.map((item) => (
+            {displayItems.map((item) => (
               <div key={item.id} className="embla__slide flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] pl-4 md:pl-6 leading-none">
                 <div className="group relative aspect-[3/2] overflow-hidden rounded-xl bg-[#161F2E] watermark-container">
                   <Image src={item.src} alt={item.title} fill unoptimized={true}

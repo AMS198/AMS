@@ -1,8 +1,5 @@
 // src/app/services/[slug]/page.tsx
-// Dedicated SEO page per service e.g. /services/bathroom-renovation
-// Ranks independently for high-intent service keywords
-
-export const revalidate = false; // Fully static — no ISR reads, rebuild only on redeploy
+// Dedicated SEO & High-Converting Service Detail Page (Next.js 16 Compatible)
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -10,13 +7,19 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { services } from '@/data/siteData';
 import { locations } from '@/data/locations';
-import { CheckCircle, ArrowRight, ShieldCheck, MapPin, Star, Wrench, Hammer, Award, Shield } from 'lucide-react';
+import { serviceDetailsData, type ServiceDetail } from '@/data/serviceDetails';
+import {
+  CheckCircle, ArrowRight, ShieldCheck, MapPin, Star,
+  Award, Shield, Clock, Users, ChevronRight, ChevronDown, HelpCircle,
+  FileCheck2, Check, Sparkles, Building2
+} from 'lucide-react';
 import ModernCTA from '@/components/ui/ModernCTA';
-import { serviceDetailsData } from '@/data/serviceDetails';
+import ServiceDetailActions, { FloatingQuickQuoteBar } from '@/components/services/ServiceDetailActions';
+import ServiceFAQAccordion from '@/components/services/ServiceFAQAccordion';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
-
-export const dynamicParams = false; // No on-demand generation — saves ISR reads
+export const revalidate = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -36,23 +39,71 @@ const serviceEmojiMap: Record<string, string> = {
   'wall-work': '🧱',
   'pop-work': '✨',
   'plaster-work': '🛠️',
-  'painting': '🎨',
+  'painting-work': '🎨',
   'waterproofing': '💧',
+  'modular-kitchen': '🍳',
+  'hall-design': '🛋️',
+  'bedroom-remodeling': '🛏️',
+  'interior-design': '🎨',
+  '1bhk-2bhk-renovation': '🏢',
+  '3bhk-4bhk-luxury-interiors': '🏰',
+  'terrace-renovation': '🏡',
+  'simple-kitchen-work': '🍳',
+  'gym-renovation': '🏋️',
+  'new-gym-construction': '🏋️',
+  'office-renovation': '💼',
+  'new-office-construction': '🏢',
 };
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
-  const svc = services.find(s => s.slug === params.slug);
-  const detail = serviceDetailsData[params.slug];
-  if (!svc) return { title: 'Not Found' };
+// Generates rich fallback detail if not explicitly listed in serviceDetails.ts
+function getServiceDetail(slug: string, svc: typeof services[0]): ServiceDetail {
+  if (serviceDetailsData[slug]) {
+    return serviceDetailsData[slug];
+  }
 
+  return {
+    slug,
+    intro: `${svc.description} AMS Civil Construction provides turnkey execution across all Mumbai, Thane, and Navi Mumbai areas with over 10+ years of certified craftsmanship.`,
+    detailedProcess: `Our ${svc.title.toLowerCase()} process is structured, rigorous, and milestone-tracked. We begin with a complimentary on-site measurement and structural assessment, coordinate all architectural and engineering plans, use certified materials, and execute work with in-house master artisans to ensure lasting durability and immaculate finishing.`,
+    steps: [
+      {
+        title: 'Step 1: Site Inspection & Planning',
+        desc: 'Comprehensive on-site measurements, structural checks, load analysis, and preliminary 3D drafting tailored to your space.',
+      },
+      {
+        title: 'Step 2: Surface & Structural Prep',
+        desc: 'Precise dismantling or excavation, laser leveling, base reinforcement, and structural alignment.',
+      },
+      {
+        title: 'Step 3: Core Civil Execution',
+        desc: 'Application of ISI-grade concrete, masonry, plumbing, electrical conduit fitting, and multi-layer protective coatings.',
+      },
+      {
+        title: 'Step 4: Quality Audit & Handover',
+        desc: 'Final architectural alignment inspection, deep cleaning, quality certification, and milestone handover with written warranty.',
+      },
+    ],
+    materials: [
+      'UltraTech / ACC 53-Grade Cement',
+      'TATA Tiscon / JSW Fe550D Steel',
+      'Saint-Gobain & Kajaria Certified Materials',
+      'Dr. Fixit Advanced Waterproofing Systems',
+    ],
+    pricingGuide: `Pricing for ${svc.title.toLowerCase()} is calculated transparently based on site square footage, structural complexity, and chosen material grades. We provide an itemized quote with zero hidden charges.`,
+  };
+}
+
+export async function generateMetadata(
+  props: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const params = await props.params;
+  const svc = services.find((s) => s.slug === params.slug);
+  if (!svc) return { title: 'Service Not Found | AMS Civil' };
+
+  const detail = getServiceDetail(params.slug, svc);
   const emoji = serviceEmojiMap[svc.slug] || '👷';
   const title = `Best ${svc.title} in Mumbai [2026] | Top Rated | AMS Civil`;
-  
-  // Use rich intro if available
-  const richDesc = detail ? detail.intro : svc.shortDesc;
-  const description = `${emoji} ${richDesc} 25+ Yrs Exp. 100% Quality Guaranteed, 5-Yr Warranty. Call +91 87793 91690 to book your site visit!`;
+  const description = `${emoji} ${detail.intro.slice(0, 150)}... 10+ Yrs Exp. 100% Quality Guaranteed, 5-Yr Warranty. Free Site Visit: +91 87793 91690.`;
 
   return {
     title,
@@ -63,14 +114,7 @@ export async function generateMetadata(
       `${svc.title.toLowerCase()} services Mumbai`,
       `${svc.title.toLowerCase()} cost Mumbai`,
       `${svc.title.toLowerCase()} near me Mumbai`,
-      `affordable ${svc.title.toLowerCase()} Mumbai`,
-      `${svc.title.toLowerCase()} mistri near me`,
-      `${svc.title.toLowerCase()} mistri Mumbai`,
-      `${svc.title.toLowerCase()} mistry near me`,
-      `${svc.title.toLowerCase()} ka rate Mumbai`,
-      `${svc.title.toLowerCase()} wala Mumbai`,
-      `${svc.title.toLowerCase()} thekedar Mumbai`,
-      ...locations.slice(0, 15).map(l => `${svc.title} ${l.name}`),
+      ...locations.slice(0, 12).map((l) => `${svc.title} ${l.name}`),
     ],
     openGraph: {
       title,
@@ -91,9 +135,12 @@ export async function generateMetadata(
   };
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const svc = services.find(s => s.slug === params.slug);
+export default async function ServicePage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
+  const svc = services.find((s) => s.slug === params.slug);
   if (!svc) notFound();
+
+  const detail = getServiceDetail(params.slug, svc);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -101,7 +148,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {
         '@type': 'Service',
         name: svc.title,
-        description: svc.description,
+        description: detail.intro,
         provider: {
           '@type': 'LocalBusiness',
           name: 'AMS Civil Construction',
@@ -115,7 +162,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.9',
-          reviewCount: String(40 + services.indexOf(svc) * 11),
+          reviewCount: String(60 + services.indexOf(svc) * 7),
           bestRating: '5',
           worstRating: '1',
         },
@@ -136,23 +183,23 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             name: `How much does ${svc.title.toLowerCase()} cost in Mumbai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `The cost of ${svc.title.toLowerCase()} in Mumbai varies by area size and materials. We offer competitive pricing with site visits (100% Free Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill). Call +91 87793 91690 for a custom quote.`,
+              text: `The cost of ${svc.title.toLowerCase()} in Mumbai is calculated based on site dimensions, structural specifications, and material selections. We offer 100% itemized estimates with zero hidden costs. Call +91 87793 91690 for an on-site visit.`,
             },
           },
           {
             '@type': 'Question',
-            name: `Which areas in Mumbai do you provide ${svc.title.toLowerCase()} services?`,
+            name: `What is the warranty on ${svc.title.toLowerCase()}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `We provide ${svc.title.toLowerCase()} services across all Mumbai areas including Borivali, Andheri, Kandivali, Malad, Goregaon, Bandra, Thane, Mira Road, Navi Mumbai, Dadar, Worli, Mulund, Ghatkopar, Kalyan, Vasai, Virar, Vashi, Panvel and more.`,
+              text: `AMS Civil Construction provides an official written warranty up to 5 years covering structural integrity and waterproofing, backed by ISI-certified materials.`,
             },
           },
           {
             '@type': 'Question',
-            name: `How long does ${svc.title.toLowerCase()} take?`,
+            name: `Which areas in Mumbai do you cover for ${svc.title.toLowerCase()}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Timeline depends on project scope. We provide a detailed schedule before starting. Our team ensures on-time delivery with milestone-based progress updates.`,
+              text: `We provide ${svc.title.toLowerCase()} across South Mumbai, Western Suburbs, Central Mumbai, Thane, Navi Mumbai, and surrounding regions.`,
             },
           },
         ],
@@ -160,218 +207,430 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     ],
   };
 
-  const detail = serviceDetailsData[params.slug];
-
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ── Hero ─────────────────────────────────────── */}
-      <section className="pt-36 pb-20 relative overflow-hidden" style={{ background: '#0B1120' }}>
-        <div className="absolute inset-0 opacity-20">
-          <Image src={svc.image} alt={svc.title} fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/90 to-[#0B1120]/60" />
-        </div>
+      {/* ── LUXURY HERO SECTION (No Navbar Overlap) ───────────── */}
+      <section className="relative pt-28 sm:pt-32 md:pt-36 pb-16 overflow-hidden bg-[#080D1A] border-b border-white/5">
+        {/* Glow ambient orbs */}
+        <div 
+          className="glow-orb w-[650px] h-[650px] opacity-15"
+          style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)', top: '-15%', right: '-10%' }}
+        />
+        <div 
+          className="glow-orb w-[450px] h-[450px] opacity-10"
+          style={{ background: 'radial-gradient(circle, #3B82F6 0%, transparent 70%)', bottom: '-10%', left: '-5%' }}
+        />
+
         <div className="relative container-custom z-10">
-          <nav className="flex items-center gap-2 text-slate-500 text-xs mb-6">
-            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <span>/</span>
-            <Link prefetch={false} href="/services" className="hover:text-orange-400 transition-colors">Services</Link>
-            <span>/</span>
-            <span style={{ color: '#F97316' }}>{svc.title}</span>
-          </nav>
-          <span className="inline-block px-3 py-1 text-xs font-mono font-semibold uppercase tracking-widest mb-4"
-            style={{ background: 'rgba(249,115,22,0.12)', color: '#F97316', border: '1px solid rgba(249,115,22,0.25)' }}>
-            Expert Service Across All Mumbai Areas
-          </span>
-          <h1 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-6xl leading-tight mb-6">
-            Best <span className="text-gradient">{svc.title}</span><br />
-            in Mumbai
-          </h1>
-          <p className="text-slate-300 text-lg leading-relaxed max-w-3xl mb-8">
-            {detail ? detail.intro : svc.description}
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="tel:+918779391690" className="btn-primary text-sm px-6 py-4">
-              📞 Call +91 87793 91690
-            </a>
-            <a href={`https://wa.me/918779391690?text=Hi! I need ${encodeURIComponent(svc.title)} service in Mumbai. Please call me.`}
-              target="_blank" rel="noopener noreferrer"
-              className="btn-outline text-sm px-6 py-4 bg-[#101827] flex items-center gap-2">
-              <WhatsAppLogo className="w-5 h-5 fill-white" /> WhatsApp Us
-            </a>
-          </div>
-        </div>
-      </section>
+          {/* Top Bar: Breadcrumb + Badge */}
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
+              <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+              <ChevronRight size={12} className="text-slate-600" />
+              <Link prefetch={false} href="/services" className="hover:text-orange-400 transition-colors">Services</Link>
+              <ChevronRight size={12} className="text-slate-600" />
+              <span className="text-orange-400 font-semibold">{svc.title}</span>
+            </nav>
 
-      {/* ── Detailed Overview ───────────────────────── */}
-      <section className="section-y" style={{ background: '#101827', borderBottom: '1px solid #1E2D45' }}>
-        <div className="container-custom grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative aspect-video overflow-hidden rounded-2xl border border-[#1E2D45]">
-            <Image src={svc.image} alt={`${svc.title} in Mumbai`} fill className="object-cover hover:scale-105 transition-transform duration-700" />
-            <div className="absolute bottom-4 left-4 flex items-center gap-2">
-              <span className="flex text-orange-400">{[1,2,3,4,5].map(i => <Star key={i} size={14} fill="#F97316" />)}</span>
-              <span className="text-white text-xs font-bold bg-black/50 px-2 py-1 rounded">4.9/5 Rating</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px] font-mono font-semibold tracking-wider uppercase">
+              <Sparkles size={12} className="text-orange-500" />
+              Certified Turnkey Civil Engineering • Mumbai
             </div>
           </div>
-          <div>
-            <h2 className="font-display text-2xl lg:text-4xl text-white mb-6">
-              Complete <span style={{ color: '#F97316' }}>{svc.title}</span> Detailing & Service
-            </h2>
-            <p className="text-slate-300 text-sm leading-relaxed mb-6">
-              {detail ? detail.detailedProcess : svc.description}
-            </p>
-            {detail && (
-              <div className="p-5 rounded-xl bg-[#0B1120] border border-[#1E2D45] mb-6">
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-orange-400 mb-2">💰 Price & Estimate Guide</h4>
-                <p className="text-slate-400 text-xs leading-relaxed">{detail.pricingGuide}</p>
+
+          <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div>
+              <h1 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-[1.1] mb-6">
+                Premium <span className="text-gradient">{svc.title}</span> <br className="hidden sm:inline" />
+                in Mumbai
+              </h1>
+
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8">
+                {detail.intro}
+              </p>
+
+              {/* 4 Trust Metrics Pills */}
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                  <Star size={16} className="text-yellow-400 fill-yellow-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">4.9/5 Rating (140+ Reviews)</span>
+                </div>
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                  <ShieldCheck size={16} className="text-emerald-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">Up to 5-Yr Written Warranty</span>
+                </div>
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                  <Clock size={16} className="text-orange-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">Milestone On-Time Handover</span>
+                </div>
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                  <Award size={16} className="text-blue-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">50+ Master Artisans</span>
+                </div>
               </div>
-            )}
-            <div className="flex gap-3">
-              <Link prefetch={false} href="/contact" className="btn-primary text-sm">Get Free Quote <ArrowRight size={15} /></Link>
-              <Link prefetch={false} href="/areas" className="btn-outline text-sm">Find Your Area</Link>
+
+              {/* Interactive CTAs */}
+              <ServiceDetailActions serviceTitle={svc.title} />
+            </div>
+
+            {/* Right Hero Visual Card */}
+            <div className="relative">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#101827] group">
+                <Image
+                  src={svc.image}
+                  alt={svc.title}
+                  fill
+                  priority
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-80" />
+
+                {/* Floating Overlay Card */}
+                <div className="absolute bottom-5 inset-x-5 p-4 rounded-xl bg-[#0B1120]/90 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">Guaranteed Standard</p>
+                    <p className="text-white text-sm font-bold mt-0.5">100% In-House Skilled Team</p>
+                  </div>
+                  <span className="px-2.5 py-1 rounded bg-orange-500 text-white text-[11px] font-bold">
+                    Zero Middlemen
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Workflow Process Timeline ───────────────── */}
-      {detail && (
-        <section className="section-y" style={{ background: '#0B1120', borderBottom: '1px solid #1E2D45' }}>
-          <div className="container-custom">
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-xs font-mono text-orange-500 font-bold uppercase tracking-widest">Our Work Process</span>
-              <h2 className="font-display text-3xl lg:text-5xl text-white mt-3">
-                How We Execute <span className="text-gradient">{svc.title}</span>
-              </h2>
-              <p className="text-slate-400 text-sm mt-3">Professional, step-by-step civil engineering process to deliver long-lasting and flawless results.</p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {detail.steps.map((step, idx) => (
-                <div key={idx} className="card p-6 border border-[#1E2D45] bg-[#101827] hover:border-orange-500/30 transition-all flex flex-col justify-between">
-                  <div>
-                    <span className="inline-block px-3 py-1 text-xs font-mono font-bold rounded bg-orange-500/10 text-orange-400 mb-4">
+      {/* ── STEP-BY-STEP WORKFLOW TIMELINE ──────────────────────── */}
+      <section className="py-20 bg-[#0B1120] border-b border-white/5">
+        <div className="container-custom">
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <div className="section-label justify-center">Engineering Workflow</div>
+            <h2 className="font-display text-3xl lg:text-4xl text-white mb-4">
+              How We Execute <span className="text-gradient">{svc.title}</span>
+            </h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Every phase is executed following strict quality parameters, structural standards, and milestone reviews.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {detail.steps.map((step, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-2xl bg-[#0E1626] border border-white/10 hover:border-orange-500/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-mono font-bold text-sm">
                       0{idx + 1}
                     </span>
-                    <h3 className="text-white text-lg font-bold mb-2">{step.title}</h3>
-                    <p className="text-slate-400 text-xs leading-relaxed">{step.desc}</p>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-semibold">
+                      Phase {idx + 1}
+                    </span>
                   </div>
+                  <h3 className="text-white text-base font-bold mb-3 group-hover:text-orange-400 transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                    {step.desc}
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
-      {/* ── Materials & Brands Specs ────────────────── */}
-      {detail && (
-        <section className="section-y" style={{ background: '#101827', borderBottom: '1px solid #1E2D45' }}>
-          <div className="container-custom grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-xs font-mono text-orange-500 font-bold uppercase tracking-widest">Premium Standards</span>
-              <h2 className="font-display text-3xl lg:text-4xl text-white mt-3 mb-6">
-                Premium Materials <span className="text-gradient">& Brands We Partner With</span>
-              </h2>
-              <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                We believe in uncompromising quality. Weak civil foundations lead to early degradation. 
-                That is why for {svc.title.toLowerCase()}, AMS Civil Construction partners exclusively with industry-leading brands and utilizes verified top-grade materials to ensure your structures remain robust for decades.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded border border-[#1E2D45] bg-[#0B1120]">
-                  <h4 className="text-white text-xs font-bold mb-1">🛡️ 100% Rust-Proof & Leak-Proof</h4>
-                  <p className="text-slate-500 text-[10px]">Multi-layer protection treatments</p>
-                </div>
-                <div className="p-4 rounded border border-[#1E2D45] bg-[#0B1120]">
-                  <h4 className="text-white text-xs font-bold mb-1">📜 5-Year Leak Guarantee</h4>
-                  <p className="text-slate-500 text-[10px]">Official written contract coverage</p>
+                <div className="pt-6 mt-4 border-t border-white/5 flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold">
+                  <Check size={14} /> Quality Verified
                 </div>
               </div>
-            </div>
-            
-            <div className="p-8 rounded-2xl border border-[#1E2D45] bg-[#0B1120] shadow-xl">
-              <h3 className="text-white text-sm font-mono uppercase tracking-wider text-orange-400 mb-6">⚙️ Material Specifications:</h3>
-              <ul className="space-y-4">
-                {detail.materials.map((mat, i) => (
-                  <li key={i} className="flex items-center gap-3 p-3 rounded bg-[#101827] border border-[#1E2D45]">
-                    <CheckCircle size={16} className="text-orange-500 flex-shrink-0" />
-                    <span className="text-white text-xs font-semibold">{mat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* ── Why Choose Us ───────────────────────────── */}
-      <section className="section-y" style={{ background: '#0B1120', borderBottom: '1px solid #1E2D45' }}>
+      {/* ── VERIFIED MATERIALS & BRAND PARTNERS ─────────────────── */}
+      <section className="py-20 bg-[#080D1A] border-b border-white/5">
         <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-mono text-orange-500 font-bold uppercase tracking-widest">Why Choose Us</span>
-            <h2 className="font-display text-2xl lg:text-4xl text-white mt-3">
-              Why Choose AMS for <span style={{ color: '#F97316' }}>{svc.title}</span>?
-            </h2>
-          </div>
-          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {svc.benefits.map((b, i) => (
-              <li key={i} className="flex items-start gap-4 p-5 rounded-xl border border-[#1E2D45] bg-[#101827] hover:border-orange-500/30 transition-colors">
-                <ShieldCheck size={20} style={{ color: '#F97316' }} className="flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-white text-sm font-bold mb-1">Standard Guarantee</h4>
-                  <p className="text-slate-400 text-xs leading-relaxed">{b}</p>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div>
+              <div className="section-label">Uncompromising Quality</div>
+              <h2 className="font-display text-3xl lg:text-4xl text-white mb-6">
+                Premium Materials & <span className="text-gradient">Approved Brands</span>
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                Weak civil foundations lead to early cracks and seepage. That is why for every {svc.title.toLowerCase()} project, 
+                AMS Civil Construction specifies only ISI-certified, industry-benchmarked brands tested to endure Mumbai’s harsh monsoons.
+              </p>
+
+              {/* Guarantees Box */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="p-4 rounded-xl bg-[#0B1120] border border-white/10">
+                  <div className="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-400 flex items-center justify-center mb-2">
+                    <Shield size={18} />
+                  </div>
+                  <h4 className="text-white text-xs font-bold mb-1">100% Anti-Seepage</h4>
+                  <p className="text-slate-500 text-[11px]">Multi-layer membrane treatment</p>
                 </div>
-              </li>
-            ))}
-          </ul>
+                <div className="p-4 rounded-xl bg-[#0B1120] border border-white/10">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2">
+                    <FileCheck2 size={18} />
+                  </div>
+                  <h4 className="text-white text-xs font-bold mb-1">Official Written Bill</h4>
+                  <p className="text-slate-500 text-[11px]">Itemized transparent billing</p>
+                </div>
+              </div>
+
+              {/* Quick Quote trigger */}
+              <FloatingQuickQuoteBar serviceTitle={svc.title} />
+            </div>
+
+            {/* Right: Material Checklist */}
+            <div className="p-8 rounded-2xl bg-[#0B1120] border border-white/10 shadow-2xl">
+              <h3 className="text-white font-mono text-xs uppercase tracking-wider text-orange-400 font-bold mb-6 flex items-center gap-2">
+                <Award size={16} /> Verified Specifications for {svc.title}:
+              </h3>
+
+              <div className="space-y-3.5 mb-8">
+                {detail.materials.map((mat, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-[#101827] border border-white/5 hover:border-orange-500/30 transition-colors"
+                  >
+                    <CheckCircle size={18} className="text-orange-500 flex-shrink-0" />
+                    <div>
+                      <p className="text-white text-xs sm:text-sm font-semibold">{mat}</p>
+                      <p className="text-slate-500 text-[11px]">100% Certified Batch Procurement</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Pricing transparency box */}
+              <div className="p-5 rounded-xl bg-orange-500/10 border border-orange-500/20">
+                <h4 className="text-orange-400 text-xs font-mono font-bold uppercase tracking-wider mb-1.5">
+                  💰 Pricing & Cost Estimation Guide
+                </h4>
+                <p className="text-slate-300 text-xs leading-relaxed">
+                  {detail.pricingGuide}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── Available in All Mumbai Areas ────────────── */}
-      <section className="section-y" style={{ background: '#101827' }}>
+      {/* ── WHY CHOOSE AMS FOR THIS SERVICE ─────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0B1120] border-b border-white/5">
         <div className="container-custom">
-          <div className="text-center mb-10">
-            <h2 className="font-display text-3xl text-white mb-3">
-              {svc.title} Available Across <span style={{ color: '#F97316' }}>All Mumbai Areas</span>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <div className="section-label justify-center">The AMS Advantage</div>
+            <h2 className="font-display text-3xl lg:text-4xl text-white mb-4">
+              Why Homeowners Choose AMS for <span className="text-gradient">{svc.title}</span>
             </h2>
-            <p className="text-slate-400 text-sm">Click your area to see local pricing and dedicated service information</p>
+            <p className="text-slate-400 text-sm">
+              We eliminate contractor stress with direct engineer supervision, clean job-site protocols, and zero cost escalations.
+            </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {locations.map(loc => (
-              <Link key={loc.slug} href={`/areas/${loc.slug}/${svc.slug}`} prefetch={false}
-                className="card p-3 group hover:border-orange-500/40 transition-all duration-200 flex items-center gap-2 bg-[#0B1120]">
-                <MapPin size={12} className="flex-shrink-0" style={{ color: '#F97316' }} />
-                <span className="text-slate-400 text-xs group-hover:text-orange-400 transition-colors leading-tight">
-                  {svc.title} in {loc.name}
-                </span>
-              </Link>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {svc.benefits.map((benefit, i) => (
+              <div
+                key={i}
+                className="p-6 rounded-2xl bg-[#0E1626] border border-white/10 hover:border-orange-500/30 transition-all flex items-start gap-4"
+              >
+                <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <ShieldCheck size={20} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-sm mb-1">Standard Guarantee #{i + 1}</h4>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{benefit}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Other Services ───────────────────────────── */}
-      <section className="section-y" style={{ background: '#0B1120', borderTop: '1px solid #1E2D45' }}>
+      {/* ── SERVICE FAQS ────────────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#080D1A] border-b border-white/5">
         <div className="container-custom">
-          <h2 className="font-display text-2xl text-white mb-6 text-center">
-            Other <span style={{ color: '#F97316' }}>Construction Services</span>
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {services.filter(s => s.slug !== svc.slug).map(s => (
-              <Link key={s.slug} href={`/services/${s.slug}`} prefetch={false}
-                className="card p-4 hover:border-orange-500/40 transition-colors group bg-[#101827] border border-[#1E2D45]">
-                <CheckCircle size={14} className="mb-2" style={{ color: '#F97316' }} />
-                <p className="text-white text-xs font-semibold group-hover:text-orange-400 transition-colors">{s.title}</p>
-                <p className="text-slate-500 text-xs mt-0.5">View Service Details</p>
-              </Link>
+          <div className="max-w-2xl mx-auto text-center mb-10">
+            <div className="section-label justify-center">Got Questions?</div>
+            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white mb-3">
+              Frequently Asked Questions About <span className="text-gradient">{svc.title}</span>
+            </h2>
+            <p className="text-slate-400 text-xs sm:text-sm">
+              Clear, transparent answers regarding pricing, project timelines, materials, and warranty.
+            </p>
+          </div>
+
+          <ServiceFAQAccordion
+            serviceTitle={svc.title}
+            faqs={[
+              {
+                q: `How much does ${svc.title.toLowerCase()} cost in Mumbai?`,
+                a: `Pricing depends primarily on your property's total square footage, current site conditions, and chosen material tiers. We provide a completely free, itemized on-site inspection and quotation so you know exact numbers upfront with zero surprises.`,
+              },
+              {
+                q: `How long does a typical ${svc.title.toLowerCase()} project take?`,
+                a: `Timelines vary by scope: small room renovations take approximately 7–14 days, full floor apartments take 3–6 weeks, and full bungalow construction takes 6–12 months. We commit to a binding milestone schedule in writing before work begins.`,
+              },
+              {
+                q: `Do you provide written guarantees and warranties?`,
+                a: `Yes! Every civil and waterproofing project completed by AMS Civil Construction comes with an official warranty up to 5 years covering leakages, structural cracks, and material workmanship.`,
+              },
+              {
+                q: `Do you provide services in my specific area of Mumbai?`,
+                a: `Yes, we cover all areas of Mumbai, including South Mumbai (Dadar, Worli, Bandra), Western Suburbs (Andheri, Borivali, Malad, Goregaon), Central Line (Thane, Mulund, Ghatkopar, Kalyan), and Navi Mumbai (Vashi, Panvel, Kharghar).`,
+              },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* ── LOCAL COVERAGE HUB ───────────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#0B1120] border-b border-white/5">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="section-label justify-center">Local Presence &amp; Coverage</div>
+            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white mb-2">
+              {svc.title} Execution Across <span className="text-gradient">Mumbai &amp; MMR</span>
+            </h2>
+            <p className="text-slate-400 text-xs sm:text-sm">
+              Direct engineering teams stationed across major micro-markets for immediate site inspections and customized quotes.
+            </p>
+          </div>
+
+          {/* 4 Regional Zone Hub Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8">
+            {[
+              {
+                zone: 'South Mumbai',
+                tag: 'Same-Day Visits',
+                areas: ['Dadar', 'Worli', 'Prabhadevi', 'Colaba', 'Lower Parel', 'Marine Lines'],
+              },
+              {
+                zone: 'Western Suburbs',
+                tag: 'Active Sites',
+                areas: ['Bandra', 'Juhu', 'Andheri', 'Goregaon', 'Malad', 'Borivali'],
+              },
+              {
+                zone: 'Central & Thane',
+                tag: 'Master Masons',
+                areas: ['Thane', 'Mulund', 'Ghatkopar', 'Powai', 'Kurla', 'Chembur'],
+              },
+              {
+                zone: 'Navi Mumbai',
+                tag: 'Turnkey Teams',
+                areas: ['Vashi', 'Nerul', 'Kharghar', 'Panvel', 'Belapur', 'Airoli'],
+              },
+            ].map((reg) => (
+              <div
+                key={reg.zone}
+                className="rounded-2xl bg-[#080D1A] border border-white/10 hover:border-orange-500/30 p-4 sm:p-5 flex flex-col justify-between transition-all"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-white/5">
+                    <div className="flex items-center gap-2">
+                      <MapPin size={14} className="text-orange-400 shrink-0" />
+                      <h3 className="text-white font-bold text-xs sm:text-sm">{reg.zone}</h3>
+                    </div>
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                      {reg.tag}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {reg.areas.map((areaName) => {
+                      const locMatch = locations.find((l) => l.name.toLowerCase() === areaName.toLowerCase()) || {
+                        slug: areaName.toLowerCase().replace(/\s+/g, '-'),
+                        name: areaName,
+                      };
+                      return (
+                        <Link
+                          key={locMatch.slug}
+                          href={`/areas/${locMatch.slug}/${svc.slug}`}
+                          prefetch={false}
+                          title={`${svc.title} in ${locMatch.name}, Mumbai`}
+                          className="px-2.5 py-1.5 rounded-lg bg-white/[0.03] hover:bg-orange-500/15 hover:border-orange-500/40 text-slate-300 hover:text-white border border-white/5 text-[11px] font-medium transition-all text-center truncate"
+                        >
+                          {locMatch.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             ))}
+          </div>
+
+          {/* Bottom All Coverage Link */}
+          <div className="text-center">
+            <Link
+              prefetch={false}
+              href="/areas"
+              className="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/30 text-xs font-semibold inline-flex items-center gap-2 transition-all"
+            >
+              <span>Explore All 90+ Coverage Areas Across Maharashtra</span>
+              <ArrowRight size={13} className="text-orange-400" />
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* ── OTHER RELATED SERVICES ──────────────────────────────── */}
+      <section className="py-12 sm:py-16 bg-[#080D1A]">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="section-label justify-center">Complete Civil Solutions</div>
+            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white mb-2">
+              Explore Other <span className="text-gradient">Civil &amp; Interior Services</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services
+              .filter((s) => s.slug !== svc.slug)
+              .slice(0, 4)
+              .map((s) => (
+                <Link
+                  key={s.slug}
+                  href={`/services/${s.slug}`}
+                  prefetch={false}
+                  className="group bg-[#0B1120] border border-white/10 rounded-2xl overflow-hidden hover:border-orange-500/40 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="relative h-44 w-full overflow-hidden bg-[#161F2E]">
+                    <Image
+                      src={s.image}
+                      alt={s.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-80" />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-white text-base font-bold group-hover:text-orange-400 transition-colors mb-2">
+                      {s.title}
+                    </h3>
+                    <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed mb-4">
+                      {s.description}
+                    </p>
+                    <span className="text-xs font-bold text-orange-400 flex items-center gap-1.5">
+                      View Service <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HIGH-CONVERTING BOTTOM CTA ──────────────────────────── */}
       <ModernCTA
-        title={`Start Your ${svc.title} Project Today`}
-        subtitle={`AMS Civil Construction delivers expert ${svc.title.toLowerCase()} across all Mumbai areas. Call +91 87793 91690 to schedule a free site visit & fast 24-hr quotation (Diwali Special Offer).`}
+        title={`Start Your ${svc.title} With Mumbai's Top Civil Contractor`}
+        subtitle="Schedule a 100% free site inspection with our senior civil engineer. We take precision measurements and provide an itemized quote with zero obligation."
         image={svc.image}
       />
     </>

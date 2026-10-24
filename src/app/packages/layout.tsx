@@ -2,9 +2,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Home Renovation Packages Mumbai | 1BHK 2BHK 3BHK 4BHK | AMS Civil',
+  title: 'Home Renovation Packages Mumbai | Civil Labor Rates | AMS Civil',
   description:
-    '⭐ [2026] Complete home renovation packages in Mumbai. 1BHK ₹2.5L, 2BHK ₹4.5L, 3BHK ₹8L, 4BHK ₹12L. Bungalow & terrace home construction. Transparent pricing. Book your site visit!',
+    '⭐ [2026] Civil renovation packages in Mumbai. 1BHK ~₹2.5L, 2BHK ~₹4.5L, 3BHK ~₹8L. Indicative civil labor & workmanship rates (materials separate). Book your site inspection!',
   keywords: [
     '1bhk renovation cost Mumbai',
     '2bhk renovation cost Mumbai',
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.amscivilwork.in/packages',
   },
   openGraph: {
-    title: 'Complete Home Renovation Packages | 1BHK to Bungalow | AMS Civil',
+    title: 'Civil Renovation Packages Mumbai | Labor Workmanship | AMS Civil',
     description:
-      'Transparent home renovation packages: 1BHK ₹2.5L, 2BHK ₹4.5L, 3BHK ₹8L, 4BHK ₹12L. Free consultation!',
+      'Transparent civil labor packages: 1BHK ~₹2.5L, 2BHK ~₹4.5L, 3BHK ~₹8L (materials separate). Free site inspection!',
     url: 'https://www.amscivilwork.in/packages',
     siteName: 'AMS Civil Construction',
     images: [
@@ -57,53 +57,66 @@ export const metadata: Metadata = {
 export default function PackagesLayout({ children }: { children: React.ReactNode }) {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'OfferCatalog',
-    name: 'Home Renovation & Construction Packages — AMS Civil Construction',
-    description:
-      'Complete home renovation packages in Mumbai from 1BHK to Bungalows with transparent pricing.',
-    provider: {
-      '@type': 'LocalBusiness',
-      name: 'AMS Civil Construction',
-      telephone: '+918779391690',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Mumbai',
-        addressRegion: 'Maharashtra',
-        addressCountry: 'IN',
-      },
-    },
-    itemListElement: [
+    '@graph': [
       {
-        '@type': 'Offer',
-        name: '1BHK Complete Renovation Package',
-        description: 'Complete 1BHK renovation including flooring, kitchen, bathroom, painting & POP work',
-        price: '250000',
-        priceCurrency: 'INR',
-        availability: 'https://schema.org/InStock',
+        '@type': 'OfferCatalog',
+        name: 'Home Renovation & Construction Packages — AMS Civil Construction',
+        description:
+          'Complete home renovation packages in Mumbai from 1BHK to Bungalows with transparent pricing.',
+        provider: {
+          '@type': 'LocalBusiness',
+          name: 'AMS Civil Construction',
+          '@id': 'https://www.amscivilwork.in/#localbusiness',
+          telephone: '+918779391690',
+          url: 'https://www.amscivilwork.in',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Mumbai',
+            addressRegion: 'Maharashtra',
+            addressCountry: 'IN',
+          },
+        },
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            name: '1BHK Complete Renovation Package',
+            description: 'Complete 1BHK renovation including flooring, kitchen, bathroom, painting & POP work',
+            price: '250000',
+            priceCurrency: 'INR',
+            availability: 'https://schema.org/InStock',
+          },
+          {
+            '@type': 'Offer',
+            name: '2BHK Complete Renovation Package',
+            description: 'Premium 2BHK makeover with modular kitchen, 2 bathrooms, Italian marble & POP ceiling',
+            price: '450000',
+            priceCurrency: 'INR',
+            availability: 'https://schema.org/InStock',
+          },
+          {
+            '@type': 'Offer',
+            name: '3BHK Luxury Interior Package',
+            description: 'Luxury 3BHK interior with Italian marble, designer POP, premium kitchen & smart wiring',
+            price: '800000',
+            priceCurrency: 'INR',
+            availability: 'https://schema.org/InStock',
+          },
+          {
+            '@type': 'Offer',
+            name: '4BHK Ultra Premium Package',
+            description: 'Ultra-luxury 4BHK transformation with imported marble, Jaquar fittings & smart home',
+            price: '1200000',
+            priceCurrency: 'INR',
+            availability: 'https://schema.org/InStock',
+          },
+        ],
       },
       {
-        '@type': 'Offer',
-        name: '2BHK Complete Renovation Package',
-        description: 'Premium 2BHK makeover with modular kitchen, 2 bathrooms, Italian marble & POP ceiling',
-        price: '450000',
-        priceCurrency: 'INR',
-        availability: 'https://schema.org/InStock',
-      },
-      {
-        '@type': 'Offer',
-        name: '3BHK Luxury Interior Package',
-        description: 'Luxury 3BHK interior with Italian marble, designer POP, premium kitchen & smart wiring',
-        price: '800000',
-        priceCurrency: 'INR',
-        availability: 'https://schema.org/InStock',
-      },
-      {
-        '@type': 'Offer',
-        name: '4BHK Ultra Premium Package',
-        description: 'Ultra-luxury 4BHK transformation with imported marble, Jaquar fittings & smart home',
-        price: '1200000',
-        priceCurrency: 'INR',
-        availability: 'https://schema.org/InStock',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Packages', item: 'https://www.amscivilwork.in/packages' },
+        ],
       },
     ],
   };

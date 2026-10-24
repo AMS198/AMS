@@ -222,7 +222,7 @@ export function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; 
     },
     {
       q: `Why is AMS the best ${svc.title.toLowerCase()} contractor in ${loc.name}?`,
-      a: `AMS Civil Construction has 25+ years of construction expertise, 350+ completed projects, and a 4.9/5 client satisfaction rating. In ${loc.name}, we combine deep local knowledge of ${loc.district} building codes with premium materials and skilled craftsmen. Our ${loc.pincode ? `teams near PIN ${loc.pincode}` : `local teams`} are available for same-week site visits.`,
+      a: `AMS Civil Construction has 10+ years of construction expertise, 200+ completed projects, and a 4.9/5 client satisfaction rating. In ${loc.name}, we combine deep local knowledge of ${loc.district} building codes with premium materials and skilled craftsmen. Our ${loc.pincode ? `teams near PIN ${loc.pincode}` : `local teams`} are available for same-week site visits.`,
     },
     {
       q: `${loc.name} mein ${svc.title.toLowerCase()} ka rate kya hai?`,
@@ -230,7 +230,7 @@ export function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; 
     },
     {
       q: `${loc.name} mein best ${svc.title.toLowerCase()} contractor kaun hai?`,
-      a: `${loc.name} aur ${loc.district} mein AMS Civil Construction sabse trusted ${svc.title.toLowerCase()} contractor hai. 25+ saal ka experience, 350+ completed projects, aur 4.9/5 rating. Hum ${loc.nearby.slice(0, 3).join(', ')} mein bhi service dete hain. Abhi call karein: +91 87793 91690.`,
+      a: `${loc.name} aur ${loc.district} mein AMS Civil Construction sabse trusted ${svc.title.toLowerCase()} contractor hai. 10+ saal ka experience, 200+ completed projects, aur 4.9/5 rating. Hum ${loc.nearby.slice(0, 3).join(', ')} mein bhi service dete hain. Abhi call karein: +91 87793 91690.`,
     },
     {
       q: `What warranty does AMS provide for ${svc.title.toLowerCase()} in ${loc.name}?`,

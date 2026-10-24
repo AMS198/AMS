@@ -301,7 +301,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             <div>
               <p className="text-white font-bold text-lg mb-1">Written by {blog.author || 'AMS Expert Team'}</p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Our editorial team consists of civil engineers and interior designers with 15+ years of real-world site experience in Mumbai and across India.
+                Our editorial team consists of civil engineers and interior designers with 10+ years of real-world site experience in Mumbai and across India.
               </p>
             </div>
           </div>

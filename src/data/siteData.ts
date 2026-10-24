@@ -695,7 +695,7 @@ export const faqs: FAQ[] = [
   {
     question: 'Mere area mein sabse accha contractor kaun hai?',
     answer:
-      'Agar aap Mumbai, Navi Mumbai, ya Thane mein hain, toh AMS Civil Construction sabse bharosemand naam hai. Humare paas 25 saal ka anubhav aur 500+ happy clients hain.',
+      'Agar aap Mumbai, Navi Mumbai, ya Thane mein hain, toh AMS Civil Construction sabse bharosemand naam hai. Humare paas 10+ saal ka anubhav aur 200+ happy clients hain.',
   },
   {
     question: 'Bathroom renovation ka kharcha kitna aata hai?',
@@ -724,9 +724,9 @@ export const faqs: FAQ[] = [
 /* ─────────────────────────────────────────────────────────────── */
 
 export const stats = [
-  { value: '25+', label: 'Years of Experience' },
-  { value: '350+', label: 'Projects Completed' },
-  { value: '500+', label: 'Happy Families' },
+  { value: '10+', label: 'Years of Experience' },
+  { value: '200+', label: 'Projects Completed' },
+  { value: '200+', label: 'Happy Families' },
   { value: '98%', label: 'Client Satisfaction' },
 ];
 

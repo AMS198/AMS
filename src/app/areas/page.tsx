@@ -24,10 +24,39 @@ export const metadata: Metadata = {
 const zones = Array.from(new Set(locations.map(l => l.zone)));
 
 export default function AreasPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ItemList',
+        name: 'AMS Civil Construction Service Areas',
+        description: 'Comprehensive network of construction service areas covered across Mumbai and India.',
+        itemListElement: locations.slice(0, 30).map((loc, idx) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          name: `${loc.name}, ${loc.district}`,
+          url: `https://www.amscivilwork.in/areas/${loc.slug}`,
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Service Areas', item: 'https://www.amscivilwork.in/areas' },
+        ],
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen bg-[#080D1A]">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main className="min-h-screen bg-[#080D1A]">
       {/* ── Hero Section ─────────────────────────────────── */}
-      <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
+      <section className="relative pt-28 sm:pt-32 md:pt-36 pb-16 overflow-hidden border-b border-white/5">
         {/* Background elements */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px]" />
@@ -99,6 +128,7 @@ export default function AreasPage() {
         description="AMS Civil Construction is expanding its footprint across major Indian cities. Whether you need a luxury bungalow in Pune, a modern office in Bangalore, or a retail renovation in Kolkata, our expert teams are ready to deliver excellence. We handle everything from site assessment to final handover."
       />
     </main>
+    </>
   );
 }
 
