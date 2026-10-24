@@ -14,6 +14,10 @@ interface FestivalItem {
   artType: 'bow' | 'diya' | 'trishul' | 'ganesha' | 'crescent' | 'flag' | 'star';
   themeGradient: string;
   ringGlow: string;
+  posterImage?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  whatsappMessage?: string;
 }
 
 interface DynamicFestivalRange {
@@ -442,78 +446,114 @@ export default function FestivalPopup() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const todayStr = `${yyyy}-${mm}-${dd}`;
-    const mmdd = `${mm}-${dd}`;
+    let isMounted = true;
 
-    let matched: FestivalItem | null = null;
+    const loadFestival = async () => {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+      const mmdd = `${mm}-${dd}`;
 
-    // 1. Dynamic multi-year search
-    for (const range of dynamicFestivalRanges) {
-      if (todayStr >= range.start && todayStr <= range.end) {
-        let title = range.title;
-        let sanskritTag = range.sanskritTag;
-        let message = range.message;
+      let matched: FestivalItem | null = null;
 
-        if (range.subDays) {
-          const startDate = new Date(range.start);
-          const currentDate = new Date(todayStr);
-          const diffDays = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-          if (range.subDays[diffDays]) {
-            title = range.subDays[diffDays].title || title;
-            sanskritTag = range.subDays[diffDays].sanskritTag || sanskritTag;
-            message = range.subDays[diffDays].message || message;
+      // 1. Check Dynamic Admin Festival / Campaign from Database
+      try {
+        const res = await fetch('/api/festivals?public=true');
+        const data = await res.json();
+        if (data.success && data.activeCampaign) {
+          const c = data.activeCampaign;
+          matched = {
+            id: c.id || 'admin-campaign',
+            title: c.title || 'Festive Special Offer',
+            sanskritTag: c.sanskritTag || '॥ विशेष पर्व महोत्सव ॥',
+            message: c.message || 'Special Festive Offer from AMS Civil Construction',
+            artType: 'diya',
+            themeGradient: 'from-[#241406] via-[#140b04] to-[#070402]',
+            ringGlow: 'rgba(245,158,11,0.5)',
+            posterImage: c.posterImage,
+            ctaText: c.ctaText || 'Claim Free Quotation & Site Visit',
+            ctaLink: c.ctaLink || '/free-consultation',
+            whatsappMessage: c.whatsappMessage,
+          };
+        }
+      } catch (err) {
+        console.warn('Could not fetch dynamic admin festivals, falling back to auto calendar:', err);
+      }
+
+      // 2. Fallback: If no custom admin campaign is active, check built-in dynamic multi-year festivals
+      if (!matched) {
+        for (const range of dynamicFestivalRanges) {
+          if (todayStr >= range.start && todayStr <= range.end) {
+            let title = range.title;
+            let sanskritTag = range.sanskritTag;
+            let message = range.message;
+
+            if (range.subDays) {
+              const startDate = new Date(range.start);
+              const currentDate = new Date(todayStr);
+              const diffDays = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+              if (range.subDays[diffDays]) {
+                title = range.subDays[diffDays].title || title;
+                sanskritTag = range.subDays[diffDays].sanskritTag || sanskritTag;
+                message = range.subDays[diffDays].message || message;
+              }
+            }
+
+            matched = {
+              id: range.id,
+              title,
+              sanskritTag,
+              message,
+              artType: range.artType,
+              themeGradient: range.themeGradient,
+              ringGlow: range.ringGlow,
+            };
+            break;
           }
         }
-
-        matched = {
-          id: range.id,
-          title,
-          sanskritTag,
-          message,
-          artType: range.artType,
-          themeGradient: range.themeGradient,
-          ringGlow: range.ringGlow,
-        };
-        break;
       }
-    }
 
-    // 2. Fixed holiday search
-    if (!matched) {
-      const fixed = fixedDateFestivals.find(f => f.date === mmdd);
-      if (fixed) {
-        matched = {
-          id: fixed.id,
-          title: fixed.title,
-          sanskritTag: fixed.sanskritTag,
-          message: fixed.message,
-          artType: fixed.artType,
-          themeGradient: fixed.themeGradient,
-          ringGlow: fixed.ringGlow,
-        };
+      // 3. Fallback: Fixed holiday search
+      if (!matched) {
+        const fixed = fixedDateFestivals.find(f => f.date === mmdd);
+        if (fixed) {
+          matched = {
+            id: fixed.id,
+            title: fixed.title,
+            sanskritTag: fixed.sanskritTag,
+            message: fixed.message,
+            artType: fixed.artType,
+            themeGradient: fixed.themeGradient,
+            ringGlow: fixed.ringGlow,
+          };
+        }
       }
-    }
 
-    if (matched) {
-      setActiveFestival(matched);
+      if (matched && isMounted) {
+        setActiveFestival(matched);
 
-      // Auto-open every time the website is opened or refreshed
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
+        // Auto-open after gentle delay on page load
+        const timer = setTimeout(() => {
+          if (isMounted) setIsVisible(true);
+        }, 1500);
+        return () => clearTimeout(timer);
+      }
+    };
+
+    loadFestival();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (!activeFestival) return null;
 
-  const captionText = `${activeFestival.title} - AMS Civil Construction.\n${activeFestival.message}\n\n🌐 https://www.amscivilwork.in`;
+  const captionText = `${activeFestival.title} - AMS Civil Construction.\n${activeFestival.message}\n\nSpecial Free Quotation Offer!\n📞 Call: +91 87793 91690 / +91 90042 98911\n🌐 https://www.amscivilwork.in/free-consultation`;
 
-  // Robust HTML2Canvas Poster Blob generator
+  // Robust HTML2Canvas Poster Blob generator (for vector card fallback)
   const generatePosterBlob = async (): Promise<Blob | null> => {
     if (!cardRef.current) return null;
     const canvas = await html2canvas(cardRef.current, {
@@ -528,9 +568,41 @@ export default function FestivalPopup() {
 
   // Primary Action: Share PHOTO + CAPTION directly to WhatsApp
   const handleShareToWhatsApp = async () => {
-    if (!cardRef.current || !activeFestival) return;
+    if (!activeFestival) return;
     setIsSharing(true);
     try {
+      if (activeFestival.posterImage) {
+        try {
+          const res = await fetch(activeFestival.posterImage);
+          const blob = await res.blob();
+          const file = new File([blob], 'AMS-Civil-Festival-Offer.jpg', { type: 'image/jpeg' });
+
+          if (typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: activeFestival.title,
+              text: activeFestival.whatsappMessage || `🪔 ${activeFestival.title}! ✨\n\nAMS Civil Construction brings Special FREE QUOTATION OFFER for your Home & Construction Needs!\n\n📞 Call/WhatsApp: +91 87793 91690 / +91 90042 98911\n🌐 https://www.amscivilwork.in/free-consultation`,
+            });
+            return;
+          }
+        } catch (e) {
+          console.warn('Native image share fallback:', e);
+        }
+
+        // WhatsApp Web / App direct message fallback
+        const shareText = encodeURIComponent(
+          activeFestival.whatsappMessage ||
+          `🪔 ${activeFestival.title}! ✨\n\n` +
+          'AMS Civil Construction is offering a Special FREE QUOTATION for Bungalow Construction, Home Renovation, Modular Kitchen, Bathroom Remodeling & Civil Work!\n\n' +
+          '📞 Call/WhatsApp: +91 87793 91690 / +91 90042 98911\n' +
+          '🌐 Website: https://www.amscivilwork.in/free-consultation'
+        );
+        window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
+        return;
+      }
+
+      // Fallback for canvas card
+      if (!cardRef.current) return;
       const canvas = await html2canvas(cardRef.current, {
         scale: 2,
         backgroundColor: '#070A12',
@@ -539,15 +611,11 @@ export default function FestivalPopup() {
       });
 
       const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
-      if (!blob) {
-        setIsSharing(false);
-        return;
-      }
+      if (!blob) return;
 
       const fileName = `${activeFestival.title.replace(/\s+/g, '-').toLowerCase()}.png`;
       const file = new File([blob], fileName, { type: 'image/png' });
 
-      // Native Share: Mobile devices pass the REAL IMAGE FILE directly into WhatsApp!
       if (typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           files: [file],
@@ -557,7 +625,6 @@ export default function FestivalPopup() {
         return;
       }
 
-      // Desktop fallback: Download image directly
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -576,6 +643,16 @@ export default function FestivalPopup() {
   // Download High-Resolution Poster
   const handleDownloadPoster = async () => {
     if (!activeFestival) return;
+    if (activeFestival.posterImage) {
+      const a = document.createElement('a');
+      const safeName = activeFestival.title.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
+      a.download = `${safeName || 'festival'}-poster.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+
     setIsSharing(true);
     try {
       const blob = await generatePosterBlob();
@@ -621,10 +698,10 @@ export default function FestivalPopup() {
         >
           <Sparkles size={14} className="text-amber-400 animate-spin" />
           <span className="font-semibold tracking-wide bg-gradient-to-r from-amber-200 to-amber-300 bg-clip-text text-transparent">
-            {activeFestival.title}
+            {activeFestival.posterImage ? 'Diwali & Chhath Offer' : activeFestival.title}
           </span>
           <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full">
-            Wish
+            {activeFestival.posterImage ? 'Offer' : 'Wish'}
           </span>
         </motion.button>
       )}
@@ -648,156 +725,239 @@ export default function FestivalPopup() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.93, y: 10 }}
               transition={{ type: 'spring', damping: 26, stiffness: 320 }}
-              className="relative w-full max-w-[340px] sm:max-w-[380px] bg-[#070A12] border border-amber-500/30 rounded-3xl shadow-[0_0_80px_rgba(245,158,11,0.25)] z-10 flex flex-col my-auto overflow-hidden ring-1 ring-white/10"
+              className={`relative w-full ${
+                activeFestival.posterImage ? 'max-w-[360px] sm:max-w-[420px]' : 'max-w-[340px] sm:max-w-[380px]'
+              } bg-[#070A12] border border-amber-500/40 rounded-3xl shadow-[0_0_80px_rgba(245,158,11,0.35)] z-10 flex flex-col my-auto overflow-hidden ring-1 ring-amber-400/20 max-h-[95vh]`}
             >
               {/* Close Button */}
               <button
                 onClick={() => setIsVisible(false)}
-                className="absolute top-2.5 right-2.5 z-30 w-8 h-8 bg-black/60 hover:bg-black/90 rounded-full flex items-center justify-center text-amber-200/80 hover:text-amber-100 transition-colors border border-amber-500/30 cursor-pointer shadow-md"
+                className="absolute top-2.5 right-2.5 z-30 w-8 h-8 bg-black/75 hover:bg-black rounded-full flex items-center justify-center text-amber-200 hover:text-white transition-all border border-amber-500/40 cursor-pointer shadow-xl backdrop-blur-sm"
                 aria-label="Close"
               >
                 <X size={16} />
               </button>
 
-              {/* AREA TO CAPTURE: LUXURY ROYAL GREETING CARD */}
-              <div
-                ref={cardRef}
-                className="relative w-full overflow-hidden flex flex-col justify-between text-center px-5 pt-6 pb-5 sm:px-6 sm:pt-7 sm:pb-6 select-none"
-                style={{
-                  background: 'radial-gradient(circle at 50% 22%, #261c10 0%, #140e08 50%, #080604 100%)',
-                }}
-              >
-                {/* Subtle Inner Filigree Border */}
-                <div className="absolute inset-2 border border-amber-500/25 rounded-2xl pointer-events-none" />
-                <div className="absolute inset-3 border border-dashed border-amber-400/15 rounded-xl pointer-events-none" />
-
-                {/* Header: Sacred Tag & Corporate Badge */}
-                <div className="relative z-10 flex flex-col items-center">
-                  {/* Sanskrit / Sacred Tag */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-[10px] sm:text-[11px] font-serif text-amber-200 tracking-wider mb-2.5 shadow-sm">
-                    <Sparkles size={10} className="text-amber-400" />
-                    <span>{activeFestival.sanskritTag}</span>
-                    <Sparkles size={10} className="text-amber-400" />
+              {/* POSTER VIEW (When uploaded festive poster is active) */}
+              {activeFestival.posterImage ? (
+                <div className="relative w-full flex flex-col bg-black select-none">
+                  {/* Sacred Header Ribbon */}
+                  <div className="px-4 pt-3 pb-2 bg-gradient-to-r from-[#1a1208] via-[#24170a] to-[#1a1208] border-b border-amber-500/30 flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 text-amber-200 text-[11px] font-semibold tracking-wide">
+                      <Sparkles size={12} className="text-amber-400" />
+                      <span>{activeFestival.sanskritTag}</span>
+                    </div>
+                    <span className="text-[10px] font-bold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 rounded-full mr-7">
+                      Festive Offer
+                    </span>
                   </div>
 
-                  {/* Clean Corporate Logo Badge */}
-                  <div className="bg-white/95 px-4 py-1.5 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.4)] border border-amber-400/40 inline-flex items-center justify-center">
+                  {/* 1:1 Aspect Ratio Full Poster Fit */}
+                  <div className="relative w-full aspect-square overflow-hidden bg-black flex items-center justify-center">
                     <img
-                      src="/logo.png"
-                      alt="AMS Civil Construction"
-                      className="h-6 sm:h-7 w-auto object-contain"
+                      src={activeFestival.posterImage}
+                      alt={`${activeFestival.title} - AMS Civil Construction`}
+                      className="w-full h-full object-contain select-none"
+                      loading="eager"
                     />
+                  </div>
+
+                  {/* High-Conversion Festive Action Bar */}
+                  <div className="bg-[#0b0e17] px-3.5 py-3 sm:px-4 sm:py-3.5 border-t border-amber-500/30 flex flex-col gap-2">
+                    {/* Primary CTA */}
+                    <Link
+                      href={activeFestival.ctaLink || '/free-consultation'}
+                      onClick={() => setIsVisible(false)}
+                      className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow-[0_4px_16px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.5)] transition-all cursor-pointer active:scale-[0.98]"
+                    >
+                      <Sparkles size={15} className="text-slate-950" />
+                      <span>{activeFestival.ctaText || 'Claim Free Quotation & Site Visit'}</span>
+                    </Link>
+
+                    {/* Secondary Row: WhatsApp Share & Chat */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        onClick={handleShareToWhatsApp}
+                        disabled={isSharing}
+                        className="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2 px-2.5 rounded-lg flex items-center justify-center gap-1.5 text-[11px] sm:text-xs shadow-[0_3px_12px_rgba(37,211,102,0.3)] transition-all cursor-pointer active:scale-95 disabled:opacity-60"
+                      >
+                        <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0 fill-white" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.414z"/>
+                        </svg>
+                        <span>{isSharing ? 'Sharing...' : 'Share Poster'}</span>
+                      </button>
+
+                      <a
+                        href={`https://wa.me/918779391690?text=${encodeURIComponent(
+                          activeFestival.whatsappMessage ||
+                          `Hello AMS Civil, I saw your ${activeFestival.title}. I want a Free Quotation for my home.`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 hover:text-white font-bold py-2 px-2.5 rounded-lg flex items-center justify-center gap-1.5 text-[11px] sm:text-xs border border-amber-500/30 transition-all cursor-pointer active:scale-95"
+                      >
+                        <PhoneCall size={13} className="text-amber-400" />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                    </div>
+
+                    {/* Secondary Actions */}
+                    <div className="pt-1.5 border-t border-white/5 flex items-center justify-between text-[11px] text-stone-400 px-1">
+                      <button
+                        onClick={handleDownloadPoster}
+                        className="text-amber-300 hover:text-amber-200 hover:underline flex items-center gap-1 cursor-pointer font-medium"
+                      >
+                        <Download size={12} />
+                        <span>Save Poster HD</span>
+                      </button>
+                      <button
+                        onClick={handleCopyWish}
+                        className="text-stone-400 hover:text-stone-200 flex items-center gap-1 cursor-pointer"
+                      >
+                        {copied ? (
+                          <>
+                            <Check size={12} className="text-emerald-400" />
+                            <span className="text-emerald-400 font-bold">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={12} />
+                            <span>Copy Offer Text</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
+              ) : (
+                /* FALLBACK VECTOR GREETING CARD FOR OTHER HOLIDAYS */
+                <>
+                  <div
+                    ref={cardRef}
+                    className="relative w-full overflow-hidden flex flex-col justify-between text-center px-5 pt-6 pb-5 sm:px-6 sm:pt-7 sm:pb-6 select-none"
+                    style={{
+                      background: 'radial-gradient(circle at 50% 22%, #261c10 0%, #140e08 50%, #080604 100%)',
+                    }}
+                  >
+                    <div className="absolute inset-2 border border-amber-500/25 rounded-2xl pointer-events-none" />
+                    <div className="absolute inset-3 border border-dashed border-amber-400/15 rounded-xl pointer-events-none" />
 
-                {/* Center: Handcrafted Solid Vector Art & Typography */}
-                <div className="relative z-10 flex flex-col items-center my-2.5">
-                  {/* Glowing Medallion with Vector Artwork */}
-                  <div className="relative my-1">
-                    <div
-                      className="absolute -inset-3 rounded-full blur-xl opacity-50 pointer-events-none"
-                      style={{ backgroundColor: activeFestival.ringGlow }}
-                    />
-                    <div className="relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-gradient-to-b from-amber-500/10 to-amber-950/25 border border-amber-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                      <FestivalArtwork type={activeFestival.artType} />
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-[10px] sm:text-[11px] font-serif text-amber-200 tracking-wider mb-2.5 shadow-sm">
+                        <Sparkles size={10} className="text-amber-400" />
+                        <span>{activeFestival.sanskritTag}</span>
+                        <Sparkles size={10} className="text-amber-400" />
+                      </div>
+
+                      <div className="bg-white/95 px-4 py-1.5 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.4)] border border-amber-400/40 inline-flex items-center justify-center">
+                        <img
+                          src="/logo.png"
+                          alt="AMS Civil Construction"
+                          className="h-6 sm:h-7 w-auto object-contain"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="relative z-10 flex flex-col items-center my-2.5">
+                      <div className="relative my-1">
+                        <div
+                          className="absolute -inset-3 rounded-full blur-xl opacity-50 pointer-events-none"
+                          style={{ backgroundColor: activeFestival.ringGlow }}
+                        />
+                        <div className="relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-gradient-to-b from-amber-500/10 to-amber-950/25 border border-amber-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                          <FestivalArtwork type={activeFestival.artType} />
+                        </div>
+                      </div>
+
+                      <h2 className="font-display font-bold text-2xl sm:text-3xl tracking-wide text-[#FDE68A] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] mt-2 mb-1.5">
+                        {activeFestival.title}
+                      </h2>
+
+                      <p className="text-stone-300 text-[11px] sm:text-xs leading-relaxed font-normal max-w-[270px] sm:max-w-[300px] mx-auto drop-shadow-sm font-sans">
+                        {activeFestival.message}
+                      </p>
+                    </div>
+
+                    <div className="relative z-10 pt-2.5 border-t border-amber-500/20 flex flex-col items-center">
+                      <div className="flex items-center gap-2 text-amber-400/50 text-[9px] mb-0.5">
+                        <span className="w-6 h-[1px] bg-gradient-to-r from-transparent to-amber-400/40" />
+                        <span>◆</span>
+                        <span className="w-6 h-[1px] bg-gradient-to-l from-transparent to-amber-400/40" />
+                      </div>
+
+                      <p className="text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase text-amber-200 font-display">
+                        AMS CIVIL CONSTRUCTION
+                      </p>
+                      <p className="text-[8px] font-medium tracking-widest text-amber-400/70 uppercase">
+                        10+ Years of Architectural & Civil Excellence
+                      </p>
+                      <p className="text-[8px] text-stone-400 font-mono tracking-widest mt-0.5">
+                        WWW.AMSCIVILWORK.IN
+                      </p>
                     </div>
                   </div>
 
-                  {/* Festival Main Heading - Solid gold text (NO bg-clip-text so html2canvas renders perfectly!) */}
-                  <h2 className="font-display font-bold text-2xl sm:text-3xl tracking-wide text-[#FDE68A] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] mt-2 mb-1.5">
-                    {activeFestival.title}
-                  </h2>
+                  <div className="bg-[#0b0e17] px-4 py-3 sm:px-4 sm:py-3.5 border-t border-amber-500/20 flex flex-col gap-2">
+                    <button
+                      onClick={handleShareToWhatsApp}
+                      disabled={isSharing}
+                      className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.5)] transition-all cursor-pointer active:scale-[0.98] disabled:opacity-60"
+                    >
+                      {isSharing ? (
+                        <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                      ) : (
+                        <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0 fill-white" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.414z"/>
+                        </svg>
+                      )}
+                      <span>{isSharing ? 'Preparing Photo...' : 'Share Photo on WhatsApp'}</span>
+                    </button>
 
-                  {/* High-End Architectural Blessing */}
-                  <p className="text-stone-300 text-[11px] sm:text-xs leading-relaxed font-normal max-w-[270px] sm:max-w-[300px] mx-auto drop-shadow-sm font-sans">
-                    {activeFestival.message}
-                  </p>
-                </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        onClick={handleDownloadPoster}
+                        disabled={isSharing}
+                        className="bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white font-medium py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 text-[11px] transition-colors border border-amber-500/20 hover:border-amber-500/40 disabled:opacity-50 cursor-pointer"
+                      >
+                        <Download size={13} className="text-amber-400" />
+                        <span>Save Poster</span>
+                      </button>
 
-                {/* Footer: Corporate Legacy Signature */}
-                <div className="relative z-10 pt-2.5 border-t border-amber-500/20 flex flex-col items-center">
-                  <div className="flex items-center gap-2 text-amber-400/50 text-[9px] mb-0.5">
-                    <span className="w-6 h-[1px] bg-gradient-to-r from-transparent to-amber-400/40" />
-                    <span>◆</span>
-                    <span className="w-6 h-[1px] bg-gradient-to-l from-transparent to-amber-400/40" />
+                      <button
+                        onClick={handleCopyWish}
+                        className="bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white font-medium py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 text-[11px] transition-colors border border-amber-500/20 hover:border-amber-500/40 cursor-pointer"
+                      >
+                        {copied ? (
+                          <>
+                            <Check size={13} className="text-emerald-400" />
+                            <span className="text-emerald-400 font-bold">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={13} className="text-amber-400" />
+                            <span>Copy Wish</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px] sm:text-[11px] text-stone-400 px-0.5">
+                      <span className="flex items-center gap-1 text-stone-300">
+                        <Award size={12} className="text-amber-400" />
+                        <span>Planning Construction?</span>
+                      </span>
+                      <Link
+                        href="/free-consultation"
+                        onClick={() => setIsVisible(false)}
+                        className="text-amber-300 hover:text-amber-200 font-semibold underline flex items-center gap-1"
+                      >
+                        <PhoneCall size={10} />
+                        <span>Free Advice</span>
+                      </Link>
+                    </div>
                   </div>
-
-                  <p className="text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase text-amber-200 font-display">
-                    AMS CIVIL CONSTRUCTION
-                  </p>
-                  <p className="text-[8px] font-medium tracking-widest text-amber-400/70 uppercase">
-                    10+ Years of Architectural & Civil Excellence
-                  </p>
-                  <p className="text-[8px] text-stone-400 font-mono tracking-widest mt-0.5">
-                    WWW.AMSCIVILWORK.IN
-                  </p>
-                </div>
-              </div>
-
-              {/* INTERACTIVE ACTION BAR (Outside capture area) */}
-              <div className="bg-[#0b0e17] px-4 py-3 sm:px-4 sm:py-3.5 border-t border-amber-500/20 flex flex-col gap-2">
-                {/* Primary Button: Share Photo + Caption to WhatsApp */}
-                <button
-                  onClick={handleShareToWhatsApp}
-                  disabled={isSharing}
-                  className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.5)] transition-all cursor-pointer active:scale-[0.98] disabled:opacity-60"
-                >
-                  {isSharing ? (
-                    <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                  ) : (
-                    /* Crisp 100% Guaranteed WhatsApp Icon */
-                    <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0 fill-white" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.414z"/>
-                    </svg>
-                  )}
-                  <span>{isSharing ? 'Preparing Photo...' : 'Share Photo on WhatsApp'}</span>
-                </button>
-
-                {/* Secondary Actions: Save HD Poster & Copy Wish */}
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={handleDownloadPoster}
-                    disabled={isSharing}
-                    className="bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white font-medium py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 text-[11px] transition-colors border border-amber-500/20 hover:border-amber-500/40 disabled:opacity-50 cursor-pointer"
-                  >
-                    <Download size={13} className="text-amber-400" />
-                    <span>Save Poster</span>
-                  </button>
-
-                  <button
-                    onClick={handleCopyWish}
-                    className="bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white font-medium py-1.5 px-2 rounded-lg flex items-center justify-center gap-1.5 text-[11px] transition-colors border border-amber-500/20 hover:border-amber-500/40 cursor-pointer"
-                  >
-                    {copied ? (
-                      <>
-                        <Check size={13} className="text-emerald-400" />
-                        <span className="text-emerald-400 font-bold">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy size={13} className="text-amber-400" />
-                        <span>Copy Wish</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                {/* Festive Consultation CTA */}
-                <div className="pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px] sm:text-[11px] text-stone-400 px-0.5">
-                  <span className="flex items-center gap-1 text-stone-300">
-                    <Award size={12} className="text-amber-400" />
-                    <span>Planning Construction?</span>
-                  </span>
-                  <Link
-                    href="/free-consultation"
-                    onClick={() => setIsVisible(false)}
-                    className="text-amber-300 hover:text-amber-200 font-semibold underline flex items-center gap-1"
-                  >
-                    <PhoneCall size={10} />
-                    <span>Free Advice</span>
-                  </Link>
-                </div>
-              </div>
+                </>
+              )}
             </motion.div>
           </div>
         )}

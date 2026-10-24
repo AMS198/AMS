@@ -11,18 +11,19 @@ import {
   Eye, X, Save, CheckCircle, Clock, HardHat, LogIn, LogOut, Lock,
   User, Eye as EyeIcon, EyeOff, ShieldCheck, AlertCircle, Upload,
   ImageIcon, RefreshCw, Mail, Calendar, Tag, MapPin,
-  Bell, BellOff, Search, PenTool, MessageCircle, BarChart3
+  Bell, BellOff, Search, PenTool, MessageCircle, BarChart3, Sparkles
 } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import toast from 'react-hot-toast';
 import BlogsTab from '@/components/admin/BlogsTab';
 import AnalyticsTab from '@/components/admin/AnalyticsTab';
+import FestivalsTab from '@/components/admin/FestivalsTab';
 
 /* ─── Session key only — credentials live in .env.local on server ─ */
 const SESSION_KEY = 'mandal_admin_auth';
 
 /* ─── Types ─────────────────────────────────────────────────────── */
-type Tab        = 'overview' | 'projects' | 'gallery' | 'enquiries' | 'testimonials' | 'blogs' | 'analytics';
+type Tab        = 'overview' | 'projects' | 'gallery' | 'enquiries' | 'testimonials' | 'blogs' | 'analytics' | 'festivals';
 type ProjStatus = 'ongoing' | 'completed';
 type EnqStatus  = 'new' | 'contacted' | 'converted';
 
@@ -440,6 +441,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               { id: 'enquiries', label: 'Enquiries', icon: MessageSquare   },
               { id: 'testimonials', label: 'Testimonials', icon: MessageCircle },
               { id: 'blogs',     label: 'Blog Articles', icon: PenTool },
+              { id: 'festivals', label: 'Festivals & Offers', icon: Sparkles },
             ] as { id: Tab; label: string; icon: React.ElementType }[]).map(({ id, label, icon: Icon }) => (
               <button key={id} onClick={() => setActiveTab(id)}
                 className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-left transition-all duration-150 flex-shrink-0 whitespace-nowrap rounded-lg lg:rounded-none"
@@ -460,6 +462,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <div className="flex-1 min-w-0">
             {activeTab === 'analytics' && <AnalyticsTab />}
             {activeTab === 'blogs' && <BlogsTab />}
+            {activeTab === 'festivals' && <FestivalsTab />}
             {activeTab === 'testimonials' && (
               <TestimonialsTab 
                 data={testimonials} 
