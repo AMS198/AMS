@@ -109,12 +109,50 @@ export async function generateMetadata(
     title,
     description,
     keywords: [
+      /* English Core Queries */
       `${svc.title} Mumbai`,
       `best ${svc.title.toLowerCase()} contractor Mumbai`,
+      `top ${svc.title.toLowerCase()} company Mumbai`,
       `${svc.title.toLowerCase()} services Mumbai`,
-      `${svc.title.toLowerCase()} cost Mumbai`,
+      `${svc.title.toLowerCase()} cost per sq ft Mumbai`,
+      `${svc.title.toLowerCase()} rates Mumbai`,
+      `${svc.title.toLowerCase()} charges in Mumbai`,
       `${svc.title.toLowerCase()} near me Mumbai`,
-      ...locations.slice(0, 12).map((l) => `${svc.title} ${l.name}`),
+      `turnkey ${svc.title.toLowerCase()} Mumbai`,
+      `licensed civil contractor ${svc.title.toLowerCase()} Mumbai`,
+      `with material ${svc.title.toLowerCase()} rate Mumbai`,
+      `labour rate ${svc.title.toLowerCase()} Mumbai`,
+      `residential ${svc.title.toLowerCase()} Mumbai`,
+      `commercial ${svc.title.toLowerCase()} Mumbai`,
+      `flat ${svc.title.toLowerCase()} Mumbai`,
+      `society ${svc.title.toLowerCase()} Mumbai`,
+      `${svc.title.toLowerCase()} contact number Mumbai`,
+
+      /* Hindi / Hinglish Search Intent */
+      `Mumbai mein ${svc.title.toLowerCase()}`,
+      `Mumbai mein ${svc.title.toLowerCase()} ka thekedar`,
+      `Mumbai me ${svc.title.toLowerCase()} ka rate`,
+      `${svc.title.toLowerCase()} mistry Mumbai`,
+      `${svc.title.toLowerCase()} mistri contact number`,
+      `ghar banane wala thekedar Mumbai`,
+      `sasta aur achha ${svc.title.toLowerCase()} thekedar`,
+      `Mumbai civil mistry`,
+      `thekedar number Mumbai`,
+
+      /* Marathi Local Search Queries */
+      `Mumbai madhye ${svc.title.toLowerCase()} thekedar`,
+      `Mumbai civil thekedar marathi`,
+      `ghar bandhani thekedar Mumbai`,
+
+      /* Major Zone Nodes */
+      `${svc.title} South Mumbai`,
+      `${svc.title} Western Suburbs Mumbai`,
+      `${svc.title} Central Line Mumbai`,
+      `${svc.title} Thane`,
+      `${svc.title} Navi Mumbai`,
+      `${svc.title} Pune`,
+
+      ...locations.slice(0, 15).map((l) => `${svc.title} in ${l.name}`),
     ],
     openGraph: {
       title,
@@ -503,8 +541,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             </p>
           </div>
 
-          {/* 4 Regional Zone Hub Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8">
+          {/* Regional Zone Hub Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 max-w-7xl mx-auto mb-8">
             {[
               {
                 zone: 'South Mumbai',
@@ -525,6 +563,11 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                 zone: 'Navi Mumbai',
                 tag: 'Turnkey Teams',
                 areas: ['Vashi', 'Nerul', 'Kharghar', 'Panvel', 'Belapur', 'Airoli'],
+              },
+              {
+                zone: 'Maharashtra & Pan-India',
+                tag: 'Regional Hubs',
+                areas: ['Pune', 'Hadapsar', 'Nasik', 'Nagpur', 'Ranchi', 'Kolkata'],
               },
             ].map((reg) => (
               <div
@@ -553,7 +596,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                           key={locMatch.slug}
                           href={`/areas/${locMatch.slug}/${svc.slug}`}
                           prefetch={false}
-                          title={`${svc.title} in ${locMatch.name}, Mumbai`}
+                          title={`${svc.title} in ${locMatch.name}`}
                           className="px-2.5 py-1.5 rounded-lg bg-white/[0.03] hover:bg-orange-500/15 hover:border-orange-500/40 text-slate-300 hover:text-white border border-white/5 text-[11px] font-medium transition-all text-center truncate"
                         >
                           {locMatch.name}
@@ -573,7 +616,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
               href="/areas"
               className="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/30 text-xs font-semibold inline-flex items-center gap-2 transition-all"
             >
-              <span>Explore All 90+ Coverage Areas Across Maharashtra</span>
+              <span>Explore All {locations.length}+ Coverage Locations Across Mumbai &amp; India</span>
               <ArrowRight size={13} className="text-orange-400" />
             </Link>
           </div>

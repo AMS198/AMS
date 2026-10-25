@@ -123,6 +123,86 @@ const serviceDeepContent: Record<string, ((loc: LocationData, rand: number) => s
     (loc, rand) => `Stop leaks permanently with our advanced waterproofing solutions in ${loc.name}. The weather in ${loc.district} demands robust protection. We apply crystalline and membrane waterproofing for terraces and basements, especially for structures near ${loc.landmarks[0] || loc.name}.`,
     (loc, rand) => `Don't let monsoon damage your property in ${loc.name}. We provide specialized chemical waterproofing across the ${loc.zone} region. From injection grouting to elastomeric coatings, our work near ${loc.landmarks[0] || loc.name} ensures a completely dry interior.`
   ],
+  'building-repair-work': [
+    (loc, rand) => `Building repair and structural restoration in ${loc.name} requires certified civil engineers experienced in handling aged concrete and monsoon weather distress. Operating across ${loc.district}, our crews near ${loc.landmarks[0] || loc.name} perform non-destructive concrete tests, polymer mortar crack filling, column jacketing, and external structural rehabilitation to ensure your building remains solid and safe for decades.`,
+    (loc, rand) => `Keep your residential society or commercial complex in ${loc.name} compliant and structurally sound with our comprehensive building repair services. Serving the ${loc.zone} belt, we remediate structural cracks, rebar corrosion, and water ingress around ${loc.landmarks[0] || loc.name}. All repair work is executed under senior civil supervision with rigorous quality audits.`,
+    (loc, rand) => `From external plaster restoration to complete structural strengthening in ${loc.name}, AMS Civil Construction is the trusted choice across ${loc.district}. We provide itemized structural audit estimates for housing societies near ${loc.landmarks[0] || loc.name}, delivering long-lasting structural integrity with guaranteed materials.`
+  ],
+  'wall-work': [
+    (loc, rand) => `Expert wall construction and masonry in ${loc.name} demands laser-aligned precision and resilient bonding. Whether you need AAC block partition walls, natural stone cladding, or decorative brickwork for properties near ${loc.landmarks[0] || loc.name}, our skilled masons in ${loc.district} ensure durable, vibration-resistant results.`,
+    (loc, rand) => `Upgrade your interior or exterior walls in ${loc.name} with our specialized wall treatments. From damp-proof base coats to Italian textured finishes around ${loc.landmarks[0] || loc.name}, we provide complete wall civil solutions tailored to the ${loc.zone} environment.`,
+    (loc, rand) => `Strong, crack-resistant walls are the backbone of every durable building in ${loc.name}. We construct internal room dividers, boundary walls, and designer feature facades across ${loc.district}. Count on our team near ${loc.landmarks[0] || loc.name} for high-grade mortar mixing and flawless alignment.`
+  ],
+  'pop-work': [
+    (loc, rand) => `Elevate your living spaces with designer Plaster of Paris (POP) false ceilings in ${loc.name}. Our master artisans craft intricate ceiling profiles, cove lighting troughs, and decorative cornices for luxury homes and offices near ${loc.landmarks[0] || loc.name}. We use crack-resistant, genuine Gyproc/Saint-Gobain plaster formulations suited for ${loc.district}.`,
+    (loc, rand) => `Transform ordinary rooms into architectural statements with custom POP work in ${loc.name}. Serving the ${loc.zone} region, our ceiling specialists create sleek minimalist designs, acoustic baffles, and LED channel integrations for flats and villas near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Looking for pristine, seamless false ceiling execution in ${loc.name}? We handle everything from heavy-gauge GI framing to mirror-smooth POP finishing across ${loc.district}. Our team near ${loc.landmarks[0] || loc.name} ensures clean, quick installation with zero ceiling sag guarantee.`
+  ],
+  'plaster-work': [
+    (loc, rand) => `Flawless plastering in ${loc.name} is the essential canvas for paint and wallpaper. Our plastering teams in ${loc.district} deliver sand-faced external cement plastering with proper water-curing, as well as super-smooth internal gypsum plastering for properties near ${loc.landmarks[0] || loc.name}, preventing hairline cracks permanently.`,
+    (loc, rand) => `Whether it is repairing peeling external walls or preparing interior surfaces in ${loc.name}, AMS Civil Construction delivers superior plaster finishes across ${loc.zone}. We use polymer-modified admixtures for buildings near ${loc.landmarks[0] || loc.name} to withstand seasonal temperature variations.`,
+    (loc, rand) => `Get perfectly plumbed, 90-degree right-angled walls with our professional plastering services in ${loc.name}. Trusted by developers and homeowners in ${loc.district}, our plasterers near ${loc.landmarks[0] || loc.name} adhere strictly to multi-coat application and curing standards.`
+  ],
+  'modular-kitchen': [
+    (loc, rand) => `Design your dream modular kitchen in ${loc.name} with marine-grade waterproof BWP plywood and premium German hardware from Hafele and Hettich. Operating across ${loc.district}, we specialize in space-efficient L-shaped, U-shaped, and parallel kitchen layouts customized for properties near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `A modern modular kitchen in ${loc.name} should seamlessly blend ergonomics with high durability for Indian cooking. Our turnkey installations in ${loc.zone} include custom quartz countertops, soft-close tandem boxes, and integrated chimney exhaust routing near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Upgrade to a luxury modular kitchen in ${loc.name} with complete civil prep. We manage plumbing line shifting, electrical power socket additions, and anti-stain tile backsplashes for apartments near ${loc.landmarks[0] || loc.name}, all delivered with a 10-year hardware warranty.`
+  ],
+  'hall-design': [
+    (loc, rand) => `Create an unforgettable first impression with bespoke hall and living room design in ${loc.name}. Our civil interior team in ${loc.district} builds custom floating TV media consoles, designer acoustic paneling, and Italian marble flooring for premium residences near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Living room civil renovations in ${loc.name} require a master touch. We specialize in open-concept living-dining integrations, multi-tiered POP ceilings with smart mood lighting, and stone veneer accents for apartments throughout ${loc.zone}, especially around ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `From space-planning to luxury finishing, our hall design services in ${loc.name} elevate the heart of your home. We coordinate all base civil restructuring, hidden cable conduits, and floor leveling across ${loc.district} for flawless execution near ${loc.landmarks[0] || loc.name}.`
+  ],
+  'bedroom-remodeling': [
+    (loc, rand) => `Turn your bedroom in ${loc.name} into a serene, private sanctuary. Our bedroom remodeling specialists in ${loc.district} provide complete civil upgrades including wardrobe masonry framing, soundproof door installations, concealed air-conditioning ducting, and attached bathroom renovations near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Optimize your bedroom layout in ${loc.name} with space-efficient civil alterations. From wooden laminate flooring to acoustic wall paneling and indirect cove lighting, we craft restful master bedrooms tailored to properties in ${loc.zone} near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Revitalize your bedroom in ${loc.name} with turnkey civil craftsmanship. We manage demolition of outdated fixtures, wall damp-proofing, and custom bedside feature walls for homes near ${loc.landmarks[0] || loc.name}, keeping the workspace clean and dust-managed.`
+  ],
+  'interior-design': [
+    (loc, rand) => `Experience bespoke turnkey interior design and civil fit-outs in ${loc.name}. We integrate 3D architectural visualization with precise structural masonry, premium flooring, and custom modular woodwork across ${loc.district}. Our team works with elite homeowners near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `From raw shell to ready-to-move luxury home, our turnkey interior design in ${loc.name} eliminates all coordination stress. Serving ${loc.zone}, we handle demolition, electrical planning, plumbing, ceiling design, and Italian marble polishing near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Exceptional interior design in ${loc.name} begins with solid civil engineering. AMS Civil Construction delivers impeccably finished residential and commercial interiors in ${loc.district}, ensuring your space near ${loc.landmarks[0] || loc.name} is functional, stunning, and on schedule.`
+  ],
+  '1bhk-2bhk-renovation': [
+    (loc, rand) => `Maximize every square foot of your 1BHK or 2BHK flat in ${loc.name} with our specialized space-optimization renovation packages. We manage smart kitchen expansion, compact bathroom overhauls, vitrified tile laying, and POP ceilings for housing complexes across ${loc.district} near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Renovating a 1BHK or 2BHK in ${loc.name} requires quick turnaround and zero disruption to neighbors. Our agile crews in ${loc.zone} complete turnkey civil transformations within 21 to 35 days near ${loc.landmarks[0] || loc.name}, delivering high-end aesthetics on a transparent budget.`,
+    (loc, rand) => `Give your compact apartment in ${loc.name} a complete modern makeover. From internal non-loadbearing wall adjustments to complete rewiring and waterproof bathroom remodeling, we cater to families in ${loc.district} living near ${loc.landmarks[0] || loc.name}.`
+  ],
+  '3bhk-4bhk-luxury-interiors': [
+    (loc, rand) => `For expansive 3BHK, 4BHK, and duplex penthouses in ${loc.name}, AMS Civil Construction delivers ultra-luxury civil interiors. Our master stonecraft artisans lay book-matched imported Italian marble, install multi-zone acoustic false ceilings, and craft bespoke ensuite bathrooms across ${loc.district} near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Luxury residential interiors in ${loc.name} demand uncompromising perfection and white-glove project management. We serve high-net-worth homeowners across ${loc.zone}, overseeing structural fit-outs, smart automation civil conduit routing, and designer finishes near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Elevate your spacious 3BHK or 4BHK residence in ${loc.name} with turnkey luxury craftsmanship. With dedicated senior architects and structural engineers deployed across ${loc.district}, we ensure your residence near ${loc.landmarks[0] || loc.name} achieves international standards of refinement.`
+  ],
+  'terrace-renovation': [
+    (loc, rand) => `Transform your exposed terrace in ${loc.name} into an elegant roof garden or outdoor entertainment deck while ensuring 100% leak-proof security. Our specialized terrace renovation teams in ${loc.district} apply elastomeric fiber-reinforced membranes, slope corrective screeding, and cool-roof heat-reflective tiles near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Stop terrace seepage permanently in ${loc.name} with our certified civil solutions. Serving ${loc.zone}, we build waterproof parapet walls, install brickbat coba or polyurethane waterproof coatings, and lay weather-proof vitrified outdoor pavers for properties near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Upgrade your rooftop in ${loc.name} with modern pergolas, waterproof planters, and non-slip tiles. We protect buildings across ${loc.district} from harsh monsoons and intense sun, backed by a written 5-year leak-proof warranty for projects near ${loc.landmarks[0] || loc.name}.`
+  ],
+  'simple-kitchen-work': [
+    (loc, rand) => `Looking for a sturdy, traditional kitchen built to withstand heavy daily use in ${loc.name}? We construct robust Kadappa stone-supported kitchen platforms with polished black or brown granite countertops, deep stainless steel sink fittings, and easy-clean ceramic wall tiles across ${loc.district} near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Simple kitchen civil work in ${loc.name} provides unmatched durability at an affordable cost. Our experienced masons in ${loc.zone} install solid masonry counters, concealed plumbing lines, and anti-skid flooring for rental homes and residences near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Get a hygienic, long-lasting kitchen platform in ${loc.name} built within days. AMS Civil Construction provides cost-effective granite and masonry kitchen remodeling across ${loc.district}, ensuring durable workmanship for homes near ${loc.landmarks[0] || loc.name}.`
+  ],
+  'gym-renovation': [
+    (loc, rand) => `Commercial and residential gym renovations in ${loc.name} require specialized civil reinforcement to handle heavy weight drops and high impact. In ${loc.district}, we install high-density shock-absorbing rubber gym flooring, acoustic sound-deadening wall partitions, and reinforced mirror wall framing near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Modernize your fitness center in ${loc.name} with complete civil and interior refurbishment. Our team in ${loc.zone} reconfigures locker rooms, builds luxury shower facilities with advanced waterproofing, and handles heavy HVAC civil ducting near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Turn any space into a high-performance training facility in ${loc.name}. We provide specialized civil floor leveling, industrial-grade electrical wiring for cardio equipment, and moisture-resistant wall coatings for fitness centers in ${loc.district} near ${loc.landmarks[0] || loc.name}.`
+  ],
+  'new-gym-construction': [
+    (loc, rand) => `Setting up a new commercial gym in ${loc.name}? AMS Civil Construction provides turnkey civil construction from raw commercial floor to grand opening. In ${loc.district}, we engineer structural floor load distribution for heavy selectorized machines, cardio zones, and CrossFit turf areas near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Build an industry-leading fitness center in ${loc.name} with customized zoning for weights, functional training, luxury changing rooms, and wellness steam rooms. Serving ${loc.zone}, our civil crews manage all plumbing, heavy electrical panels, and sound isolation near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `End-to-end gym civil construction in ${loc.name} executed with speed and durability. We handle structural modifications, reception desk masonry, and high-impact rubberized installations across ${loc.district} for gym owners near ${loc.landmarks[0] || loc.name}.`
+  ],
+  'office-renovation': [
+    (loc, rand) => `Revamp your corporate workspace in ${loc.name} to foster productivity and modern collaboration. We provide turnkey commercial office civil renovations across ${loc.district}, including acoustic glass partitioning, commercial modular carpet flooring, ceiling grids, and data server room civil framing near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Fast-track office renovations in ${loc.name} with zero operational downtime. Our teams in ${loc.zone} execute night-shift and weekend civil works for IT parks and commercial buildings near ${loc.landmarks[0] || loc.name}, delivering clean, immaculate handovers on strict deadlines.`,
+    (loc, rand) => `From executive boardrooms to modern open workstations, we deliver high-spec commercial civil renovations in ${loc.name}. We upgrade electrical conduits, install fire-resistant ceiling systems, and modernize pantry facilities across ${loc.district} near ${loc.landmarks[0] || loc.name}.`
+  ],
+  'new-office-construction': [
+    (loc, rand) => `Building a new corporate headquarters or branch office in ${loc.name}? AMS Civil Construction manages turnkey commercial construction from bare-shell fit-out to complete ready-to-occupy handover. We handle heavy power distributions, server room fireproofing, and acoustic zoning across ${loc.district} near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Execute your new office build in ${loc.name} with top-tier civil contracting. Serving commercial hubs across ${loc.zone}, we engineer durable floor leveling, structural mezzanine additions, and prestige reception areas for corporate clients near ${loc.landmarks[0] || loc.name}.`,
+    (loc, rand) => `Scale your business in ${loc.name} with a custom-built, future-ready office. We coordinate all civil engineering, municipal fire-safety standards, HVAC ducting, and luxury executive suites across ${loc.district} near ${loc.landmarks[0] || loc.name}.`
+  ],
 };
 
 /* ── Generate unique paragraph based on location seed ──────── */

@@ -150,6 +150,17 @@ export const metadata: Metadata = {
     'accha builder kaun hai Mumbai',
     'renovation kaise hota hai',
     'construction company ka number',
+    'with material civil work rate Mumbai',
+    'labour rate civil contractor Mumbai',
+    'society repair civil contractor Mumbai',
+    'flat renovation civil work Mumbai',
+
+    /* ── Marathi Intent ── */
+    'Mumbai madhye thekedar',
+    'ghar bandhani thekedar Mumbai',
+    'civil contractor marathi Mumbai',
+    'flat renovation thekedar Mumbai',
+    'tile basavnyacha thekedar Mumbai',
   ],
 
   /* ── Authors & Publisher ──────────────────────────────────── */

@@ -56,8 +56,8 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `✓ Best Civil Contractor in ${loc.name} [2026] | Top Rated | AMS Civil`;
-  const description = `⭐ 4.9/5 Rated. Award-Winning Civil Contractor in ${loc.name}, ${loc.district}. Premium bungalow construction, renovations & interior work. 100% Guaranteed Quality. Call now!`;
+  const title       = `#1 Civil Contractor in ${loc.name} [2026] | Top Rated | AMS Civil`;
+  const description = `⭐ 4.9/5 Rated. Top-rated civil contractor in ${loc.name}, ${loc.district}. Bungalow construction, renovations & interior civil work. 10+ yrs exp. Call +91 87793 91690 for free visit!`;
 
   return {
     title,
@@ -106,6 +106,19 @@ export async function generateMetadata(
       `false ceiling ${loc.name}`,
       `sasta aur achha contractor ${loc.name}`,
       `civil contractor near me`,
+      `with material civil rate ${loc.name}`,
+      `labour rate civil contractor ${loc.name}`,
+      `civil work quotation ${loc.name}`,
+
+      /* Marathi Local Search Queries */
+      `${loc.name} madhye thekedar`,
+      `${loc.name} madhye civil kaam`,
+      `${loc.name} civil contractor marathi`,
+      `ghar bandhani thekedar ${loc.name}`,
+
+      /* Landmarks & Pincode */
+      ...(loc.pincode ? [`civil contractor in ${loc.pincode}`, `construction company in ${loc.pincode}`] : []),
+      ...loc.landmarks.slice(0, 3).map(lm => `civil contractor near ${lm}`),
       ...loc.nearby.map(n => `best construction company in ${n}`),
       ...loc.nearby.map(n => `civil contractor near ${n}`),
     ],

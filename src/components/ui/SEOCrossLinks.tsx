@@ -25,7 +25,7 @@ export default function SEOCrossLinks({
   if (currentServiceSlug && !currentLocationSlug) {
     const svc = services.find(s => s.slug === currentServiceSlug);
     if (svc) {
-      locations.filter(l => topCities.includes(l.slug) || Math.random() > 0.5).slice(0, limit).forEach(loc => {
+      locations.filter((l, i) => topCities.includes(l.slug) || i % 3 === 0).slice(0, limit).forEach(loc => {
         crossLinks.push({
           label: `${svc.title} in ${loc.name}`,
           url: `/areas/${loc.slug}/${svc.slug}`

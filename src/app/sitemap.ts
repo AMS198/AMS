@@ -91,17 +91,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
 
-    // SEO: Generate granular Location × Service pages for CORE_ZONES (Mumbai / MMR) to maximize high-intent leads
-    if (CORE_ZONES.includes(loc.zone)) {
-      services.forEach(svc => {
-        locationPages.push({
-          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-          lastModified:    SITE_UPDATED,
-          changeFrequency: 'weekly' as const,
-          priority:        getLocationServicePriority(loc.zone, loc.slug),
-        });
+    // SEO: Generate granular Location × Service pages for ALL locations across Mumbai and India
+    services.forEach(svc => {
+      locationPages.push({
+        url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+        lastModified:    SITE_UPDATED,
+        changeFrequency: 'weekly' as const,
+        priority:        getLocationServicePriority(loc.zone, loc.slug),
       });
-    }
+    });
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
