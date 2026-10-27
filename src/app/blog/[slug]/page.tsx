@@ -74,8 +74,9 @@ function getViewsFromSlug(slug: string) {
   return (base + variance).toLocaleString('en-IN');
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const blog = await getBlogData(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const blog = await getBlogData(slug);
   
   if (!blog) return { title: 'Article Not Found' };
 
@@ -100,17 +101,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function BlogArticlePage({ params }: { params: { slug: string } }) {
-  const blog = await getBlogData(params.slug);
+export default async function BlogArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const blog = await getBlogData(slug);
   if (!blog) notFound();
 
-  const related = await getRelatedBlogs(params.slug);
+  const related = await getRelatedBlogs(slug);
   const readingTime = calculateReadingTime(blog.content || '');
   const formattedDate = new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', {
     year: 'numeric', month: 'long', day: 'numeric',
   });
   
-  const viewsCount = getViewsFromSlug(params.slug);
+  const viewsCount = getViewsFromSlug(slug);
 
   const shareUrl = `https://www.amscivilwork.in/blog/${blog.slug}`;
   const shareText = encodeURIComponent(`Check out this article: ${blog.title}`);
