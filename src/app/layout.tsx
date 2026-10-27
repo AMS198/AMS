@@ -406,8 +406,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Adsterra ads are loaded per-component, no global head script needed */}
-
         {/* Preconnect for Cloudinary images */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
         {/* PWA Manifest */}
@@ -448,6 +446,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-TD85QNQ7KW');
           `}
         </Script>
+
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6377824535072521"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
 
       <body className="antialiased" style={{ background: '#0B1120', color: '#CBD5E1' }}>

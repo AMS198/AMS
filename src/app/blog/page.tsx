@@ -6,7 +6,6 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDb } from '@/lib/mongodb';
 import { Calendar, PenTool, ArrowRight, Eye } from 'lucide-react';
-import AdsterraBanner from '@/components/ads/AdsterraBanner';
 
 // Generate realistic deterministic view count >= 50,000 based on slug
 function getViewsFromSlug(slug: string) {
@@ -63,11 +62,6 @@ export default async function BlogIndexPage() {
           </p>
         </div>
 
-        {/* Adsterra Banner Ad */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <AdsterraBanner variant="728x90" />
-        </div>
-
         {blogs.length === 0 ? (
           <div className="text-center py-20 bg-[#101827] border border-[#1E2D45] rounded-xl flex flex-col items-center justify-center">
             <PenTool size={48} className="text-slate-600 mb-4" />
@@ -114,12 +108,6 @@ export default async function BlogIndexPage() {
                       </div>
                     </div>
                   </Link>
-                  {/* Inject an Ad banner after every 3rd card */}
-                  {(index + 1) % 3 === 0 && (
-                    <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-center my-6">
-                      <AdsterraBanner variant="728x90" />
-                    </div>
-                  )}
                 </React.Fragment>
               );
             })}

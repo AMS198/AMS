@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>3. Third-Party Advertising and Links</h2>
           <p>
-            Our website may use third-party advertising companies to serve ads when you visit our website (e.g. Google AdSense, Adsterra). These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
+            Our website may use third-party advertising companies to serve ads when you visit our website (e.g. Google AdSense). These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
           </p>
           <p>
             Our Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.

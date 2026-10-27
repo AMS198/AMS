@@ -13,8 +13,6 @@ import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Fa
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { sanitizeBlogHtml } from '@/lib/sanitizeHtml';
 import ShareButtons from '@/components/ui/ShareButtons';
-import AdsterraBanner from '@/components/ads/AdsterraBanner';
-import AdsterraNative from '@/components/ads/AdsterraNative';
 
 // Pre-generate all published blog slugs at build time.
 // Next.js will statically render each one — no Serverless invocations for reads.
@@ -161,23 +159,8 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
         {/* Background Gradients */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="container-custom max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row gap-8">
-            
-            {/* Left Sidebar Ad (Desktop Only) */}
-            <aside className="hidden lg:block w-64 flex-shrink-0">
-              <div className="sticky top-32 w-full">
-                <AdsterraBanner variant="300x250" />
-              </div>
-            </aside>
-
-            {/* Main Article Content */}
-            <article className="flex-1 min-w-0 max-w-4xl mx-auto w-full">
-          
-          {/* Massive Top Banner Ad */}
-          <div className="w-full mb-8 flex justify-center">
-            <AdsterraBanner variant="728x90" />
-          </div>
+        <div className="container-custom max-w-4xl mx-auto relative z-10">
+          <article className="w-full">
 
           {/* Breadcrumbs & Back */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -239,12 +222,8 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
           </header>
 
           {/* Article Body */}
-          <div className="relative">
-            {/* Adsterra In-Content Ad (Top) */}
-            <div className="w-full my-8">
-              <AdsterraBanner variant="728x90" />
-            </div>
-
+          {/* Article Body */}
+          <div className="relative my-8">
             <div className="prose prose-invert prose-orange max-w-none 
                            prose-headings:font-display prose-headings:font-black
                            prose-h2:text-3xl prose-h2:text-white prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b-2 prose-h2:border-orange-500/20
@@ -256,15 +235,6 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
                            prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-500/5 prose-blockquote:p-6 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-xl
                            prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-[#1E2D45]"
                  dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(blog.content || '') }} />
-          </div>
-
-          {/* Adsterra Native Ad (Bottom — blends with content) */}
-          <div className="w-full mt-12 mb-8">
-            <AdsterraNative />
-          </div>
-
-          <div className="w-full my-8 flex justify-center">
-            <AdsterraBanner variant="728x90" />
           </div>
 
           <div className="mt-8 px-2">
@@ -345,19 +315,7 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             </section>
           )}
 
-          <div className="w-full mt-12 flex justify-center">
-            <AdsterraBanner variant="728x90" />
-          </div>
             </article>
-
-            {/* Right Sidebar Ad (Desktop Only) */}
-            <aside className="hidden lg:block w-64 flex-shrink-0">
-              <div className="sticky top-32 w-full">
-                <AdsterraBanner variant="300x250" />
-              </div>
-            </aside>
-
-          </div>
         </div>
       </main>
     </>
