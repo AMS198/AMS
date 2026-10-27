@@ -1,8 +1,6 @@
-// SSG: Pre-build all blog posts at deploy time.
-// Cache is NEVER time-based — purged only when admin saves/updates a blog.
+// SSG: Pre-build all blog posts at deploy time, with on-demand fallback for newly added posts.
 export const revalidate = false;
-export const dynamic = 'force-static';
-export const dynamicParams = false; // Strictly prevent on-demand ISR reads for missing slugs
+export const dynamicParams = true; // Allow newly added blogs in MongoDB to render on-demand and cache seamlessly
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';

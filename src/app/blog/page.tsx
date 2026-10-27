@@ -1,5 +1,5 @@
-// SSG: Purged on-demand when admin creates/updates/deletes a blog post.
-export const revalidate = false;
+// Cache for 60 seconds so newly added blogs appear promptly with zero server load
+export const revalidate = 60;
 
 import React from 'react';
 import { Metadata } from 'next';
