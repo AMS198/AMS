@@ -224,6 +224,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'a-NPUUlhFt4ndck1sIedFhwSQG-oqFwumbqeujTHc-g',
     other: {
+      'google-adsense-account': 'ca-pub-6377824535072521',
       'msvalidate.01': 'ADD_YOUR_BING_CODE_HERE', // Get from bing.com/webmasters
       'p:domain_verify': '24ef3d99f9f608ed1abdd2f62a065345',
     },
@@ -448,11 +449,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
 
         {/* Google AdSense */}
-        <Script
+        <meta name="google-adsense-account" content="ca-pub-6377824535072521" />
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6377824535072521"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
 
