@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { WhatsAppLogo } from './BrandIcons';
 import { X, Send, UserCheck, MessageSquare } from 'lucide-react';
+import { trackClick } from '@/lib/tracker';
 
 export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,7 @@ export default function WhatsAppButton() {
 
   const handleSend = (e?: React.FormEvent) => {
     e?.preventDefault();
+    trackClick('whatsapp', 'floating_chat_modal_send', adminPhone);
     const currentUrl = typeof window !== 'undefined' ? window.location.href : 'your website';
     const finalMessage = message.trim() 
       ? `${message}\n\n(Sent from: ${currentUrl})`

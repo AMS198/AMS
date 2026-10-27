@@ -17,6 +17,7 @@ import DPDPConsentBanner from '@/components/ui/DPDPConsentBanner';
 import { Toaster } from 'react-hot-toast';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 import SeoHead from '@/components/seo/SeoHead';
+import ClickTracker from '@/components/analytics/ClickTracker';
 
 /* ─────────────────────────────────────────────────────────────
    SEO METADATA
@@ -459,6 +460,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </noscript>
         <SeoHead />
+        <ClickTracker />
         <Toaster
           position="top-right"
           toastOptions={{
