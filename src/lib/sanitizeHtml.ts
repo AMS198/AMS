@@ -14,8 +14,15 @@ import { marked } from 'marked';
 export function sanitizeBlogHtml(htmlOrMarkdown: string): string {
   if (!htmlOrMarkdown) return '';
 
+  let processed = htmlOrMarkdown;
+  const hasHtmlTags = /<\/?(?:h[1-6]|p|div|ul|ol|li|table|article|section|blockquote)[^>]*>/i.test(htmlOrMarkdown);
+  if (hasHtmlTags) {
+    // Strip leading spaces from lines so marked doesn't misinterpret indented HTML as <pre><code> blocks
+    processed = processed.replace(/^[ \t]+/gm, '');
+  }
+
   // Parse markdown into HTML first (works fine if it's already HTML too)
-  let sanitized = marked.parse(htmlOrMarkdown, { async: false }) as string;
+  let sanitized = marked.parse(processed, { async: false }) as string;
 
   // Fix 1: Remove completely broken anchor tags where <a href= leaked as text
   // e.g., text that contains literal "<a href=" as visible text (not actual tags)
