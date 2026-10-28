@@ -211,40 +211,6 @@ export default async function LocationPage(props: { params: Promise<{ location: 
           'https://www.instagram.com/amscivilwork/',
           'https://wa.me/918779391690',
         ],
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: String(28 + (locations.indexOf(loc) % 47) * 3 + (loc.slug.length % 5)),
-          bestRating: '5',
-          worstRating: '1',
-        },
-        /* Individual reviews — triggers Google SERP star ratings */
-        review: [
-          {
-            '@type': 'Review',
-            itemReviewed: { '@type': 'LocalBusiness', name: 'AMS Civil Construction', telephone: '+918779391690' },
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-            author: { '@type': 'Person', name: 'Rajesh Sharma' },
-            reviewBody: `AMS Civil Construction did excellent bungalow construction work near ${loc.name}. Very professional team with top quality materials. Highly recommended for any construction work in ${loc.district}.`,
-            datePublished: '2025-03-15',
-          },
-          {
-            '@type': 'Review',
-            itemReviewed: { '@type': 'LocalBusiness', name: 'AMS Civil Construction', telephone: '+918779391690' },
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-            author: { '@type': 'Person', name: 'Priya Mehta' },
-            reviewBody: `Best construction company in ${loc.name}. They completed our full renovation on time and within budget. The quality of finishing is outstanding.`,
-            datePublished: '2025-06-20',
-          },
-          {
-            '@type': 'Review',
-            itemReviewed: { '@type': 'LocalBusiness', name: 'AMS Civil Construction', telephone: '+918779391690' },
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-            author: { '@type': 'Person', name: 'Suresh Patel' },
-            reviewBody: `We hired AMS for bathroom renovation and kitchen work in ${loc.name}. The team was punctual, skilled, and used premium materials. 100% satisfied with the result.`,
-            datePublished: '2025-09-10',
-          },
-        ],
       },
       /* Breadcrumb Schema for structure */
       {

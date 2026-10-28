@@ -354,13 +354,6 @@ const jsonLd = {
           { '@type':'Offer', itemOffered: { '@type':'Service', name:'Building Repair Work',   description:'Structural repair, crack treatment, and concrete restoration', areaServed:'India', provider:{'@id':'https://www.amscivilwork.in/#business'} } },
         ],
       },
-      aggregateRating: {
-        '@type':       'AggregateRating',
-        ratingValue:   '4.9',
-        reviewCount:   '142',
-        bestRating:    '5',
-        worstRating:   '1',
-      },
       sameAs: [
         'https://www.facebook.com/profile.php?id=61570712849063',
         'https://www.instagram.com/amscivilwork/',

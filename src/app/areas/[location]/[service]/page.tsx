@@ -215,13 +215,6 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
       latitude: getGeoCoordinates(loc.district).lat,
       longitude: getGeoCoordinates(loc.district).lon,
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: String(45 + (locations.indexOf(loc!) * 7 + services.indexOf(svc!) * 3) % 40),
-      bestRating: '5',
-      worstRating: '1',
-    }
   };
 
   const extraJsonLd = {

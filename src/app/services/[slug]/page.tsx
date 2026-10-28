@@ -197,13 +197,6 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         areaServed: { '@type': 'State', name: 'Maharashtra' },
         serviceType: svc.title,
         url: `https://www.amscivilwork.in/services/${svc.slug}`,
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: String(60 + services.indexOf(svc) * 7),
-          bestRating: '5',
-          worstRating: '1',
-        },
       },
       {
         '@type': 'BreadcrumbList',

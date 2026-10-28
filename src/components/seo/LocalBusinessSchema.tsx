@@ -72,41 +72,6 @@ export default function LocalBusinessSchema() {
       'Wall Scraping, Putty & Emulsion Painting',
       'Electrical Chipping & Conduiting'
     ],
-    'aggregateRating': {
-      '@type': 'AggregateRating',
-      'ratingValue': '4.9',
-      'reviewCount': '142',
-      'bestRating': '5',
-      'worstRating': '1'
-    },
-    'review': [
-      {
-        '@type': 'Review',
-        'itemReviewed': {
-          '@type': 'LocalBusiness',
-          'name': 'AMS Civil Construction',
-          'image': 'https://www.amscivilwork.in/og-image.jpg',
-          'telephone': '+918779391690'
-        },
-        'author': { '@type': 'Person', 'name': 'Vikram Mehta' },
-        'datePublished': '2026-06-15',
-        'reviewBody': 'AMS Civil Construction did an incredible job with our bungalow in Bandra. They were transparent about pricing from day one and finished the work right on schedule.',
-        'reviewRating': { '@type': 'Rating', 'ratingValue': '5' }
-      },
-      {
-        '@type': 'Review',
-        'itemReviewed': {
-          '@type': 'LocalBusiness',
-          'name': 'AMS Civil Construction',
-          'image': 'https://www.amscivilwork.in/og-image.jpg',
-          'telephone': '+918779391690'
-        },
-        'author': { '@type': 'Person', 'name': 'Anjali Desai' },
-        'datePublished': '2026-05-20',
-        'reviewBody': 'We hired them for a complete flat renovation in Andheri West. Their team is highly professional and handled everything from plumbing to false ceilings.',
-        'reviewRating': { '@type': 'Rating', 'ratingValue': '5' }
-      }
-    ],
     'openingHoursSpecification': [
       {
         '@type': 'OpeningHoursSpecification',
