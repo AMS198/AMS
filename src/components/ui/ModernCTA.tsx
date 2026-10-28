@@ -30,7 +30,7 @@ export default function ModernCTA({
   title = "Ready to Build Your Dream Space?",
   subtitle = "Premium Turnkey Construction, Bungalow Builds & Luxury Renovations in Mumbai.",
   description = "AMS Civil Construction brings 10+ years of trusted engineering expertise to your residential or commercial project. From RCC structural frameworks to bespoke Italian modular kitchens and luxury marble flooring, we guarantee ISI-grade materials, transparent itemised pricing, and direct engineer supervision.",
-  image = "/images/cta-bg.png"
+  image = "/images/cta-bg.jpg"
 }: ModernCTAProps) {
   // Extract location if present in title (e.g. "Ready to Build in Bandra?")
   const locationTag = title.includes(' in ')

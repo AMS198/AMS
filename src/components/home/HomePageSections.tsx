@@ -262,7 +262,7 @@ function IntroSection() {
           {/* About Banner Image */}
           <div className="relative aspect-[1.35/1] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
             <Image 
-              src="/images/aboutbenner.png" 
+              src="/images/aboutbenner.jpg" 
               alt="About AMS Civil Construction" 
               fill 
               className="object-contain"
@@ -767,8 +767,8 @@ function TransformationSection() {
     location: 'Davanagere, Karnataka',
     scope: 'Ground-Up Masonry to Luxury Living',
     duration: '45 Days Turnaround',
-    beforeImage: '/real-projects/before.png',
-    afterImage: '/real-projects/after.png',
+    beforeImage: '/real-projects/before.jpg',
+    afterImage: '/real-projects/after.jpg',
     beforeLabel: 'Raw Brick Shell',
     afterLabel: 'Finished Luxury Villa',
   };
@@ -1012,7 +1012,7 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
       location: 'Pali Hill, Bandra West',
       status: 'completed',
       description: 'Comprehensive structural reconfiguration, Italian marble flooring, designer POP cove ceilings, and 4 luxury spa bathrooms with Jaquar diverters.',
-      images: ['/real-projects/Luxury 4BHK Penthouse Renovation.png'],
+      images: ['/real-projects/Luxury 4BHK Penthouse Renovation.jpg'],
       completedDate: '2026',
     },
     {

@@ -78,8 +78,20 @@ const nextConfig = {
         ],
       },
       {
-        // Cache static assets aggressively — better Core Web Vitals
-        source: '/(.*)\\.(ico|png|jpg|jpeg|svg|webp|woff|woff2)',
+        // Cache static assets aggressively — better Core Web Vitals & 0 Origin Hits
+        source: '/:path*.(ico|png|jpg|jpeg|svg|webp|woff|woff2)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/images/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/real-projects/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],

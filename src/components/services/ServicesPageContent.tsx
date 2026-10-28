@@ -470,7 +470,7 @@ export default function ServicesPageContent() {
       <ModernCTA
         title="Need Advice on Your Civil Construction Project?"
         subtitle="Book a free on-site visit with our senior civil engineer. We take measurements, discuss ideas, and provide an itemized quote with zero obligation."
-        image="/images/cta-bg.png"
+        image="/images/cta-bg.jpg"
       />
     </>
   );

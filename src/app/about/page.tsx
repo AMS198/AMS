@@ -199,7 +199,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#101827] group">
                 <Image
-                  src="/aboutpage.png"
+                  src="/aboutpage.jpg"
                   alt="AMS Civil Construction Team and Projects in Mumbai"
                   fill
                   priority
@@ -454,7 +454,7 @@ export default function AboutPage() {
       <ModernCTA
         title="Inspired by Our Journey? Let's Build Your Dream Project."
         subtitle="Schedule a free on-site visit with our senior engineering team across Mumbai, Thane, and Navi Mumbai."
-        image="/images/cta-bg.png"
+        image="/images/cta-bg.jpg"
       />
     </>
   );
