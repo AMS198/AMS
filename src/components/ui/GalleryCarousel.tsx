@@ -18,14 +18,14 @@ export interface GalleryItem {
 }
 
 const fallbackGalleryItems: GalleryItem[] = [
-  { id: 'fb-1', src: '/images/bungalow-construction.png', title: 'Luxury 3-Storey Bungalow Structure', category: 'Bungalow' },
-  { id: 'fb-2', src: '/images/bathroom-renovation.png', title: 'Italian Marble Designer Bathroom', category: 'Bathroom' },
-  { id: 'fb-3', src: '/images/kitchen-work.png', title: 'Modular Kitchen Civil Foundation', category: 'Kitchen' },
-  { id: 'fb-4', src: '/images/interior-work.png', title: 'Turnkey Architectural Interior', category: 'Interior' },
-  { id: 'fb-5', src: '/images/flooring-work.png', title: 'Precision Vitrified & Marble Flooring', category: 'Flooring' },
-  { id: 'fb-6', src: '/images/pop-work.png', title: 'Modern False Ceiling & Cove Lighting', category: 'False Ceiling' },
-  { id: 'fb-7', src: '/images/swimming-pool.png', title: 'Waterproof RCC Swimming Pool', category: 'Swimming Pool' },
-  { id: 'fb-8', src: '/images/compound-wall-real.png', title: 'Heavy-Duty Boundary Wall & Gate', category: 'Structural' },
+  { id: 'fb-1', src: '/images/bungalow-construction.jpg', title: 'Luxury 3-Storey Bungalow Structure', category: 'Bungalow' },
+  { id: 'fb-2', src: '/images/bathroom-renovation.jpg', title: 'Italian Marble Designer Bathroom', category: 'Bathroom' },
+  { id: 'fb-3', src: '/images/kitchen-work.jpg', title: 'Modular Kitchen Civil Foundation', category: 'Kitchen' },
+  { id: 'fb-4', src: '/images/interior-work.jpg', title: 'Turnkey Architectural Interior', category: 'Interior' },
+  { id: 'fb-5', src: '/images/flooring-work.jpg', title: 'Precision Vitrified & Marble Flooring', category: 'Flooring' },
+  { id: 'fb-6', src: '/images/pop-work.jpg', title: 'Modern False Ceiling & Cove Lighting', category: 'False Ceiling' },
+  { id: 'fb-7', src: '/images/swimming-pool.jpg', title: 'Waterproof RCC Swimming Pool', category: 'Swimming Pool' },
+  { id: 'fb-8', src: '/images/compound-wall-real.jpg', title: 'Heavy-Duty Boundary Wall & Gate', category: 'Structural' },
 ];
 
 interface Props {

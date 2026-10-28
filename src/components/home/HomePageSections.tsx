@@ -1022,7 +1022,7 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
       location: 'Seawoods, Navi Mumbai',
       status: 'completed',
       description: 'End-to-end ground-up construction including RCC framed structure, brickwork, waterproofing, external plaster, and modern glass façade civil prep.',
-      images: ['/images/bungalow-construction.png'],
+      images: ['/images/bungalow-construction.jpg'],
       completedDate: '2026',
     },
     {
@@ -1032,7 +1032,7 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
       location: 'Hiranandani Gardens, Powai',
       status: 'completed',
       description: 'Complete moisture diagnosis, 5-layer chemical waterproofing, full-height Italian marble slabs, and concealed thermostatic plumbing.',
-      images: ['/images/bathroom-renovation.png'],
+      images: ['/images/bathroom-renovation.jpg'],
       completedDate: '2026',
     },
     {
@@ -1042,7 +1042,7 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
       location: 'Lokhandwala, Andheri West',
       status: 'completed',
       description: 'Laser-level subfloor preparation, zero-lip 4x2 GVT tiles laying, epoxy grouting, and heavy-duty wear-resistant perimeter beading.',
-      images: ['/images/flooring-work.png'],
+      images: ['/images/flooring-work.jpg'],
       completedDate: '2026',
     },
     {
@@ -1052,7 +1052,7 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
       location: 'Worli Sea Face, Mumbai',
       status: 'completed',
       description: 'Multi-tiered gypsum board POP ceilings with concealed AC ducting boxing, acoustic insulation, and precision LED cove channel integration.',
-      images: ['/images/pop-work.png'],
+      images: ['/images/pop-work.jpg'],
       completedDate: '2026',
     },
     {
@@ -1062,7 +1062,7 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
       location: 'Ghodbunder Road, Thane West',
       status: 'ongoing',
       description: 'Ongoing 2-storey vertical structural expansion with lightweight AAC blockwork, seismic RCC tie-beams, and weather-seal terrace roof.',
-      images: ['/images/compound-wall-real.png'],
+      images: ['/images/compound-wall-real.jpg'],
       completedDate: 'In Progress',
     },
   ];

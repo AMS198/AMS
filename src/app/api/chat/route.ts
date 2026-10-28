@@ -2,10 +2,11 @@
 import { google } from '@ai-sdk/google';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
+import { getDb } from '@/lib/mongodb';
+import nodemailer from 'nodemailer';
 
-// Allow streaming responses up to 15 seconds to save Fluid CPU
-export const maxDuration = 15;
-export const runtime = 'edge';
+// Allow streaming responses up to 30 seconds
+export const maxDuration = 30;
 
 const SYSTEM_PROMPT = `
 You are the official AI Assistant for AMS Civil Construction, a premium civil contractor based in Mumbai, India.
@@ -45,8 +46,60 @@ export async function POST(req: Request) {
             location: z.string().optional().describe('Where they want the work done'),
           }),
           execute: async ({ name, phone, serviceRequested, location }) => {
-            // In a real app, you would save this to MongoDB or send an email/SMS
             console.log(`[LEAD CAPTURED] Name: ${name}, Phone: ${phone}, Service: ${serviceRequested}, Location: ${location}`);
+
+            // 1. Save directly to MongoDB enquiries collection
+            try {
+              const db = await getDb();
+              await db.collection('enquiries').insertOne({
+                name: (name || 'Valued Client').trim(),
+                phone: (phone || '').trim(),
+                service: (serviceRequested || 'Site Visit Consultation').trim(),
+                location: (location || 'Mumbai & MMR').trim(),
+                status: 'new',
+                source: 'ai-chatbot',
+                createdAt: new Date(),
+              });
+            } catch (dbErr) {
+              console.error('[AI Chat] Failed to persist lead to MongoDB:', dbErr);
+            }
+
+            // 2. Send instant email notification to admin
+            if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+              try {
+                const transporter = nodemailer.createTransport({
+                  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+                  port: Number(process.env.EMAIL_PORT) || 587,
+                  secure: false,
+                  auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS,
+                  },
+                });
+
+                await transporter.sendMail({
+                  from: `"AMS AI Assistant" <${process.env.EMAIL_USER}>`,
+                  to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+                  subject: `🤖 New AI Chatbot Lead — ${name} (+91 ${phone})`,
+                  html: `
+                    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f8fafc; border-radius: 8px;">
+                      <h2 style="color: #ea580c; margin-top: 0;">New Lead Captured by SmartBot AI</h2>
+                      <p>A visitor just booked a site visit through the website AI chat assistant:</p>
+                      <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold; width: 140px;">Name:</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${name}</td></tr>
+                        <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Phone:</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;"><a href="tel:+91${phone}" style="color: #ea580c; font-weight: bold;">+91 ${phone}</a> | <a href="https://wa.me/91${phone}" style="color: #16a34a; font-weight: bold;">WhatsApp Chat</a></td></tr>
+                        <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Service:</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${serviceRequested || 'General Consultation'}</td></tr>
+                        <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Location:</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${location || 'Mumbai'}</td></tr>
+                        <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Timestamp:</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</td></tr>
+                      </table>
+                    </div>
+                  `,
+                });
+              } catch (mailErr) {
+                console.warn('[AI Chat] Failed to send email alert:', mailErr);
+              }
+            }
+
             return {
               success: true,
               message: `Site visit booked successfully for ${name}. Our engineer will contact them on ${phone}.`,

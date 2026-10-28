@@ -396,7 +396,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
               </div>
             </div>
             <div className="relative aspect-square sm:aspect-video lg:aspect-square rounded-3xl overflow-hidden group">
-               <Image src="/images/bungalow-construction.png" alt={`Civil Work in ${loc.name}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+               <Image src="/images/bungalow-construction.jpg" alt={`Civil Work in ${loc.name}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-60" />
                <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
                   <p className="text-white font-bold text-lg mb-1">Serving {loc.name} & Surroundings</p>

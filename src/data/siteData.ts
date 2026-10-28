@@ -64,7 +64,7 @@ export const services: Service[] = [
       'Dedicated project manager assigned',
       'On-time delivery guarantee',
     ],
-    image: '/images/bungalow-construction.png',
+    image: '/images/bungalow-construction.jpg',
   },
   {
     id: '9',
@@ -80,7 +80,7 @@ export const services: Service[] = [
       'High-precision wall & ceiling work',
       'Seamless integration with designers',
     ],
-    image: '/images/interior-work.png',
+    image: '/images/interior-work.jpg',
   },
   {
     id: '10',
@@ -96,7 +96,7 @@ export const services: Service[] = [
       'Premium glass & mosaic tile finishing',
       'End-to-end filtration & plumbing setup',
     ],
-    image: '/images/swimming-pool.png',
+    image: '/images/swimming-pool.jpg',
   },
   {
     id: '11',
@@ -112,7 +112,7 @@ export const services: Service[] = [
       'Perimeter security enhancements',
       'Weather-resistant external finishes',
     ],
-    image: '/images/compound-wall-real.png',
+    image: '/images/compound-wall-real.jpg',
   },
   {
     id: '12',
@@ -145,7 +145,7 @@ export const services: Service[] = [
       'Dust-free work process',
       'Completed within 7–14 days',
     ],
-    image: '/images/bathroom-renovation.png',
+    image: '/images/bathroom-renovation.jpg',
   },
   {
     id: '3',
@@ -162,7 +162,7 @@ export const services: Service[] = [
       'Both residential & commercial',
       'Minimum wastage guarantee',
     ],
-    image: '/images/tiles-work.png',
+    image: '/images/tiles-work.jpg',
   },
   {
     id: '4',
@@ -179,7 +179,7 @@ export const services: Service[] = [
       'Integrated appliance planning',
       '3D design preview before work starts',
     ],
-    image: '/images/kitchen-work.png',
+    image: '/images/kitchen-work.jpg',
   },
   {
     id: '5',
@@ -196,7 +196,7 @@ export const services: Service[] = [
       'Seamless joins & edges',
       'Polishing & sealing finish',
     ],
-    image: '/images/flooring-work.png',
+    image: '/images/flooring-work.jpg',
   },
   {
     id: '6',
@@ -230,7 +230,7 @@ export const services: Service[] = [
       'Smooth paint-ready surfaces',
       'Quick installation process',
     ],
-    image: '/images/pop-work.png',
+    image: '/images/pop-work.jpg',
   },
   {
     id: '8',
@@ -247,7 +247,7 @@ export const services: Service[] = [
       'Crack-free guarantee',
       'Ready-to-paint finish',
     ],
-    image: '/images/plaster-work.png',
+    image: '/images/plaster-work.jpg',
   },
   {
     id: '13',
@@ -298,7 +298,7 @@ export const services: Service[] = [
       'Stain-resistant quartz countertops',
       'Factory-finish seamless edges',
     ],
-    image: '/images/kitchen-work.png',
+    image: '/images/kitchen-work.jpg',
   },
   {
     id: '16',
@@ -315,7 +315,7 @@ export const services: Service[] = [
       'Premium wall textures & wallpaper',
       'Italian marble laying & polishing',
     ],
-    image: '/images/interior-work.png',
+    image: '/images/interior-work.jpg',
   },
   {
     id: '17',
@@ -349,7 +349,7 @@ export const services: Service[] = [
       'Dedicated project manager',
       'On-time handover',
     ],
-    image: '/images/interior-work.png',
+    image: '/images/interior-work.jpg',
   },
   {
     id: '19',
@@ -366,7 +366,7 @@ export const services: Service[] = [
       'Affordable complete packages',
       'Zero-hassle turnkey execution',
     ],
-    image: '/images/interior-work.png',
+    image: '/images/interior-work.jpg',
   },
   {
     id: '20',
@@ -417,7 +417,7 @@ export const services: Service[] = [
       'Strong plumbing for sinks',
       'Highly affordable and durable',
     ],
-    image: '/images/kitchen-work.png',
+    image: '/images/kitchen-work.jpg',
   },
   {
     id: '23',
@@ -735,14 +735,14 @@ export const stats = [
 /* ─────────────────────────────────────────────────────────────── */
 
 export const galleryImages = [
-  { src: '/images/bungalow-construction.png', alt: 'Bungalow Exterior', category: 'Bungalow' },
-  { src: '/images/bathroom-renovation.png', alt: 'Luxury Bathroom', category: 'Bathroom' },
-  { src: '/images/kitchen-work.png', alt: 'Modular Kitchen', category: 'Kitchen' },
-  { src: '/images/tiles-work.png', alt: 'Floor Tiles', category: 'Tiles' },
-  { src: '/images/interior-work.png', alt: 'Living Room', category: 'Interior' },
-  { src: '/images/pop-work.png', alt: 'POP Ceiling', category: 'POP' },
-  { src: '/images/flooring-work.png', alt: 'Marble Flooring', category: 'Flooring' },
-  { src: '/images/swimming-pool.png', alt: 'Swimming Pool', category: 'Pool' },
-  { src: '/images/plaster-work.png', alt: 'Plaster Work', category: 'Plaster' },
-  { src: '/images/compound-wall-real.png', alt: 'Compound Wall', category: 'Wall' },
+  { src: '/images/bungalow-construction.jpg', alt: 'Bungalow Exterior', category: 'Bungalow' },
+  { src: '/images/bathroom-renovation.jpg', alt: 'Luxury Bathroom', category: 'Bathroom' },
+  { src: '/images/kitchen-work.jpg', alt: 'Modular Kitchen', category: 'Kitchen' },
+  { src: '/images/tiles-work.jpg', alt: 'Floor Tiles', category: 'Tiles' },
+  { src: '/images/interior-work.jpg', alt: 'Living Room', category: 'Interior' },
+  { src: '/images/pop-work.jpg', alt: 'POP Ceiling', category: 'POP' },
+  { src: '/images/flooring-work.jpg', alt: 'Marble Flooring', category: 'Flooring' },
+  { src: '/images/swimming-pool.jpg', alt: 'Swimming Pool', category: 'Pool' },
+  { src: '/images/plaster-work.jpg', alt: 'Plaster Work', category: 'Plaster' },
+  { src: '/images/compound-wall-real.jpg', alt: 'Compound Wall', category: 'Wall' },
 ];
