@@ -3,8 +3,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { HardHat, Mail, MapPin, Facebook, Instagram, Youtube, Linkedin, Send, Star } from 'lucide-react';
-import { WhatsAppLogo, PhoneLogo } from '../ui/BrandIcons';
+import { HardHat, Mail, MapPin, Facebook, Instagram, Star } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo, PinterestLogo, QuoraLogo } from '../ui/BrandIcons';
 import SEOCrossLinks from '../ui/SEOCrossLinks';
 
 const serviceLinks = [
@@ -56,9 +56,9 @@ const areaLinks = [
 const socialLinks = [
   { Icon: Facebook,  href: 'https://www.facebook.com/profile.php?id=61570712849063', label: 'Facebook'  },
   { Icon: Instagram, href: 'https://www.instagram.com/amscivilwork/', label: 'Instagram' },
-  { Icon: Youtube,   href: '#', label: 'YouTube'   },
-  { Icon: Linkedin,  href: '#', label: 'LinkedIn'  },
-  { Icon: Send,      href: '#', label: 'Telegram'  },
+  { Icon: PinterestLogo, href: 'https://in.pinterest.com/amsconstructionwork/', label: 'Pinterest' },
+  { Icon: QuoraLogo,     href: 'https://mumbaiconstructionhomerenovationguide.quora.com/', label: 'Quora' },
+
 ];
 
 export default function Footer() {
@@ -134,7 +134,7 @@ export default function Footer() {
               Mumbai&apos;s trusted construction partner for 10+ years and 200+ completed projects. We strictly follow all government rules and regulations to deliver excellence in every project.
             </p>
             <a 
-              href="https://share.google/2FZZD5O5FcpaLjExA" 
+              href="https://share.google/v9ZNhSlXDECsz2p58" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/50 text-xs text-slate-300 hover:text-white transition-all mb-6 group"
@@ -197,7 +197,7 @@ export default function Footer() {
                   <MapPin size={14} className="text-orange-500" />
                 </div>
                 <a 
-                  href="https://share.google/2FZZD5O5FcpaLjExA" 
+                  href="https://share.google/v9ZNhSlXDECsz2p58" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-slate-400 hover:text-orange-400 text-sm leading-relaxed pt-1 transition-colors"

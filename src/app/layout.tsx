@@ -355,8 +355,11 @@ const jsonLd = {
         ],
       },
       sameAs: [
+        'https://share.google/v9ZNhSlXDECsz2p58',
         'https://www.facebook.com/profile.php?id=61570712849063',
         'https://www.instagram.com/amscivilwork/',
+        'https://in.pinterest.com/amsconstructionwork/',
+        'https://mumbaiconstructionhomerenovationguide.quora.com/',
         'https://wa.me/918779391690',
         'https://wa.me/919004298911',
       ],

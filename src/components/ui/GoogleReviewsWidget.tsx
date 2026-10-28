@@ -77,7 +77,7 @@ export default function GoogleReviewsWidget() {
           </div>
 
           <a 
-            href="https://share.google/2FZZD5O5FcpaLjExA" 
+            href="https://share.google/v9ZNhSlXDECsz2p58" 
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-white/5 border border-white/10 hover:border-blue-500/40 rounded-2xl p-6 flex items-center gap-6 backdrop-blur-sm shrink-0 transition-all hover:scale-105 group"
@@ -170,7 +170,7 @@ export default function GoogleReviewsWidget() {
       <div className="container-custom relative z-10">
         
         <div className="mt-12 flex justify-center">
-          <a href="https://share.google/2FZZD5O5FcpaLjExA" target="_blank" rel="noopener noreferrer" 
+          <a href="https://share.google/v9ZNhSlXDECsz2p58" target="_blank" rel="noopener noreferrer" 
              className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white font-bold hover:bg-white/10 hover:border-orange-500/40 transition-colors backdrop-blur-sm">
             <span>Read verified reviews on Google Maps</span>
             <ExternalLink size={16} className="text-orange-400" />

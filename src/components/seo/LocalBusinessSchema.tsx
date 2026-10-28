@@ -26,11 +26,13 @@ export default function LocalBusinessSchema() {
     'foundingDate': '2014',
     'slogan': 'Building Dreams, Delivering Trust with Zero Hidden Escalations',
     'description': "Mumbai's trusted civil contractor with 10+ years of proven craftsmanship. Premium bungalow construction, complete home renovation, waterproofing, Italian marble tiling, POP false ceilings, plumbing, and structural civil work.",
-    'hasMap': 'https://share.google/2FZZD5O5FcpaLjExA',
+    'hasMap': 'https://share.google/v9ZNhSlXDECsz2p58',
     'sameAs': [
-      'https://share.google/2FZZD5O5FcpaLjExA',
+      'https://share.google/v9ZNhSlXDECsz2p58',
       'https://www.facebook.com/profile.php?id=61570712849063',
-      'https://www.instagram.com/amscivilwork/'
+      'https://www.instagram.com/amscivilwork/',
+      'https://in.pinterest.com/amsconstructionwork/',
+      'https://mumbaiconstructionhomerenovationguide.quora.com/'
     ],
     'address': {
       '@type': 'PostalAddress',

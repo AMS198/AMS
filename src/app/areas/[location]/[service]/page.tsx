@@ -177,8 +177,11 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
     paymentAccepted: 'Cash, UPI, Credit Card, Bank Transfer, Cheque',
     currenciesAccepted: 'INR',
     sameAs: [
+      'https://share.google/v9ZNhSlXDECsz2p58',
       'https://www.facebook.com/profile.php?id=61570712849063',
-      'https://www.instagram.com/amscivilwork/'
+      'https://www.instagram.com/amscivilwork/',
+      'https://in.pinterest.com/amsconstructionwork/',
+      'https://mumbaiconstructionhomerenovationguide.quora.com/'
     ],
     openingHoursSpecification: [
       {

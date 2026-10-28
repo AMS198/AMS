@@ -88,7 +88,7 @@ export default function ContactPage() {
       icon: MapPin,
       label: 'Location / Google Business',
       values: ['Mumbai, Maharashtra, India (📍 View on Google Maps)'],
-      href: 'https://share.google/2FZZD5O5FcpaLjExA',
+      href: 'https://share.google/v9ZNhSlXDECsz2p58',
     },
     {
       icon: Clock,
