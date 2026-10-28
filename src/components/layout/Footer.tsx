@@ -277,7 +277,7 @@ export default function Footer() {
               <Link prefetch={false} href="/admin" className="ml-1 text-slate-800 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
             </p>
             <p className="text-slate-500 text-xs font-medium">
-              Developed by <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors font-semibold">WebX Crafting</a>
+              Designed &amp; Developed by: <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors font-semibold">webxcrafting.in</a>
             </p>
           </div>
           
