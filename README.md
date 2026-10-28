@@ -31,13 +31,8 @@ Go to **http://localhost:3000/admin**
 
 | Field | Value |
 |---|---|
-<<<<<<< HEAD
-| Username | `` |
-| Password | `` |
-=======
-| Username |  |
-| Password |  |
->>>>>>> 3398dc6 (make changes on package json and navbar)
+| Username | Configured in `.env.local` |
+| Password | Configured in `.env.local` |
 
 To change: edit the constants at the top of `src/app/admin/page.tsx`
 

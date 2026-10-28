@@ -3,7 +3,6 @@
 import { useRef } from 'react';
 import { Star, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import StructuredDataManager from '../seo/StructuredDataManager';
 
 const reviews = [
   {
@@ -163,15 +162,6 @@ export default function GoogleReviewsWidget() {
                   "{review.content}"
                 </p>
               </div>
-              
-              <StructuredDataManager 
-                type="Review" 
-                data={{
-                  author: review.name,
-                  rating: review.rating || 5,
-                  text: review.content
-                }} 
-              />
             </div>
           ))}
         </div>

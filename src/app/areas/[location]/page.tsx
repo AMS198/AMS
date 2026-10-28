@@ -222,6 +222,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
         review: [
           {
             '@type': 'Review',
+            itemReviewed: { '@type': 'LocalBusiness', name: 'AMS Civil Construction', telephone: '+918779391690' },
             reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
             author: { '@type': 'Person', name: 'Rajesh Sharma' },
             reviewBody: `AMS Civil Construction did excellent bungalow construction work near ${loc.name}. Very professional team with top quality materials. Highly recommended for any construction work in ${loc.district}.`,
@@ -229,6 +230,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
           },
           {
             '@type': 'Review',
+            itemReviewed: { '@type': 'LocalBusiness', name: 'AMS Civil Construction', telephone: '+918779391690' },
             reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
             author: { '@type': 'Person', name: 'Priya Mehta' },
             reviewBody: `Best construction company in ${loc.name}. They completed our full renovation on time and within budget. The quality of finishing is outstanding.`,
@@ -236,6 +238,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
           },
           {
             '@type': 'Review',
+            itemReviewed: { '@type': 'LocalBusiness', name: 'AMS Civil Construction', telephone: '+918779391690' },
             reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
             author: { '@type': 'Person', name: 'Suresh Patel' },
             reviewBody: `We hired AMS for bathroom renovation and kitchen work in ${loc.name}. The team was punctual, skilled, and used premium materials. 100% satisfied with the result.`,

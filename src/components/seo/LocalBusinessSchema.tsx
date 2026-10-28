@@ -82,6 +82,12 @@ export default function LocalBusinessSchema() {
     'review': [
       {
         '@type': 'Review',
+        'itemReviewed': {
+          '@type': 'LocalBusiness',
+          'name': 'AMS Civil Construction',
+          'image': 'https://www.amscivilwork.in/og-image.jpg',
+          'telephone': '+918779391690'
+        },
         'author': { '@type': 'Person', 'name': 'Vikram Mehta' },
         'datePublished': '2026-06-15',
         'reviewBody': 'AMS Civil Construction did an incredible job with our bungalow in Bandra. They were transparent about pricing from day one and finished the work right on schedule.',
@@ -89,6 +95,12 @@ export default function LocalBusinessSchema() {
       },
       {
         '@type': 'Review',
+        'itemReviewed': {
+          '@type': 'LocalBusiness',
+          'name': 'AMS Civil Construction',
+          'image': 'https://www.amscivilwork.in/og-image.jpg',
+          'telephone': '+918779391690'
+        },
         'author': { '@type': 'Person', 'name': 'Anjali Desai' },
         'datePublished': '2026-05-20',
         'reviewBody': 'We hired them for a complete flat renovation in Andheri West. Their team is highly professional and handled everything from plumbing to false ceilings.',

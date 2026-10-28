@@ -77,6 +77,21 @@ export default function StructuredDataManager({ type, data }: StructuredDataMana
       schemaObj = {
         ...schemaObj,
         '@type': 'Review',
+        itemReviewed: {
+          '@type': 'LocalBusiness',
+          name: 'AMS Civil Construction',
+          image: 'https://www.amscivilwork.in/og-image.jpg',
+          telephone: '+918779391690',
+          url: 'https://www.amscivilwork.in',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Andheri West',
+            addressLocality: 'Mumbai',
+            addressRegion: 'Maharashtra',
+            postalCode: '400053',
+            addressCountry: 'IN',
+          },
+        },
         author: { '@type': 'Person', name: data.author },
         reviewRating: {
           '@type': 'Rating',
