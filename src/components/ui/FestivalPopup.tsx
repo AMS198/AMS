@@ -693,7 +693,7 @@ export default function FestivalPopup() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsVisible(true)}
-          className="fixed bottom-20 left-4 sm:bottom-6 sm:left-6 z-40 bg-gradient-to-r from-[#17140b] via-[#1f190e] to-[#14120a] text-amber-200 font-medium text-xs sm:text-sm px-4 py-2.5 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.6),0_0_15px_rgba(245,158,11,0.25)] flex items-center gap-2 border border-amber-500/40 hover:border-amber-400 transition-all cursor-pointer backdrop-blur-md"
+          className="fixed bottom-24 left-4 sm:bottom-28 sm:left-6 z-40 bg-gradient-to-r from-[#17140b] via-[#1f190e] to-[#14120a] text-amber-200 font-medium text-xs sm:text-sm px-4 py-2.5 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.6),0_0_15px_rgba(245,158,11,0.25)] flex items-center gap-2 border border-amber-500/40 hover:border-amber-400 transition-all cursor-pointer backdrop-blur-md"
           title="Click to view & share festive greeting"
         >
           <Sparkles size={14} className="text-amber-400 animate-spin" />

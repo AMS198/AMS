@@ -271,13 +271,13 @@ export default function Footer() {
       <div className="relative z-10 bg-[#02040A] border-t border-white/5 py-6">
         <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <div className="flex flex-col gap-2">
-            <p className="text-slate-500 text-xs font-medium">
+            <p className="text-slate-300 text-xs font-medium">
               © {new Date().getFullYear()} AMS Civil Construction. All rights reserved. 
               <span className="hidden sm:inline"> A Mandal Group Venture</span>
               <Link prefetch={false} href="/admin" className="ml-1 text-slate-800 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
             </p>
-            <p className="text-slate-500 text-xs font-medium">
-              Designed &amp; Developed by: <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 transition-colors font-semibold">webxcrafting.in</a>
+            <p className="text-slate-300 text-xs font-medium">
+              Designed &amp; Developed by: <a href="https://www.webxcrafting.in/" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 font-bold underline underline-offset-2 transition-colors">webxcrafting.in</a>
             </p>
           </div>
           
