@@ -13,7 +13,7 @@ const blogData = {
   title: 'Bungalow Construction Cost per Sq Ft in Mumbai Outskirts & Maharashtra (2026 Guide)',
   slug: 'bungalow-construction-cost-mumbai-maharashtra-2026',
   excerpt: 'Planning to build your dream bungalow or row house in Virar, Vasai, Kalyan, Panvel, or Alibaug? Here is the exact 2026 cost per sq ft breakdown, material quality grades, stage-by-stage expenses, and hidden costs explained by seasoned civil contractors.',
-  featuredImage: '/images/bungalow-construction.png',
+  featuredImage: '/images/bungalow-construction.jpg',
   author: 'AMS Civil Engineering Team',
   seoKeywords: 'bungalow construction cost Mumbai, construction cost per sq ft Maharashtra 2026, bungalow builders Virar Vasai Kalyan, residential civil contractor Mumbai, villa construction cost per sq ft, turnkey bungalow contractor Maharashtra, civil construction rate per sq ft',
   locationTags: ['Virar', 'Vasai', 'Kalyan', 'Mira Road', 'Panvel', 'Thane', 'Alibaug', 'Palghar', 'Dombivli'],

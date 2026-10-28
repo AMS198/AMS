@@ -13,7 +13,7 @@ const blogData = {
   title: 'Mumbai Metro Line 13 (Mira Road to Virar): Route, Real Estate Impact & Construction Boom (2026 Guide)',
   slug: 'mumbai-metro-line-13-mira-road-to-virar-real-estate-impact',
   excerpt: 'Everything you need to know about Mumbai Metro Line 13 (Shivaji Chowk Mira Road to Virar): complete route, station list, expected completion, property price appreciation, and the massive civil construction boom across Vasai and Virar.',
-  featuredImage: '/images/bungalow-construction.png',
+  featuredImage: '/images/bungalow-construction.jpg',
   author: 'AMS Infrastructure & Civil Insights',
   seoKeywords: 'Mumbai Metro Line 13 route, Metro Line 13 Mira Road to Virar, Virar real estate boom metro, Vasai bungalow construction metro, Naigaon property price hike metro line 13, civil contractor Mira Road Virar, construction cost Virar Vasai',
   locationTags: ['Mira Road', 'Bhayandar', 'Naigaon', 'Vasai', 'Nalasopara', 'Virar', 'Palghar', 'Thane'],

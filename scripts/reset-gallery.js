@@ -14,16 +14,16 @@ if (!uri) {
 }
 
 const galleryImages = [
-  { src: '/images/bungalow-construction.png', title: 'Modern Bungalow Construction', category: 'Bungalow' },
-  { src: '/images/bathroom-renovation.png', title: 'Luxury Bathroom Renovation', category: 'Bathroom' },
-  { src: '/images/kitchen-work.png', title: 'Premium Modular Kitchen', category: 'Kitchen' },
-  { src: '/images/tiles-work.png', title: 'High-End Tiles Installation', category: 'Tiles' },
-  { src: '/images/interior-work.png', title: 'Luxury Interior Design', category: 'Interior' },
-  { src: '/images/pop-work.png', title: 'Designer POP False Ceiling', category: 'POP' },
-  { src: '/images/flooring-work.png', title: 'Italian Marble Flooring', category: 'Flooring' },
-  { src: '/images/swimming-pool.png', title: 'Luxury Private Swimming Pool', category: 'Pool' },
-  { src: '/images/plaster-work.png', title: 'External Plastering Work', category: 'Plaster' },
-  { src: '/images/compound-wall-real.png', title: 'Bungalow Compound Wall', category: 'Wall' },
+  { src: '/images/bungalow-construction.jpg', title: 'Modern Bungalow Construction', category: 'Bungalow' },
+  { src: '/images/bathroom-renovation.jpg', title: 'Luxury Bathroom Renovation', category: 'Bathroom' },
+  { src: '/images/kitchen-work.jpg', title: 'Premium Modular Kitchen', category: 'Kitchen' },
+  { src: '/images/tiles-work.jpg', title: 'High-End Tiles Installation', category: 'Tiles' },
+  { src: '/images/interior-work.jpg', title: 'Luxury Interior Design', category: 'Interior' },
+  { src: '/images/pop-work.jpg', title: 'Designer POP False Ceiling', category: 'POP' },
+  { src: '/images/flooring-work.jpg', title: 'Italian Marble Flooring', category: 'Flooring' },
+  { src: '/images/swimming-pool.jpg', title: 'Luxury Private Swimming Pool', category: 'Pool' },
+  { src: '/images/plaster-work.jpg', title: 'External Plastering Work', category: 'Plaster' },
+  { src: '/images/compound-wall-real.jpg', title: 'Bungalow Compound Wall', category: 'Wall' },
 ];
 
 async function main() {

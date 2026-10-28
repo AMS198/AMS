@@ -13,7 +13,7 @@ const blogData = {
   title: 'Is Virar the Best Place for Real Estate Investment in 2026? (Honest Pros, Cons & Civil Expert Review)',
   slug: 'is-virar-best-place-for-real-estate-investment-pros-cons-2026',
   excerpt: 'Planning to buy a flat, plot, or build a bungalow in Virar? Here is an unfiltered, honest 2026 evaluation of Virar real estate: massive infrastructure growth (Metro 13, Bullet Train), price appreciation potential, water supply realities, and low-lying flood risks to avoid.',
-  featuredImage: '/images/bungalow-construction.png',
+  featuredImage: '/images/bungalow-construction.jpg',
   author: 'AMS Regional Planning & Civil Cell',
   seoKeywords: 'is Virar good for investment 2026, Virar real estate review, Virar property price appreciation, bungalow plots Virar investment, Virar East vs Virar West investment, Metro 13 Virar impact, civil contractor Virar',
   locationTags: ['Virar', 'Vasai', 'Nalasopara', 'Mira Road', 'Palghar', 'Mumbai'],
