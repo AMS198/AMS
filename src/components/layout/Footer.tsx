@@ -137,12 +137,37 @@ export default function Footer() {
               href="https://share.google/v9ZNhSlXDECsz2p58" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/50 text-xs text-slate-300 hover:text-white transition-all mb-6 group"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/50 text-xs text-slate-300 hover:text-white transition-all mb-3 group"
             >
               <span className="text-yellow-400 font-bold">★ 4.9</span>
               <span className="text-slate-400 group-hover:text-slate-200">Google Verified Business</span>
               <span className="text-[10px] bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded font-mono">Reviews</span>
             </a>
+            {/* Verified Business Directory Badges */}
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <a 
+                href="https://www.indiamart.com/ams-civil-work/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-500 text-xs text-slate-300 hover:text-white transition-all group"
+                title="Verified Civil Contractor on IndiaMART"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-slate-300 font-medium">IndiaMART</span>
+                <span className="text-[9px] bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded font-mono">TrustSEAL</span>
+              </a>
+              <a 
+                href="https://jsdl.in/DT-434YEUFG4BN" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/30 hover:border-blue-400 text-xs text-slate-300 hover:text-white transition-all group"
+                title="Verified Listing on Justdial"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                <span className="text-slate-300 font-medium">Justdial</span>
+                <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1 py-0.5 rounded font-mono">Verified</span>
+              </a>
+            </div>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer"

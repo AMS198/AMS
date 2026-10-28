@@ -356,6 +356,8 @@ const jsonLd = {
       },
       sameAs: [
         'https://share.google/v9ZNhSlXDECsz2p58',
+        'https://www.indiamart.com/ams-civil-work/',
+        'https://jsdl.in/DT-434YEUFG4BN',
         'https://www.facebook.com/profile.php?id=61570712849063',
         'https://www.instagram.com/amscivilwork/',
         'https://in.pinterest.com/amsconstructionwork/',
