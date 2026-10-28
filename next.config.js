@@ -21,6 +21,19 @@ const nextConfig = {
   poweredByHeader: false,
   // SEO: Enable compression for better Core Web Vitals
   compress: true,
+  // Fallback rewrites: automatically serve .jpg for any legacy .png requests
+  async rewrites() {
+    return [
+      {
+        source: '/images/:path*.png',
+        destination: '/images/:path*.jpg',
+      },
+      {
+        source: '/real-projects/:path*.png',
+        destination: '/real-projects/:path*.jpg',
+      },
+    ];
+  },
   // SEO: Redirect old broken URLs from Search Console
   async redirects() {
     return [

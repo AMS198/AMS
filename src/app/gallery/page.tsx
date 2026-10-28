@@ -6,7 +6,7 @@ import { getDb } from '@/lib/mongodb';
 import { galleryImages as fallbackImages } from '@/data/siteData';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 
-export const revalidate = false;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Project Gallery | Real Civil Construction & Renovation Work Mumbai',
@@ -54,7 +54,7 @@ export default async function GalleryPage() {
     const docs = await db.collection('gallery').find({}).sort({ createdAt: -1 }).toArray();
     const manualImages = docs.map(({ _id, ...rest }) => ({
       id: _id.toString(),
-      src: (rest.src as string) || '',
+      src: ((rest.src as string) || '').replace(/\.png$/i, '.jpg'),
       alt: (rest.alt as string) || (rest.title as string) || 'AMS Civil Construction',
       category: (rest.category as string) || 'General',
     }));
@@ -69,7 +69,7 @@ export default async function GalleryPage() {
           if (imgSrc) {
             projectImages.push({
               id: `${proj._id.toString()}-img-${index}`,
-              src: imgSrc,
+              src: typeof imgSrc === 'string' ? imgSrc.replace(/\.png$/i, '.jpg') : imgSrc,
               alt: (proj.title as string) || 'Project Image',
               category: (proj.category as string) || 'Projects',
             });

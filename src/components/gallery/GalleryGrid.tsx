@@ -355,7 +355,7 @@ export default function GalleryGrid({ images }: Props) {
                       onClick={() => setLightboxIndex(i)}
                     >
                       <Image
-                        src={encodeURI(img.src)}
+                        src={encodeURI((img.src || '').replace(/\.png$/i, '.jpg'))}
                         alt={img.alt || 'AMS Civil Construction'}
                         fill
                         unoptimized={true}
@@ -536,7 +536,7 @@ export default function GalleryGrid({ images }: Props) {
             {/* Current Image */}
             <div className="relative w-full h-full max-w-5xl max-h-[75vh]">
               <Image
-                src={encodeURI(activeLightboxImage.src)}
+                src={encodeURI((activeLightboxImage.src || '').replace(/\.png$/i, '.jpg'))}
                 alt={activeLightboxImage.alt}
                 fill
                 unoptimized={true}
