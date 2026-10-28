@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 import type { GalleryImage } from '@/app/gallery/page';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 interface Props {
   images: GalleryImage[];
@@ -570,52 +571,11 @@ export default function GalleryGrid({ images }: Props) {
       )}
 
       {/* ── BOTTOM LUXURY CONVERSION CTA ────────────────────────────── */}
-      <section className="relative py-16 sm:py-20 bg-gradient-to-b from-[#070C16] to-[#0B1120] border-t border-white/10">
-        <div className="container-custom">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-orange-600/20 via-[#162238] to-[#0A101D] border border-orange-500/30 p-8 sm:p-12 lg:p-16 shadow-2xl">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-[100px] pointer-events-none" />
-
-            <div className="relative z-10 max-w-3xl">
-              <span className="text-xs font-mono font-bold tracking-widest uppercase text-orange-400 mb-3 block">
-                Inspired By Our Real Sites?
-              </span>
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white font-display tracking-tight leading-tight mb-4">
-                Let&apos;s Build Your Dream Space Together.
-              </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl">
-                Get a transparent, itemised quotation with zero hidden fees. Book a 100% Free Site Visit
-                under our festive promotion anywhere in Mumbai, Thane, or Navi Mumbai.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  prefetch={false}
-                  href="/free-consultation"
-                  className="px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-sm tracking-wide shadow-lg shadow-orange-500/25 transition-all hover:scale-105"
-                >
-                  Book Free Site Visit
-                </Link>
-                <a
-                  href="https://wa.me/918779391690?text=Hi%20AMS%20Civil,%20I%20would%20like%20a%20detailed%20quotation%20for%20my%20construction%20project."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-sm tracking-wide transition-all hover:scale-105 shadow-lg shadow-green-500/25"
-                >
-                  <WhatsAppLogo className="w-5 h-5 fill-current" />
-                  <span>WhatsApp Estimate</span>
-                </a>
-                <a
-                  href="tel:+918779391690"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm tracking-wide transition-all border border-white/15"
-                >
-                  <Phone size={16} />
-                  <span>Call +91 87793 91690</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ModernCTA
+        title="Inspired By Our Real Sites?"
+        subtitle="Let's Build Your Dream Space Together."
+        description="Get a transparent, itemised quotation with zero hidden fees. Book a 100% Free Site Visit anywhere in Mumbai, Thane, or Navi Mumbai with senior engineer site inspection."
+      />
     </>
   );
 }
