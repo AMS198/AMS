@@ -6,7 +6,7 @@ import { getDb } from '@/lib/mongodb';
 import { galleryImages as fallbackImages } from '@/data/siteData';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 
-export const revalidate = 86400;
+export const revalidate = false;
 
 export const metadata: Metadata = {
   title: 'Project Gallery | Real Civil Construction & Renovation Work Mumbai',
