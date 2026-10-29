@@ -169,10 +169,10 @@ export default function LeadGenPopup() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Email */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Email Address</label>
+                    <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Email Address (Optional)</label>
                     <input 
                       {...register('email', { 
-                        required: 'Email is required',
+
                         pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: 'Invalid email' }
                       })}
                       type="email"

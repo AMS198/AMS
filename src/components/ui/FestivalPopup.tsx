@@ -551,7 +551,7 @@ export default function FestivalPopup() {
         // Auto-open after gentle delay on page load
         const timer = setTimeout(() => {
           if (isMounted) setIsVisible(true);
-        }, 1500);
+        }, 5000);
         return () => clearTimeout(timer);
       }
     };

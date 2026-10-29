@@ -37,9 +37,9 @@ export async function POST(request: NextRequest) {
     }
 
     /* ── Validation ─────────────────────────────────────────── */
-    if (!phone?.trim() || !email?.trim() || !service?.trim() || !location?.trim()) {
+    if (!phone?.trim() || !service?.trim()) {
       return NextResponse.json(
-        { success: false, error: 'Missing required fields.' },
+        { success: false, error: 'Phone number and service are required.' },
         { status: 400 },
       );
     }
@@ -47,9 +47,20 @@ export async function POST(request: NextRequest) {
     const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(phone.trim())) {
       return NextResponse.json(
-        { success: false, error: 'Invalid phone number.' },
+        { success: false, error: 'Enter a valid 10-digit mobile number.' },
         { status: 400 },
       );
+    }
+
+    // Email is optional — validate format only if provided
+    if (email?.trim()) {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      if (!emailRegex.test(email.trim())) {
+        return NextResponse.json(
+          { success: false, error: 'Invalid email address.' },
+          { status: 400 },
+        );
+      }
     }
 
     /* ── Save to MongoDB ────────────────────────────────────── */

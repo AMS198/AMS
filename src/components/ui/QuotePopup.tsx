@@ -144,10 +144,10 @@ export default function QuotePopup() {
 
               <div>
                 <label className="block text-slate-300 text-xs font-medium mb-1.5">
-                  Email Address *
+                  Email Address <span className="text-slate-500 font-normal">(Optional)</span>
                 </label>
                 <input {...register('email', {
-                    required: 'Email is required',
+
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: 'Invalid email address',
@@ -196,10 +196,10 @@ export default function QuotePopup() {
 
               {/* Address */}
               <div>
-                <label className="block text-slate-300 text-xs font-medium mb-1.5">Site Address (Full) *</label>
-                <textarea {...register('address', { required: 'Address is required for site visit' })} rows={2}
-                  placeholder="Complete address with Room No, Floor, Building, Area..."
-                  className="form-input resize-none" />
+                <label className="block text-slate-300 text-xs font-medium mb-1.5">Site Location / Area *</label>
+                <input {...register('address', { required: 'Please enter your area or location' })}
+                  placeholder="e.g. Andheri West, Bandra, Thane..." className="form-input" />
+
                 {errors.address && <p className="text-red-400 text-xs mt-1">{errors.address.message as string}</p>}
               </div>
 
@@ -209,6 +209,7 @@ export default function QuotePopup() {
                 <textarea {...register('message')} rows={3}
                   placeholder="Briefly describe your project…"
                   className="form-input resize-none" />
+
               </div>
 
               {/* Honeypot Field */}

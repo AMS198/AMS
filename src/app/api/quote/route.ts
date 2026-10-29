@@ -39,10 +39,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    /* ── Validation ─────────────────────────────────────────── */
-    if (!name?.trim() || !phone?.trim() || !email?.trim() || !service?.trim() || !address?.trim()) {
+    /* ── Validation: Name, Phone, and Service are primary ── */
+    if (!name?.trim() || !phone?.trim() || !service?.trim()) {
       return NextResponse.json(
-        { success: false, error: 'Missing required fields.' },
+        { success: false, error: 'Name, phone number, and service are required.' },
         { status: 400 },
       );
     }
@@ -50,17 +50,20 @@ export async function POST(request: NextRequest) {
     const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(phone.trim())) {
       return NextResponse.json(
-        { success: false, error: 'Invalid phone number.' },
+        { success: false, error: 'Enter a valid 10-digit mobile number.' },
         { status: 400 },
       );
     }
 
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    if (!emailRegex.test(email.trim())) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid email address.' },
-        { status: 400 },
-      );
+    // Email is optional — validate only if user provided one
+    if (email?.trim()) {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      if (!emailRegex.test(email.trim())) {
+        return NextResponse.json(
+          { success: false, error: 'Invalid email address.' },
+          { status: 400 },
+        );
+      }
     }
 
     /* ── Save to MongoDB ────────────────────────────────────── */
