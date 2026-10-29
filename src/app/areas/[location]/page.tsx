@@ -219,6 +219,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
   const params = await props.params;
   const loc = getLocation(params.location);
   if (!loc) notFound();
+  const slugHash = loc.slug.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
 
   /* ── Dynamic Content Injection (Static SSG at build time) ── */
   const { localProjects, localBlogs } = await getLocalData(loc.name, loc.zone, loc.nearby);
