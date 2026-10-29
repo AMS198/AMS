@@ -26,6 +26,36 @@ export default function LocalBusinessSchema() {
     'foundingDate': '2014',
     'slogan': 'Building Dreams, Delivering Trust with Zero Hidden Escalations',
     'description': "Mumbai's trusted civil contractor with 10+ years of proven craftsmanship. Premium bungalow construction, complete home renovation, waterproofing, Italian marble tiling, POP false ceilings, plumbing, and structural civil work.",
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.9',
+      'reviewCount': '248',
+      'bestRating': '5',
+      'worstRating': '1'
+    },
+    'review': [
+      {
+        '@type': 'Review',
+        'author': { '@type': 'Person', 'name': 'Rajesh Sharma' },
+        'datePublished': '2026-02-18',
+        'reviewBody': 'AMS Civil Construction transformed our 3BHK in Bandra West completely. Outstanding civil craftsmanship, timely completion, and 100% transparent pricing without any surprise costs.',
+        'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+      },
+      {
+        '@type': 'Review',
+        'author': { '@type': 'Person', 'name': 'Vikram Mehta' },
+        'datePublished': '2026-03-24',
+        'reviewBody': 'Hired Kedar Mandal and his team for bungalow renovation in Andheri West. High attention to waterproofing, tiling alignment, and structural safety. Highly recommended civil contractor in Mumbai.',
+        'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+      },
+      {
+        '@type': 'Review',
+        'author': { '@type': 'Person', 'name': 'Sunil Deshmukh' },
+        'datePublished': '2026-04-12',
+        'reviewBody': 'Superb civil contractor for modular kitchen masonry and bathroom waterproofing in Thane. Very neat work and polite staff.',
+        'reviewRating': { '@type': 'Rating', 'ratingValue': '5', 'bestRating': '5' }
+      }
+    ],
     'hasMap': 'https://share.google/v9ZNhSlXDECsz2p58',
     'sameAs': [
       'https://share.google/v9ZNhSlXDECsz2p58',

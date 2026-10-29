@@ -12,13 +12,11 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
         disallow: ['/admin', '/api/', '/*?*'],
-        crawlDelay: 2,
       },
       {
         userAgent: ['GPTBot', 'OAI-SearchBot', 'PerplexityBot', 'Google-Extended', 'anthropic-ai', 'Applebot-Extended'],
         allow: '/',
         disallow: ['/admin', '/api/', '/*?*'],
-        crawlDelay: 2,
       },
       // ── Aggressive Commercial Scrapers & Unauthorized SEO Harvesters — Block to save bandwidth ──
       { userAgent: 'AhrefsBot', disallow: '/' },
@@ -40,7 +38,5 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: 'https://www.amscivilwork.in/sitemap.xml',
     host: 'https://www.amscivilwork.in',
-    // Note: Next.js MetadataRoute.Robots doesn't support custom fields,
-    // but llms.txt is discoverable at /llms.txt by convention
   };
 }
