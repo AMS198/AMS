@@ -238,11 +238,11 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-slate-300 text-xs font-medium mb-1.5">
-                    Email Address *
+                    Email Address <span className="text-slate-500 font-normal">(Optional)</span>
                   </label>
                   <input
                     {...register('email', {
-                      required: 'Email is required',
+
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         message: 'Invalid email address',

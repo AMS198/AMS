@@ -19,13 +19,18 @@ export default function LandingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const cleanPhone = formData.phone.replace(/\D/g, '').slice(-10);
+    if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
+      toast.error('Please enter a valid 10-digit mobile number');
+      return;
+    }
     setLoading(true);
 
     try {
       const res = await fetch('/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, phone: cleanPhone, address: 'Mumbai Area (Free Consultation Request)' }),
       });
 
       const data = await res.json();
@@ -167,7 +172,7 @@ export default function LandingPage() {
                         <input
                           required
                           type="tel"
-                          pattern="[0-9]{10}"
+                          maxLength={15}
                           value={formData.phone}
                           onChange={e => setFormData({ ...formData, phone: e.target.value })}
                           className="w-full bg-[#161F2E] border border-[#1E2D45] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-colors"

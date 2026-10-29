@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
         <hr/>
         <h3>Project Details</h3>
         <p><strong>Property Type:</strong> ${propertyType}</p>
-        <p><strong>Services Needed:</strong> ${services.join(', ')}</p>
+        <p><strong>Services Needed:</strong> ${Array.isArray(services) ? services.join(', ') : (services || 'General Civil Work')}</p>
         <p><strong>Quality Finish:</strong> ${condition}</p>
         <p><strong>Shown Estimate:</strong> ${estimateMin} - ${estimateMax}</p>
         <br/>

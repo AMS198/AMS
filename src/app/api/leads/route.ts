@@ -44,8 +44,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const cleanPhone = phone.replace(/\D/g, '').slice(-10);
     const phoneRegex = /^[6-9]\d{9}$/;
-    if (!phoneRegex.test(phone.trim())) {
+    if (!phoneRegex.test(cleanPhone)) {
       return NextResponse.json(
         { success: false, error: 'Enter a valid 10-digit mobile number.' },
         { status: 400 },
