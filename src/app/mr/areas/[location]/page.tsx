@@ -1,7 +1,19 @@
 // src/app/mr/areas/[location]/page.tsx
-// Dynamic SSR: Renders on demand to completely bypass Vercel Data Cache (0 ISR Reads)
-export const revalidate = false;
+// Pure Static SSG for Top Hubs
 export const dynamicParams = true;
+
+const CORE_LOCATIONS = [
+  'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
+  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
+  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
+  'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
+  'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
+  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
+];
+
+export async function generateStaticParams() {
+  return CORE_LOCATIONS.map((slug) => ({ location: slug }));
+}
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -12,7 +24,6 @@ import { services } from '@/data/siteData';
 import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat, Navigation } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
-import { getDb } from '@/lib/mongodb';
 import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 

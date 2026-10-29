@@ -1,7 +1,19 @@
 // src/app/hi/areas/[location]/page.tsx
-// Dynamic SSR: Renders on demand to completely bypass Vercel Data Cache (0 ISR Reads)
-export const revalidate = false;
+// Pure Static SSG for Top Hubs
 export const dynamicParams = true;
+
+const CORE_LOCATIONS = [
+  'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
+  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
+  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
+  'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
+  'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
+  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
+];
+
+export async function generateStaticParams() {
+  return CORE_LOCATIONS.map((slug) => ({ location: slug }));
+}
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -13,6 +25,22 @@ import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardH
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
+
+let cachedProjectsPromise: Promise<any[]> | null = null;
+async function getAllProjectsCached() {
+  if (!cachedProjectsPromise) {
+    cachedProjectsPromise = (async () => {
+      try {
+        const db = await getDb();
+        const res = await db.collection('projects').find({ status: 'completed' }).toArray();
+        return JSON.parse(JSON.stringify(res));
+      } catch (e) {
+        return [];
+      }
+    })();
+  }
+  return cachedProjectsPromise;
+}
 import { getSeededRandom, zoneContext } from '@/data/localContent';
 
 
@@ -65,11 +93,8 @@ export default async function LocationPageHindi(props: { params: Promise<{ locat
 
   let localProjects: any[] = [];
   try {
-    const db = await getDb();
-    localProjects = await db.collection('projects').find({ 
-      location: { $regex: new RegExp(loc.name, 'i') },
-      status: 'completed'
-    }).limit(3).toArray();
+    const all = await getAllProjectsCached();
+    localProjects = all.filter(p => p.location && p.location.toLowerCase().includes(loc.name.toLowerCase())).slice(0, 3);
   } catch (e) {
     console.error(e);
   }

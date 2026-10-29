@@ -3,9 +3,27 @@
 // Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
 
-// Dynamic SSR: Renders on demand in milliseconds to completely bypass Vercel Data Cache (0 ISR Reads)
-export const revalidate = false;
+// Pure Static SSG for Top Hubs + On-Demand CDN Caching
 export const dynamicParams = true;
+
+const CORE_LOCATIONS = [
+  'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
+  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
+  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
+  'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
+  'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
+  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
+];
+
+export async function generateStaticParams() {
+  const params: Array<{ location: string; service: string }> = [];
+  for (const locSlug of CORE_LOCATIONS) {
+    for (const svc of services) {
+      params.push({ location: locSlug, service: svc.slug });
+    }
+  }
+  return params;
+}
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

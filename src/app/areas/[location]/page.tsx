@@ -3,9 +3,12 @@
 // Redesigned: Premium SEO page for each Mumbai area
 // Each page is highly optimized for local ranking with a high-end UI
 
-// Dynamic SSR: Renders on demand to completely bypass Vercel Data Cache (0 ISR Reads)
-export const revalidate = false;
+// Pure Static SSG: Pre-rendered at build time with 0 Origin Transfer & 0 ISR Reads
 export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  return locations.map((loc) => ({ location: loc.slug }));
+}
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -20,29 +23,65 @@ import ModernCTA from '@/components/ui/ModernCTA';
 import { getDb } from '@/lib/mongodb';
 import { zoneContext, getSeededRandom } from '@/data/localContent';
 
+let cachedProjectsPromise: Promise<any[]> | null = null;
+let cachedBlogsPromise: Promise<any[]> | null = null;
+
+async function getAllProjectsCached() {
+  if (!cachedProjectsPromise) {
+    cachedProjectsPromise = (async () => {
+      try {
+        const db = await getDb();
+        const res = await db.collection('projects').find({ status: 'completed' }).toArray();
+        return JSON.parse(JSON.stringify(res));
+      } catch (e) {
+        console.error('Failed to pre-fetch projects', e);
+        return [];
+      }
+    })();
+  }
+  return cachedProjectsPromise;
+}
+
+async function getAllBlogsCached() {
+  if (!cachedBlogsPromise) {
+    cachedBlogsPromise = (async () => {
+      try {
+        const db = await getDb();
+        const res = await db.collection('blogs').find({ published: true }, {
+          projection: { title: 1, slug: 1, locationTags: 1, seoKeywords: 1, createdAt: 1, coverImage: 1 }
+        }).sort({ createdAt: -1 }).toArray();
+        return JSON.parse(JSON.stringify(res));
+      } catch (e) {
+        console.error('Failed to pre-fetch blogs', e);
+        return [];
+      }
+    })();
+  }
+  return cachedBlogsPromise;
+}
+
 async function getLocalData(locName: string, locZone: string, locNearby: string[]) {
   try {
-    const db = await getDb();
-    const localProjects = await db.collection('projects').find({ 
-      location: { $regex: new RegExp(locName, 'i') },
-      status: 'completed'
-    }).limit(3).toArray();
+    const [allProjects, allBlogs] = await Promise.all([
+      getAllProjectsCached(),
+      getAllBlogsCached()
+    ]);
+    const lowerName = locName.toLowerCase();
+    const tagsToMatch = [locName, locZone, ...(locNearby || [])].map(t => t.toLowerCase());
 
-    const localBlogs = await db.collection('blogs').find({
-      published: true,
-      $or: [
-        { locationTags: { $in: [locName, locZone, ...locNearby] } },
-        { title: { $regex: new RegExp(locName, 'i') } },
-        { seoKeywords: { $regex: new RegExp(locName, 'i') } }
-      ]
-    }).sort({ createdAt: -1 }).limit(3).toArray();
+    const localProjects = allProjects.filter(p => 
+      p.location && p.location.toLowerCase().includes(lowerName)
+    ).slice(0, 3);
 
-    return {
-      localProjects: JSON.parse(JSON.stringify(localProjects)),
-      localBlogs: JSON.parse(JSON.stringify(localBlogs))
-    };
+    const localBlogs = allBlogs.filter(b => {
+      const hasTag = Array.isArray(b.locationTags) && b.locationTags.some((t: string) => tagsToMatch.includes(t.toLowerCase()));
+      const titleMatch = b.title && b.title.toLowerCase().includes(lowerName);
+      const kwMatch = b.seoKeywords && b.seoKeywords.toLowerCase().includes(lowerName);
+      return hasTag || titleMatch || kwMatch;
+    }).slice(0, 3);
+
+    return { localProjects, localBlogs };
   } catch (e) {
-    console.error('Failed to fetch local projects or blogs', e);
     return { localProjects: [], localBlogs: [] };
   }
 }
