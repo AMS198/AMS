@@ -58,12 +58,17 @@ export default function PrivacyPolicyPage() {
             <li>Find and prevent fraud and spam (through invisible reCAPTCHA/Honeypot mechanisms).</li>
           </ul>
 
-          <h2>3. Third-Party Advertising and Links</h2>
+          <h2>3. Third-Party Advertising & Google AdSense</h2>
           <p>
-            Our website may use third-party advertising companies to serve ads when you visit our website (e.g. Google AdSense). These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
+            Our website uses third-party advertising services, including <strong>Google AdSense</strong> (Publisher ID: pub-6377824535072521), to serve advertisements to visitors.
           </p>
+          <ul>
+            <li><strong>Google AdSense &amp; DoubleClick Cookies:</strong> Google, as a third-party vendor, uses cookies to serve ads on our site. Google&apos;s use of advertising cookies enables it and its partners to serve ads to our users based on their visits to our site and/or other sites across the Internet.</li>
+            <li><strong>Opting Out of Personalized Advertising:</strong> Users may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:underline">Google Ads Settings</a> or by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:underline">www.aboutads.info</a>.</li>
+            <li><strong>Third-Party Ad Networks:</strong> Third-party ad servers or ad networks use technology in their respective advertisements and links that appear on AMS Civil Construction, which are sent directly to users&apos; browsers. They automatically receive your IP address when this occurs.</li>
+          </ul>
           <p>
-            Our Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.
+            Our Privacy Policy does not apply to other advertisers or websites. Thus, we advise you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.
           </p>
 
           <h2>4. Data Security</h2>
