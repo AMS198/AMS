@@ -62,7 +62,10 @@ export default function LocalBusinessSchema() {
       { '@type': 'AdministrativeArea', 'name': 'Powai' },
       { '@type': 'AdministrativeArea', 'name': 'Malad' },
       { '@type': 'AdministrativeArea', 'name': 'Kharghar' },
-      { '@type': 'City', 'name': 'Pune' }
+      { '@type': 'City', 'name': 'Pune' },
+      { '@type': 'City', 'name': 'Kolkata' },
+      { '@type': 'City', 'name': 'Howrah' },
+      { '@type': 'City', 'name': 'Ranchi' }
     ],
     'knowsAbout': [
       'Civil Construction',

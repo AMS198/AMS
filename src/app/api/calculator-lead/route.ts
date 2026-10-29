@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import nodemailer from 'nodemailer';
+import { syncLeadToGoogleSheet } from '@/lib/googleSheetLead';
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || 'smtp.gmail.com',
@@ -45,6 +46,18 @@ export async function POST(request: NextRequest) {
       source: 'calculator',
       createdAt: new Date(),
     });
+
+    const serviceSummary = Array.isArray(services) ? services.join(', ') : (services || 'General Civil Work');
+
+    /* ── Real-Time Google Sheet Sync ────────────────────────── */
+    syncLeadToGoogleSheet({
+      name: name.trim(),
+      phone: phone.trim(),
+      service: `Calculator: ${serviceSummary} (${propertyType})`,
+      address: 'Online Calculator Inquiry',
+      source: 'Cost Calculator',
+      notes: `Estimate: ${estimateMin} - ${estimateMax} | Finish: ${condition}`,
+    }).catch(() => {});
 
     const htmlBody = `
       <div style="font-family: sans-serif; padding: 20px;">

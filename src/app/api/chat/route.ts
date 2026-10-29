@@ -4,6 +4,7 @@ import { streamText, tool } from 'ai';
 import { z } from 'zod';
 import { getDb } from '@/lib/mongodb';
 import nodemailer from 'nodemailer';
+import { syncLeadToGoogleSheet } from '@/lib/googleSheetLead';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -63,6 +64,15 @@ export async function POST(req: Request) {
             } catch (dbErr) {
               console.error('[AI Chat] Failed to persist lead to MongoDB:', dbErr);
             }
+
+            // Real-time Google Sheet Sync
+            syncLeadToGoogleSheet({
+              name: (name || 'Valued Client').trim(),
+              phone: (phone || '').trim(),
+              service: (serviceRequested || 'Site Visit Consultation').trim(),
+              address: (location || 'Mumbai & MMR').trim(),
+              source: 'AI SmartBot Chat',
+            }).catch(() => {});
 
             // 2. Send instant email notification to admin
             if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {

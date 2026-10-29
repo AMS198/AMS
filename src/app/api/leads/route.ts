@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb }                     from '@/lib/mongodb';
 import nodemailer                    from 'nodemailer';
 import { adminAlertHtml, clientAutoReplyHtml } from '@/lib/emailTemplates';
+import { syncLeadToGoogleSheet }      from '@/lib/googleSheetLead';
 
 /* ── Shared transporter ─────────────────────────────────────── */
 const transporter = nodemailer.createTransport({
@@ -85,6 +86,16 @@ export async function POST(request: NextRequest) {
       location: location.trim(),
       source:   'scroll-lead',
     };
+
+    /* ── Real-Time Google Sheet Sync ────────────────────────── */
+    syncLeadToGoogleSheet({
+      name:    name?.trim() || 'Valued Client',
+      phone:   cleanPhone,
+      email:   email?.trim() || '',
+      service: service.trim(),
+      address: location.trim(),
+      source:  'Scroll Lead Popup',
+    }).catch(() => {});
 
     /* ── 1. Admin Alert Email ───────────────────────────────── */
     try {
