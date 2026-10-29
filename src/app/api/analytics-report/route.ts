@@ -1,6 +1,6 @@
 // src/app/api/analytics-report/route.ts
-// Sends an automated 24-hour daily summary email of WhatsApp clicks, Call clicks, and Leads.
-// Can be triggered by Vercel Cron (GET) or from Admin Dashboard (POST).
+// Sends an automated 24-hour daily summary email of Visits, Traffic Sources, WhatsApp clicks, Call clicks, and Leads.
+// Includes a strict Daily MongoDB Idempotency Lock: prevents duplicate emails even if multiple crons or webhooks trigger.
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
@@ -22,27 +22,79 @@ const transporter = nodemailer.createTransport({
 const from = `"AMS Civil Analytics" <${process.env.EMAIL_USER}>`;
 const TO = process.env.EMAIL_TO || process.env.EMAIL_USER || 'ams.constructionwork@gmail.com';
 
-async function generateAndSendReport() {
+async function generateAndSendReport(force = false) {
   const db = await getDb();
   const clickCollection = db.collection('click_events');
   const enquiryCollection = db.collection('enquiries');
+  const reportsLogCollection = db.collection('daily_reports_log');
+
+  // Today date key in IST (e.g. "2026-10-29")
+  const todayDateKey = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+
+  // 1. Strict Idempotency Lock: Only 1 email per day unless forced by Admin
+  if (!force) {
+    const existingLog = await reportsLogCollection.findOne({ dateKey: todayDateKey });
+    if (existingLog) {
+      console.log(`[DailyReport] Report for ${todayDateKey} already sent at ${existingLog.sentAt}. Skipping duplicate.`);
+      return {
+        alreadySent: true,
+        message: `Daily report for ${todayDateKey} was already sent today at ${existingLog.sentAt}. Skipped duplicate email.`,
+        sentAt: existingLog.sentAt,
+      };
+    }
+  }
 
   // Filter for last 24 hours
   const last24h = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
   const [
+    totalPageViews,
     whatsappClicks,
     callClicks,
     newLeads,
+    recentEnquiries,
   ] = await Promise.all([
+    clickCollection.countDocuments({ type: 'pageview', createdAt: { $gte: last24h } }),
     clickCollection.countDocuments({ type: 'whatsapp', createdAt: { $gte: last24h } }),
     clickCollection.countDocuments({ type: 'call', createdAt: { $gte: last24h } }),
     enquiryCollection.countDocuments({ createdAt: { $gte: last24h } }),
+    enquiryCollection.find({ createdAt: { $gte: last24h } })
+      .sort({ createdAt: -1 })
+      .limit(6)
+      .project({ name: 1, phone: 1, service: 1, address: 1, createdAt: 1 })
+      .toArray(),
   ]);
 
-  // Top Pages in last 24h
+  // 2. Traffic Sources (Where visitors came from in last 24h)
+  const rawSources = await clickCollection.aggregate([
+    { $match: { type: 'pageview', createdAt: { $gte: last24h } } },
+    { $group: { _id: "$referrer", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 6 }
+  ]).toArray();
+
+  const trafficSources = rawSources.map(s => ({
+    name: s._id || 'Direct / Organic',
+    count: s.count,
+    pct: totalPageViews > 0 ? Math.round((s.count / totalPageViews) * 100) : 0,
+  }));
+
+  // 3. Top Visited Pages & Areas
+  const rawVisited = await clickCollection.aggregate([
+    { $match: { type: 'pageview', createdAt: { $gte: last24h } } },
+    { $group: { _id: "$page", views: { $sum: 1 } } },
+    { $sort: { views: -1 } },
+    { $limit: 8 }
+  ]).toArray();
+
+  const topVisitedPages = rawVisited.map(p => ({
+    page: p._id || '/',
+    views: p.views,
+  }));
+
+  // 4. Top Conversion Pages (Where WhatsApp or Call clicks occurred)
   const topClickPages = await clickCollection.aggregate([
-    { $match: { createdAt: { $gte: last24h } } },
+    { $match: { type: { $in: ['whatsapp', 'call'] }, createdAt: { $gte: last24h } } },
     {
       $group: {
         _id: "$page",
@@ -55,9 +107,9 @@ async function generateAndSendReport() {
     { $limit: 8 }
   ]).toArray();
 
-  // Button/Source Breakdown in last 24h
+  // 5. Button Breakdown
   const sources = await clickCollection.aggregate([
-    { $match: { createdAt: { $gte: last24h } } },
+    { $match: { type: { $in: ['whatsapp', 'call'] }, createdAt: { $gte: last24h } } },
     {
       $group: {
         _id: { label: "$label", type: "$type" },
@@ -68,7 +120,7 @@ async function generateAndSendReport() {
     { $limit: 8 }
   ]).toArray();
 
-  // Devices in last 24h
+  // 6. Devices
   const mobileCount = await clickCollection.countDocuments({
     createdAt: { $gte: last24h },
     device: 'mobile'
@@ -85,13 +137,24 @@ async function generateAndSendReport() {
     timeZone: 'Asia/Kolkata',
   });
 
+  const recentLeads = recentEnquiries.map(e => ({
+    name: e.name || 'Anonymous Client',
+    phone: e.phone || 'N/A',
+    service: e.service || 'Civil Work',
+    area: e.address || '',
+    time: new Date(e.createdAt).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' }),
+  }));
+
   const reportData = {
     date: formattedDate,
     period: 'Past 24 Hours',
+    totalPageViews,
     whatsappClicks,
     callClicks,
     newLeads,
     totalInteractions: whatsappClicks + callClicks + newLeads,
+    trafficSources,
+    topVisitedPages,
     topClickPages: topClickPages.map(p => ({
       page: p._id || '/',
       total: p.total,
@@ -105,33 +168,56 @@ async function generateAndSendReport() {
     })),
     mobileCount,
     desktopCount,
+    recentLeads,
   };
 
   const html = analyticsReportHtml(reportData);
 
-  // Send Email
+  // Send Single Consolidated Email
   await transporter.sendMail({
     from,
     to: TO,
-    subject: `📊 AMS Daily Report: ${whatsappClicks} WhatsApp | ${callClicks} Calls | ${newLeads} Leads (${formattedDate})`,
+    subject: `📊 AMS Daily Report: ${totalPageViews} Views | ${whatsappClicks} WhatsApp | ${callClicks} Calls | ${newLeads} Leads (${formattedDate})`,
     html,
   });
+
+  // Record sent log to lock out duplicate dispatches for today
+  await reportsLogCollection.updateOne(
+    { dateKey: todayDateKey },
+    {
+      $set: {
+        dateKey: todayDateKey,
+        sentAt: new Date(),
+        recipient: TO,
+        summary: {
+          totalPageViews,
+          whatsappClicks,
+          callClicks,
+          newLeads,
+        },
+      },
+    },
+    { upsert: true }
+  );
 
   return reportData;
 }
 
 export async function GET(request: NextRequest) {
   try {
-    // Verify cron authorization header if configured
     const authHeader = request.headers.get('authorization');
     if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
       // Optional security check
     }
 
-    const reportData = await generateAndSendReport();
+    const force = request.nextUrl.searchParams.get('force') === 'true';
+    const reportData = await generateAndSendReport(force);
+
     return NextResponse.json({
       success: true,
-      message: 'Daily 24-hour analytics email report sent successfully.',
+      message: (reportData as any)?.alreadySent
+        ? (reportData as any).message
+        : 'Daily 24-hour analytics email report sent successfully.',
       data: reportData,
     });
   } catch (error: any) {
@@ -145,10 +231,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const reportData = await generateAndSendReport();
+    // Admin dashboard manual trigger supports ?force=true
+    const force = request.nextUrl.searchParams.get('force') === 'true';
+    const reportData = await generateAndSendReport(force);
+
     return NextResponse.json({
       success: true,
-      message: 'Daily report triggered and sent successfully to ' + TO,
+      message: (reportData as any)?.alreadySent
+        ? (reportData as any).message
+        : 'Daily report triggered and sent successfully to ' + TO,
       data: reportData,
     });
   } catch (error: any) {

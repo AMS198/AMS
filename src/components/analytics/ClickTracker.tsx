@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { trackClick } from '@/lib/tracker';
+import { usePathname } from 'next/navigation';
+import { trackClick, trackPageView } from '@/lib/tracker';
 
 function determineLabel(el: HTMLElement): string {
   // 1. Explicit data-track-label attribute
@@ -21,6 +22,13 @@ function determineLabel(el: HTMLElement): string {
 }
 
 export default function ClickTracker() {
+  const pathname = usePathname();
+
+  // Track pageview on route change (zero-ISR, bot-filtered, non-blocking beacon)
+  useEffect(() => {
+    trackPageView();
+  }, [pathname]);
+
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       const target = e.target as HTMLElement | null;

@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
 
     const { type, label, target, page, device, referrer, metadata } = body || {};
 
-    if (!type || !['whatsapp', 'call', 'quote', 'lead', 'custom'].includes(type)) {
+    if (!type || !['whatsapp', 'call', 'quote', 'lead', 'custom', 'pageview'].includes(type)) {
       return NextResponse.json({ success: false, error: 'Invalid click type' }, { status: 400 });
     }
 

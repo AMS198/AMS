@@ -70,7 +70,7 @@ export default function AnalyticsTab() {
   const handleSendDailyReport = async () => {
     setSendingReport(true);
     try {
-      const res = await fetch('/api/analytics-report', { method: 'POST' });
+      const res = await fetch('/api/analytics-report?force=true', { method: 'POST' });
       const j = await res.json();
       if (j.success) {
         toast.success(j.message || 'Daily report email sent successfully!');
