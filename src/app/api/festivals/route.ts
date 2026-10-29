@@ -3,6 +3,7 @@
 // POST /api/festivals — create new festival campaign (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
 
@@ -57,10 +58,17 @@ export async function GET(request: NextRequest) {
         return todayStr >= c.startDate && todayStr <= c.endDate;
       }) || null;
 
-      return NextResponse.json({
-        success: true,
-        activeCampaign,
-      });
+      return NextResponse.json(
+        {
+          success: true,
+          activeCampaign,
+        },
+        {
+          headers: {
+            'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
+          },
+        }
+      );
     }
 
     // Admin view: return all campaigns
@@ -122,6 +130,8 @@ export async function POST(request: NextRequest) {
     };
 
     const result = await db.collection(COLLECTION).insertOne(newCampaign);
+
+    try { revalidatePath('/api/festivals'); } catch {}
 
     return NextResponse.json(
       {

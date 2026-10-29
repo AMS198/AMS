@@ -3,6 +3,7 @@
 // DELETE /api/festivals/[id] — delete campaign (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { requireAuth, sanitizeInput } from '@/lib/auth';
@@ -70,6 +71,8 @@ export async function PUT(
       return NextResponse.json({ success: false, error: 'Festival campaign not found.' }, { status: 404 });
     }
 
+    try { revalidatePath('/api/festivals'); } catch {}
+
     return NextResponse.json({ success: true, message: 'Campaign updated successfully.' });
   } catch (error) {
     console.error('PUT /api/festivals/[id] error:', error);
@@ -96,6 +99,8 @@ export async function DELETE(
     if (result.deletedCount === 0) {
       return NextResponse.json({ success: false, error: 'Festival campaign not found.' }, { status: 404 });
     }
+
+    try { revalidatePath('/api/festivals'); } catch {}
 
     return NextResponse.json({ success: true, message: 'Campaign deleted successfully.' });
   } catch (error) {

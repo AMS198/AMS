@@ -1,6 +1,7 @@
 // src/app/mr/areas/[location]/page.tsx
 // Dynamic SSR: Renders on demand to completely bypass Vercel Data Cache (0 ISR Reads)
-export const dynamic = 'force-dynamic';
+export const revalidate = 2592000;
+export const dynamicParams = true;
 
 import type { Metadata } from 'next';
 import Link from 'next/link';

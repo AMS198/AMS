@@ -460,8 +460,22 @@ export default function FestivalPopup() {
 
       // 1. Check Dynamic Admin Festival / Campaign from Database
       try {
-        const res = await fetch('/api/festivals?public=true');
-        const data = await res.json();
+        let data: any = null;
+        if (typeof window !== 'undefined') {
+          const cached = sessionStorage.getItem('ams_fest_cache');
+          if (cached) {
+            try { data = JSON.parse(cached); } catch {}
+          }
+        }
+        if (!data) {
+          const res = await fetch('/api/festivals?public=true');
+          data = await res.json();
+          if (data && typeof window !== 'undefined') {
+            try { sessionStorage.setItem('ams_fest_cache', JSON.stringify(data)); } catch {}
+          }
+        }
+        // data loaded
+
         if (data.success && data.activeCampaign) {
           const c = data.activeCampaign;
           matched = {

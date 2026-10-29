@@ -1,5 +1,5 @@
 // Cache for 60 seconds so newly added blogs appear promptly with zero server load
-export const revalidate = 60;
+export const revalidate = 86400;
 
 import React from 'react';
 import { Metadata } from 'next';

@@ -2,6 +2,8 @@
 // Robots.txt configuration — allows search engine + AI crawlers
 import { MetadataRoute } from 'next';
 
+export const revalidate = false;
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
