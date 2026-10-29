@@ -18,20 +18,21 @@ const SITE_UPDATED = new Date('2026-05-25');
 const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
 const TOP_SLUGS = new Set([
   'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
-  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex'
+  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
+  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah'
 ]);
 
 function getLocationPriority(zone: string, slug: string): number {
   if (TOP_SLUGS.has(slug)) return 0.92;
   if (CORE_ZONES.includes(zone)) return 0.85;
-  if (zone === 'Maharashtra') return 0.75;
-  return 0.65; // Jharkhand, West Bengal, far suburbs
+  if (zone === 'Maharashtra' || zone === 'West Bengal' || zone === 'Jharkhand') return 0.78;
+  return 0.65;
 }
 
 function getLocationServicePriority(zone: string, slug: string): number {
   if (TOP_SLUGS.has(slug)) return 0.88;
   if (CORE_ZONES.includes(zone)) return 0.80;
-  if (zone === 'Maharashtra') return 0.65;
+  if (zone === 'Maharashtra' || zone === 'West Bengal' || zone === 'Jharkhand') return 0.70;
   return 0.55;
 }
 

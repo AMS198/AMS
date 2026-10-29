@@ -164,6 +164,7 @@ function getGeoCoordinates(loc: { district: string; slug: string; pincode?: stri
     'Dhanbad':          { lat: 23.7957, lon: 86.4304 },
     'Paschim Bardhaman':{ lat: 23.6850, lon: 86.9695 },
     'Kolkata':          { lat: 22.5726, lon: 88.3639 },
+    'Howrah':           { lat: 22.5958, lon: 88.2636 },
   };
   const b = base[loc.district] || { lat: 19.0760, lon: 72.8777 };
   // Add micro-offset per slug (±0.03 degrees ≈ 3km) for hyperlocal uniqueness
