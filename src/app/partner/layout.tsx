@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Partner with AMS Civil | For Architects & Interior Designers Mumbai',
+  title: 'Partner with AMS Civil | For Builders, Developers & Architects Mumbai',
   description:
-    'Are you an Architect or Interior Designer in Mumbai? Partner with AMS Civil Construction for flawless execution of your drawings. Reliable, transparent civil contracting with zero delays.',
+    'Are you a Builder, Real Estate Developer, or Architect in Mumbai? Partner with AMS Civil Construction for turnkey civil subcontracting, RCC structural work, masonry & flawless blueprint execution with zero delays.',
   keywords: [
+    'civil contractor for builders in Mumbai',
+    'subcontractor for real estate developers Mumbai',
+    'society redevelopment civil contractor',
     'architect partner civil contractor',
     'interior designer civil contractor Mumbai',
     'turnkey execution partner Mumbai',
@@ -16,9 +19,9 @@ export const metadata: Metadata = {
     canonical: 'https://www.amscivilwork.in/partner',
   },
   openGraph: {
-    title: 'Partner with AMS Civil | For Architects & Interior Designers',
+    title: 'Partner with AMS Civil | For Builders, Developers & Architects',
     description:
-      'Partner with Mumbai’s trusted civil contractor for flawless execution of your architectural blueprints.',
+      'Partner with Mumbai’s trusted civil contractor for turnkey subcontracting and flawless execution of architectural blueprints.',
     url: 'https://www.amscivilwork.in/partner',
     siteName: 'AMS Civil Construction',
     images: [

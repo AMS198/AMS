@@ -76,6 +76,7 @@ export default function HomePageSections({
       <CostEstimatorSection />
       <TransformationSection />
       <ProjectsCarousel projects={projects} totalCount={totalProjectsCount} />
+      <BuilderArchitectSection />
       <ProcessSection />
       <FounderSection totalProjectsCount={totalProjectsCount} />
       <GalleryCarouselSection items={galleryItems} />
@@ -121,6 +122,19 @@ function HeroSection() {
       <div className="relative container-custom pt-44 md:pt-48 pb-20">
         <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 items-center">
           <div className="max-w-3xl">
+            {/* B2B Builder & Architect Fast Track Badge */}
+            <div className="mb-3 animate-fadeIn">
+              <Link
+                prefetch={false}
+                href="/partner"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-semibold hover:bg-orange-500/20 transition-all backdrop-blur-md group"
+              >
+                <Building2 size={13} className="text-orange-400 group-hover:scale-110 transition-transform" />
+                <span>For Builders &amp; Architects: Turnkey Civil Subcontracting</span>
+                <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+
             {/* Label */}
             <div className="section-label animate-fadeIn">
               Mumbai&apos;s Trusted Construction Partner With 10+ Years Legacy
@@ -1181,6 +1195,195 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
           <Link prefetch={false} href="/projects" className="btn-outline text-sm px-8 py-3.5">
             Explore Projects Portfolio <ArrowRight size={16} />
           </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BUILDER & ARCHITECT B2B PARTNERSHIP SECTION
+   Ultra-Professional B2B suite for Builders, Developers & Architects
+───────────────────────────────────────────────────────────── */
+function BuilderArchitectSection() {
+  return (
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#080D1A] via-[#0A1122] to-[#080D1A] border-t border-white/5 relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div
+        className="glow-orb w-[500px] h-[500px] opacity-15"
+        style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)', top: '10%', right: '-5%' }}
+      />
+      <div
+        className="glow-orb w-[450px] h-[450px] opacity-10"
+        style={{ background: 'radial-gradient(circle, #3B82F6 0%, transparent 70%)', bottom: '5%', left: '-5%' }}
+      />
+
+      <div className="container-custom relative z-10">
+        {/* Header Tag & Title */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 animate-on-scroll">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-mono font-semibold tracking-wider uppercase mb-4">
+            <Building2 size={13} className="text-orange-400" />
+            <span>B2B Turnkey &amp; Subcontracting Collaboration</span>
+          </div>
+          <h2 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">
+            Are You a <span className="text-gradient">Builder, Developer</span> or <span className="text-gradient">Architect?</span>
+          </h2>
+          <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed">
+            Partner with Mumbai&apos;s most disciplined civil execution contractor. Whether you need heavy structural concrete, high-speed blockwork, sand-face plastering, or millimeter-precise interior civil finishing — we execute your drawings on schedule with zero quality compromise.
+          </p>
+        </div>
+
+        {/* Dual B2B Pillars: Builders vs Architects */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-10">
+          {/* Card 1: For Builders & Real Estate Developers */}
+          <div className="p-7 sm:p-9 rounded-2xl bg-[#0B1329]/80 border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+            <div>
+              <div className="flex items-center justify-between gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/25 flex items-center justify-center text-orange-400">
+                  <HardHat size={26} />
+                </div>
+                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 text-[11px] font-mono font-semibold">
+                  For Real Estate &amp; Tower Developers
+                </span>
+              </div>
+
+              <h3 className="font-display font-bold text-white text-2xl mb-3 group-hover:text-orange-400 transition-colors">
+                For Builders &amp; Developers
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                Reliable subcontracting partner for residential towers, row houses, and society redevelopment projects across Mumbai, Thane &amp; Navi Mumbai.
+              </p>
+
+              <div className="space-y-3.5 mb-6">
+                {[
+                  { title: 'Turnkey or Labor-Only Subcontracting', desc: 'Flexible commercial models tailored to your procurement flow and cash cycle.' },
+                  { title: 'RCC & Heavy Structural Skeleton', desc: 'Columns, beams, raft foundation, and high-strength concrete with mechanized vibration.' },
+                  { title: 'High-Speed Brickwork & AAC Blocks', desc: 'Laser-levelled internal and external partition walls with thermal cracking prevention.' },
+                  { title: 'Sand-Face External & Internal Plaster', desc: 'High-pressure line plastering and water curing for monsoon-resistant building facades.' },
+                  { title: 'On-Site Civil Engineers & 50+ Artisans', desc: 'Dedicated supervisor ensuring IS-code compliance, safety standards, and daily logs.' },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="text-orange-400 mt-0.5 shrink-0" />
+                    <div>
+                      <strong className="text-white text-xs sm:text-sm block">{item.title}</strong>
+                      <span className="text-slate-400 text-xs">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-3">
+              <a
+                href="https://wa.me/918779391690?text=Hi%20Kedar%20ji,%20I%20am%20a%20Builder%20/%20Developer.%20I%20have%20an%20upcoming%20project%20and%20would%20like%20to%20discuss%20civil%20subcontracting%20/%20BOQ."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-xs sm:text-sm px-5 py-3 flex items-center gap-2"
+              >
+                <WhatsAppLogo className="w-4 h-4 fill-current" />
+                <span>Share Project BOQ / CAD</span>
+              </a>
+              <Link
+                prefetch={false}
+                href="/partner"
+                className="btn-ghost text-xs sm:text-sm px-5 py-3 flex items-center gap-1.5"
+              >
+                <span>Builder Terms</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2: For Architects & Interior Designers */}
+          <div className="p-7 sm:p-9 rounded-2xl bg-[#0B1329]/80 border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+            <div>
+              <div className="flex items-center justify-between gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-400">
+                  <Building2 size={26} />
+                </div>
+                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 text-[11px] font-mono font-semibold">
+                  For Architecture &amp; Design Studios
+                </span>
+              </div>
+
+              <h3 className="font-display font-bold text-white text-2xl mb-3 group-hover:text-blue-400 transition-colors">
+                For Architects &amp; Interior Designers
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                Your creative vision, translated onto the site with millimeter precision. We act as your confidential on-site engineering team with strict NDA adherence.
+              </p>
+
+              <div className="space-y-3.5 mb-6">
+                {[
+                  { title: '100% CAD & Blueprint Fidelity', desc: 'No on-site guesswork. Precise structural dismantling, wall alignment, and floor levels.' },
+                  { title: 'Strict B2B Non-Disclosure (NDA)', desc: 'Unconditional privacy protection for your designs, client contacts, and proprietary plans.' },
+                  { title: 'Italian Marble & Large-Format GVT Laying', desc: 'Laser-guided zero-lip tile laying, concealed niche work, and epoxy grouting.' },
+                  { title: 'Acoustic POP Ceilings & Concealed MEP', desc: 'Framed false ceiling architecture ready for cove lighting and modular fit-outs.' },
+                  { title: 'Milestone-Linked Progressive Billing', desc: 'Work certified stage-by-stage so you have 100% control over quality before payout.' },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="text-blue-400 mt-0.5 shrink-0" />
+                    <div>
+                      <strong className="text-white text-xs sm:text-sm block">{item.title}</strong>
+                      <span className="text-slate-400 text-xs">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-3">
+              <a
+                href="https://wa.me/918779391690?text=Hi%20Kedar%20ji,%20I%20am%20an%20Architect%20/%20Interior%20Designer.%20I%20would%20like%20to%20discuss%20a%20turnkey%20civil%20execution%20partnership."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-xs sm:text-sm px-5 py-3 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500"
+              >
+                <WhatsAppLogo className="w-4 h-4 fill-current" />
+                <span>Architect Connect</span>
+              </a>
+              <Link
+                prefetch={false}
+                href="/partner"
+                className="btn-ghost text-xs sm:text-sm px-5 py-3 flex items-center gap-1.5"
+              >
+                <span>Studio Program</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Badges Strip for B2B */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5">
+          <div className="flex items-center gap-3">
+            <ShieldCheck size={20} className="text-orange-400 shrink-0" />
+            <div>
+              <div className="text-white text-xs font-bold">Formal B2B Contract</div>
+              <div className="text-slate-400 text-[11px]">Strict NDA &amp; Penalty Clauses</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Clock size={20} className="text-orange-400 shrink-0" />
+            <div>
+              <div className="text-white text-xs font-bold">Zero Delay Delivery</div>
+              <div className="text-slate-400 text-[11px]">Gantt Chart Project Tracking</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Users size={20} className="text-orange-400 shrink-0" />
+            <div>
+              <div className="text-white text-xs font-bold">50+ In-House Workforce</div>
+              <div className="text-slate-400 text-[11px]">Experienced Masons &amp; Carpenters</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Phone size={20} className="text-orange-400 shrink-0" />
+            <div>
+              <div className="text-white text-xs font-bold">B2B Direct Desk</div>
+              <a href="tel:+918779391690" className="text-orange-400 hover:underline text-[11px] font-mono">+91 87793 91690</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
