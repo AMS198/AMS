@@ -4,6 +4,7 @@
 // Each page is highly optimized for local ranking with a high-end UI
 
 // Pure Static SSG: Pre-rendered at build time with 0 Origin Transfer & 0 ISR Reads
+export const revalidate = false;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
