@@ -1202,186 +1202,181 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
 }
 
 /* ─────────────────────────────────────────────────────────────
-   BUILDER & ARCHITECT B2B PARTNERSHIP SECTION
-   Ultra-Professional B2B suite for Builders, Developers & Architects
+   BUILDER & ARCHITECT B2B PARTNERSHIP SECTION (EXECUTIVE COMPACT)
 ───────────────────────────────────────────────────────────── */
 function BuilderArchitectSection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#080D1A] via-[#0A1122] to-[#080D1A] border-t border-white/5 relative overflow-hidden">
-      {/* Ambient background glows */}
+    <section className="py-10 sm:py-14 bg-[#080D1A] border-t border-white/5 relative overflow-hidden">
+      {/* Subtle architectural ambient lights */}
       <div
-        className="glow-orb w-[500px] h-[500px] opacity-15"
-        style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)', top: '10%', right: '-5%' }}
+        className="glow-orb w-[400px] h-[400px] opacity-10"
+        style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)', top: '0%', right: '5%' }}
       />
       <div
-        className="glow-orb w-[450px] h-[450px] opacity-10"
-        style={{ background: 'radial-gradient(circle, #3B82F6 0%, transparent 70%)', bottom: '5%', left: '-5%' }}
+        className="glow-orb w-[350px] h-[350px] opacity-10"
+        style={{ background: 'radial-gradient(circle, #3B82F6 0%, transparent 70%)', bottom: '0%', left: '5%' }}
       />
 
-      <div className="container-custom relative z-10">
-        {/* Header Tag & Title */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 animate-on-scroll">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-mono font-semibold tracking-wider uppercase mb-4">
-            <Building2 size={13} className="text-orange-400" />
-            <span>B2B Turnkey &amp; Subcontracting Collaboration</span>
+      <div className="container-custom relative z-10 max-w-6xl">
+        {/* Compact Header */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 animate-on-scroll">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px] font-mono font-semibold tracking-wider uppercase mb-2.5">
+            <Building2 size={12} className="text-orange-400" />
+            <span>B2B Contracting &amp; Execution</span>
           </div>
-          <h2 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">
+          <h2 className="font-display font-bold text-white text-2xl sm:text-3xl lg:text-3xl leading-snug mb-2">
             Are You a <span className="text-gradient">Builder, Developer</span> or <span className="text-gradient">Architect?</span>
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed">
-            Partner with Mumbai&apos;s most disciplined civil execution contractor. Whether you need heavy structural concrete, high-speed blockwork, sand-face plastering, or millimeter-precise interior civil finishing — we execute your drawings on schedule with zero quality compromise.
+          <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Partner with Mumbai&apos;s disciplined civil contractor. From RCC framing and high-speed AAC blockwork to millimeter-precise luxury interior civil execution — we deliver your drawings on schedule.
           </p>
         </div>
 
-        {/* Dual B2B Pillars: Builders vs Architects */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-10">
-          {/* Card 1: For Builders & Real Estate Developers */}
-          <div className="p-7 sm:p-9 rounded-2xl bg-[#0B1329]/80 border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+        {/* Executive 2-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+          {/* Card 1: For Builders & Developers */}
+          <div className="p-5 sm:p-6 rounded-xl bg-[#0B1329]/90 border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-lg flex flex-col justify-between group">
             <div>
-              <div className="flex items-center justify-between gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/25 flex items-center justify-center text-orange-400">
-                  <HardHat size={26} />
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
+                  <HardHat size={18} />
                 </div>
-                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 text-[11px] font-mono font-semibold">
-                  For Real Estate &amp; Tower Developers
+                <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono font-medium">
+                  Real Estate &amp; Towers
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-white text-2xl mb-3 group-hover:text-orange-400 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">
                 For Builders &amp; Developers
               </h3>
-              <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                Reliable subcontracting partner for residential towers, row houses, and society redevelopment projects across Mumbai, Thane &amp; Navi Mumbai.
+              <p className="text-slate-400 text-xs leading-relaxed mb-4">
+                Reliable civil subcontracting partner for residential towers, row houses &amp; society redevelopment.
               </p>
 
-              <div className="space-y-3.5 mb-6">
+              <div className="space-y-2 mb-5">
                 {[
-                  { title: 'Turnkey or Labor-Only Subcontracting', desc: 'Flexible commercial models tailored to your procurement flow and cash cycle.' },
-                  { title: 'RCC & Heavy Structural Skeleton', desc: 'Columns, beams, raft foundation, and high-strength concrete with mechanized vibration.' },
-                  { title: 'High-Speed Brickwork & AAC Blocks', desc: 'Laser-levelled internal and external partition walls with thermal cracking prevention.' },
-                  { title: 'Sand-Face External & Internal Plaster', desc: 'High-pressure line plastering and water curing for monsoon-resistant building facades.' },
-                  { title: 'On-Site Civil Engineers & 50+ Artisans', desc: 'Dedicated supervisor ensuring IS-code compliance, safety standards, and daily logs.' },
+                  { tag: 'Contract Models', text: 'Turnkey or pure labor subcontracting matching your procurement' },
+                  { tag: 'RCC Skeleton', text: 'Raft foundation, columns, beams & high-strength vibrated concrete' },
+                  { tag: 'Masonry & Plaster', text: 'Laser-levelled AAC blockwork & waterproof sand-face plastering' },
+                  { tag: 'Workforce & Supervision', text: '50+ in-house artisans led by certified on-site civil engineers' },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-orange-400 mt-0.5 shrink-0" />
-                    <div>
-                      <strong className="text-white text-xs sm:text-sm block">{item.title}</strong>
-                      <span className="text-slate-400 text-xs">{item.desc}</span>
-                    </div>
+                  <div key={idx} className="flex items-start gap-2 text-xs">
+                    <CheckCircle2 size={14} className="text-orange-400 mt-0.5 shrink-0" />
+                    <span className="text-slate-300">
+                      <strong className="text-white font-medium">{item.tag}:</strong> {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-3">
+            <div className="pt-4 border-t border-white/10 flex items-center gap-2.5">
               <a
                 href="https://wa.me/918779391690?text=Hi%20Kedar%20ji,%20I%20am%20a%20Builder%20/%20Developer.%20I%20have%20an%20upcoming%20project%20and%20would%20like%20to%20discuss%20civil%20subcontracting%20/%20BOQ."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-xs sm:text-sm px-5 py-3 flex items-center gap-2"
+                className="btn-primary text-xs px-4 py-2.5 flex items-center gap-1.5 rounded-lg"
               >
-                <WhatsAppLogo className="w-4 h-4 fill-current" />
-                <span>Share Project BOQ / CAD</span>
+                <WhatsAppLogo className="w-3.5 h-3.5 fill-current" />
+                <span>Share BOQ / CAD</span>
               </a>
               <Link
                 prefetch={false}
                 href="/partner"
-                className="btn-ghost text-xs sm:text-sm px-5 py-3 flex items-center gap-1.5"
+                className="btn-ghost text-xs px-3.5 py-2.5 flex items-center gap-1 rounded-lg text-slate-300 hover:text-white"
               >
                 <span>Builder Terms</span>
-                <ArrowRight size={14} />
+                <ArrowRight size={12} />
               </Link>
             </div>
           </div>
 
           {/* Card 2: For Architects & Interior Designers */}
-          <div className="p-7 sm:p-9 rounded-2xl bg-[#0B1329]/80 border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+          <div className="p-5 sm:p-6 rounded-xl bg-[#0B1329]/90 border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-lg flex flex-col justify-between group">
             <div>
-              <div className="flex items-center justify-between gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-400">
-                  <Building2 size={26} />
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <Building2 size={18} />
                 </div>
-                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 text-[11px] font-mono font-semibold">
-                  For Architecture &amp; Design Studios
+                <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono font-medium">
+                  Architecture &amp; Design Studios
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-white text-2xl mb-3 group-hover:text-blue-400 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
                 For Architects &amp; Interior Designers
               </h3>
-              <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                Your creative vision, translated onto the site with millimeter precision. We act as your confidential on-site engineering team with strict NDA adherence.
+              <p className="text-slate-400 text-xs leading-relaxed mb-4">
+                Your architectural blueprints executed on-site with millimeter fidelity and formal B2B NDA privacy.
               </p>
 
-              <div className="space-y-3.5 mb-6">
+              <div className="space-y-2 mb-5">
                 {[
-                  { title: '100% CAD & Blueprint Fidelity', desc: 'No on-site guesswork. Precise structural dismantling, wall alignment, and floor levels.' },
-                  { title: 'Strict B2B Non-Disclosure (NDA)', desc: 'Unconditional privacy protection for your designs, client contacts, and proprietary plans.' },
-                  { title: 'Italian Marble & Large-Format GVT Laying', desc: 'Laser-guided zero-lip tile laying, concealed niche work, and epoxy grouting.' },
-                  { title: 'Acoustic POP Ceilings & Concealed MEP', desc: 'Framed false ceiling architecture ready for cove lighting and modular fit-outs.' },
-                  { title: 'Milestone-Linked Progressive Billing', desc: 'Work certified stage-by-stage so you have 100% control over quality before payout.' },
+                  { tag: '100% Drawing Fidelity', text: 'Zero guesswork. Precise AutoCAD/Revit alignment & floor levels' },
+                  { tag: 'Confidential NDA', text: 'Strict client privacy & proprietary design protection guaranteed' },
+                  { tag: 'Luxury Finishes', text: 'Zero-lip Italian marble laying, niche tile work & acoustic ceilings' },
+                  { tag: 'Milestone Billing', text: 'Progressive stage sign-offs with quality certified before payouts' },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-blue-400 mt-0.5 shrink-0" />
-                    <div>
-                      <strong className="text-white text-xs sm:text-sm block">{item.title}</strong>
-                      <span className="text-slate-400 text-xs">{item.desc}</span>
-                    </div>
+                  <div key={idx} className="flex items-start gap-2 text-xs">
+                    <CheckCircle2 size={14} className="text-blue-400 mt-0.5 shrink-0" />
+                    <span className="text-slate-300">
+                      <strong className="text-white font-medium">{item.tag}:</strong> {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-3">
+            <div className="pt-4 border-t border-white/10 flex items-center gap-2.5">
               <a
                 href="https://wa.me/918779391690?text=Hi%20Kedar%20ji,%20I%20am%20an%20Architect%20/%20Interior%20Designer.%20I%20would%20like%20to%20discuss%20a%20turnkey%20civil%20execution%20partnership."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-xs sm:text-sm px-5 py-3 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500"
+                className="btn-primary text-xs px-4 py-2.5 flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500"
               >
-                <WhatsAppLogo className="w-4 h-4 fill-current" />
+                <WhatsAppLogo className="w-3.5 h-3.5 fill-current" />
                 <span>Architect Connect</span>
               </a>
               <Link
                 prefetch={false}
                 href="/partner"
-                className="btn-ghost text-xs sm:text-sm px-5 py-3 flex items-center gap-1.5"
+                className="btn-ghost text-xs px-3.5 py-2.5 flex items-center gap-1 rounded-lg text-slate-300 hover:text-white"
               >
                 <span>Studio Program</span>
-                <ArrowRight size={14} />
+                <ArrowRight size={12} />
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Trust Badges Strip for B2B */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-          <div className="flex items-center gap-3">
-            <ShieldCheck size={20} className="text-orange-400 shrink-0" />
+        {/* Compact B2B Trust Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div className="flex items-center gap-2.5">
+            <ShieldCheck size={16} className="text-orange-400 shrink-0" />
             <div>
-              <div className="text-white text-xs font-bold">Formal B2B Contract</div>
-              <div className="text-slate-400 text-[11px]">Strict NDA &amp; Penalty Clauses</div>
+              <div className="text-white text-xs font-semibold">Formal B2B Contract</div>
+              <div className="text-slate-400 text-[10px]">Strict NDA &amp; Penalty Clauses</div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Clock size={20} className="text-orange-400 shrink-0" />
+          <div className="flex items-center gap-2.5">
+            <Clock size={16} className="text-orange-400 shrink-0" />
             <div>
-              <div className="text-white text-xs font-bold">Zero Delay Delivery</div>
-              <div className="text-slate-400 text-[11px]">Gantt Chart Project Tracking</div>
+              <div className="text-white text-xs font-semibold">Zero Delay Handover</div>
+              <div className="text-slate-400 text-[10px]">Milestone Gantt Tracking</div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Users size={20} className="text-orange-400 shrink-0" />
+          <div className="flex items-center gap-2.5">
+            <Users size={16} className="text-orange-400 shrink-0" />
             <div>
-              <div className="text-white text-xs font-bold">50+ In-House Workforce</div>
-              <div className="text-slate-400 text-[11px]">Experienced Masons &amp; Carpenters</div>
+              <div className="text-white text-xs font-semibold">50+ In-House Workforce</div>
+              <div className="text-slate-400 text-[10px]">Permanent Skilled Masons</div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Phone size={20} className="text-orange-400 shrink-0" />
+          <div className="flex items-center gap-2.5">
+            <Phone size={16} className="text-orange-400 shrink-0" />
             <div>
-              <div className="text-white text-xs font-bold">B2B Direct Desk</div>
-              <a href="tel:+918779391690" className="text-orange-400 hover:underline text-[11px] font-mono">+91 87793 91690</a>
+              <div className="text-white text-xs font-semibold">B2B Direct Desk</div>
+              <a href="tel:+918779391690" className="text-orange-400 hover:underline text-[10px] font-mono">+91 87793 91690</a>
             </div>
           </div>
         </div>
