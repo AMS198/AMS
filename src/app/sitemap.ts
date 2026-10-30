@@ -19,7 +19,10 @@ const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai
 const TOP_SLUGS = new Set([
   'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
   'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
-  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah'
+  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
+  'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
+  'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
+  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
 ]);
 
 function getLocationPriority(zone: string, slug: string): number {
@@ -92,15 +95,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
 
-    // SEO: Generate granular Location × Service pages for ALL locations across Mumbai and India
-    services.forEach(svc => {
-      locationPages.push({
-        url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-        lastModified:    SITE_UPDATED,
-        changeFrequency: 'weekly' as const,
-        priority:        getLocationServicePriority(loc.zone, loc.slug),
+    // SEO: Include high-priority Location × Service pages that are pre-rendered pure static (0 Origin Hits)
+    if (TOP_SLUGS.has(loc.slug)) {
+      services.forEach(svc => {
+        locationPages.push({
+          url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+          lastModified:    SITE_UPDATED,
+          changeFrequency: 'weekly' as const,
+          priority:        getLocationServicePriority(loc.zone, loc.slug),
+        });
       });
-    });
+    }
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
