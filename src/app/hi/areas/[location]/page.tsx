@@ -124,13 +124,24 @@ export default async function LocationPageHindi(props: { params: Promise<{ locat
       <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 blur-[120px]" />
         <div className="relative z-10 container-custom">
-          <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400 mb-8">
-            <Link prefetch={false} href="/" className="hover:text-orange-400">मुख्य पृष्ठ (Home)</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <Link prefetch={false} href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <span className="text-orange-400 font-medium">{loc.name}</span>
-          </nav>
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400">
+              <Link prefetch={false} href="/" className="hover:text-orange-400">होम (Home)</Link>
+              <ArrowRight size={10} className="opacity-50" />
+              <Link prefetch={false} href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
+              <ArrowRight size={10} className="opacity-50" />
+              <span className="text-orange-400 font-medium">{loc.name}</span>
+            </nav>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[11px] text-slate-400">
+              <span className="text-slate-500 font-medium">भाषा:</span>
+              <Link prefetch={false} href={`/areas/${loc.slug}`} className="text-slate-400 hover:text-white transition-colors">English</Link>
+              <span className="text-slate-600">•</span>
+              <Link prefetch={false} href={`/mr/areas/${loc.slug}`} className="text-slate-400 hover:text-white transition-colors">मराठी</Link>
+              <span className="text-slate-600">•</span>
+              <span className="text-orange-400 font-bold px-1.5 py-0.5 rounded bg-orange-500/10">हिंदी</span>
+            </div>
+          </div>
 
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold mb-6">
@@ -199,8 +210,24 @@ export default async function LocationPageHindi(props: { params: Promise<{ locat
               </h2>
               <div className="space-y-6 text-slate-400 leading-relaxed">
                 <p>
-                  {loc.name} में एक भरोसेमंद ठेकेदार खोजना मुश्किल हो सकता है। AMS Civil Construction आपको 100% पारदर्शी कीमत पर क्वालिटी काम देता है।
+                  {loc.name} में एक भरोसेमंद ठेकेदार खोजना मुश्किल हो सकता है। AMS Civil Construction आपको 100% पारदर्शी कीमत पर क्वालिटी काम देता है। हम <Link prefetch={false} href={`/areas/${loc.slug}/bungalow-construction`} className="text-orange-400 font-medium hover:underline">बंगलो कंस्ट्रक्शन</Link>, <Link prefetch={false} href={`/areas/${loc.slug}/bathroom-renovation`} className="text-orange-400 font-medium hover:underline">बाथरूम रिनोवेशन</Link>, और <Link prefetch={false} href={`/areas/${loc.slug}/waterproofing`} className="text-orange-400 font-medium hover:underline">वाटरप्रूफिंग</Link> के एक्सपर्ट हैं।
                   {layoutSeed > 0.5 ? ` खास तौर पर ${loc.landmarks[0] || loc.name} के इलाके में हमने कई प्रोजेक्ट्स पूरे किए हैं।` : ''}
+                </p>
+                <p className="text-slate-400 text-sm leading-relaxed mt-4">
+                  {loc.name} के अलावा, हमारी एक्सपर्ट टीम आसपास के प्रमुख इलाकों जैसे{' '}
+                  {loc.nearby.slice(0, 3).map((nearSlug, idx) => {
+                    const nearLoc = getLocation(nearSlug);
+                    if (!nearLoc) return null;
+                    return (
+                      <span key={nearSlug}>
+                        {idx > 0 && ', '}
+                        <Link prefetch={false} href={`/hi/areas/${nearLoc.slug}`} className="text-orange-400 font-medium hover:underline">
+                          {nearLoc.name}
+                        </Link>
+                      </span>
+                    );
+                  })}{' '}
+                  में भी गारंटीड सिविल कंस्ट्रक्शन और रिनोवेशन का काम करती है।
                 </p>
               </div>
               <div className="flex flex-wrap gap-6 mt-10">

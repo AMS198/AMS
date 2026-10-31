@@ -95,13 +95,24 @@ export default async function LocationPageMarathi(props: { params: Promise<{ loc
       <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 blur-[120px]" />
         <div className="relative z-10 container-custom">
-          <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400 mb-8">
-            <Link prefetch={false} href="/" className="hover:text-orange-400">मुख्य पृष्ठ (Home)</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <Link prefetch={false} href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <span className="text-orange-400 font-medium">{loc.name}</span>
-          </nav>
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400">
+              <Link prefetch={false} href="/" className="hover:text-orange-400">मुख्य पृष्ठ (Home)</Link>
+              <ArrowRight size={10} className="opacity-50" />
+              <Link prefetch={false} href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
+              <ArrowRight size={10} className="opacity-50" />
+              <span className="text-orange-400 font-medium">{loc.name}</span>
+            </nav>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[11px] text-slate-400">
+              <span className="text-slate-500 font-medium">भाषा:</span>
+              <Link prefetch={false} href={`/areas/${loc.slug}`} className="text-slate-400 hover:text-white transition-colors">English</Link>
+              <span className="text-slate-600">•</span>
+              <span className="text-orange-400 font-bold px-1.5 py-0.5 rounded bg-orange-500/10">मराठी</span>
+              <span className="text-slate-600">•</span>
+              <Link prefetch={false} href={`/hi/areas/${loc.slug}`} className="text-slate-400 hover:text-white transition-colors">हिंदी</Link>
+            </div>
+          </div>
 
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold mb-6">
@@ -170,8 +181,24 @@ export default async function LocationPageMarathi(props: { params: Promise<{ loc
               </h2>
               <div className="space-y-6 text-slate-400 leading-relaxed">
                 <p>
-                  {loc.name} मध्ये एक विश्वासार्ह कंत्राटदार शोधणे कठीण असू शकते. AMS Civil Construction तुम्हाला 100% पारदर्शक किंमतीवर दर्जेदार काम देते.
+                  {loc.name} मध्ये एक विश्वासार्ह कंत्राटदार शोधणे कठीण असू शकते. AMS Civil Construction तुम्हाला 100% पारदर्शक किंमतीवर दर्जेदार काम देते. आम्ही <Link prefetch={false} href={`/areas/${loc.slug}/bungalow-construction`} className="text-orange-400 font-medium hover:underline">बंगला बांधकाम</Link>, <Link prefetch={false} href={`/areas/${loc.slug}/bathroom-renovation`} className="text-orange-400 font-medium hover:underline">बाथरुम नूतनीकरण</Link>, आणि <Link prefetch={false} href={`/areas/${loc.slug}/waterproofing`} className="text-orange-400 font-medium hover:underline">वॉटरप्रूफिंग</Link> चे विशेष काम करतो.
                   {layoutSeed > 0.5 ? ` आम्ही विशेषतः ${loc.landmarks[0] || loc.name} च्या परिसरात अनेक प्रकल्प यशस्वीपणे पूर्ण केले आहेत.` : ''}
+                </p>
+                <p className="text-slate-400 text-sm leading-relaxed mt-4">
+                  {loc.name} व्यतिरिक्त, आमची टीम जवळच्या{' '}
+                  {loc.nearby.slice(0, 3).map((nearSlug, idx) => {
+                    const nearLoc = getLocation(nearSlug);
+                    if (!nearLoc) return null;
+                    return (
+                      <span key={nearSlug}>
+                        {idx > 0 && ', '}
+                        <Link prefetch={false} href={`/mr/areas/${nearLoc.slug}`} className="text-orange-400 font-medium hover:underline">
+                          {nearLoc.name}
+                        </Link>
+                      </span>
+                    );
+                  })}{' '}
+                  परिसरातही दर्जेदार सिव्हिल बांधकाम व नूतनीकरण सेवा पुरवते.
                 </p>
               </div>
               <div className="flex flex-wrap gap-6 mt-10">

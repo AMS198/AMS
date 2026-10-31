@@ -508,7 +508,7 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
             <ArrowRight size={10} className="opacity-50" />
             <Link prefetch={false} href={`/areas/${loc.slug}`} className="hover:text-orange-400 transition-colors">{loc.name}</Link>
             <ArrowRight size={10} className="opacity-50" />
-            <span className="text-orange-400 font-medium">{svc.title}</span>
+            <Link prefetch={false} href={`/services/${svc.slug}`} className="text-orange-400 font-medium hover:underline">{svc.title}</Link>
           </nav>
 
           <div className="max-w-4xl">
@@ -523,7 +523,7 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
               Looking for expert <strong>{svc.title.toLowerCase()} in {loc.name}</strong>?
-              AMS Civil Construction delivers premium {svc.title.toLowerCase()} services across {loc.district}. {zoneDesc}.
+              AMS Civil Construction delivers premium <Link prefetch={false} href={`/services/${svc.slug}`} className="text-orange-400 font-semibold hover:underline">{svc.title.toLowerCase()}</Link> services across <Link prefetch={false} href={`/areas/${loc.slug}`} className="text-orange-400 font-semibold hover:underline">{loc.name}</Link> and {loc.district}. {zoneDesc}.
             </p>
 
             <div className="flex flex-wrap gap-4 animate-fadeUp" style={{ animationDelay: '200ms' }}>
@@ -564,6 +564,22 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
             
             <p className="text-slate-400 text-lg leading-relaxed mb-6">
               {localParagraph}
+            </p>
+            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+              Looking for expert {svc.title.toLowerCase()} in nearby hubs? In addition to {loc.name}, our certified crews deliver turnkey {svc.title.toLowerCase()} across{' '}
+              {loc.nearby.slice(0, 4).map((nearSlug, idx) => {
+                const nearLoc = getLocation(nearSlug);
+                if (!nearLoc) return null;
+                const isLast = idx === Math.min(loc.nearby.length, 4) - 1;
+                return (
+                  <span key={nearSlug}>
+                    {idx > 0 && (isLast ? ', and ' : ', ')}
+                    <Link prefetch={false} href={`/areas/${nearLoc.slug}/${svc.slug}`} className="text-orange-400 font-medium hover:underline">
+                      {nearLoc.name}
+                    </Link>
+                  </span>
+                );
+              })}. You can also explore our verified <Link prefetch={false} href={`/areas/${loc.slug}`} className="text-orange-400 font-medium hover:underline">all civil services in {loc.name}</Link> or check our latest <Link prefetch={false} href="/blog" className="text-orange-400 font-medium hover:underline">construction guides &amp; material estimates</Link>.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">

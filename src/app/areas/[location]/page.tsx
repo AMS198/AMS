@@ -378,14 +378,25 @@ export default async function LocationPage(props: { params: Promise<{ location: 
         </div>
 
         <div className="relative z-10 container-custom">
-          {/* Breadcrumbs with glassmorphism */}
-          <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] sm:text-xs text-slate-400 mb-8 animate-fadeIn">
-            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <Link prefetch={false} href="/areas" className="hover:text-orange-400 transition-colors">Service Areas</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <span className="text-orange-400 font-medium">{loc.name}</span>
-          </nav>
+          {/* Breadcrumbs & Language Switcher */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] sm:text-xs text-slate-400 animate-fadeIn">
+              <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+              <ArrowRight size={10} className="opacity-50" />
+              <Link prefetch={false} href="/areas" className="hover:text-orange-400 transition-colors">Service Areas</Link>
+              <ArrowRight size={10} className="opacity-50" />
+              <span className="text-orange-400 font-medium">{loc.name}</span>
+            </nav>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[11px] text-slate-400">
+              <span className="text-slate-500 font-medium">Language:</span>
+              <span className="text-orange-400 font-bold px-1.5 py-0.5 rounded bg-orange-500/10">English</span>
+              <span className="text-slate-600">•</span>
+              <Link prefetch={false} href={`/mr/areas/${loc.slug}`} className="text-slate-400 hover:text-white transition-colors">मराठी</Link>
+              <span className="text-slate-600">•</span>
+              <Link prefetch={false} href={`/hi/areas/${loc.slug}`} className="text-slate-400 hover:text-white transition-colors">हिंदी</Link>
+            </div>
+          </div>
 
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-widest mb-6 animate-fadeUp">
@@ -441,17 +452,26 @@ export default async function LocationPage(props: { params: Promise<{ location: 
               <div className="space-y-6 text-slate-400 leading-relaxed">
                 <p>
                   Finding a reliable <strong>civil contractor in {loc.name}</strong> can be challenging. 
-                  AMS Civil Construction simplifies your search by offering end-to-end <strong>civil work in {loc.name}</strong> 
-                  tailored to local requirements. From the structural integrity of your bungalow to the 
-                  finest details of interior renovations, our <strong>civil work</strong> teams in {loc.district} 
-                  ensure every project is built to last.
+                  AMS Civil Construction simplifies your search by offering end-to-end <Link href="/services" className="text-orange-400 font-semibold hover:underline">civil work in {loc.name}</Link> tailored to local municipal requirements. From the structural planning of your <Link href={`/areas/${loc.slug}/bungalow-construction`} className="text-orange-400 font-medium hover:underline">bungalow construction</Link> to the finest craftsmanship in <Link href={`/areas/${loc.slug}/full-interior-work`} className="text-orange-400 font-medium hover:underline">full interior work</Link>, our engineering teams in {loc.district} ensure every project is built with certified materials.
                 </p>
                 <p>
-                  Our expertise in <strong>civil work</strong> covers everything from RCC framework, masonry, 
-                  plastering, and waterproofing to specialized tasks like tiling and plumbing. 
-                  Whether you are planning a new project near {loc.landmarks[0]} or need 
-                  urgent repair work in the {loc.zone} area, we are your local experts for high-quality, 
-                  on-time, and budget-friendly <strong>civil work in {loc.name}</strong>.
+                  Our specialized solutions in {loc.name} cover certified <Link href={`/areas/${loc.slug}/waterproofing`} className="text-orange-400 font-medium hover:underline">waterproofing</Link>, high-grade <Link href={`/areas/${loc.slug}/plaster-work`} className="text-orange-400 font-medium hover:underline">plaster work</Link>, precision <Link href={`/areas/${loc.slug}/tiles-work`} className="text-orange-400 font-medium hover:underline">tiles work</Link>, seamless <Link href={`/areas/${loc.slug}/flooring-work`} className="text-orange-400 font-medium hover:underline">flooring</Link>, and modern <Link href={`/areas/${loc.slug}/bathroom-renovation`} className="text-orange-400 font-medium hover:underline">bathroom renovation</Link>. Whether you are planning a fresh construction near {loc.landmarks[0] || loc.name} or need urgent <Link href={`/areas/${loc.slug}/building-repair-work`} className="text-orange-400 font-medium hover:underline">building repair work</Link> in {loc.zone}, we deliver on-time, guaranteed craftsmanship.
+                </p>
+                <p>
+                  Need certified civil contractors in neighbouring localities? In addition to {loc.name}, our verified on-site crews actively manage projects across neighbouring hubs including{' '}
+                  {loc.nearby.slice(0, 4).map((nearSlug, idx) => {
+                    const nearLoc = getLocation(nearSlug);
+                    if (!nearLoc) return null;
+                    const isLast = idx === Math.min(loc.nearby.length, 4) - 1;
+                    return (
+                      <span key={nearSlug}>
+                        {idx > 0 && (isLast ? ', and ' : ', ')}
+                        <Link prefetch={false} href={`/areas/${nearLoc.slug}`} className="text-orange-400 font-medium hover:underline">
+                          {nearLoc.name}
+                        </Link>
+                      </span>
+                    );
+                  })}. Planning your construction budget? Check our comprehensive <Link prefetch={false} href="/blog" className="text-orange-400 font-medium hover:underline">Mumbai Construction Cost &amp; Price Guides</Link> for updated 2026 material benchmarks.
                 </p>
               </div>
               <div className="flex flex-wrap gap-6 mt-10">
