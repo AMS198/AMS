@@ -71,6 +71,7 @@ const nextConfig = {
       { source: '/blog/terrace-%3Ca%20href=', destination: '/blog', permanent: true },
       { source: '/blog/terrace-%3Ca%20href%3D', destination: '/blog', permanent: true },
       
+      { source: '/services/interior-civil-work', destination: '/services/full-interior-work', permanent: true },
       // Redirect deleted/old blogs
       { source: '/blog/civil-contractor-agreement-rules-tips-marathi', destination: '/blog', permanent: true },
     ];

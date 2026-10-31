@@ -70,7 +70,7 @@ export function sanitizeBlogHtml(htmlOrMarkdown: string): string {
     { word: 'pop work', link: '/services/pop-work' },
     { word: 'painting work', link: '/services/painting' },
     { word: 'waterproofing', link: '/services/waterproofing' },
-    { word: 'civil contractor', link: '/areas/mumbai' },
+    { word: 'civil contractor', link: '/areas' },
     { word: 'civil work', link: '/services' }
   ];
 

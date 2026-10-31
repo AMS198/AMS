@@ -9,7 +9,7 @@ import SEOCrossLinks from '../ui/SEOCrossLinks';
 
 const serviceLinks = [
   { label: 'Bungalow Construction',   href: '/services/bungalow-construction' },
-  { label: 'Full Interior Civil Work',href: '/services/interior-civil-work'   },
+  { label: 'Full Interior Civil Work',href: '/services/full-interior-work'   },
   { label: 'Swimming Pool Work',      href: '/services/swimming-pool-work'    },
   { label: 'Compound Wall & Gates',   href: '/services/compound-wall-work'    },
   { label: 'Building Repair',         href: '/services/building-repair-work'  },

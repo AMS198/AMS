@@ -3,17 +3,8 @@
 export const revalidate = false;
 export const dynamicParams = true;
 
-const CORE_LOCATIONS = [
-  'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
-  'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
-  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
-  'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
-  'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
-  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
-];
-
 export async function generateStaticParams() {
-  return CORE_LOCATIONS.map((slug) => ({ location: slug }));
+  return locations.map((loc) => ({ location: loc.slug }));
 }
 
 import type { Metadata } from 'next';
