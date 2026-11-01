@@ -5,7 +5,7 @@
 
 // Pure Static SSG: Pre-rendered at build time with 0 Origin Transfer & 0 ISR Reads
 export const revalidate = false;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return locations.map((loc) => ({ location: loc.slug }));

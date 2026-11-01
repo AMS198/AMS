@@ -1,7 +1,7 @@
 // src/app/hi/areas/[location]/page.tsx
 // Pure Static SSG for Top Hubs (0 ISR Reads, 0 Origin Transfer)
 export const revalidate = false;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return locations.map((loc) => ({ location: loc.slug }));

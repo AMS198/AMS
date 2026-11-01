@@ -19,7 +19,7 @@ import ServiceFAQAccordion from '@/components/services/ServiceFAQAccordion';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
 export const revalidate = false;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));

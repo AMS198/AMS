@@ -5,7 +5,7 @@
 
 // Pure Static SSG for Top Hubs + On-Demand CDN Caching (0 ISR Reads, 0 Fast Origin Transfer)
 export const revalidate = false;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 const CORE_LOCATIONS = [
   'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
