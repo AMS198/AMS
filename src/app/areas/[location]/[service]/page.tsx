@@ -10,10 +10,12 @@ export const dynamicParams = false;
 const CORE_LOCATIONS = [
   'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
   'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
-  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
   'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
   'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
-  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
+  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli',
+  // Top Pune High-Value Hubs
+  'kothrud','hinjawadi','baner','wakad','viman-nagar','kalyani-nagar','koregaon-park','kharadi',
+  'hadapsar','pimpri-chinchwad','aundh','bavdhan','pimple-saudagar','magarpatta'
 ];
 
 export async function generateStaticParams() {
@@ -74,59 +76,11 @@ export async function generateMetadata(
     title,
     description,
     keywords: [
-      /* English Core & Commercial Queries */
       `${svc.title} in ${loc.name}`,
       `best ${svc.title} in ${loc.name}`,
       `top ${svc.title.toLowerCase()} contractor ${loc.name}`,
-      `top ${svc.title.toLowerCase()} company ${loc.name}`,
-      `expert ${svc.title.toLowerCase()} near me ${loc.name}`,
-      `${svc.title.toLowerCase()} cost per sq ft in ${loc.name}`,
-      `${svc.title.toLowerCase()} charges in ${loc.name}`,
-      `${svc.title.toLowerCase()} rates ${loc.name}`,
-      `${svc.title.toLowerCase()} quotation in ${loc.name}`,
-      `${svc.title.toLowerCase()} contact number ${loc.name}`,
-      `${svc.title.toLowerCase()} phone number ${loc.name}`,
-      `civil work contractor ${loc.name}`,
-      `building contractor in ${loc.name}`,
-      `licensed civil contractor in ${loc.name}`,
-      `turnkey ${svc.title.toLowerCase()} work ${loc.name}`,
-      `with material ${svc.title.toLowerCase()} in ${loc.name}`,
-      `labour rate ${svc.title.toLowerCase()} in ${loc.name}`,
-      `flat ${svc.title.toLowerCase()} in ${loc.name}`,
-      `apartment ${svc.title.toLowerCase()} ${loc.name}`,
-      `society ${svc.title.toLowerCase()} work ${loc.name}`,
-      `commercial ${svc.title.toLowerCase()} in ${loc.name}`,
-      `emergency ${svc.title.toLowerCase()} in ${loc.name}`,
-
-      /* Hindi / Hinglish Search Intent (High Conversion in India) */
       `${loc.name} mein ${svc.title.toLowerCase()}`,
-      `${loc.name} mein ${svc.title.toLowerCase()} ka thekedar`,
-      `${loc.name} mein civil work ka thekedar`,
-      `${svc.title.toLowerCase()} thekedar contact number ${loc.name}`,
-      `${svc.title.toLowerCase()} ka rate ${loc.name}`,
-      `${loc.name} mein ${svc.title.toLowerCase()} ka kharcha`,
-      `${loc.name} civil mistry`,
-      `${loc.name} mein mistry chahiye`,
-      `ghar banane wala thekedar ${loc.name}`,
-      `sasta aur achha thekedar ${loc.name}`,
-      `achha thekedar ${loc.name}`,
-      `civil thekedar near ${loc.name}`,
-
-      /* Marathi Local Search Queries */
       `${loc.name} madhye ${svc.title.toLowerCase()} thekedar`,
-      `${loc.name} madhye thekedar`,
-      `${loc.name} madhye civil kaam`,
-      `${loc.name} civil contractor marathi`,
-      `ghar bandhani thekedar ${loc.name}`,
-
-      /* Landmarks & Pincode Targeting */
-      ...(loc.pincode ? [`${svc.title.toLowerCase()} in ${loc.pincode}`, `civil contractor in ${loc.pincode}`] : []),
-      ...loc.landmarks.slice(0, 3).map(lm => `${svc.title.toLowerCase()} near ${lm}`),
-      ...loc.landmarks.slice(0, 2).map(lm => `civil contractor near ${lm}`),
-
-      /* Nearby Micro-Markets */
-      ...loc.nearby.slice(0, 6).map(n => `${svc.title} in ${n}`),
-      ...loc.nearby.slice(0, 4).map(n => `${svc.title.toLowerCase()} contractor ${n}`),
     ],
     openGraph: {
       title,
@@ -157,10 +111,6 @@ function getGeoCoordinates(district: string) {
     'Pune': { lat: '18.5204', lon: '73.8567' },
     'Nasik': { lat: '20.0110', lon: '73.7903' },
     'Nagpur': { lat: '21.1458', lon: '79.0882' },
-    'Ranchi': { lat: '23.3441', lon: '85.3096' },
-    'Kolkata': { lat: '22.5726', lon: '88.3639' },
-    'Howrah': { lat: '22.5958', lon: '88.2636' },
-    'Bangalore Urban': { lat: '12.9716', lon: '77.5946' },
   };
   return coords[district] || { lat: '19.0760', lon: '72.8777' }; // Fallback to Mumbai
 }
@@ -184,94 +134,38 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
   const zContexts = zoneContext[loc.zone] || ['a growing region'];
   const zoneDesc = zContexts[Math.floor(layoutSeed * zContexts.length)];
 
-  /* JSON-LD Schema */
+  /* JSON-LD Schema (Lightweight, High-SEO) */
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
-    name: `AMS Civil Construction — ${svc.title} in ${loc.name}`,
-    description: localParagraph,
-    telephone: ['+918779391690', '+919004298911'],
-    image: svc.image,
-    url: `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}`,
-    priceRange: '₹₹ - Affordable to Luxury',
-    paymentAccepted: 'Cash, UPI, Credit Card, Bank Transfer, Cheque',
-    currenciesAccepted: 'INR',
-    sameAs: [
-      'https://share.google/v9ZNhSlXDECsz2p58',
-      'https://www.indiamart.com/ams-civil-work/',
-      'https://jsdl.in/DT-434YEUFG4BN',
-      'https://www.facebook.com/profile.php?id=61570712849063',
-      'https://www.instagram.com/amscivilwork/',
-      'https://in.pinterest.com/amsconstructionwork/',
-      'https://mumbaiconstructionhomerenovationguide.quora.com/'
-    ],
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        opens: '08:00',
-        closes: '21:00',
-      }
-    ],
-    knowsAbout: [
-      svc.title,
-      'Civil Construction',
-      'Home Renovation',
-      'Building Repair',
-      'Waterproofing'
-    ],
-    areaServed: {
-      '@type': 'City',
-      name: loc.name,
-      containedInPlace: {
-        '@type': 'AdministrativeArea',
-        name: loc.district,
-      }
-    },
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: loc.name,
-      addressRegion: loc.district,
-      addressCountry: 'IN',
-      ...(loc.pincode ? { postalCode: loc.pincode } : {}),
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: getGeoCoordinates(loc.district).lat,
-      longitude: getGeoCoordinates(loc.district).lon,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: (120 + ((loc.name.length * 7) % 50)).toString(),
-      bestRating: '5',
-      worstRating: '1',
-    },
-    review: [
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Amitabh Sen' },
-        datePublished: '2026-03-22',
-        reviewBody: `Hired AMS for ${svc.title} in ${loc.name}. Very impressed with work quality, daily updates, and strict budget adherence.`,
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      }
-    ],
-  };
-
-  const extraJsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'FAQPage',
-        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#faq`,
-        mainEntity: faqs.map(f => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
+        '@type': 'LocalBusiness',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
+        name: `AMS Civil Construction — ${svc.title} in ${loc.name}`,
+        description: localParagraph,
+        telephone: ['+918779391690', '+919004298911'],
+        image: svc.image,
+        url: `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: loc.name,
+          addressRegion: loc.district,
+          addressCountry: 'IN',
+          ...(loc.pincode ? { postalCode: loc.pincode } : {}),
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: getGeoCoordinates(loc.district).lat,
+          longitude: getGeoCoordinates(loc.district).lon,
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          reviewCount: (120 + ((loc.name.length * 7) % 50)).toString(),
+          bestRating: '5',
+          worstRating: '1',
+        },
       },
-      /* Breadcrumb Schema for structure */
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -281,62 +175,14 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
           { '@type': 'ListItem', position: 4, name: svc.title, item: `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}` },
         ],
       },
-      /* HowTo Schema — AI loves step-by-step content */
       {
-        '@type': 'HowTo',
-        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#howto`,
-        name: `How to get professional ${svc.title.toLowerCase()} in ${loc.name}`,
-        description: `Step-by-step process for ${svc.title.toLowerCase()} by AMS Civil Construction in ${loc.name}, ${loc.district}`,
-        totalTime: 'P14D',
-        estimatedCost: {
-          '@type': 'MonetaryAmount',
-          currency: 'INR',
-          value: 'Detailed quotation after site visit',
-        },
-        step: [
-          {
-            '@type': 'HowToStep',
-            name: 'Free Site Visit & Consultation',
-            text: `Our engineer visits your property in ${loc.name} to understand your ${svc.title.toLowerCase()} requirements, take measurements, and plan. (100% Free Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill).`,
-            position: 1,
-          },
-          {
-            '@type': 'HowToStep',
-            name: 'Transparent Quotation',
-            text: `You receive a detailed, itemized quotation for ${svc.title.toLowerCase()} in ${loc.name} with zero hidden costs and exact timelines.`,
-            position: 2,
-          },
-          {
-            '@type': 'HowToStep',
-            name: 'Expert Execution',
-            text: `Our skilled team starts the ${svc.title.toLowerCase()} work in ${loc.name} under senior supervision, keeping you updated at every milestone.`,
-            position: 3,
-          },
-        ],
-      },
-      /* Service Schema — tells AI exactly what service this page is about */
-      {
-        '@type': 'Service',
-        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#service`,
-        name: `${svc.title} in ${loc.name}`,
-        description: localParagraph,
-        provider: { '@id': 'https://www.amscivilwork.in/#business' },
-        areaServed: {
-          '@type': 'City',
-          name: loc.name,
-          containedInPlace: { '@type': 'State', name: loc.district },
-        },
-        serviceType: svc.title,
-        offers: {
-          '@type': 'Offer',
-          availability: 'https://schema.org/InStock',
-          priceCurrency: 'INR',
-          priceSpecification: {
-            '@type': 'PriceSpecification',
-            priceCurrency: 'INR',
-            eligibleRegion: { '@type': 'Place', name: loc.name },
-          },
-        },
+        '@type': 'FAQPage',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#faq`,
+        mainEntity: faqs.map(f => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
       },
     ]
   };
@@ -489,7 +335,6 @@ export default async function AreaServicePage(props: { params: Promise<{ locatio
   return (
     <main className="min-h-screen bg-[#080D1A]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(extraJsonLd) }} />
 
       {/* ── Hero Section ─────────────────────────────────── */}
       <section className="relative pt-40 pb-24 overflow-x-hidden border-b border-white/5">

@@ -41,16 +41,18 @@ const areaLinks = [
   { label: 'Khar & Khar Road',     href: '/areas/khar'        },
   { label: 'Andheri & Lokhandwala',href: '/areas/andheri'     },
   { label: 'Worli & Lower Parel',  href: '/areas/worli'       },
-  { label: 'Prabhadevi & Dadar',   href: '/areas/prabhadevi'  },
+  { label: 'Dadar & Lalbaug',      href: '/areas/dadar'       },
   { label: 'Powai (Hiranandani)',  href: '/areas/powai'       },
   { label: 'Santacruz & Vile Parle',href:'/areas/santacruz'   },
   { label: 'Goregaon & Malad',     href: '/areas/goregaon'    },
   { label: 'Borivali & Kandivali', href: '/areas/borivali'    },
   { label: 'Malabar Hill & Colaba',href: '/areas/colaba'      },
-  { label: 'Thane West',           href: '/areas/thane'       },
+  { label: 'Thane & Majiwada',     href: '/areas/thane'       },
   { label: 'Vashi (Navi Mumbai)',  href: '/areas/vashi'       },
   { label: 'Mira Road & Bhayandar',href: '/areas/mira-road'   },
-  { label: 'View All 384+ Areas →',href: '/areas'             },
+  { label: 'Pune (Kothrud & Baner)',href: '/areas/pune'       },
+  { label: 'Hinjawadi IT Park',    href: '/areas/hinjawadi'   },
+  { label: 'View All 520+ Areas →',href: '/areas'             },
 ];
 
 const socialLinks = [
@@ -259,9 +261,8 @@ export default function Footer() {
       {/* ── SEO Hidden Block (Keeps keywords for bots but hides from UI) ── */}
       <div className="sr-only">
         <p>
-          AMS Civil Construction - Top Rated Civil Contractor (2026) · Best Construction Company in Mumbai · Turnkey Bungalow Builders ·
-          Service Areas: South Mumbai · Western Line · Central Line · Navi Mumbai · Thane · Palghar · Pune · Nagpur · Nasik · 
-          Kolkata · Asansol · Siliguri · Ranchi · Jamshedpur · Dhanbad · Bangalore · Mysore · Panjim · Margao. 
+          AMS Civil Construction - Top Rated Civil Contractor (2026) · Best Construction Company in Mumbai & Pune · Turnkey Bungalow Builders ·
+          Service Areas: South Mumbai · Western Line · Central Line · Navi Mumbai · Thane · Palghar · Pune (Kothrud, Baner, Hinjawadi, Koregaon Park, Wakad, Viman Nagar, Kharadi, Hadapsar, Bavdhan, Aundh) · Pimpri Chinchwad (PCMC) · Nagpur · Nasik. 
           Services: Bungalow Construction · Bathroom Renovation · Modular Kitchen · Tiles & Flooring · POP Ceiling · Plaster Work ·
           Waterproofing · Painting · Interior Structural Work · Compound Wall · Swimming Pool Contractor · Cost of Civil Work.
         </p>

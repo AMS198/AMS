@@ -44,6 +44,11 @@ export const zoneContext: Record<string, string[]> = {
     'a growing township with high demand for premium finishes',
     'the future of systematic urban development'
   ],
+  'Pune':           [
+    'the booming IT and cultural capital of Maharashtra with high residential and commercial construction demand',
+    'a dynamic smart city, premier industrial hub, and top residential center with rapid infrastructure expansion',
+    'one of Maharashtra\'s most affluent, high-growth, and modern real estate markets'
+  ],
   'Maharashtra':    [
     'a key city with a booming real estate sector',
     'a rapidly expanding urban center',

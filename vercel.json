@@ -7,7 +7,7 @@
   ],
   "headers": [
     {
-      "source": "/areas/(.*)",
+      "source": "/areas(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "source": "/hi/areas/(.*)",
+      "source": "/hi/areas(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -25,7 +25,34 @@
       ]
     },
     {
-      "source": "/mr/areas/(.*)",
+      "source": "/mr/areas(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/services(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/blog(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(about|contact|gallery|projects|calculator|packages|free-consultation)",
       "headers": [
         {
           "key": "Cache-Control",

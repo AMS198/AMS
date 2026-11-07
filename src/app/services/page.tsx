@@ -6,6 +6,9 @@ import type { Metadata } from 'next';
 import ServicesPageContent from '@/components/services/ServicesPageContent';
 import { services } from '@/data/siteData';
 
+// Pure Static SSG: 0 ISR Reads, 0 ISR Writes
+export const revalidate = false;
+
 export const metadata: Metadata = {
   title: 'Civil Construction & Renovation Services Mumbai | AMS Civil',
   description:

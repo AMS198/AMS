@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     unoptimized: true,
@@ -40,8 +40,6 @@ const nextConfig = {
       { source: '/hi', destination: '/', permanent: true },
       { source: '/mr', destination: '/', permanent: true },
       { source: '/search', destination: '/', permanent: true },
-      { source: '/areas/palghar', destination: '/areas', permanent: true },
-      { source: '/areas/palghar/:path*', destination: '/areas', permanent: true },
       { source: '/areas/mumbai', destination: '/areas', permanent: true },
       { source: '/areas/mumbai/:path*', destination: '/areas', permanent: true },
       { source: '/areas/central-line', destination: '/areas', permanent: true },
@@ -58,11 +56,23 @@ const nextConfig = {
       { source: '/areas/lower parel/:path*', destination: '/areas/lower-parel/:path*', permanent: true },
       { source: '/areas/navi mumbai', destination: '/areas/navi-mumbai', permanent: true },
       { source: '/areas/navi mumbai/:path*', destination: '/areas/navi-mumbai/:path*', permanent: true },
-      { source: '/areas/khar-road', destination: '/areas/khar', permanent: true },
-      { source: '/areas/khar-road/:path*', destination: '/areas/khar/:path*', permanent: true },
       { source: '/areas/juhu-scheme', destination: '/areas/juhu', permanent: true },
       { source: '/areas/juhu-scheme/:path*', destination: '/areas/juhu/:path*', permanent: true },
       
+      // Redirect removed non-Maharashtra locations to /areas
+      { source: '/areas/kolkata', destination: '/areas', permanent: true },
+      { source: '/areas/kolkata/:path*', destination: '/areas', permanent: true },
+      { source: '/areas/bangalore', destination: '/areas', permanent: true },
+      { source: '/areas/bangalore/:path*', destination: '/areas', permanent: true },
+      { source: '/areas/ranchi', destination: '/areas', permanent: true },
+      { source: '/areas/ranchi/:path*', destination: '/areas', permanent: true },
+      { source: '/hi/areas/kolkata/:path*', destination: '/areas', permanent: true },
+      { source: '/hi/areas/bangalore/:path*', destination: '/areas', permanent: true },
+      { source: '/hi/areas/ranchi/:path*', destination: '/areas', permanent: true },
+      { source: '/mr/areas/kolkata/:path*', destination: '/areas', permanent: true },
+      { source: '/mr/areas/bangalore/:path*', destination: '/areas', permanent: true },
+      { source: '/mr/areas/ranchi/:path*', destination: '/areas', permanent: true },
+
       // Catch garbage URLs generated from old broken link tags
       { source: '/areas/:location/<a%20href=', destination: '/areas/:location', permanent: true },
       { source: '/areas/:location/%3Ca%20href=', destination: '/areas/:location', permanent: true },

@@ -7,18 +7,31 @@ export const revalidate = false;
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Standard search engine & AI search crawlers (Google, Bing, ChatGPT Search, Perplexity)
+      // Verified Search Engines & AI Search Engines (Google, Bing, ChatGPT, Perplexity, Claude, Apple AI)
+      {
+        userAgent: [
+          'Googlebot',
+          'Bingbot',
+          'GPTBot',
+          'OAI-SearchBot',
+          'ChatGPT-User',
+          'PerplexityBot',
+          'ClaudeBot',
+          'anthropic-ai',
+          'Applebot',
+          'Applebot-Extended',
+          'Google-Extended',
+        ],
+        allow: '/',
+        disallow: ['/admin', '/api/', '/*?*'],
+      },
+      // Standard search crawlers
       {
         userAgent: '*',
         allow: '/',
         disallow: ['/admin', '/api/', '/*?*'],
       },
-      {
-        userAgent: ['GPTBot', 'OAI-SearchBot', 'PerplexityBot', 'Google-Extended', 'anthropic-ai', 'Applebot-Extended'],
-        allow: '/',
-        disallow: ['/admin', '/api/', '/*?*'],
-      },
-      // ── Aggressive Commercial Scrapers & Unauthorized SEO Harvesters — Block to save bandwidth ──
+      // ── Third-Party Commercial SEO Scrapers & Harvesters (No Search Value) ──
       { userAgent: 'AhrefsBot', disallow: '/' },
       { userAgent: 'SemrushBot', disallow: '/' },
       { userAgent: 'SemrushBot-SI', disallow: '/' },
@@ -35,6 +48,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'ZoominfoBot', disallow: '/' },
       { userAgent: 'Screaming Frog SEO Spider', disallow: '/' },
       { userAgent: 'CCBot', disallow: '/' },
+      { userAgent: 'Bytespider', disallow: '/' },
     ],
     sitemap: 'https://www.amscivilwork.in/sitemap.xml',
     host: 'https://www.amscivilwork.in',

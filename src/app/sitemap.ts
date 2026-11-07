@@ -15,27 +15,29 @@ const BASE = 'https://www.amscivilwork.in';
 const SITE_UPDATED = new Date('2026-05-25');
 
 /* ── Zone-based priority tiers for crawl budget optimization ── */
-const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
+const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai', 'Pune'];
 const TOP_SLUGS = new Set([
   'bandra','andheri','thane','pune','kurla','dadar','borivali','malad',
   'kandivali','goregaon','vashi','powai','worli','lower-parel','bandra-kurla-complex',
-  'kolkata','ranchi','morabadi','kanke','salt-lake','new-town','alipore','ballygunge','howrah',
   'andheri-west','andheri-east','bandra-west','borivali-west','malad-west','kandivali-west',
   'ghatkopar','mulund','chembur','santacruz','vile-parle','khar','juhu','bhayandar','mira-road',
-  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli'
+  'navi-mumbai','panvel','kharghar','nerul','airoli','kalyan','dombivli',
+  // Top Pune & PCMC Metropolitan Hubs
+  'kothrud','hinjawadi','baner','wakad','viman-nagar','kalyani-nagar','koregaon-park','kharadi',
+  'hadapsar','pimpri-chinchwad','aundh','bavdhan','pimple-saudagar','magarpatta'
 ]);
 
 function getLocationPriority(zone: string, slug: string): number {
   if (TOP_SLUGS.has(slug)) return 0.92;
   if (CORE_ZONES.includes(zone)) return 0.85;
-  if (zone === 'Maharashtra' || zone === 'West Bengal' || zone === 'Jharkhand') return 0.78;
+  if (zone === 'Maharashtra') return 0.78;
   return 0.65;
 }
 
 function getLocationServicePriority(zone: string, slug: string): number {
   if (TOP_SLUGS.has(slug)) return 0.88;
   if (CORE_ZONES.includes(zone)) return 0.80;
-  if (zone === 'Maharashtra' || zone === 'West Bengal' || zone === 'Jharkhand') return 0.70;
+  if (zone === 'Maharashtra') return 0.70;
   return 0.55;
 }
 
@@ -75,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locationPages.push({
       url:             `${BASE}/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'monthly' as const,
       priority:        getLocationPriority(loc.zone, loc.slug),
     });
     
@@ -83,7 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locationPages.push({
       url:             `${BASE}/hi/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'monthly' as const,
       priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
 
@@ -91,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locationPages.push({
       url:             `${BASE}/mr/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'monthly' as const,
       priority:        getLocationPriority(loc.zone, loc.slug) * 0.9,
     });
 
@@ -101,7 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         locationPages.push({
           url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
           lastModified:    SITE_UPDATED,
-          changeFrequency: 'weekly' as const,
+          changeFrequency: 'monthly' as const,
           priority:        getLocationServicePriority(loc.zone, loc.slug),
         });
       });

@@ -8,14 +8,17 @@ import { MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { locations } from '@/data/locations';
 import ModernCTA from '@/components/ui/ModernCTA';
 
+// Pure Static SSG: 0 ISR Reads, 0 ISR Writes
+export const revalidate = false;
+
 export const metadata: Metadata = {
-  title: 'Service Areas in Mumbai & Across India | Best Construction Network',
+  title: 'Civil Contractor Service Areas in Mumbai MMR & Maharashtra | AMS Civil',
   description:
-    `AMS Civil Construction provides premium civil work in ${locations.length}+ locations across Mumbai, Maharashtra, Jharkhand, and West Bengal. Search for the best civil contractor near you.`,
+    `AMS Civil Construction provides premium civil work across 520+ localities in Mumbai City, Western Suburbs, Central Line, Thane, Navi Mumbai, Palghar & Pune. Search for the top-rated civil contractor near you.`,
   keywords: [
-    'construction service areas', 'civil contractor near me', 'best builder in Mumbai', 
-    'construction company Pune', 'civil work Bangalore', 'bungalow construction Ranchi',
-    'renovation services Kolkata', 'all location construction company', 'top builders India'
+    'civil contractor service areas Mumbai', 'construction company Mumbai MMR', 'best builder in Mumbai', 
+    'civil work Thane', 'construction company Navi Mumbai', 'bungalow construction Pune',
+    'renovation services Mumbai', 'top civil contractor near me'
   ],
   alternates: { canonical: 'https://www.amscivilwork.in/areas' },
 };
@@ -74,14 +77,14 @@ export default function AreasPage() {
 
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-widest mb-6 animate-fadeUp">
-              <Sparkles size={14} /> National Presence
+              <Sparkles size={14} /> Full Mumbai MMR &amp; Pune Coverage
             </div>
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
-              Our Service <span className="text-gradient">Network</span>
+              Mumbai MMR &amp; Pune <span className="text-gradient">Service Network</span>
             </h1>
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl animate-fadeUp" style={{ animationDelay: '100ms' }}>
-              From South Mumbai to North Mumbai and major cities across India — we provide premium civil construction 
-              services in <strong className="text-white">{locations.length}+ locations</strong>. Select your city to see our specialized local services.
+              From South Mumbai luxury estates to Western Suburbs, Central Line, Thane, Navi Mumbai, Palghar and Pune — we deliver certified civil construction 
+              and premium renovations across <strong className="text-white">{locations.length}+ hyperlocal pockets</strong>.
             </p>
           </div>
         </div>

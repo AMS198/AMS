@@ -109,59 +109,8 @@ export async function generateMetadata(
       `civil work contractor ${loc.name}`,
       `house renovation services ${loc.name}`,
       `home builders in ${loc.name}`,
-      `best civil work ${loc.name}`,
-      `professional civil work in ${loc.name}`,
-      `civil work cost in ${loc.name}`,
-      `turnkey construction company in ${loc.name}`,
-      `top rated building contractor ${loc.name}`,
-      `civil work near me ${loc.name}`,
-      `bungalow construction ${loc.name}`,
-      `commercial construction ${loc.name}`,
-      `bathroom renovation ${loc.name}`,
-      `kitchen renovation ${loc.name}`,
-      `tiles work ${loc.name}`,
-      `flooring work ${loc.name}`,
-      `interior contractor ${loc.name}`,
-      `AMS Civil ${loc.name}`,
-      `construction cost in ${loc.name}`,
-      `civil contractor contact number ${loc.name}`,
-      `mistry work in ${loc.name}`,
-      /* Hindi/Hinglish keywords — critical for Indian search intent */
       `${loc.name} mein civil work`,
-      `${loc.name} mein construction company`,
-      `${loc.name} mein civil contractor`,
-      `ghar banane wala contractor ${loc.name}`,
-      `achha thekedar ${loc.name}`,
-      `civil mistry ${loc.name}`,
-      `civil mistri ${loc.name}`,
-      `best mistry in ${loc.name}`,
-      `plaster mistri ${loc.name}`,
-      `tiles mistri ${loc.name}`,
-      `${loc.name} construction rate per sq ft`,
-      `${loc.name} mein ghar ka renovation`,
-      `building contractor near ${loc.name}`,
-      `${loc.name} ke paas construction company`,
-      `flat renovation ${loc.name}`,
-      `home construction cost ${loc.name}`,
-      `waterproofing specialist ${loc.name}`,
-      `false ceiling ${loc.name}`,
-      `sasta aur achha contractor ${loc.name}`,
-      `civil contractor near me`,
-      `with material civil rate ${loc.name}`,
-      `labour rate civil contractor ${loc.name}`,
-      `civil work quotation ${loc.name}`,
-
-      /* Marathi Local Search Queries */
       `${loc.name} madhye thekedar`,
-      `${loc.name} madhye civil kaam`,
-      `${loc.name} civil contractor marathi`,
-      `ghar bandhani thekedar ${loc.name}`,
-
-      /* Landmarks & Pincode */
-      ...(loc.pincode ? [`civil contractor in ${loc.pincode}`, `construction company in ${loc.pincode}`] : []),
-      ...loc.landmarks.slice(0, 3).map(lm => `civil contractor near ${lm}`),
-      ...loc.nearby.map(n => `best construction company in ${n}`),
-      ...loc.nearby.map(n => `civil contractor near ${n}`),
     ],
     openGraph: {
       title,
@@ -199,12 +148,6 @@ function getGeoCoordinates(loc: { district: string; slug: string; pincode?: stri
     'Nashik':           { lat: 20.0110, lon: 73.7903 },
     'Nagpur':           { lat: 21.1458, lon: 79.0882 },
     'Aurangabad':       { lat: 19.8762, lon: 75.3433 },
-    'Ranchi':           { lat: 23.3441, lon: 85.3096 },
-    'East Singhbhum':   { lat: 22.8046, lon: 86.2029 },
-    'Dhanbad':          { lat: 23.7957, lon: 86.4304 },
-    'Paschim Bardhaman':{ lat: 23.6850, lon: 86.9695 },
-    'Kolkata':          { lat: 22.5726, lon: 88.3639 },
-    'Howrah':           { lat: 22.5958, lon: 88.2636 },
   };
   const b = base[loc.district] || { lat: 19.0760, lon: 72.8777 };
   // Add micro-offset per slug (±0.03 degrees ≈ 3km) for hyperlocal uniqueness
@@ -266,22 +209,6 @@ export default async function LocationPage(props: { params: Promise<{ location: 
           bestRating: '5',
           worstRating: '1',
         },
-        review: [
-          {
-            '@type': 'Review',
-            author: { '@type': 'Person', name: 'R. K. Verma' },
-            datePublished: '2026-03-10',
-            reviewBody: `AMS Civil Construction completed our renovation project in ${loc.name} on time. High quality civil work and reliable supervision by Kedar Mandal.`,
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          },
-          {
-            '@type': 'Review',
-            author: { '@type': 'Person', name: 'Pooja Agarwal' },
-            datePublished: '2026-04-05',
-            reviewBody: `Best civil contractor in ${loc.name}, ${loc.district}. Waterproofing and tile laying work was done with great precision.`,
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-          }
-        ],
       },
       /* Breadcrumb Schema for structure */
       {
@@ -301,7 +228,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
             name: `Who is the most trusted construction company in ${loc.name}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 10+ years of experience and a track record of 200+ completed projects, we provide high-quality bungalow construction and renovation services with full transparency in ${loc.district}.`,
+              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 10+ years of experience and 200+ completed projects, we provide high-quality civil and renovation services in ${loc.district}.`,
             },
           },
           {
@@ -309,7 +236,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
             name: `What type of civil work does AMS provide in ${loc.name}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `In ${loc.name}, we provide end-to-end civil solutions including new bungalow construction, modular kitchen work, bathroom renovation, luxury flooring, POP false ceilings, and swimming pool construction.`,
+              text: `In ${loc.name}, we provide end-to-end civil solutions including bungalow construction, modular kitchen, bathroom renovation, luxury flooring, POP false ceilings, and building repairs.`,
             },
           },
           {
@@ -319,37 +246,6 @@ export default async function LocationPage(props: { params: Promise<{ location: 
               '@type': 'Answer',
               text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. Free site visit (Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill) aur accurate estimate ke liye call karein: +91 87793 91690.`,
             },
-          },
-        ],
-      },
-      {
-        '@type': 'HowTo',
-        name: `How to Hire a Verified Civil Contractor in ${loc.name}`,
-        description: `Follow this step-by-step process to plan, inspect, and execute civil construction or home renovation in ${loc.name}, ${loc.district}.`,
-        step: [
-          {
-            '@type': 'HowToStep',
-            position: 1,
-            name: 'Define Scope & Requirements',
-            text: `Determine your construction needs in ${loc.name} — whether new RCC bungalow construction, flat renovation, tiles, painting, or waterproofing.`,
-          },
-          {
-            '@type': 'HowToStep',
-            position: 2,
-            name: 'Book an On-Site Inspection',
-            text: `Contact AMS Civil Construction (+91 87793 91690) to schedule an engineer site visit in ${loc.name} for laser measurements and structural assessment.`,
-          },
-          {
-            '@type': 'HowToStep',
-            position: 3,
-            name: 'Get Itemized BOQ & Estimate',
-            text: 'Receive a transparent Bill of Quantities listing materials (UltraTech cement, Tata Tiscon steel, Asian Paints) and milestone-based pricing.',
-          },
-          {
-            '@type': 'HowToStep',
-            position: 4,
-            name: 'Milestone Execution & Warranty Handover',
-            text: 'Work begins with dedicated site supervisors, daily WhatsApp photo updates, strict quality checks, and a 1-year workmanship warranty upon completion.',
           },
         ],
       },

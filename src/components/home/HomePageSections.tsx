@@ -1750,17 +1750,23 @@ function WhyUsSection() {
 ───────────────────────────────────────────────────────────── */
 function NetworkSection() {
   const topCities = [
-    { name: 'Ranchi',      slug: 'ranchi',      zone: 'Jharkhand' },
-    { name: 'Bangalore',   slug: 'bangalore',   zone: 'Karnataka' },
-    { name: 'Kolkata',     slug: 'kolkata',     zone: 'West Bengal' },
-    { name: 'Panjim',      slug: 'panjim',      zone: 'Goa' },
-    { name: 'Pune',        slug: 'pune',        zone: 'Maharashtra' },
-    { name: 'Nagpur',      slug: 'nagpur',      zone: 'Maharashtra' },
-    { name: 'Jamshedpur',  slug: 'jamshedpur',  zone: 'Jharkhand' },
-    { name: 'Mysore',      slug: 'mysore',      zone: 'Karnataka' },
-    { name: 'Asansol',     slug: 'asansol',     zone: 'West Bengal' },
-    { name: 'Dhanbad',     slug: 'dhanbad',     zone: 'Jharkhand' },
-    { name: 'Siliguri',    slug: 'siliguri',    zone: 'West Bengal' },
+    { name: 'Bandra & BKC',        slug: 'bandra',       zone: 'Western Line' },
+    { name: 'Andheri & Marol',     slug: 'andheri',      zone: 'Western Line' },
+    { name: 'Thane & Majiwada',    slug: 'thane',        zone: 'Central Line' },
+    { name: 'Worli & Lower Parel', slug: 'worli',        zone: 'South Mumbai' },
+    { name: 'Dadar & Lalbaug',     slug: 'dadar',        zone: 'South Mumbai' },
+    { name: 'Borivali & Gorai',    slug: 'borivali',     zone: 'Western Line' },
+    { name: 'Malad & Mindspace',   slug: 'malad',        zone: 'Western Line' },
+    { name: 'Kandivali & Charkop', slug: 'kandivali',    zone: 'Western Line' },
+    { name: 'Powai & Chandivali',  slug: 'powai',        zone: 'Central Line' },
+    { name: 'Kolshet & Balkum',    slug: 'kolshet-road', zone: 'Central Line' },
+    { name: 'Vashi & Sanpada',     slug: 'vashi',        zone: 'Navi Mumbai' },
+    { name: 'Kharghar & Panvel',   slug: 'kharghar',     zone: 'Navi Mumbai' },
+    { name: 'Mira Road & Bhayandar', slug: 'mira-road',  zone: 'Western Line' },
+    { name: 'Vasai & Virar',       slug: 'vasai',        zone: 'Western Line' },
+    { name: 'Kothrud & Baner',     slug: 'kothrud',      zone: 'Pune' },
+    { name: 'Hinjawadi IT Park',   slug: 'hinjawadi',    zone: 'Pune' },
+    { name: 'Pune & PCMC Hub',     slug: 'pune',         zone: 'Pune' },
   ];
 
   const featuredLinks = [
@@ -1784,13 +1790,13 @@ function NetworkSection() {
       <div className="container-custom">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
-            <div className="section-label">National Presence</div>
+            <div className="section-label">Hyperlocal Mumbai MMR &amp; Pune Presence</div>
             <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
-              Expanding Across <span className="text-gradient">Major Cities</span>
+              Dominating Mumbai &amp; Pune&apos;s <span className="text-gradient">Core Micro-Markets</span>
             </h2>
             <p className="text-slate-400 mt-4 text-sm leading-relaxed">
-              AMS Civil Construction is now active in top metropolitan areas. We bring the same 
-              Mumbai-quality civil expertise to Jharkhand, Karnataka, Goa, and West Bengal.
+              AMS Civil Construction is physically active across all 520+ localities in Mumbai, Thane, Navi Mumbai, Palghar &amp; Pune. 
+              From high-end bungalow construction to luxury interior overhauls, select your neighborhood to get a certified engineer site inspection.
             </p>
           </div>
 

@@ -1,4 +1,4 @@
-// src/app/layout.tsx
+﻿// src/app/layout.tsx
 // Root layout with comprehensive SEO — targeting all Mumbai areas
 
 import type { Metadata } from 'next';
@@ -212,19 +212,12 @@ export const metadata: Metadata = {
   /* ── Alternates / Canonical ──────────────────────────────── */
   alternates: {
     canonical: 'https://www.amscivilwork.in',
-    languages: {
-      'en-IN': 'https://www.amscivilwork.in',
-      'hi-IN': 'https://www.amscivilwork.in/hi',
-      'mr-IN': 'https://www.amscivilwork.in/mr',
-      'x-default': 'https://www.amscivilwork.in',
-    },
   },
 
   /* ── Verification (add your codes from Google/Bing Search Console) */
   verification: {
     google: 'a-NPUUlhFt4ndck1sIedFhwSQG-oqFwumbqeujTHc-g',
     other: {
-      'google-adsense-account': 'ca-pub-6377824535072521',
       'msvalidate.01': 'ADD_YOUR_BING_CODE_HERE', // Get from bing.com/webmasters
       'p:domain_verify': '24ef3d99f9f608ed1abdd2f62a065345',
     },
@@ -446,13 +439,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
-        {/* Google AdSense */}
-        <meta name="google-adsense-account" content="ca-pub-6377824535072521" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6377824535072521"
-          crossOrigin="anonymous"
-        />
+
       </head>
 
       <body className="antialiased" style={{ background: '#0B1120', color: '#CBD5E1' }}>
