@@ -20,10 +20,12 @@ import {
   CheckCircle2,
   Phone,
   RotateCcw,
-  SlidersHorizontal,
   Home,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Building2,
+  LayoutTemplate,
+  MapPin,
 } from 'lucide-react';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 import type { GalleryImage } from '@/app/gallery/page';
@@ -40,6 +42,19 @@ export default function GalleryGrid({ images }: Props) {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(ITEMS_PER_PAGE);
+
+  // Helper for category icons
+  const getCategoryIcon = (cat: string) => {
+    const lower = cat.toLowerCase();
+    if (lower === 'all') return Sparkles;
+    if (lower.includes('bungalow') || lower.includes('villa') || lower.includes('home')) return Home;
+    if (lower.includes('commercial') || lower.includes('office') || lower.includes('lobby')) return Building2;
+    if (lower.includes('kitchen') || lower.includes('interior') || lower.includes('modular')) return LayoutTemplate;
+    if (lower.includes('civil') || lower.includes('structural') || lower.includes('concrete')) return Layers;
+    if (lower.includes('waterproofing') || lower.includes('repair')) return ShieldCheck;
+    if (lower.includes('ceiling') || lower.includes('pop')) return Layers;
+    return Camera;
+  };
 
   // Clean and normalize categories
   const categories = useMemo(() => {
@@ -138,15 +153,6 @@ export default function GalleryGrid({ images }: Props) {
         />
 
         <div className="relative container-custom">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 mb-6 text-xs text-slate-400 font-medium">
-            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-600">/</span>
-            <span className="text-orange-400 font-semibold">Project Gallery</span>
-          </nav>
-
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Heading & Trust */}
             <div className="lg:col-span-7">
@@ -248,24 +254,24 @@ export default function GalleryGrid({ images }: Props) {
       </section>
 
       {/* ── FILTER & SEARCH TOOLBAR ─────────────────────────────────── */}
-      <section className="relative z-20 bg-[#0B1120] border-y border-white/10 shadow-md">
-        <div className="container-custom py-4">
+      <section className="relative z-20 bg-[#080E1C] border-y border-white/10 shadow-lg sticky top-16 backdrop-blur-md bg-opacity-95">
+        <div className="container-custom py-3.5 sm:py-4">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
             
             {/* Search Input */}
             <div className="relative w-full md:w-80 shrink-0">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search photos by work type..."
-                className="w-full bg-[#121B2E] border border-white/10 focus:border-orange-500/50 rounded-xl pl-9 pr-9 py-2 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none transition-colors"
+                placeholder="Search photos (e.g. Bandra, Kitchen, POP)..."
+                className="w-full bg-[#0E1626] border border-white/10 focus:border-orange-500/60 rounded-xl pl-9 pr-9 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none transition-all shadow-inner focus:ring-1 focus:ring-orange-500/30"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors cursor-pointer"
                   aria-label="Clear search"
                 >
                   <X size={14} />
@@ -273,10 +279,11 @@ export default function GalleryGrid({ images }: Props) {
               )}
             </div>
 
-            {/* Category Pills (Horizontally Scrollable) */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none text-xs">
+            {/* Category Pills (Horizontally Scrollable with safe edge padding) */}
+            <div className="flex items-center gap-2 overflow-x-auto py-1 px-1 scrollbar-none text-xs -mx-1 sm:mx-0">
               {categories.map((cat) => {
                 const isActive = activeCategory.toLowerCase() === cat.toLowerCase();
+                const IconComponent = getCategoryIcon(cat);
                 const count =
                   cat === 'All'
                     ? images.length
@@ -288,16 +295,17 @@ export default function GalleryGrid({ images }: Props) {
                     onClick={() => {
                       setActiveCategory(cat);
                     }}
-                    className={`shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 ${
+                    className={`shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20'
-                        : 'bg-[#121B2E] text-slate-300 hover:text-white hover:bg-[#1A2640] border border-white/10'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/25 border border-orange-400/50 scale-[1.02]'
+                        : 'bg-[#0E1626] text-slate-300 hover:text-white hover:bg-[#152033] border border-white/10'
                     }`}
                   >
+                    <IconComponent size={13} className={isActive ? 'text-white' : 'text-orange-400'} />
                     <span>{cat}</span>
                     <span
                       className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono font-bold ${
-                        isActive ? 'bg-black/25 text-white' : 'bg-white/10 text-slate-400'
+                        isActive ? 'bg-black/30 text-white' : 'bg-white/10 text-slate-400'
                       }`}
                     >
                       {count}
@@ -329,7 +337,7 @@ export default function GalleryGrid({ images }: Props) {
                   setActiveCategory('All');
                   setSearchQuery('');
                 }}
-                className="flex items-center gap-1 text-orange-400 hover:text-orange-300 font-semibold transition-colors"
+                className="flex items-center gap-1 text-orange-400 hover:text-orange-300 font-semibold transition-colors cursor-pointer"
               >
                 <RotateCcw size={12} />
                 <span>Reset Filters</span>
@@ -340,82 +348,106 @@ export default function GalleryGrid({ images }: Props) {
       </section>
 
       {/* ── PHOTO GRID ──────────────────────────────────────────────── */}
-      <section className="section-y bg-[#070C16] min-h-[500px]">
+      <section className="py-12 sm:py-16 pb-28 sm:pb-36 bg-[#050914] min-h-[500px]">
         <div className="container-custom">
           {filteredImages.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                {visibleImages.map((img, i) => (
-                  <div
-                    key={`${img.src}-${i}`}
-                    className="group relative rounded-2xl overflow-hidden bg-[#10192A] border border-white/10 hover:border-orange-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1"
-                  >
-                    {/* Image Container */}
-                    <div
-                      className="relative aspect-[4/3] w-full overflow-hidden cursor-pointer"
-                      onClick={() => setLightboxIndex(i)}
-                    >
-                      <Image
-                        src={encodeURI((img.src || '').replace(/\.png$/i, '.jpg'))}
-                        alt={img.alt || 'AMS Civil Construction'}
-                        fill
-                        unoptimized={true}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                {visibleImages.map((img, i) => {
+                  const locationMatch = img.alt?.match(/at\s+([^,]+)(?:,\s*([^,]+))?/i) || img.alt?.match(/in\s+([^,]+)/i);
+                  const locationText = locationMatch ? locationMatch[1] : 'Mumbai';
 
-                      {/* Top Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
-                        <span className="px-2.5 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider font-bold bg-black/70 backdrop-blur-md text-amber-300 border border-white/10">
-                          {img.category || 'Civil Work'}
-                        </span>
-                        <span className="flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-950/80 backdrop-blur-md text-emerald-300 border border-emerald-500/30">
-                          <CheckCircle2 size={10} /> Real Site
-                        </span>
+                  return (
+                    <div
+                      key={`${img.src}-${i}`}
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-b from-[#111928] via-[#0E1626] to-[#0A101D] border border-white/10 hover:border-orange-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 flex flex-col justify-between"
+                    >
+                      {/* Ambient corner light on hover */}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-orange-500/15 transition-colors" />
+
+                      {/* Image Container */}
+                      <div
+                        className="relative aspect-[4/3] w-full overflow-hidden cursor-pointer"
+                        onClick={() => setLightboxIndex(i)}
+                      >
+                        <Image
+                          src={encodeURI((img.src || '').replace(/\.png$/i, '.jpg'))}
+                          alt={img.alt || 'AMS Civil Construction'}
+                          fill
+                          unoptimized={true}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+
+                        {/* Subtle Vignette Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A101D] via-transparent to-black/40 pointer-events-none" />
+
+                        {/* Top Badges */}
+                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+                          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-bold bg-[#0A101D]/80 backdrop-blur-md text-amber-300 border border-amber-500/30 shadow-md">
+                            {img.category || 'Civil Work'}
+                          </span>
+                          <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#0A101D]/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30 shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Real Site</span>
+                          </span>
+                        </div>
+
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-full bg-orange-500/90 text-white flex items-center justify-center shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300 backdrop-blur-sm">
+                            <ZoomIn size={22} />
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-orange-500/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                          <ZoomIn size={22} />
+                      {/* Card Meta & Actions */}
+                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between relative z-10">
+                        <div>
+                          {/* Location Indicator */}
+                          <div className="flex items-center gap-1.5 text-[11px] text-slate-400 mb-1.5">
+                            <MapPin size={12} className="text-orange-400 shrink-0" />
+                            <span className="truncate">{locationText} • Turnkey Site</span>
+                          </div>
+
+                          {/* Title - 2 lines allowed, never truncated to 'M...' */}
+                          <h4
+                            className="text-white text-xs sm:text-sm font-bold line-clamp-2 min-h-[38px] leading-snug group-hover:text-orange-400 cursor-pointer transition-colors"
+                            onClick={() => setLightboxIndex(i)}
+                            title={img.alt}
+                          >
+                            {img.alt || 'AMS Completed Civil Project'}
+                          </h4>
+                        </div>
+
+                        {/* Bottom Actions Row */}
+                        <div className="flex items-center justify-between gap-2 mt-4 pt-3 border-t border-white/5">
+                          <button
+                            onClick={() => setLightboxIndex(i)}
+                            className="flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer"
+                            title="Open Fullscreen Preview"
+                          >
+                            <ZoomIn size={13} className="text-orange-400" />
+                            <span>Preview</span>
+                          </button>
+
+                          <a
+                            href={`https://wa.me/918779391690?text=${encodeURIComponent(
+                              `Hi AMS Civil Construction, I saw this project in your gallery: "${img.alt}". Can you share details and an estimate for similar work?`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 px-3 py-1.5 rounded-lg shadow-md shadow-emerald-950/40 transition-all active:scale-95 shrink-0"
+                            title="Enquire on WhatsApp"
+                          >
+                            <WhatsAppLogo className="w-3.5 h-3.5 fill-white shrink-0" />
+                            <span>Get Quote</span>
+                          </a>
                         </div>
                       </div>
                     </div>
-
-                    {/* Card Meta & Quick Action */}
-                    <div className="p-4 bg-[#10192A]">
-                      <h4
-                        className="text-white text-xs sm:text-sm font-semibold truncate hover:text-orange-400 cursor-pointer transition-colors"
-                        onClick={() => setLightboxIndex(i)}
-                        title={img.alt}
-                      >
-                        {img.alt || 'AMS Completed Civil Project'}
-                      </h4>
-
-                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-                        <button
-                          onClick={() => setLightboxIndex(i)}
-                          className="text-[11px] text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
-                        >
-                          <ZoomIn size={12} />
-                          <span>View Fullscreen</span>
-                        </button>
-
-                        <a
-                          href={`https://wa.me/918779391690?text=${encodeURIComponent(
-                            `Hi AMS Civil Construction, I saw this project photo in your gallery: "${img.alt}". Can you share more details and a quote for similar work?`
-                          )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1 rounded-md transition-colors border border-emerald-500/20"
-                        >
-                          <WhatsAppLogo className="w-3.5 h-3.5 fill-current" />
-                          <span>WhatsApp Quote</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Progressive Load More Button */}
@@ -435,13 +467,13 @@ export default function GalleryGrid({ images }: Props) {
                     <div className="flex items-center gap-3 mt-2">
                       <button
                         onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_PAGE)}
-                        className="px-6 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-orange-500/20"
+                        className="px-6 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-orange-500/20 cursor-pointer"
                       >
                         Load More Works ({filteredImages.length - visibleCount} remaining)
                       </button>
                       <button
                         onClick={() => setVisibleCount(filteredImages.length)}
-                        className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-semibold text-xs tracking-wide transition-all border border-white/10"
+                        className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-semibold text-xs tracking-wide transition-all border border-white/10 cursor-pointer"
                       >
                         Show All
                       </button>
@@ -465,7 +497,7 @@ export default function GalleryGrid({ images }: Props) {
                   setActiveCategory('All');
                   setSearchQuery('');
                 }}
-                className="px-5 py-2.5 rounded-xl bg-orange-500 text-white text-xs font-bold uppercase tracking-wider hover:bg-orange-600 transition-colors"
+                className="px-5 py-2.5 rounded-xl bg-orange-500 text-white text-xs font-bold uppercase tracking-wider hover:bg-orange-600 transition-colors cursor-pointer"
               >
                 Clear Filters
               </button>
@@ -511,7 +543,7 @@ export default function GalleryGrid({ images }: Props) {
 
               <button
                 onClick={() => setLightboxIndex(null)}
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close fullscreen view"
               >
                 <X size={20} />
@@ -527,7 +559,7 @@ export default function GalleryGrid({ images }: Props) {
                 onClick={() =>
                   setLightboxIndex((i) => ((i ?? 0) - 1 + filteredImages.length) % filteredImages.length)
                 }
-                className="absolute left-2 sm:left-6 z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-orange-500 text-white flex items-center justify-center backdrop-blur-md transition-colors"
+                className="absolute left-2 sm:left-6 z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-orange-500 text-white flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer"
                 aria-label="Previous photo"
               >
                 <ChevronLeft size={24} />
@@ -550,7 +582,7 @@ export default function GalleryGrid({ images }: Props) {
             {filteredImages.length > 1 && (
               <button
                 onClick={() => setLightboxIndex((i) => ((i ?? 0) + 1) % filteredImages.length)}
-                className="absolute right-2 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-orange-500 text-white flex items-center justify-center backdrop-blur-md transition-colors"
+                className="absolute right-2 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-orange-500 text-white flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer"
                 aria-label="Next photo"
               >
                 <ChevronRight size={24} />

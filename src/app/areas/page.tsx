@@ -69,11 +69,6 @@ export default function AreasPage() {
         </div>
 
         <div className="relative z-10 container-custom">
-          <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs text-slate-400 mb-8 animate-fadeIn">
-            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <ArrowRight size={10} className="opacity-50" />
-            <span className="text-orange-400 font-medium">Service Areas</span>
-          </nav>
 
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-widest mb-6 animate-fadeUp">

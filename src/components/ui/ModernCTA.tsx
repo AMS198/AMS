@@ -81,18 +81,26 @@ export default function ModernCTA({
 
             {/* Dynamic Master Headline — Compact & Balanced */}
             <h2 className="font-display font-black text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-[1.2] mb-3">
-              {title.includes('?') ? (
-                <>
-                  {title.replace('?', '')}{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-200">
-                    Together?
+              {(() => {
+                if (title.includes(' in ')) {
+                  const parts = title.split(' in ');
+                  const locPart = parts.pop();
+                  const main = parts.join(' in ');
+                  return (
+                    <>
+                      {main} in{' '}
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-200">
+                        {locPart}
+                      </span>
+                    </>
+                  );
+                }
+                return (
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300">
+                    {title}
                   </span>
-                </>
-              ) : (
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300">
-                  {title}
-                </span>
-              )}
+                );
+              })()}
             </h2>
 
             {/* Subtitle */}
@@ -106,38 +114,39 @@ export default function ModernCTA({
             </p>
 
             {/* High-Converting Action Row */}
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
               {/* Primary Consultation Button */}
               <button
                 type="button"
                 onClick={openQuotePopup}
-                className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs sm:text-sm tracking-wide shadow-lg shadow-orange-500/20 transition-all duration-200 hover:scale-[1.01] active:scale-95 flex items-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs sm:text-sm tracking-wide shadow-lg shadow-orange-500/25 transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Get Free Consultation</span>
                 <ArrowRight size={15} />
               </button>
 
-              {/* Direct WhatsApp Estimate */}
-              <a
-                href={`https://wa.me/918779391690?text=${encodeURIComponent(
-                  `Hi AMS Civil Construction, I am interested in getting a detailed quotation for my project: "${title}".`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-green-500/20 transition-all duration-200 hover:scale-[1.01] active:scale-95"
-              >
-                <WhatsAppLogo className="w-4 h-4 fill-current" />
-                <span>WhatsApp Estimate</span>
-              </a>
+              {/* Dual Contact Strip on Mobile */}
+              <div className="grid grid-cols-2 gap-2.5 sm:flex sm:items-center sm:gap-3 w-full sm:w-auto">
+                <a
+                  href={`https://wa.me/918779391690?text=${encodeURIComponent(
+                    `Hi AMS Civil Construction, I am interested in getting a detailed quotation for: "${title}".`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 sm:py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-green-500/20 transition-all active:scale-95 flex items-center justify-center gap-1.5"
+                >
+                  <WhatsAppLogo className="w-4 h-4 fill-white" />
+                  <span>WhatsApp</span>
+                </a>
 
-              {/* Phone Direct */}
-              <a
-                href="tel:+918779391690"
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 sm:py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium text-xs sm:text-sm tracking-wide border border-white/10 transition-colors"
-              >
-                <Phone size={14} className="text-orange-400" />
-                <span className="font-mono text-xs">+91 87793 91690</span>
-              </a>
+                <a
+                  href="tel:+918779391690"
+                  className="px-3.5 py-3 sm:py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-medium text-xs sm:text-sm border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <Phone size={14} className="text-orange-400 shrink-0" />
+                  <span className="font-mono text-xs">+91 87793 91690</span>
+                </a>
+              </div>
             </div>
 
             {/* Quick Guarantees Row */}

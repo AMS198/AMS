@@ -117,6 +117,13 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error('Failed to generate RSS feed:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return new NextResponse(
+      `<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel><title>AMS Civil Construction Blog</title><link>https://www.amscivilwork.in</link><description>AMS Civil Construction Blog</description></channel></rss>`,
+      {
+        headers: {
+          'Content-Type': 'application/xml; charset=utf-8',
+        },
+      }
+    );
   }
 }

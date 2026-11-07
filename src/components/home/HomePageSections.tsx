@@ -39,7 +39,7 @@ const iconMap: Record<string, React.ElementType> = {
 function useScrollReveal() {
   useEffect(() => {
     const els = document.querySelectorAll('.animate-on-scroll');
-    const io  = new IntersectionObserver(
+    const io = new IntersectionObserver(
       (entries) => entries.forEach(e => {
         if (e.isIntersecting) {
           (e.target as HTMLElement).classList.add('visible');
@@ -119,52 +119,61 @@ function HeroSection() {
         }} />
 
       {/* Hero content */}
-      <div className="relative container-custom pt-44 md:pt-48 pb-20">
-        <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 items-center">
+      <div className="relative container-custom pt-28 sm:pt-36 md:pt-44 pb-14 sm:pb-20">
+        <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-10 lg:gap-12 items-center">
           <div className="max-w-3xl">
             {/* B2B Builder & Architect Fast Track Badge */}
-            <div className="mb-3 animate-fadeIn">
+            <div className="mb-3.5 animate-fadeIn">
               <Link
                 prefetch={false}
                 href="/partner"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-semibold hover:bg-orange-500/20 transition-all backdrop-blur-md group"
+                className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-[11px] sm:text-xs font-semibold hover:bg-orange-500/20 transition-all backdrop-blur-md group max-w-full"
               >
-                <Building2 size={13} className="text-orange-400 group-hover:scale-110 transition-transform" />
-                <span>For Builders &amp; Architects: Turnkey Civil Subcontracting</span>
-                <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                <Building2 size={13} className="text-orange-400 shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="truncate">
+                  <span className="hidden sm:inline">For Builders &amp; Architects: </span>Turnkey Civil Subcontracting
+                </span>
+                <ArrowRight size={12} className="shrink-0 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
 
             {/* Label */}
-            <div className="section-label animate-fadeIn">
-              Mumbai&apos;s Trusted Construction Partner With 10+ Years Legacy
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-orange-400 mb-3 animate-fadeIn">
+              <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse shrink-0" />
+              <span>Mumbai&apos;s Trusted Construction Partner &bull; 10+ Years</span>
             </div>
 
             {/* Headline */}
-            <h1 className="font-display font-black text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] mt-2 mb-6">
+            <h1 className="font-display font-black text-white leading-[1.12] sm:leading-[1.08] text-3xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] mt-1 mb-4 sm:mb-6">
               Mumbai&apos;s Best <br />
               <span className="text-gradient">Civil Contractors</span>
             </h1>
 
             {/* Sub */}
-            <p className="text-slate-400 text-lg leading-relaxed max-w-xl mb-8 animate-fadeUp">
-              The #1 choice for <strong className="text-orange-400">best civil work in Mumbai</strong>. 
+            <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl mb-6 sm:mb-8 animate-fadeUp">
+              The #1 choice for <strong className="text-orange-400 font-semibold">best civil work in Mumbai</strong>.
               Expert in bungalow construction, bathroom renovation, kitchen work, and premium interior civil work across Mumbai, Navi Mumbai, and Thane.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 mb-10 animate-fadeUp">
-              <motion.button 
-                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(249,115,22,0.4)' }}
-                whileTap={{ scale: 0.95 }}
-                onClick={openQuotePopup} 
-                className="btn-primary text-base px-8 py-4"
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10 animate-fadeUp">
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: '0 0 25px rgba(249,115,22,0.4)' }}
+                whileTap={{ scale: 0.97 }}
+                onClick={openQuotePopup}
+                className="btn-primary justify-center text-sm sm:text-base px-7 py-3.5 sm:py-4 shadow-xl shadow-orange-500/25 rounded-xl sm:rounded-full font-bold cursor-pointer"
               >
-                Get Free Quote <ArrowRight size={18} />
+                <span>Get Free Quote &amp; Estimate</span>
+                <ArrowRight size={16} />
               </motion.button>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link prefetch={false} href="/projects" className="btn-ghost text-base px-8 py-4 h-full flex items-center">
-                  View Projects
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  prefetch={false}
+                  href="/projects"
+                  className="w-full sm:w-auto px-7 py-3.5 sm:py-4 rounded-xl sm:rounded-full bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 hover:border-orange-500/40 text-sm font-semibold tracking-wide transition-all flex items-center justify-center gap-2 backdrop-blur-md shadow-md"
+                >
+                  <span>View 200+ Projects</span>
+                  <ArrowRight size={14} className="text-orange-400" />
                 </Link>
               </motion.div>
             </div>
@@ -256,7 +265,7 @@ function IntroSection() {
           <div>
             <div className="section-label animate-on-scroll">About Us</div>
             <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl text-white leading-tight mb-6 animate-on-scroll">
-              Premium Bungalow Construction & <br/>
+              Premium Bungalow Construction & <br />
               <span className="text-gradient">Civil Work in Mumbai</span>
             </h2>
             <p className="text-slate-400 leading-relaxed mb-4 animate-on-scroll">
@@ -275,10 +284,10 @@ function IntroSection() {
 
           {/* About Banner Image */}
           <div className="relative aspect-[1.35/1] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
-            <Image 
-              src="/images/aboutbenner.jpg" 
-              alt="About AMS Civil Construction" 
-              fill 
+            <Image
+              src="/images/aboutbenner.jpg"
+              alt="About AMS Civil Construction"
+              fill
               className="object-contain"
             />
           </div>
@@ -396,11 +405,10 @@ function ServicesSection() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                  activeTab === tab.id
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${activeTab === tab.id
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/25'
                     : 'bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:border-white/20'
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -425,9 +433,8 @@ function ServicesSection() {
             return (
               <div
                 key={svc.id}
-                className={`group relative rounded-2xl overflow-hidden border border-white/10 bg-[#0B1120] hover:border-orange-500/50 transition-all duration-500 flex-col justify-between shadow-xl hover:shadow-[0_10px_35px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 animate-on-scroll ${
-                  i >= 4 ? 'hidden sm:flex' : 'flex'
-                }`}
+                className={`group relative rounded-2xl overflow-hidden border border-white/10 bg-[#0B1120] hover:border-orange-500/50 transition-all duration-500 flex-col justify-between shadow-xl hover:shadow-[0_10px_35px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 animate-on-scroll ${i >= 4 ? 'hidden sm:flex' : 'flex'
+                  }`}
                 style={{ transitionDelay: `${(i % 4) * 60}ms` }}
               >
                 {/* Image Header with Gradient Overlay */}
@@ -440,7 +447,7 @@ function ServicesSection() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/60 to-transparent" />
-                  
+
                   {/* Category Chip */}
                   <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#0B1120]/80 backdrop-blur-md border border-white/15 text-orange-400">
                     Turnkey Civil
@@ -526,7 +533,7 @@ function PackagesPromoSection() {
   return (
     <section className="pt-8 sm:pt-12 pb-12 sm:pb-16 bg-[#080D1A] border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]"
-           style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+        style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -676,7 +683,7 @@ function CostEstimatorSection() {
   return (
     <section className="py-12 sm:py-16 bg-[#0B1120] border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]"
-           style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+        style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
 
       <div className="container-custom relative z-10">
         <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-to-b from-[#161F2E] via-[#101827] to-[#0B1120] border border-orange-500/30 p-6 sm:p-10 shadow-2xl relative overflow-hidden animate-on-scroll">
@@ -892,11 +899,10 @@ function FeaturedProjectCard({
 
           {/* Status Badge */}
           <span
-            className={`absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 backdrop-blur-md shadow-md ${
-              project.status === 'ongoing'
+            className={`absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 backdrop-blur-md shadow-md ${project.status === 'ongoing'
                 ? 'bg-blue-600/90 text-white border border-blue-400/30'
                 : 'bg-emerald-600/90 text-white border border-emerald-400/30'
-            }`}
+              }`}
           >
             {project.status === 'ongoing' ? <Clock size={11} /> : <CheckCircle2 size={11} />}
             <span>{project.status === 'ongoing' ? 'In Progress' : 'Completed'}</span>
@@ -947,11 +953,10 @@ function FeaturedProjectCard({
               {project.images.map((_, idx) => (
                 <div
                   key={idx}
-                  className={`h-1 rounded-full transition-all duration-300 flex-1 ${
-                    activeImage === idx
+                  className={`h-1 rounded-full transition-all duration-300 flex-1 ${activeImage === idx
                       ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.9)]'
                       : 'bg-white/30 backdrop-blur-sm'
-                  }`}
+                    }`}
                 />
               ))}
             </div>
@@ -1123,11 +1128,10 @@ function ProjectsCarousel({ projects, totalCount = 0 }: { projects: ProjectType[
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                  filter === f
+                className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${filter === f
                     ? 'bg-orange-500 text-white shadow-md shadow-orange-500/25'
                     : 'bg-white/5 border border-white/10 text-slate-400 hover:text-white'
-                }`}
+                  }`}
               >
                 {f}
               </button>
@@ -1482,7 +1486,7 @@ function FounderSection({ totalProjectsCount = 0 }: { totalProjectsCount?: numbe
     <section className="py-10 sm:py-14 bg-[#0B1120] border-t border-white/5 relative overflow-hidden">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-3xl bg-[#0F172A] border border-orange-500/30 p-5 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden animate-on-scroll">
-          
+
           {/* Subtle Ambient Glow */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
           <div className="absolute bottom-0 left-0 w-60 h-60 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
@@ -1490,9 +1494,15 @@ function FounderSection({ totalProjectsCount = 0 }: { totalProjectsCount?: numbe
           {/* Top Row: Executive Identity & Direct Contact */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10 relative z-10">
             <div className="flex items-center gap-3.5">
-              {/* Executive Monogram Crest */}
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-orange-600 text-white flex items-center justify-center font-display font-black text-xl sm:text-2xl shadow-lg shadow-orange-500/25 border-2 border-white/20 shrink-0">
-                KM
+              {/* Executive Portrait */}
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-orange-500/40 shadow-lg shadow-orange-500/20 shrink-0">
+                <Image
+                  src="/images/director-kedar-mandal.jpg"
+                  alt="Kedar Mandal - Founder & Principal Civil Contractor"
+                  fill
+                  sizes="64px"
+                  className="object-cover object-top"
+                />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
@@ -1750,23 +1760,23 @@ function WhyUsSection() {
 ───────────────────────────────────────────────────────────── */
 function NetworkSection() {
   const topCities = [
-    { name: 'Bandra & BKC',        slug: 'bandra',       zone: 'Western Line' },
-    { name: 'Andheri & Marol',     slug: 'andheri',      zone: 'Western Line' },
-    { name: 'Thane & Majiwada',    slug: 'thane',        zone: 'Central Line' },
-    { name: 'Worli & Lower Parel', slug: 'worli',        zone: 'South Mumbai' },
-    { name: 'Dadar & Lalbaug',     slug: 'dadar',        zone: 'South Mumbai' },
-    { name: 'Borivali & Gorai',    slug: 'borivali',     zone: 'Western Line' },
-    { name: 'Malad & Mindspace',   slug: 'malad',        zone: 'Western Line' },
-    { name: 'Kandivali & Charkop', slug: 'kandivali',    zone: 'Western Line' },
-    { name: 'Powai & Chandivali',  slug: 'powai',        zone: 'Central Line' },
-    { name: 'Kolshet & Balkum',    slug: 'kolshet-road', zone: 'Central Line' },
-    { name: 'Vashi & Sanpada',     slug: 'vashi',        zone: 'Navi Mumbai' },
-    { name: 'Kharghar & Panvel',   slug: 'kharghar',     zone: 'Navi Mumbai' },
-    { name: 'Mira Road & Bhayandar', slug: 'mira-road',  zone: 'Western Line' },
-    { name: 'Vasai & Virar',       slug: 'vasai',        zone: 'Western Line' },
-    { name: 'Kothrud & Baner',     slug: 'kothrud',      zone: 'Pune' },
-    { name: 'Hinjawadi IT Park',   slug: 'hinjawadi',    zone: 'Pune' },
-    { name: 'Pune & PCMC Hub',     slug: 'pune',         zone: 'Pune' },
+    { name: 'Bandra & BKC', slug: 'bandra', zone: 'Western Line' },
+    { name: 'Andheri & Marol', slug: 'andheri', zone: 'Western Line' },
+    { name: 'Thane & Majiwada', slug: 'thane', zone: 'Central Line' },
+    { name: 'Worli & Lower Parel', slug: 'worli', zone: 'South Mumbai' },
+    { name: 'Dadar & Lalbaug', slug: 'dadar', zone: 'South Mumbai' },
+    { name: 'Borivali & Gorai', slug: 'borivali', zone: 'Western Line' },
+    { name: 'Malad & Mindspace', slug: 'malad', zone: 'Western Line' },
+    { name: 'Kandivali & Charkop', slug: 'kandivali', zone: 'Western Line' },
+    { name: 'Powai & Chandivali', slug: 'powai', zone: 'Central Line' },
+    { name: 'Kolshet & Balkum', slug: 'kolshet-road', zone: 'Central Line' },
+    { name: 'Vashi & Sanpada', slug: 'vashi', zone: 'Navi Mumbai' },
+    { name: 'Kharghar & Panvel', slug: 'kharghar', zone: 'Navi Mumbai' },
+    { name: 'Mira Road & Bhayandar', slug: 'mira-road', zone: 'Western Line' },
+    { name: 'Vasai & Virar', slug: 'vasai', zone: 'Western Line' },
+    { name: 'Kothrud & Baner', slug: 'kothrud', zone: 'Pune' },
+    { name: 'Hinjawadi IT Park', slug: 'hinjawadi', zone: 'Pune' },
+    { name: 'Pune & PCMC Hub', slug: 'pune', zone: 'Pune' },
   ];
 
   const featuredLinks = [
@@ -1795,7 +1805,7 @@ function NetworkSection() {
               Dominating Mumbai &amp; Pune&apos;s <span className="text-gradient">Core Micro-Markets</span>
             </h2>
             <p className="text-slate-400 mt-4 text-sm leading-relaxed">
-              AMS Civil Construction is physically active across all 520+ localities in Mumbai, Thane, Navi Mumbai, Palghar &amp; Pune. 
+              AMS Civil Construction is physically active across all 520+ localities in Mumbai, Thane, Navi Mumbai, Palghar &amp; Pune.
               From high-end bungalow construction to luxury interior overhauls, select your neighborhood to get a certified engineer site inspection.
             </p>
           </div>
@@ -1816,8 +1826,8 @@ function NetworkSection() {
         {/* Horizontal Scroll Track */}
         <div ref={scrollRef} className="flex overflow-x-auto pb-8 gap-4 sm:gap-6 no-scrollbar snap-x scroll-smooth px-4 sm:px-0">
           {topCities.map(city => (
-            <div key={city.slug} 
-                 className="flex-shrink-0 w-[calc(100vw-64px)] sm:w-[300px] lg:w-[280px] snap-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
+            <div key={city.slug}
+              className="flex-shrink-0 w-[calc(100vw-64px)] sm:w-[300px] lg:w-[280px] snap-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover/card:bg-orange-500 group-hover/card:text-white transition-all duration-300">
                   <MapPin size={18} />
@@ -1827,18 +1837,18 @@ function NetworkSection() {
                   <p className="text-slate-500 text-[10px] uppercase tracking-wider font-bold">{city.zone}</p>
                 </div>
               </div>
-              
+
               <div className="space-y-4">
                 {featuredLinks.map(link => (
-                  <Link key={`${city.slug}-${link.slug}`} 
-                        href={`/areas/${city.slug}/${link.slug}`}
-                        prefetch={false}
-                        className="flex items-center justify-between text-[13px] text-slate-400 hover:text-orange-400 transition-colors group/link">
-                    {link.label} 
+                  <Link key={`${city.slug}-${link.slug}`}
+                    href={`/areas/${city.slug}/${link.slug}`}
+                    prefetch={false}
+                    className="flex items-center justify-between text-[13px] text-slate-400 hover:text-orange-400 transition-colors group/link">
+                    {link.label}
                     <ArrowRight size={14} className="opacity-0 group-hover/card:opacity-100 -translate-x-2 group-hover/card:translate-x-0 transition-all duration-300" />
                   </Link>
                 ))}
-                
+
                 <div className="pt-4 border-t border-white/5 mt-2">
                   <Link href={`/areas/${city.slug}`} prefetch={false} className="inline-flex items-center gap-2 text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors">
                     Explore All Work in {city.name} <ArrowRight size={14} />

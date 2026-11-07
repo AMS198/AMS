@@ -9,9 +9,10 @@ import {
   ArrowRight, ArrowUpRight, CheckCircle, Search, Sparkles,
   Home, Bath, Grid3X3, ChefHat, Layers, Paintbrush, Wrench,
   Shield, Waves, Fence, Hammer, Building2, Dumbbell, Sofa, Bed,
-  LayoutTemplate, Award, Clock, Users, MapPin, ChevronRight, Phone
+  LayoutTemplate, Award, Clock, Users, MapPin, ChevronRight, Phone, X
 } from 'lucide-react';
 import { services } from '@/data/siteData';
+import { locations } from '@/data/locations';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
 import ModernCTA from '@/components/ui/ModernCTA';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
@@ -71,11 +72,11 @@ const serviceCategories: Record<string, 'structural' | 'renovation' | 'interior'
 };
 
 const categoryTabs = [
-  { id: 'all', label: 'All Services' },
-  { id: 'structural', label: 'Bungalow & Structural' },
-  { id: 'renovation', label: 'Home Renovation' },
-  { id: 'interior', label: 'Interiors & Modular' },
-  { id: 'finishing', label: 'Finishing & Civil' },
+  { id: 'all', label: 'All Services', icon: Sparkles },
+  { id: 'structural', label: 'Bungalow & Structural', icon: Building2 },
+  { id: 'renovation', label: 'Home Renovation', icon: Hammer },
+  { id: 'interior', label: 'Interiors & Modular', icon: LayoutTemplate },
+  { id: 'finishing', label: 'Finishing & Civil', icon: Layers },
 ];
 
 function getCategoryBadge(slug: string): string {
@@ -99,9 +100,69 @@ function getServiceIcon(svc: typeof services[0]): React.ElementType {
   return Wrench;
 }
 
+const coverageRegions = [
+  {
+    zone: 'Western Suburbs',
+    short: 'Western',
+    tag: 'Active Crews',
+    areas: [
+      { name: 'Bandra', slug: 'bandra' },
+      { name: 'Andheri', slug: 'andheri' },
+      { name: 'Borivali', slug: 'borivali' },
+      { name: 'Juhu', slug: 'juhu' },
+      { name: 'Khar', slug: 'khar' },
+      { name: 'Santacruz', slug: 'santacruz' },
+      { name: 'Goregaon', slug: 'goregaon' },
+      { name: 'Malad', slug: 'malad' },
+    ],
+  },
+  {
+    zone: 'South & Central',
+    short: 'South & Central',
+    tag: 'Prime Hubs',
+    areas: [
+      { name: 'Worli', slug: 'worli' },
+      { name: 'Dadar', slug: 'dadar' },
+      { name: 'Colaba', slug: 'colaba' },
+      { name: 'Lower Parel', slug: 'lower-parel' },
+      { name: 'Prabhadevi', slug: 'prabhadevi' },
+      { name: 'Byculla', slug: 'byculla' },
+    ],
+  },
+  {
+    zone: 'Thane & Central Line',
+    short: 'Thane & Central',
+    tag: 'Full Civil Teams',
+    areas: [
+      { name: 'Thane', slug: 'thane' },
+      { name: 'Mulund', slug: 'mulund' },
+      { name: 'Chembur', slug: 'chembur' },
+      { name: 'Ghatkopar', slug: 'ghatkopar' },
+      { name: 'Powai', slug: 'powai' },
+      { name: 'Kalyan', slug: 'kalyan' },
+      { name: 'Dombivli', slug: 'dombivli' },
+      { name: 'Mira Road', slug: 'mira-road' },
+    ],
+  },
+  {
+    zone: 'Navi Mumbai',
+    short: 'Navi Mumbai',
+    tag: 'Fast Response',
+    areas: [
+      { name: 'Vashi', slug: 'vashi' },
+      { name: 'Nerul', slug: 'nerul' },
+      { name: 'Kharghar', slug: 'kharghar' },
+      { name: 'Panvel', slug: 'panvel' },
+      { name: 'Belapur', slug: 'cbd-belapur' },
+      { name: 'Airoli', slug: 'airoli' },
+    ],
+  },
+];
+
 export default function ServicesPageContent() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [activeRegionIndex, setActiveRegionIndex] = useState<number>(0);
 
   const filteredServices = useMemo(() => {
     return services.filter((svc) => {
@@ -167,21 +228,10 @@ export default function ServicesPageContent() {
         />
 
         <div className="relative container-custom">
-          {/* Top Bar: Breadcrumb + Badge */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
-              <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors flex items-center gap-1.5">
-                <Home size={13} />
-                Home
-              </Link>
-              <ChevronRight size={12} className="text-slate-600" />
-              <span className="text-orange-400 font-semibold">Services</span>
-            </nav>
-
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px] font-mono font-semibold tracking-wider uppercase">
-              <Sparkles size={12} className="text-orange-500" />
-              10+ Years Legacy • Mumbai & Thane
-            </div>
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold tracking-wider uppercase mb-6">
+            <Sparkles size={12} className="text-orange-500" />
+            <span>10+ Years Legacy • Mumbai &amp; Thane</span>
           </div>
 
           {/* Heading */}
@@ -219,56 +269,71 @@ export default function ServicesPageContent() {
       </section>
 
       {/* ── CATEGORY FILTER & SEARCH BAR ───────────────────────── */}
-      <div className="relative z-20 bg-[#0B1120] border-b border-white/10 py-3.5 shadow-md">
-        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-3">
-          {/* Category Tabs (Smooth Horizontal Swipe) */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto py-1 no-scrollbar">
-            {categoryTabs.map((tab) => {
-              const count =
-                tab.id === 'all'
-                  ? services.length
-                  : services.filter((s) => serviceCategories[s.slug] === tab.id).length;
-              const isActive = selectedCategory === tab.id;
+      <div className="relative z-20 bg-[#0B1120] border-y border-white/10 py-3 sm:py-4 shadow-xl">
+        <div className="container-custom flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+          {/* Category Tabs (Smooth Horizontal Swipe with edge padding) */}
+          <div className="relative flex-1 min-w-0 w-full">
+            <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-1 px-1 sm:px-0 no-scrollbar scroll-smooth">
+              {categoryTabs.map((tab) => {
+                const Icon = tab.icon;
+                const count =
+                  tab.id === 'all'
+                    ? services.length
+                    : services.filter((s) => serviceCategories[s.slug] === tab.id).length;
+                const isActive = selectedCategory === tab.id;
 
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 sm:gap-2 cursor-pointer flex-shrink-0 ${
-                    isActive
-                      ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20 font-bold'
-                      : 'bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-white/10'
-                  }`}
-                >
-                  {tab.label}
-                  <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                      isActive ? 'bg-black/20 text-white' : 'bg-white/10 text-slate-400'
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setSelectedCategory(tab.id)}
+                    className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-2 cursor-pointer flex-shrink-0 group ${
+                      isActive
+                        ? 'bg-gradient-to-r from-orange-500 via-orange-600 to-amber-600 text-white shadow-lg shadow-orange-500/25 ring-1 ring-orange-400/50 font-bold'
+                        : 'bg-[#131D31]/90 hover:bg-[#1C2844] text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/40'
                     }`}
                   >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
+                    <Icon
+                      size={14}
+                      className={`shrink-0 transition-colors ${
+                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-orange-400'
+                      }`}
+                    />
+                    <span>{tab.label}</span>
+                    <span
+                      className={`text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors ${
+                        isActive
+                          ? 'bg-black/30 text-white font-bold'
+                          : 'bg-white/5 border border-white/10 text-slate-400 group-hover:text-slate-200'
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Search Box */}
-          <div className="relative w-full md:w-64 flex-shrink-0">
-            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <div className="relative w-full md:w-72 lg:w-80 flex-shrink-0 group">
+            <Search
+              size={15}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-orange-400 transition-colors pointer-events-none"
+            />
             <input
               type="text"
-              placeholder="Search 26+ services..."
+              placeholder="Search 26+ civil & interior services..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#101827] border border-white/10 rounded-full pl-9 pr-8 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
+              className="w-full bg-[#131D31]/90 hover:bg-[#18233C] focus:bg-[#0D1526] border border-white/10 hover:border-white/20 focus:border-orange-500 rounded-xl sm:rounded-full pl-9 pr-9 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all duration-200 shadow-inner"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs p-1"
+                aria-label="Clear search"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
               >
-                ✕
+                <X size={11} />
               </button>
             )}
           </div>
@@ -422,45 +487,102 @@ export default function ServicesPageContent() {
         </div>
       </section>
 
-      {/* ── LOCATIONS WE SERVE (SEO HUB) ────────────────────────── */}
-      <section className="py-20 bg-[#0B1120] border-t border-white/5">
-        <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="section-label justify-center">Mumbai & Beyond</div>
-            <h2 className="font-display text-3xl lg:text-4xl text-white mb-4">
-              Local Civil Contractors Across <span className="text-gradient">40+ Areas</span>
+      {/* ── LOCATIONS WE SERVE (SEO HUB - COMPACT INTERACTIVE TABS) ── */}
+      <section className="py-10 sm:py-14 bg-[#080D1A] border-t border-white/5 relative overflow-hidden">
+        {/* Ambient background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="container-custom max-w-4xl relative z-10">
+          <div className="text-center max-w-xl mx-auto mb-5 sm:mb-7">
+            <div className="section-label mx-auto">Regional Coverage Hubs</div>
+            <h2 className="font-display text-xl sm:text-3xl lg:text-4xl text-white mt-3 mb-2">
+              Civil Contractors Across <span className="text-gradient">40+ Areas</span>
             </h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              We deploy our senior civil engineers and artisan teams across South Mumbai, Western Suburbs, Central Mumbai, Thane, and Navi Mumbai.
+            <p className="text-slate-400 text-xs sm:text-sm">
+              Dedicated site engineers and artisan teams deployed across Mumbai &amp; Thane for fast on-site visits.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2.5 justify-center">
-            {[
-              'Bandra', 'Andheri', 'Borivali', 'Juhu', 'Worli', 'Dadar', 'Khar', 'Santacruz',
-              'Malad', 'Kandivali', 'Goregaon', 'Vile Parle', 'Thane', 'Vashi', 'Nerul',
-              'Kharghar', 'Panvel', 'Powai', 'Chembur', 'Ghatkopar', 'Mulund', 'Kalyan',
-              'Dombivli', 'Mira Road', 'Colaba', 'Lower Parel', 'Prabhadevi', 'Byculla'
-            ].map((loc) => (
-              <Link
-                key={loc}
-                prefetch={false}
-                href={`/areas/${loc.toLowerCase().replace(' ', '-')}`}
-                className="px-4 py-2 rounded-full text-xs font-medium text-slate-300 bg-white/5 border border-white/10 hover:border-orange-500 hover:text-white hover:bg-orange-500/10 transition-all flex items-center gap-1.5"
+          {/* Region Segmented Tabs Switcher */}
+          <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 sm:pb-0 mb-4 sm:mb-6 no-scrollbar">
+            {coverageRegions.map((reg, idx) => {
+              const isSelected = activeRegionIndex === idx;
+              return (
+                <button
+                  key={reg.zone}
+                  type="button"
+                  onClick={() => setActiveRegionIndex(idx)}
+                  className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                    isSelected
+                      ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20 font-bold'
+                      : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10'
+                  }`}
+                >
+                  <MapPin size={12} className={isSelected ? 'text-white' : 'text-orange-400'} />
+                  <span>{reg.short}</span>
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                      isSelected ? 'bg-black/25 text-white' : 'bg-white/10 text-slate-400'
+                    }`}
+                  >
+                    {reg.areas.length}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Single Master Card with Selected Region's Locations */}
+          <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#111928] via-[#0E1626] to-[#0A101D] border border-white/10 p-4 sm:p-6 shadow-xl relative overflow-hidden">
+            {coverageRegions.map((reg, idx) => (
+              <div
+                key={reg.zone}
+                className={activeRegionIndex === idx ? 'block' : 'hidden'}
               >
-                <MapPin size={12} className="text-orange-500" />
-                {loc}
-              </Link>
+                {/* Card Header */}
+                <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                      <MapPin size={13} className="text-orange-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-xs sm:text-sm">{reg.zone}</h3>
+                      <p className="text-[11px] text-slate-400 hidden sm:block">Verified localized construction crews &amp; engineer coverage</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>{reg.tag}</span>
+                  </span>
+                </div>
+
+                {/* Locations Grid - 2 cols on mobile, 4 cols on desktop! */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {reg.areas.map((loc) => (
+                    <Link
+                      key={loc.slug}
+                      prefetch={false}
+                      href={`/areas/${loc.slug}`}
+                      className="px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-orange-500/15 border border-white/5 hover:border-orange-500/40 text-slate-300 hover:text-white text-xs font-medium transition-all text-center truncate flex items-center justify-center gap-1 group/loc shadow-sm"
+                    >
+                      <span className="truncate">{loc.name}</span>
+                      <ArrowRight size={10} className="text-slate-500 group-hover/loc:text-orange-400 group-hover/loc:translate-x-0.5 transition-all shrink-0" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
-          <div className="text-center mt-8">
+          {/* Bottom Explore All CTA */}
+          <div className="text-center mt-6 sm:mt-8">
             <Link
               prefetch={false}
               href="/areas"
-              className="inline-flex items-center gap-2 text-xs font-bold text-orange-400 hover:text-orange-300 tracking-wider uppercase transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/30 text-xs font-semibold tracking-wide transition-all shadow-md group"
             >
-              Explore All 90+ Service Locations <ArrowRight size={14} />
+              <span>Explore All {locations.length}+ Service Locations Across Mumbai &amp; India</span>
+              <ArrowRight size={13} className="text-orange-400 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>

@@ -5,6 +5,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import {
@@ -77,18 +78,10 @@ export default function PartnerPage() {
         />
 
         <div className="relative z-10 container-custom">
-          {/* Breadcrumb + Verified Badge */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
-              <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-              <span className="text-slate-600">/</span>
-              <span className="text-orange-400 font-semibold">Partner Program</span>
-            </nav>
-
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px] font-mono font-semibold tracking-wider uppercase">
-              <Handshake size={12} className="text-orange-500" />
-              <span>B2B Studio Collaboration • Mumbai, Thane &amp; Navi Mumbai</span>
-            </div>
+          {/* Top Verified Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold tracking-wider uppercase mb-6">
+            <Handshake size={12} className="text-orange-500" />
+            <span>B2B Studio Collaboration • Mumbai, Thane &amp; Navi Mumbai</span>
           </div>
 
           <div className="max-w-3xl">
@@ -314,8 +307,14 @@ export default function PartnerPage() {
               {/* Founder Commitment Card */}
               <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">
-                    KM
+                  <div className="relative w-11 h-11 rounded-xl overflow-hidden border border-orange-500/30 shadow-md shrink-0">
+                    <Image
+                      src="/images/director-kedar-mandal.jpg"
+                      alt="Kedar Mandal - Founder & Master Civil Engineer"
+                      fill
+                      sizes="44px"
+                      className="object-cover object-top"
+                    />
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-sm">Kedar Mandal</h4>

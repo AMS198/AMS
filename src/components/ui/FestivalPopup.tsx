@@ -707,15 +707,15 @@ export default function FestivalPopup() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsVisible(true)}
-          className="fixed bottom-20 left-4 sm:bottom-8 sm:left-6 z-40 bg-[#0E1526]/95 text-amber-200 text-xs px-3 py-1.5 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.5),0_0_12px_rgba(245,158,11,0.2)] flex items-center gap-2 border border-amber-500/30 hover:border-amber-400/70 transition-all cursor-pointer backdrop-blur-md hover:scale-105"
+          className="hidden sm:flex fixed sm:bottom-8 sm:left-6 z-40 bg-[#0E1526]/95 text-amber-200 text-xs px-3 py-1.5 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.5),0_0_12px_rgba(245,158,11,0.2)] items-center gap-2 border border-amber-500/30 hover:border-amber-400/70 transition-all cursor-pointer backdrop-blur-md hover:scale-105"
           title="Click to view special festive offer"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           <span className="font-semibold tracking-wide bg-gradient-to-r from-amber-200 to-amber-300 bg-clip-text text-transparent">
-            {activeFestival.posterImage ? 'Diwali Special' : activeFestival.title}
+            {activeFestival.title || 'Special Offer'}
           </span>
           <span className="bg-amber-500/15 text-amber-300 border border-amber-500/25 text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md">
-            {activeFestival.posterImage ? 'Free Visit' : 'Offer'}
+            Free Visit
           </span>
         </motion.button>
       )}

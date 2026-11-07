@@ -132,20 +132,10 @@ export default function AboutPage() {
         />
 
         <div className="relative container-custom z-10">
-          {/* Top Bar: Breadcrumb + Badge */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
-              <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors flex items-center gap-1.5">
-                Home
-              </Link>
-              <ChevronRight size={12} className="text-slate-600" />
-              <span className="text-orange-400 font-semibold">About Us</span>
-            </nav>
-
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px] font-mono font-semibold tracking-wider uppercase">
-              <Sparkles size={12} className="text-orange-500" />
-              Building Mumbai With Integrity • 10+ Years Legacy
-            </div>
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold tracking-wider uppercase mb-6">
+            <Sparkles size={12} className="text-orange-500" />
+            <span>Building Mumbai With Integrity • 10+ Years Legacy</span>
           </div>
 
           <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 lg:gap-16 items-center">
@@ -213,12 +203,21 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-80" />
 
                 {/* Floating Bottom Card */}
-                <div className="absolute bottom-5 inset-x-5 p-4 rounded-xl bg-[#0B1120]/90 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">Mumbai & Beyond</p>
-                    <p className="text-white text-sm font-bold mt-0.5">200+ Landmark Projects Handled</p>
+                <div className="absolute bottom-3 sm:bottom-4 inset-x-3 sm:inset-x-4 p-3 sm:p-4 rounded-2xl bg-[#080D1A]/90 backdrop-blur-xl border border-white/15 shadow-2xl flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center shrink-0">
+                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[9px] sm:text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold truncate">
+                        Mumbai &amp; Beyond
+                      </p>
+                      <p className="text-white text-xs sm:text-sm font-bold tracking-tight truncate">
+                        200+ Landmark Projects Handled
+                      </p>
+                    </div>
                   </div>
-                  <span className="px-2.5 py-1 rounded bg-orange-500 text-white text-[11px] font-bold">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold whitespace-nowrap shadow-md shrink-0">
                     10+ Years Legacy
                   </span>
                 </div>
@@ -347,14 +346,23 @@ export default function AboutPage() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
-              {/* Leader Avatar Badge */}
+              {/* Leader Avatar / Portrait */}
               <div className="flex-shrink-0 text-center">
-                <div className="w-32 h-32 md:w-36 md:h-36 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 text-white flex items-center justify-center font-display font-black text-4xl shadow-xl shadow-orange-500/20 border-2 border-white/20">
-                  {leadership.initials}
+                <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-2xl md:rounded-3xl overflow-hidden border-2 border-orange-500/50 shadow-2xl shadow-orange-500/20 ring-4 ring-orange-500/10 mx-auto group">
+                  <Image
+                    src="/images/director-kedar-mandal.jpg"
+                    alt={`${leadership.name} - ${leadership.role}`}
+                    fill
+                    sizes="(max-width: 768px) 144px, 176px"
+                    priority
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
                 </div>
-                <span className="inline-block px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-mono font-bold uppercase tracking-wider mt-3">
-                  Verified Director
-                </span>
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mt-3.5 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Verified Director</span>
+                </div>
               </div>
 
               {/* Bio & Credentials */}
@@ -411,46 +419,83 @@ export default function AboutPage() {
       </section>
 
       {/* ── OUR GUARANTEE TO MUMBAI HOMEOWNERS ──────────────────── */}
-      <section className="py-20 bg-[#080D1A] border-b border-white/5">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <div className="section-label justify-center">Client Protections</div>
-            <h2 className="font-display text-3xl lg:text-4xl text-white mb-4">
+      <section className="py-14 sm:py-20 bg-[#080D1A] border-b border-white/5 relative overflow-hidden">
+        {/* Ambient subtle glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-orange-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-14">
+            <div className="section-label mx-auto">Client Protections</div>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-white mt-3 mb-3">
               Our 100% Written <span className="text-gradient">Contract Guarantees</span>
             </h2>
-            <p className="text-slate-400 text-sm">
-              We treat every home build with the care, security, and financial transparency of a family contract.
+            <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
+              We treat every home build with the care, security, and financial transparency of a legally binding family contract.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {[
               {
-                title: 'Milestone Payments',
-                desc: 'Pay strictly in installments as each milestone is verified. Zero upfront bulk advances required.',
+                num: '01',
+                icon: CalendarCheck,
+                title: 'Milestone-Based Payments',
+                desc: 'Pay strictly in stage-wise installments only after work is verified on site. Zero upfront bulk advances required.',
+                pill: '0% Advance Risk • Verified Stages',
               },
               {
-                title: 'Written 5-Year Warranty',
-                desc: 'Official legal coverage against structural cracks and water seepages for 5 full years.',
+                num: '02',
+                icon: ShieldCheck,
+                title: 'Material & Workmanship Warranty',
+                desc: 'Written 1-year legal workmanship warranty on civil execution, plus official manufacturer brand warranties on materials (UltraTech, Dr. Fixit, Asian Paints) as applicable.',
+                pill: 'Applicable Material & Workmanship Warranty',
               },
               {
+                num: '03',
+                icon: Award,
                 title: 'Zero Material Downgrades',
-                desc: 'Only ISI-marked branded materials (UltraTech, TATA Tiscon, Kajaria) directly delivered to your site.',
+                desc: 'Only genuine ISI-certified materials (TATA Tiscon, UltraTech, Kajaria) directly delivered and inspected on your site with zero compromise.',
+                pill: '100% Genuine Branded Materials',
               },
-            ].map((cert, i) => (
-              <div
-                key={i}
-                className="p-6 rounded-2xl bg-[#0B1120] border border-white/10 hover:border-orange-500/30 transition-all text-center flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-full bg-orange-500/10 text-orange-400 flex items-center justify-center mx-auto mb-4">
-                    <ShieldCheck size={24} />
+            ].map((cert, i) => {
+              const Icon = cert.icon;
+              return (
+                <div
+                  key={i}
+                  className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#111928] via-[#0E1626] to-[#0A101D] border border-white/10 hover:border-orange-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group hover:-translate-y-1 relative overflow-hidden"
+                >
+                  {/* Subtle corner glow */}
+                  <div className="absolute top-0 right-0 w-28 h-28 bg-orange-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-orange-500/10 transition-colors" />
+
+                  <div>
+                    {/* Card Top: Icon + Number badge */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all shadow-sm">
+                        <Icon size={20} />
+                      </div>
+                      <span className="font-mono text-xs font-bold text-slate-500 group-hover:text-orange-400/80 transition-colors">
+                        {cert.num}
+                      </span>
+                    </div>
+
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-2 group-hover:text-orange-300 transition-colors">
+                      {cert.title}
+                    </h3>
+                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                      {cert.desc}
+                    </p>
                   </div>
-                  <h3 className="text-white font-bold text-base mb-2">{cert.title}</h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{cert.desc}</p>
+
+                  {/* Micro-guarantee Pill */}
+                  <div className="pt-3.5 border-t border-white/10 flex items-center">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[11px] font-medium tracking-wide">
+                      <CheckCircle size={13} className="text-emerald-400 shrink-0" />
+                      <span>{cert.pill}</span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

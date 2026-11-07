@@ -358,13 +358,8 @@ export default function CalculatorPage() {
       <div className="absolute top-80 left-10 w-80 h-80 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
       <div className="container-custom max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Breadcrumb & Live Verification Pill */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pt-2">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-400 font-mono">
-            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <span className="text-slate-600">/</span>
-            <span className="text-orange-400 font-medium">Cost Calculator</span>
-          </nav>
+        {/* Live Verification Pill */}
+        <div className="flex items-center justify-start gap-3 mb-6 pt-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[11px] font-mono font-bold tracking-wider">
             <ShieldCheck size={12} className="text-orange-400" />
             <span>2026 MUMBAI CIVIL RATES • VERIFIED ESTIMATOR</span>

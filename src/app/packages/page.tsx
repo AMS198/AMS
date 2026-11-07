@@ -351,13 +351,6 @@ export default function PackagesPage() {
         />
 
         <div className="relative z-10 container-custom">
-          {/* Breadcrumb */}
-          <nav className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 mb-6">
-            <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <span className="text-slate-600">/</span>
-            <span className="text-orange-400 font-semibold">Packages</span>
-          </nav>
-
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-wider mb-5">
               <Sparkles size={13} /> Pure Civil &amp; Labor Workmanship Contract

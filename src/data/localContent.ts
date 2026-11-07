@@ -291,39 +291,42 @@ export function generateWhyChooseUs(loc: LocationData, svc: ServiceInfo): { titl
 /* ── Generate unique FAQs per combo (includes Hindi/Hinglish) ── */
 export function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; a: string }[] {
   const rand = getSeededRandom(loc.slug + svc.slug + 'faq');
+  const sameDistrict = loc.name.toLowerCase() === loc.district.toLowerCase();
+  const areaDesc = sameDistrict ? `${loc.name} और आसपास के सभी इलाकों` : `${loc.name} (${loc.district})`;
+  const areaDescEng = sameDistrict ? `${loc.name} and surrounding neighborhoods` : `${loc.name}, ${loc.district}`;
   
   const pool = [
     {
       q: `What is the cost of ${svc.title.toLowerCase()} in ${loc.name}?`,
-      a: `The cost of ${svc.title.toLowerCase()} in ${loc.name} (${loc.district}) varies based on area size, material grade, and design complexity. Standard projects start at ₹150/sq.ft. and premium work goes up to ₹450+/sq.ft. We provide site visits near ${loc.landmarks[0] || loc.name} (100% Free under Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill). Call +91 87793 91690 to book.`,
+      a: `The cost of ${svc.title.toLowerCase()} in ${loc.name} varies based on area size, material grade, and design complexity. Standard projects start at ₹150/sq.ft. and premium work goes up to ₹450+/sq.ft. We provide 100% Free on-site inspection and laser measurement near ${loc.landmarks[0] || loc.name} with a zero-obligation detailed quote. Call +91 87793 91690 to book your visit.`,
     },
     {
       q: `How long does ${svc.title.toLowerCase()} take in ${loc.name}?`,
-      a: `Project timelines for ${svc.title.toLowerCase()} in ${loc.name} depend on scope. A standard residential project takes 7–30 days, while larger works can take 2–6 months. We provide a detailed milestone schedule and our ${loc.zone} teams ensure on-time delivery with weekly progress updates.`,
+      a: `Project timelines for ${svc.title.toLowerCase()} in ${loc.name} depend on the scope of work. A standard residential project takes 7–30 days, while larger turnkey works take 2–6 months. We provide a milestone-tracked schedule, and our ${loc.zone} teams ensure guaranteed on-time delivery with weekly progress updates.`,
     },
     {
       q: `Do you serve areas near ${loc.name} for ${svc.title.toLowerCase()}?`,
-      a: `Yes! Besides ${loc.name}, our ${svc.title.toLowerCase()} teams actively serve ${loc.nearby.join(', ')}. We maintain dedicated crews across ${loc.district} so you get fast response and consistent quality regardless of the exact location.`,
+      a: `Yes! Besides ${loc.name}, our ${svc.title.toLowerCase()} teams actively serve ${loc.nearby.slice(0, 4).join(', ')}. We maintain dedicated local crews across ${loc.district} ensuring rapid 24-hour response and top-tier workmanship at your site.`,
     },
     {
       q: `Why is AMS the best ${svc.title.toLowerCase()} contractor in ${loc.name}?`,
-      a: `AMS Civil Construction has 10+ years of construction expertise, 200+ completed projects, and a 4.9/5 client satisfaction rating. In ${loc.name}, we combine deep local knowledge of ${loc.district} building codes with premium materials and skilled craftsmen. Our ${loc.pincode ? `teams near PIN ${loc.pincode}` : `local teams`} are available for same-week site visits.`,
+      a: `AMS Civil Construction brings 10+ years of proven construction expertise, 200+ completed projects, and a stellar 4.9/5 client satisfaction rating. In ${loc.name}, we combine deep structural knowledge of ${loc.district} municipal guidelines with certified ISI-grade materials and master artisans.`,
     },
     {
       q: `${loc.name} mein ${svc.title.toLowerCase()} ka rate kya hai?`,
-      a: `${loc.name} mein ${svc.title.toLowerCase()} ka rate project ke size aur material pe depend karta hai. Standard kaam ₹150/sq.ft. se shuru hota hai aur premium quality ka ₹450+/sq.ft. tak jata hai. Exact rate ke liye AMS Civil Construction ko call karein: +91 87793 91690. Hum ${loc.name} mein site visit provide karte hain (Diwali Offer ke tahat 100% Free till 15 Nov; post offer nominal fee bill mein adjustable hoti hai).`,
+      a: `${loc.name} mein ${svc.title.toLowerCase()} ka rate project ke size aur material quality par nirbhar karta hai. Standard kaam ₹150/sq.ft. se shuru hota hai aur premium designer work ₹450+/sq.ft. tak jata hai. Accurate rate aur estimation ke liye AMS Civil Construction ko call karein: +91 87793 91690. Hum ${loc.name} mein 100% Free Site Visit provide karte hain.`,
     },
     {
       q: `${loc.name} mein best ${svc.title.toLowerCase()} contractor kaun hai?`,
-      a: `${loc.name} aur ${loc.district} mein AMS Civil Construction sabse trusted ${svc.title.toLowerCase()} contractor hai. 10+ saal ka experience, 200+ completed projects, aur 4.9/5 rating. Hum ${loc.nearby.slice(0, 3).join(', ')} mein bhi service dete hain. Abhi call karein: +91 87793 91690.`,
+      a: `${areaDesc} mein AMS Civil Construction sabse bharosemand aur certified ${svc.title.toLowerCase()} contractor hai. 10+ saal ka anubhav, 200+ safal projects, aur 4.9/5 rating. Hum ${loc.nearby.slice(0, 3).join(', ')} mein bhi active service dete hain. Abhi call karein: +91 87793 91690.`,
     },
     {
       q: `What warranty does AMS provide for ${svc.title.toLowerCase()} in ${loc.name}?`,
-      a: `AMS Civil Construction provides a comprehensive 1-year workmanship warranty on all ${svc.title.toLowerCase()} projects in ${loc.name}. Waterproofing work comes with a 5-year guarantee. All materials used carry manufacturer warranties. We also offer post-completion support for any maintenance needs.`,
+      a: `AMS Civil Construction provides a 1-year comprehensive workmanship warranty on all ${svc.title.toLowerCase()} projects in ${loc.name}. Waterproofing treatments carry up to a 5-year leak-proof guarantee, and all materials used come with verified manufacturer warranties.`,
     },
     {
       q: `Can I get an estimate for ${svc.title.toLowerCase()} near ${loc.landmarks[0] || loc.name}?`,
-      a: `Absolutely. We offer site visits and detailed estimations for properties near ${loc.landmarks[0] || loc.name} and across ${loc.district} (100% Free Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill). Our supervisor will measure the area and discuss material choices with you directly on-site.`,
+      a: `Yes, absolutely! We offer complimentary on-site measurement and transparent quotes for residential and commercial properties near ${loc.landmarks[0] || loc.name} and across ${areaDescEng}. Our senior civil engineer will visit your site, inspect the premises, and share a fixed-price itemized estimate.`,
     }
   ];
 

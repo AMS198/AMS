@@ -257,7 +257,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         <div className="relative container-custom z-10">
           {/* Top Bar: Breadcrumb + Badge */}
           <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <nav className="flex items-center gap-2 text-xs font-medium text-slate-400">
+            <nav className="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-400">
               <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
               <ChevronRight size={12} className="text-slate-600" />
               <Link prefetch={false} href="/services" className="hover:text-orange-400 transition-colors">Services</Link>
@@ -320,12 +320,21 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-80" />
 
                 {/* Floating Overlay Card */}
-                <div className="absolute bottom-5 inset-x-5 p-4 rounded-xl bg-[#0B1120]/90 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                  <div>
-                    <p className="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">Guaranteed Standard</p>
-                    <p className="text-white text-sm font-bold mt-0.5">100% In-House Skilled Team</p>
+                <div className="absolute bottom-3 sm:bottom-4 inset-x-3 sm:inset-x-4 p-3 sm:p-4 rounded-2xl bg-[#080D1A]/90 backdrop-blur-xl border border-white/15 shadow-2xl flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[9px] sm:text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold truncate">
+                        Guaranteed Standard
+                      </p>
+                      <p className="text-white text-xs sm:text-sm font-bold tracking-tight truncate">
+                        100% In-House Skilled Team
+                      </p>
+                    </div>
                   </div>
-                  <span className="px-2.5 py-1 rounded bg-orange-500 text-white text-[11px] font-bold">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold whitespace-nowrap shadow-md shrink-0">
                     Zero Middlemen
                   </span>
                 </div>

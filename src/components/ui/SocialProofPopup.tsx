@@ -84,41 +84,42 @@ export default function SocialProofPopup() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          initial={{ opacity: 0, y: 30, scale: 0.92 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.9 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-          className="fixed bottom-24 left-4 z-[60] max-w-[300px] w-[calc(100vw-32px)] border border-white/20 shadow-2xl rounded-2xl p-4 overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.92), rgba(30,41,59,0.97))' }}
+          exit={{ opacity: 0, y: 15, scale: 0.92 }}
+          transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+          className="fixed bottom-20 sm:bottom-6 left-3 sm:left-6 z-40 max-w-[240px] sm:max-w-[280px] border border-white/10 shadow-2xl rounded-xl p-2.5 sm:p-3 overflow-hidden backdrop-blur-xl"
+          style={{ background: 'linear-gradient(135deg, rgba(11,17,32,0.95), rgba(16,24,39,0.98))' }}
         >
-          <div className="absolute top-0 right-0 w-16 h-16 bg-orange-500/20 blur-2xl rounded-full pointer-events-none" />
+          <div className="absolute top-0 right-0 w-12 h-12 bg-orange-500/10 blur-xl rounded-full pointer-events-none" />
 
           <button
             onClick={() => { setIsVisible(false); showCountRef.current = MAX_POPUPS; }} // user dismissed = stop
-            className="absolute top-2 right-2 text-slate-400 hover:text-white transition-colors"
+            className="absolute top-1.5 right-1.5 p-0.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
             aria-label="Close"
           >
-            <X size={14} />
+            <X size={11} />
           </button>
 
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-2.5 items-center">
             <div
-              className="w-10 h-10 rounded-full flex flex-shrink-0 items-center justify-center relative font-bold text-white text-lg"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex flex-shrink-0 items-center justify-center relative font-bold text-white text-xs sm:text-sm shadow-sm"
               style={{ background: `linear-gradient(135deg, hsl(${notification.name.charCodeAt(0) * 20}, 70%, 50%), hsl(${notification.name.charCodeAt(0) * 30}, 80%, 40%))` }}
             >
               {notification.name.charAt(0)}
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-[#0f172a] rounded-full flex items-center justify-center">
-                <CheckCircle size={8} className="text-white" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border border-[#0B1120] rounded-full flex items-center justify-center">
+                <CheckCircle size={6} className="text-white" />
               </div>
             </div>
 
-            <div className="flex-1 pr-4">
-              <p className="text-white text-[13px] leading-snug font-medium mb-1">
-                <span className="font-bold text-slate-200">{notification.name}</span> from{' '}
-                <span className="text-orange-400">{notification.loc}</span> {notification.svc}.
+            <div className="flex-1 min-w-0 pr-3">
+              <p className="text-slate-200 text-[11px] sm:text-xs leading-tight font-medium">
+                <span className="font-bold text-white">{notification.name}</span> from{' '}
+                <span className="text-orange-400 font-semibold">{notification.loc}</span> {notification.svc}.
               </p>
-              <div className="flex items-center gap-1 text-slate-400 text-[10px] font-mono uppercase tracking-wider">
-                <MapPin size={10} /> Mumbai • {notification.time} mins ago
+              <div className="flex items-center gap-1 text-slate-400 text-[9px] font-mono uppercase tracking-wider mt-1">
+                <MapPin size={9} className="text-orange-400 shrink-0" />
+                <span>Mumbai • {notification.time}m ago</span>
               </div>
             </div>
           </div>

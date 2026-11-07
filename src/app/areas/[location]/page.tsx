@@ -20,6 +20,7 @@ import { services } from '@/data/siteData';
 import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
+import ServiceFAQAccordion from '@/components/services/ServiceFAQAccordion';
 
 import { getDb } from '@/lib/mongodb';
 import { zoneContext, getSeededRandom } from '@/data/localContent';
@@ -244,7 +245,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
             name: `${loc.name} mein construction ka rate kya hai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. Free site visit (Diwali Offer till 15 Nov; nominal visit fee applicable post offer, adjustable in bill) aur accurate estimate ke liye call karein: +91 87793 91690.`,
+              text: `${loc.name} mein construction ka rate ₹1,500 se ₹3,500 per sq.ft. tak hota hai, material aur design ke hisaab se. 100% Free on-site inspection aur transparent estimate ke liye call karein: +91 87793 91690.`,
             },
           },
         ],
@@ -260,11 +261,11 @@ export default async function LocationPage(props: { params: Promise<{ location: 
   ];
 
   return (
-    <main className="min-h-screen bg-[#080D1A]">
+    <main className="min-h-screen bg-[#080D1A] overflow-x-hidden">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ── Hero Section ─────────────────────────────────── */}
-      <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
+      <section className="relative pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-16 overflow-hidden border-b border-white/5">
         {/* Background elements */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px]" />
@@ -275,8 +276,8 @@ export default async function LocationPage(props: { params: Promise<{ location: 
 
         <div className="relative z-10 container-custom">
           {/* Breadcrumbs & Language Switcher */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-            <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] sm:text-xs text-slate-400 animate-fadeIn">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 mb-4 sm:mb-6">
+            <nav className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[11px] sm:text-xs text-slate-300 w-fit">
               <Link prefetch={false} href="/" className="hover:text-orange-400 transition-colors">Home</Link>
               <ArrowRight size={10} className="opacity-50" />
               <Link prefetch={false} href="/areas" className="hover:text-orange-400 transition-colors">Service Areas</Link>
@@ -284,7 +285,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
               <span className="text-orange-400 font-medium">{loc.name}</span>
             </nav>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[11px] text-slate-400">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] sm:text-[11px] text-slate-400 w-fit">
               <span className="text-slate-500 font-medium">Language:</span>
               <span className="text-orange-400 font-bold px-1.5 py-0.5 rounded bg-orange-500/10">English</span>
               <span className="text-slate-600">•</span>
@@ -295,30 +296,30 @@ export default async function LocationPage(props: { params: Promise<{ location: 
           </div>
 
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-widest mb-6 animate-fadeUp">
-              <MapPin size={14} /> Service Center: {loc.zone}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-widest mb-4 animate-fadeUp">
+              <MapPin size={13} /> Service Center: {loc.zone}
             </div>
 
-            <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
-              #1 Civil Contractor & <br />
-              Construction in <span className="text-gradient">{loc.name}</span>
+            <h1 className="font-display font-black text-white text-3xl sm:text-5xl lg:text-7xl leading-[1.15] mb-5 animate-fadeUp">
+              #1 Civil Contractor &amp; Construction in{' '}
+              <span className="text-gradient">{loc.name}</span>
             </h1>
 
-            <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
+            <p className="text-slate-300 text-sm sm:text-lg leading-relaxed max-w-2xl mb-7 animate-fadeUp" style={{ animationDelay: '100ms' }}>
               AMS Civil Construction delivers premium building solutions in {loc.name}. 
               From luxury bungalows to modern renovations, we bring 10+ years of expertise 
               to every project in {loc.district}. Trusted by 200+ families across {loc.zone}.
             </p>
 
             {/* Actions */}
-            <div className="flex flex-wrap gap-4 animate-fadeUp" style={{ animationDelay: '200ms' }}>
-              <a href="tel:+918779391690" className="btn-primary px-8 py-4 gap-3 shadow-[0_0_20px_rgba(249,115,22,0.3)]">
-                <PhoneLogo className="w-5 h-5 fill-white" /> Call Expert
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fadeUp" style={{ animationDelay: '200ms' }}>
+              <a href="tel:+918779391690" className="btn-primary w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 gap-2.5 shadow-[0_0_20px_rgba(249,115,22,0.3)] justify-center font-bold text-sm sm:text-base">
+                <PhoneLogo className="w-4 h-4 sm:w-5 sm:h-5 fill-white" /> Call Expert
               </a>
-              <a href={`https://wa.me/918779391690?text=Hi!%20I%20need%20${encodeURIComponent(services[Math.floor(getSeededRandom(loc.slug+'wa') * Math.min(5, services.length))].title)}%20in%20${encodeURIComponent(loc.name)}.%20Please%20share%20a%20quote.`}
+              <a href={`https://wa.me/918779391690?text=Hi!%20I%20need%20civil%20work%20in%20${encodeURIComponent(loc.name)}.%20Please%20share%20a%20quote.`}
                  target="_blank" rel="noopener noreferrer"
-                 className="btn-outline px-8 py-4 gap-3 bg-white/5 group">
-                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-white transition-colors" /> WhatsApp Us
+                 className="btn-outline w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 gap-2.5 bg-white/5 hover:bg-white/10 border-white/20 justify-center font-bold text-sm sm:text-base group">
+                <WhatsAppLogo className="w-4 h-4 sm:w-5 sm:h-5 fill-[#25D366] group-hover:scale-110 transition-transform" /> WhatsApp Us
               </a>
             </div>
 
@@ -444,15 +445,15 @@ export default async function LocationPage(props: { params: Promise<{ location: 
                <div className="absolute inset-0 bg-gradient-to-tr from-[#080D1A] via-transparent to-transparent" />
             </div>
             {/* Floating Trust Card */}
-            <div className="absolute -bottom-6 -right-6 md:right-12 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl max-w-xs">
-              <div className="flex items-center gap-3 mb-3">
-                <ShieldCheck className="text-orange-400" size={24} />
-                <span className="text-white font-bold">100% Quality Guaranteed</span>
+            <div className="sm:absolute sm:-bottom-6 sm:-right-6 md:right-12 mt-4 sm:mt-0 p-4 sm:p-6 rounded-2xl bg-[#111827]/95 border border-white/10 backdrop-blur-xl shadow-2xl max-w-sm">
+              <div className="flex items-center gap-2.5 mb-2 sm:mb-3">
+                <ShieldCheck className="text-orange-400 shrink-0" size={22} />
+                <span className="text-white font-bold text-sm sm:text-base">100% Quality Guaranteed</span>
               </div>
-              <p className="text-slate-400 text-xs leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                 We follow strict ISI-certified material standards and provide a comprehensive 1-year warranty on all civil works.*
               </p>
-              <p className="text-slate-500 text-[10px] italic">*Terms & Conditions Apply.</p>
+              <p className="text-slate-500 text-[10px] italic mt-1">*Terms & Conditions Apply.</p>
             </div>
           </div>
 
@@ -504,27 +505,88 @@ export default async function LocationPage(props: { params: Promise<{ location: 
       </section>
 
       {/* ── Community Presence / Neighbourhoods ────────────── */}
-      <section className="section-y bg-[#0B1120] relative">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+      <section className="section-y bg-[#0B1120] relative overflow-hidden">
+        {/* Ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-orange-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
             <div className="section-label mx-auto">Neighbourhood Presence</div>
-            <h2 className="font-display text-3xl lg:text-5xl text-white mt-4 mb-6">
-              Working Near <span className="text-gradient">You</span>
+            <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl text-white mt-4 mb-3 sm:mb-4">
+              Working Near <span className="text-gradient">{loc.name}</span>
             </h2>
-            <p className="text-slate-400 leading-relaxed">
-              Our teams are active across {loc.name}. We have successfully delivered projects near these local landmarks:
+            <p className="text-slate-400 text-xs sm:text-base leading-relaxed">
+              Our site engineers and civil crews are actively deployed across {loc.name}. We provide direct on-site estimates and verified project execution across all major localities:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {loc.landmarks.map((l, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0">
-                  <MapPin size={18} className="text-orange-400" />
+          {/* Master Landmark Coverage Showcase Card */}
+          <div className="max-w-4xl mx-auto rounded-3xl bg-gradient-to-b from-[#111928] via-[#0E1626] to-[#0A101D] border border-white/10 p-5 sm:p-8 shadow-2xl relative overflow-hidden">
+            {/* Card corner ambient glow */}
+            <div className="absolute -top-16 -right-16 w-56 h-56 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Card Top Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-5 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center shrink-0">
+                  <MapPin className="text-orange-400 w-4 h-4" />
                 </div>
-                <span className="text-slate-300 font-medium">{l}</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+                      Active Civil Hub
+                    </span>
+                  </div>
+                  <h3 className="text-white font-bold text-sm sm:text-base mt-0.5">
+                    Key Landmarks &amp; Societies We Serve
+                  </h3>
+                </div>
               </div>
-            ))}
+
+              <span className="text-xs text-slate-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full self-start sm:self-auto">
+                {loc.district} &bull; {loc.zone}
+              </span>
+            </div>
+
+            {/* Landmark Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3.5">
+              {loc.landmarks.map((l, i) => (
+                <div
+                  key={i}
+                  className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-orange-500/40 transition-all duration-200 flex items-center justify-between group shadow-sm"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:border-orange-500 transition-colors">
+                      <MapPin size={13} className="text-orange-400 group-hover:text-white transition-colors" />
+                    </div>
+                    <span className="text-slate-200 group-hover:text-white text-xs sm:text-sm font-semibold truncate transition-colors">
+                      {l}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full shrink-0 ml-2">
+                    Active
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Card Footer Bar */}
+            <div className="mt-5 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 text-slate-400">
+                <CheckCircle className="text-emerald-400 w-3.5 h-3.5 shrink-0" />
+                <span>Free laser measurement &amp; estimate visit available across all {loc.name} addresses.</span>
+              </div>
+              <a
+                href={`https://wa.me/918779391690?text=${encodeURIComponent(`Hi AMS Civil, I want to book a free site inspection near ${loc.landmarks[0] || loc.name} in ${loc.name}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-orange-400 hover:text-orange-300 font-semibold transition-colors shrink-0"
+              >
+                <span>Book Free Site Visit</span>
+                <ArrowRight size={12} />
+              </a>
+            </div>
           </div>
 
           {/* Localized content paragraph for SEO — unique per location */}
@@ -542,10 +604,15 @@ export default async function LocationPage(props: { params: Promise<{ location: 
             ];
             const para = uniqueParas[Math.floor(rand * uniqueParas.length)];
             return (
-              <div className="mt-16 p-8 rounded-3xl bg-[#111827] border border-white/10 max-w-4xl mx-auto">
-                <h3 className="text-white text-xl font-bold mb-4">Trusted Construction Partner for Families in {loc.name}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">{para}</p>
-                <p className="text-slate-400 text-sm leading-relaxed">
+              <div className="mt-8 sm:mt-12 p-5 sm:p-8 rounded-3xl bg-[#111827]/80 border border-white/10 max-w-4xl mx-auto shadow-xl">
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-orange-400" />
+                  <h3 className="text-white text-base sm:text-xl font-bold">
+                    Trusted Construction Partner for Families in {loc.name}
+                  </h3>
+                </div>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-3">{para}</p>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
                   Residents of {loc.name}{loc.pincode ? ` (PIN: ${loc.pincode})` : ''} trust AMS Civil Construction for their most valuable investment. 
                   Our commitment to using top-grade materials, laser-precise finishing, and transparent pricing makes us the preferred choice 
                   not just in {loc.name}, but also in surrounding areas like {loc.nearby.slice(0, 4).join(', ')}.
@@ -558,28 +625,115 @@ export default async function LocationPage(props: { params: Promise<{ location: 
 
       {/* ── Dynamic Local Projects (SEO Unique Value) ──────── */}
       {localProjects.length > 0 && (
-        <section className="section-y bg-[#080D1A] border-t border-white/5">
-          <div className="container-custom">
-            <div className="text-center mb-12">
+        <section className="section-y bg-[#080D1A] border-t border-white/5 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-orange-500/5 rounded-full blur-[140px] pointer-events-none" />
+          
+          <div className="container-custom relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
               <div className="section-label mx-auto">Real Results</div>
-              <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-white mt-4">
                 Recently Completed in <span className="text-gradient">{loc.name}</span>
               </h2>
+              <p className="text-slate-400 mt-4 text-sm sm:text-base leading-relaxed">
+                Actual on-site project deliveries by AMS Civil Construction in {loc.name}. Built with ISI-certified materials and supervised by senior civil engineers.
+              </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {localProjects.map(project => (
-                <div key={project._id.toString()} className="card p-5">
-                  <div className="relative aspect-video rounded-xl overflow-hidden mb-4">
-                    {project.images?.[0] ? (
-                      <Image src={encodeURI(project.images[0])} alt={project.title} fill unoptimized={true} className="object-cover" />
-                    ) : (
-                      <div className="w-full h-full bg-white/5 flex items-center justify-center">No Image</div>
-                    )}
+
+            <div
+              className={`grid gap-6 sm:gap-8 ${
+                localProjects.length === 1
+                  ? 'max-w-lg mx-auto grid-cols-1'
+                  : localProjects.length === 2
+                  ? 'max-w-4xl mx-auto grid-cols-1 md:grid-cols-2'
+                  : 'max-w-6xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+              }`}
+            >
+              {localProjects.map(project => {
+                const category = project.category || 'Civil Construction';
+                const whatsappMsg = `Hi AMS Civil, I saw your completed project "${project.title}" in ${loc.name}. Can you share quotation details for similar work on my property?`;
+                return (
+                  <div
+                    key={project._id ? project._id.toString() : project.title}
+                    className="rounded-3xl bg-gradient-to-b from-[#111928] via-[#0E1626] to-[#0A101D] border border-white/10 hover:border-orange-500/40 shadow-xl hover:shadow-[0_16px_40px_rgba(249,115,22,0.12)] transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                  >
+                    <div>
+                      {/* Image Header with Badges */}
+                      <div className="relative aspect-[16/10] overflow-hidden bg-black/40">
+                        {project.images?.[0] ? (
+                          <Image
+                            src={encodeURI(project.images[0])}
+                            alt={project.title}
+                            fill
+                            unoptimized={true}
+                            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-white/5 flex items-center justify-center text-slate-500 text-xs">
+                            Project Photo
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1626] via-transparent to-black/30 pointer-events-none" />
+
+                        {/* Top Badges */}
+                        <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2 z-10">
+                          <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-amber-200 border border-amber-500/20 shadow-md">
+                            {category}
+                          </span>
+                          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 backdrop-blur-md text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 shadow-md">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            Completed
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content Body */}
+                      <div className="p-5 sm:p-6">
+                        {/* Location Tag */}
+                        <div className="flex items-center gap-1.5 text-xs text-orange-400 font-medium mb-2.5">
+                          <MapPin size={13} className="shrink-0" />
+                          <span>{project.location || `${loc.name}, ${loc.district}`}</span>
+                        </div>
+
+                        {/* Project Title */}
+                        <h3 className="text-white font-bold text-lg sm:text-xl mb-3 leading-snug group-hover:text-orange-400 transition-colors line-clamp-2">
+                          {project.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-slate-300 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4">
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Card Footer with Quick CTA */}
+                    <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 border-t border-white/5">
+                      <a
+                        href={`https://wa.me/918779391690?text=${encodeURIComponent(whatsappMsg)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 px-4 rounded-xl bg-white/[0.04] hover:bg-orange-500 text-slate-200 hover:text-white border border-white/10 hover:border-orange-500 text-xs font-bold transition-all flex items-center justify-center gap-2 group/btn"
+                      >
+                        <WhatsAppLogo className="w-3.5 h-3.5 fill-current" />
+                        <span>Inquire About Similar Work</span>
+                        <ArrowRight size={13} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                      </a>
+                    </div>
                   </div>
-                  <h3 className="text-white font-bold mb-2">{project.title}</h3>
-                  <p className="text-slate-400 text-sm line-clamp-2">{project.description}</p>
-                </div>
-              ))}
+                );
+              })}
+            </div>
+
+            {/* Bottom Gallery Link */}
+            <div className="mt-12 text-center">
+              <Link
+                href="/gallery"
+                prefetch={false}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/40 text-xs sm:text-sm font-semibold transition-all group"
+              >
+                <span>View More Completed Projects in Photo Gallery</span>
+                <ArrowRight size={14} className="text-orange-400 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
           </div>
         </section>
@@ -589,18 +743,49 @@ export default async function LocationPage(props: { params: Promise<{ location: 
       {localBlogs.length > 0 && (
         <section className="section-y bg-[#0B1120] border-t border-white/5">
           <div className="container-custom">
-            <div className="text-center mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-12">
               <div className="section-label mx-auto">Construction Guides</div>
-              <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
-                Latest Property & Civil Updates in <span className="text-gradient">{loc.name}</span>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-white mt-4">
+                Latest Property &amp; Civil Updates in <span className="text-gradient">{loc.name}</span>
               </h2>
+              <p className="text-slate-400 mt-3 text-sm sm:text-base">
+                Expert tips on material estimation, society guidelines, and renovation costs in {loc.name}.
+              </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div
+              className={`grid gap-6 ${
+                localBlogs.length === 1
+                  ? 'max-w-lg mx-auto grid-cols-1'
+                  : localBlogs.length === 2
+                  ? 'max-w-4xl mx-auto grid-cols-1 md:grid-cols-2'
+                  : 'max-w-6xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+              }`}
+            >
               {localBlogs.map((blog: any) => (
-                <Link prefetch={false} key={blog._id.toString()} href={`/blog/${blog.slug}`} className="card p-5 group hover:border-orange-500/40 transition-colors">
-                  <h3 className="text-white font-bold mb-2 group-hover:text-orange-400 transition-colors line-clamp-2">{blog.title}</h3>
-                  <p className="text-slate-400 text-sm line-clamp-3 mb-4">{blog.excerpt}</p>
-                  <span className="text-orange-400 text-xs font-bold flex items-center gap-1">Read Guide <ArrowRight size={14}/></span>
+                <Link
+                  prefetch={false}
+                  key={blog._id.toString()}
+                  href={`/blog/${blog.slug}`}
+                  className="rounded-2xl sm:rounded-3xl p-4 sm:p-6 bg-white/[0.03] border border-white/10 hover:border-orange-500/40 hover:bg-white/[0.05] transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    <span className="text-orange-400 font-mono font-semibold text-[10px] sm:text-[11px] uppercase tracking-wider block mb-2 sm:mb-2.5">
+                      Construction Guide
+                    </span>
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-2 sm:mb-3 group-hover:text-orange-400 transition-colors line-clamp-2 leading-snug">
+                      {blog.title}
+                    </h3>
+                    {blog.excerpt && (
+                      <p className="text-slate-400 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3 mb-4">
+                        {blog.excerpt}
+                      </p>
+                    )}
+                  </div>
+                  <span className="text-orange-400 text-xs font-bold flex items-center gap-1.5 group-hover:translate-x-1 transition-transform pt-2">
+                    <span>Read Full Guide</span>
+                    <ArrowRight size={13} />
+                  </span>
                 </Link>
               ))}
             </div>
@@ -610,7 +795,6 @@ export default async function LocationPage(props: { params: Promise<{ location: 
 
       {/* ── Location-Specific FAQ Section ─────────────────────── */}
       {(() => {
-        const rand = getSeededRandom(loc.slug + 'faq-main');
         const landmark = loc.landmarks[0] || loc.name;
         const faqs = [
           {
@@ -619,7 +803,7 @@ export default async function LocationPage(props: { params: Promise<{ location: 
           },
           {
             q: `How much does civil work cost in ${loc.name}?`,
-            a: `Civil work in ${loc.name} typically ranges from ₹1,500 to ₹3,500 per sq.ft. depending on the type of work and material grade. Basic renovations start at ₹150/sq.ft. while luxury bungalow construction can go up to ₹3,500+/sq.ft. We provide 100% Free Site Visits under our Diwali Offer till 15 Nov (visit fee applicable post offer, fully adjustable in your final bill).`
+            a: `Civil work in ${loc.name} typically ranges from ₹1,500 to ₹3,500 per sq.ft. depending on the type of work and material grade. Basic renovations start at ₹150/sq.ft. while luxury bungalow construction can go up to ₹3,500+/sq.ft. We provide 100% Free Site Visits with comprehensive laser measurements and zero-obligation itemized quotes.`
           },
           {
             q: `Do you provide construction services near ${landmark}?`,
@@ -630,24 +814,18 @@ export default async function LocationPage(props: { params: Promise<{ location: 
             a: `AMS Civil Construction ka number hai +91 87793 91690 aur +91 90042 98911. Hum ${loc.name} aur ${loc.district} mein sabhi tarah ke civil kaam karte hain — bungalow construction, renovation, tiles, waterproofing, painting, aur interiors. WhatsApp bhi kar sakte hain.`
           },
         ];
-        // Pick 3 deterministically
-        const picked = Math.floor(rand * 2) === 0 ? faqs.slice(0, 3) : faqs.slice(1, 4);
         return (
           <section className="section-y bg-[#0B1120] border-t border-white/5">
             <div className="container-custom">
-              <div className="max-w-3xl mx-auto">
+              <div className="max-w-4xl mx-auto">
                 <div className="section-label mx-auto text-center">FAQ</div>
-                <h2 className="font-display text-3xl lg:text-4xl text-white mt-4 mb-10 text-center">
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-white mt-4 mb-4 text-center">
                   Common Questions about <span className="text-gradient">Civil Work in {loc.name}</span>
                 </h2>
-                <div className="space-y-4">
-                  {picked.map((faq, i) => (
-                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/20 transition-colors">
-                      <h3 className="text-white font-bold mb-2 text-base">{faq.q}</h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">{faq.a}</p>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-slate-400 text-sm sm:text-base text-center max-w-2xl mx-auto mb-12">
+                  Transparent information on civil construction rates, site inspections, and contractor details in {loc.name}.
+                </p>
+                <ServiceFAQAccordion faqs={faqs} serviceTitle="Civil Work" locationName={loc.name} />
               </div>
             </div>
           </section>
@@ -655,32 +833,32 @@ export default async function LocationPage(props: { params: Promise<{ location: 
       })()}
 
       {/* ── CTA ─────────────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden">
-         <div className="absolute inset-0 bg-[#F97316]/5 pointer-events-none" />
-         <div className="container-custom relative z-10">
-           <ModernCTA 
-             title={`Ready to start your dream project in ${loc.name}?`}
-             subtitle={`Get a professionally managed, on-time construction experience in ${loc.zone}.`}
-             description={`AMS Civil Construction is the leading provider of high-quality civil solutions in ${loc.name}. We specialize in turnkey bungalow construction, professional renovations, and expert finishing work. Our teams are highly experienced with local building codes in ${loc.district} and ensure every project is delivered with 100% transparency and structural integrity.`}
-           />
-           <div className="mt-12 text-center">
-             <h4 className="text-white font-semibold mb-6">We Also Serve Nearby Areas:</h4>
-             <div className="flex flex-wrap justify-center gap-2">
-                {loc.nearby.map(area => {
-                  const nearLoc = getLocation(area);
-                  if (!nearLoc) return null;
-                  return (
-                  <Link key={area}
-                      href={`/areas/${nearLoc.slug}`}
-                      prefetch={false}
-                    className="px-4 py-2 text-xs text-slate-400 hover:text-orange-400 border border-white/10 hover:border-orange-500/40 rounded-full transition-all bg-white/5">
-                      {nearLoc.name}
-                  </Link>
-                    );
-                })}
-              </div>
-           </div>
-         </div>
+      <ModernCTA 
+        title={`Ready to start your dream project in ${loc.name}?`}
+        subtitle={`Get a professionally managed, on-time construction experience in ${loc.zone}.`}
+        description={`AMS Civil Construction is the leading provider of high-quality civil solutions in ${loc.name}. We specialize in turnkey bungalow construction, professional renovations, and expert finishing work. Our teams are highly experienced with local building codes in ${loc.district} and ensure every project is delivered with 100% transparency and structural integrity.`}
+      />
+      {/* ── Nearby Service Areas Mesh ────────────────────── */}
+      <section className="py-12 bg-[#0B1120] border-t border-white/5">
+        <div className="container-custom text-center">
+          <h4 className="text-white font-semibold text-sm sm:text-base mb-6">We Also Serve Nearby Areas:</h4>
+          <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+            {loc.nearby.map(area => {
+              const nearLoc = getLocation(area);
+              if (!nearLoc) return null;
+              return (
+                <Link
+                  key={area}
+                  href={`/areas/${nearLoc.slug}`}
+                  prefetch={false}
+                  className="px-3.5 py-1.5 text-xs text-slate-300 hover:text-white hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/40 rounded-full transition-all bg-white/5"
+                >
+                  {nearLoc.name}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* ── Browse all areas ─────────────────────────────── */}

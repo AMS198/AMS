@@ -92,11 +92,11 @@ export default async function LocationPageMarathi(props: { params: Promise<{ loc
     <main className="min-h-screen bg-[#080D1A] font-body">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
+      <section className="relative pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-16 overflow-hidden border-b border-white/5">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 blur-[120px]" />
         <div className="relative z-10 container-custom">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-            <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-5 sm:mb-6">
+            <nav className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400">
               <Link prefetch={false} href="/" className="hover:text-orange-400">मुख्य पृष्ठ (Home)</Link>
               <ArrowRight size={10} className="opacity-50" />
               <Link prefetch={false} href="/areas" className="hover:text-orange-400">सेवा क्षेत्र</Link>
