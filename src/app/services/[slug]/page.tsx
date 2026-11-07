@@ -18,6 +18,7 @@ import ServiceDetailActions, { FloatingQuickQuoteBar } from '@/components/servic
 import ServiceFAQAccordion from '@/components/services/ServiceFAQAccordion';
 import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
+export const dynamic = 'force-static';
 export const revalidate = false;
 export const dynamicParams = false;
 

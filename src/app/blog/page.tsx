@@ -1,4 +1,5 @@
-// Cache for 60 seconds so newly added blogs appear promptly with zero server load
+// Pure Static SSG: Pre-rendered at build time with 0 Origin Transfer & 0 ISR Reads
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 import React from 'react';

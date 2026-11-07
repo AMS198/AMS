@@ -7,6 +7,7 @@ import ServicesPageContent from '@/components/services/ServicesPageContent';
 import { services } from '@/data/siteData';
 
 // Pure Static SSG: 0 ISR Reads, 0 ISR Writes
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {

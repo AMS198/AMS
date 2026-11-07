@@ -6,6 +6,7 @@ import { getDb } from '@/lib/mongodb';
 import { galleryImages as fallbackImages } from '@/data/siteData';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {

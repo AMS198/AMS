@@ -3,7 +3,8 @@
 // Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
 
-// Pure Static SSG for Top Hubs + On-Demand CDN Caching (0 ISR Reads, 0 Fast Origin Transfer)
+// Pure Static SSG for Top Hubs (0 ISR Reads, 0 Fast Origin Transfer)
+export const dynamic = 'force-static';
 export const revalidate = false;
 export const dynamicParams = false;
 

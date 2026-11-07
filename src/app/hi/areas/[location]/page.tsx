@@ -1,5 +1,6 @@
 // src/app/hi/areas/[location]/page.tsx
 // Pure Static SSG for Top Hubs (0 ISR Reads, 0 Origin Transfer)
+export const dynamic = 'force-static';
 export const revalidate = false;
 export const dynamicParams = false;
 
@@ -182,21 +183,21 @@ export default async function LocationPageHindi(props: { params: Promise<{ locat
       {/* Internal Linking Mesh for nearby areas */}
       <section className="section-y bg-[#0B1120]">
         <div className="container-custom">
-           <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-xl">
-             <MapPin className="text-orange-400" /> {loc.name} के आस-पास हमारी सेवाएँ
-           </h3>
-           <div className="flex flex-wrap gap-3">
-             {loc.nearby.slice(0, 8).map(near => {
-                const nearLoc = getLocation(near);
-                if (!nearLoc) return null;
-                return (
-                  <Link key={near} href={`/hi/areas/${nearLoc.slug}`} prefetch={false}
-                    className="px-5 py-3 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-xl transition-all bg-white/5">
-                    {nearLoc.name} में सिविल वर्क
-                  </Link>
-                );
-             })}
-           </div>
+          <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-xl">
+            <MapPin className="text-orange-400" /> {loc.name} के आस-पास हमारी सेवाएँ
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {loc.nearby.slice(0, 8).map(near => {
+              const nearLoc = getLocation(near);
+              if (!nearLoc) return null;
+              return (
+                <Link key={near} href={`/hi/areas/${nearLoc.slug}`} prefetch={false}
+                  className="px-5 py-3 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-orange-500/50 rounded-xl transition-all bg-white/5">
+                  {nearLoc.name} में सिविल वर्क
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -236,14 +237,14 @@ export default async function LocationPageHindi(props: { params: Promise<{ locat
                 <div className="flex items-center gap-2 text-orange-400 font-bold"><CheckCircle size={18} /> तय समय पर काम पूरा</div>
               </div>
             </div>
-            
+
             <div className={`bg-white/5 rounded-3xl p-8 border border-white/10 ${layoutSeed > 0.5 ? 'order-1' : 'order-2'}`}>
-                <h3 className="text-white font-bold text-xl mb-4">हमारी विशेषताएँ</h3>
-                <ul className="space-y-4 text-slate-400">
-                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> {loc.district} में 200+ से ज्यादा घरों का निर्माण और रिनोवेशन।</li>
-                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> बिना किसी छुपे हुए खर्च के स्पष्ट कोटेशन।</li>
-                    <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16}/> काम के दौरान सुपरवाइजर की 100% निगरानी।</li>
-                </ul>
+              <h3 className="text-white font-bold text-xl mb-4">हमारी विशेषताएँ</h3>
+              <ul className="space-y-4 text-slate-400">
+                <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16} /> {loc.district} में 200+ से ज्यादा घरों का निर्माण और रिनोवेशन।</li>
+                <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16} /> बिना किसी छुपे हुए खर्च के स्पष्ट कोटेशन।</li>
+                <li className="flex gap-3"><Star className="text-orange-400 flex-shrink-0 mt-1" size={16} /> काम के दौरान सुपरवाइजर की 100% निगरानी।</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -251,7 +252,7 @@ export default async function LocationPageHindi(props: { params: Promise<{ locat
 
       <section className="section-y relative overflow-hidden bg-[#0B1120]">
         <div className="container-custom relative z-10">
-          <ModernCTA 
+          <ModernCTA
             title={`क्या आप ${loc.name} में घर बनवाना या रिनोवेट करना चाहते हैं?`}
             subtitle={`आज ही मुफ्त साइट विजिट और एस्टीमेट के लिए हमें कॉल करें।`}
             description={`हमारी टीम ${loc.district} में काम करती है और म्युनिसिपल नियमों को अच्छी तरह समझती है। बिना किसी छिपे हुए खर्च के अपना बजट जानें।`}

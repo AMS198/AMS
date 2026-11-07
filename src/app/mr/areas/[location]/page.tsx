@@ -1,5 +1,6 @@
 // src/app/mr/areas/[location]/page.tsx
 // Pure Static SSG for Top Hubs (0 ISR Reads, 0 Origin Transfer)
+export const dynamic = 'force-static';
 export const revalidate = false;
 export const dynamicParams = false;
 

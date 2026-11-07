@@ -9,6 +9,7 @@ import { locations } from '@/data/locations';
 import ModernCTA from '@/components/ui/ModernCTA';
 
 // Pure Static SSG: 0 ISR Reads, 0 ISR Writes
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {

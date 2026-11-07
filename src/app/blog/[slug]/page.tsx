@@ -1,6 +1,7 @@
-// SSG: Pre-build all blog posts at deploy time, with on-demand fallback for newly added posts.
+// Pure Static SSG: Pre-rendered at build time with 0 Origin Transfer & 0 ISR Reads
+export const dynamic = 'force-static';
 export const revalidate = false;
-export const dynamicParams = true; // Allow newly added blogs in MongoDB to render on-demand and cache seamlessly
+export const dynamicParams = false;
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';

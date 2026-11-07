@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { getDb } from '@/lib/mongodb';
 import ProjectsGrid from '@/components/projects/ProjectsGrid';
 
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {

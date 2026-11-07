@@ -2,6 +2,7 @@
 // Data is fetched at BUILD TIME via direct DB calls.
 // Cache is purged on-demand: revalidateGallery() / revalidateProjects() called by admin APIs.
 // All client-side interactivity lives in HomePageSections (a 'use client' component).
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 import type { Metadata } from 'next';
